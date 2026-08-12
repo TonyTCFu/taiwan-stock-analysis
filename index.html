@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台湾股市分析 - 5大 AI 核心卡位龙头每日行情与风控仪表盘</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0a0e17;
+            --bg-card: #131b2e;
+            --bg-card-hover: #1c2740;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-highlight: rgba(79, 140, 255, 0.3);
+            
+            --text-primary: #f0f4f8;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-purple: #8b5cf6;
+            --accent-gold: #f59e0b;
+            
+            --font-main: 'Microsoft YaHei', 'Inter', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Calibri', 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        /* Glassmorphism Navigation Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 24px;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 20px;
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+        }
+
+        .logo-title h1 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(120deg, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-title p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .header-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px;
+            color: var(--accent-green);
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .update-time {
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+        }
+
+        /* Container Layout */
+        main {
+            max-width: 1400px;
+            margin: 24px auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation Tabs */
+        .tab-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 10px 18px;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .tab-btn.active {
+            color: #fff;
+            background: var(--bg-card);
+            border-color: var(--border-highlight);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Cards Grid Layout */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 20px;
+        }
+
+        .stock-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stock-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-highlight);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .stock-name-group h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stock-code {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2px 8px;
+            border-radius: 6px;
+            color: var(--accent-cyan);
+        }
+
+        .score-pill {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2));
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #a78bfa;
+        }
+
+        .price-hero {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .current-price {
+            font-family: var(--font-mono);
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .price-change {
+            font-family: var(--font-mono);
+            font-size: 16px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .up { color: var(--accent-red); } /* Taiwan Stock convention: Red is UP, Green is DOWN */
+        .down { color: var(--accent-green); }
+
+        .chokepoint-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--accent-purple);
+            padding: 10px 14px;
+            border-radius: 0 8px 8px 0;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            padding: 12px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .metric-item .label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .metric-item .val {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .strategy-zone {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .zone-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 10px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .zone-tag {
+            font-weight: 600;
+        }
+
+        .zone-val {
+            font-family: var(--font-mono);
+            font-weight: 700;
+        }
+
+        /* Executive Table Styling */
+        .table-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-secondary);
+            padding: 14px 16px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .btn-refresh {
+            padding: 8px 16px;
+            background: var(--accent-blue);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-refresh:hover {
+            background: #2563eb;
+        }
+
+        footer {
+            max-width: 1400px;
+            margin: 40px auto 0;
+            padding: 20px 24px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo-group">
+                <div class="logo-icon">台</div>
+                <div class="logo-title">
+                    <h1>台湾股市分析</h1>
+                    <p>Taiwan Stock Analysis | 5大 AI 核心卡位龙头动态仪表盘</p>
+                </div>
+            </div>
+            <div class="header-meta">
+                <span class="status-badge">
+                    <span class="status-dot"></span> 自动推送到公网
+                </span>
+                <span class="update-time" id="update-time">更新时间: 加载中...</span>
+                <button class="btn-refresh" onclick="loadStockData()">🔄 刷新行情</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="tab-bar">
+            <button class="tab-btn active" onclick="switchTab('cards')">📊 核心卡位龙头行情概览</button>
+            <button class="tab-btn" onclick="switchTab('table')">🎯 买卖策略与决策速查</button>
+            <button class="tab-btn" onclick="switchTab('chokepoint')">🛡️ Serenity 卡位与风控评估</button>
+        </div>
+
+        <!-- TAB 1: CARDS -->
+        <div id="tab-cards" class="cards-grid">
+            <!-- Dynamically populated -->
+        </div>
+
+        <!-- TAB 2: TABLE -->
+        <div id="tab-table" class="table-card" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>代码</th>
+                        <th>公司名称</th>
+                        <th>当前价</th>
+                        <th>涨跌幅</th>
+                        <th>建议买入位 (分批/试仓)</th>
+                        <th>黄金重仓位 (强支撑)</th>
+                        <th>波段止盈位</th>
+                        <th>长线目标价</th>
+                        <th>防守止损价</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Dynamically populated -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TAB 3: CHOKEPOINT & RISK -->
+        <div id="tab-chokepoint" class="table-card" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>代码</th>
+                        <th>公司名称</th>
+                        <th>卡位评分</th>
+                        <th>毛利率</th>
+                        <th>单季 EPS</th>
+                        <th>Serenity 供应链卡位与护城河逻辑</th>
+                        <th>筹码与三大法人资金特征</th>
+                    </tr>
+                </thead>
+                <tbody id="chokepoint-body">
+                    <!-- Dynamically populated -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p>台湾股市分析 Dashboard | 数据来源: TWSE / Yahoo Finance | 框架基准: Serenity Hunter (逆向拆解) + Serenity Analyst (九步风控)</p>
+        <p>© 2026 Tony Fu. 自动化每日定点更新 | 本系统仅供量化模型评估参考，不构成直接买卖指令。</p>
+    </footer>
+
+    <script>
+        let stockDataCache = null;
+
+        async function loadStockData() {
+            try {
+                const res = await fetch('data/stock_data.json?t=' + new Date().getTime());
+                const json = await res.json();
+                stockDataCache = json;
+                renderDashboard(json);
+            } catch (e) {
+                console.error("加载数据失败:", e);
+            }
+        }
+
+        function renderDashboard(data) {
+            document.getElementById('update-time').innerText = '数据更新时间: ' + data.updated_at;
+            
+            // Render Cards
+            const cardsContainer = document.getElementById('tab-cards');
+            cardsContainer.innerHTML = data.stocks.map(s => {
+                const isUp = s.change >= 0;
+                const changeClass = isUp ? 'up' : 'down';
+                const changeSign = isUp ? '+' : '';
+                
+                return `
+                    <div class="stock-card">
+                        <div class="card-top">
+                            <div class="stock-name-group">
+                                <h2>${s.name}</h2>
+                                <span class="stock-code">${s.code}</span>
+                            </div>
+                            <div class="score-pill">卡位 ${s.score}分</div>
+                        </div>
+
+                        <div class="price-hero">
+                            <span class="current-price" style="color: ${isUp ? '#ef4444' : '#10b981'}">NT$ ${s.last_price}</span>
+                            <span class="price-change ${changeClass}">${changeSign}${s.change} (${changeSign}${s.change_pct}%)</span>
+                        </div>
+
+                        <div class="chokepoint-box">
+                            <strong>定位：</strong>${s.chokepoint}
+                        </div>
+
+                        <div class="metrics-row">
+                            <div class="metric-item">
+                                <div class="label">毛利率</div>
+                                <div class="val">${s.gross_margin}</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="label">ROE</div>
+                                <div class="val">${s.roe}</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="label">单季 EPS</div>
+                                <div class="val">${s.eps_single}</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="label">成交量</div>
+                                <div class="val">${(s.volume / 1000).toFixed(1)}k</div>
+                            </div>
+                        </div>
+
+                        <div class="strategy-zone">
+                            <div class="zone-row" style="background: rgba(59, 130, 246, 0.1); border-left: 3px solid #3b82f6;">
+                                <span class="zone-tag" style="color: #60a5fa;">📥 建议买入位</span>
+                                <span class="zone-val" style="color: #93c5fd;">${s.buy_zone_sub}</span>
+                            </div>
+                            <div class="zone-row" style="background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444;">
+                                <span class="zone-tag" style="color: #f87171;">🛡️ 黄金重仓位</span>
+                                <span class="zone-val" style="color: #fca5a5;">${s.buy_zone_heavy}</span>
+                            </div>
+                            <div class="zone-row" style="background: rgba(16, 185, 129, 0.1); border-left: 3px solid #10b981;">
+                                <span class="zone-tag" style="color: #34d399;">🎯 波段止盈 / 长线目标</span>
+                                <span class="zone-val" style="color: #6ee7b7;">${s.take_profit} / ${s.target_price}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Render Table 1
+            const tableBody = document.getElementById('table-body');
+            tableBody.innerHTML = data.stocks.map(s => {
+                const isUp = s.change >= 0;
+                return `
+                    <tr>
+                        <td style="font-family: var(--font-mono); font-weight:700; color: var(--accent-cyan);">${s.code}</td>
+                        <td style="font-weight:700;">${s.name}</td>
+                        <td style="font-family: var(--font-mono); font-weight:800; color: ${isUp ? '#ef4444' : '#10b981'};">NT$ ${s.last_price}</td>
+                        <td style="font-family: var(--font-mono); font-weight:700;" class="${isUp ? 'up' : 'down'}">${s.change >= 0 ? '+' : ''}${s.change_pct}%</td>
+                        <td style="color: #93c5fd; font-weight:600;">${s.buy_zone_sub}</td>
+                        <td style="color: #fca5a5; font-weight:700;">${s.buy_zone_heavy}</td>
+                        <td style="color: #34d399; font-weight:600;">${s.take_profit}</td>
+                        <td style="color: #a78bfa; font-weight:700;">${s.target_price}</td>
+                        <td style="color: #f87171; font-weight:700;">${s.stop_loss}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            // Render Chokepoint Table
+            const chokepointBody = document.getElementById('chokepoint-body');
+            chokepointBody.innerHTML = data.stocks.map(s => {
+                return `
+                    <tr>
+                        <td style="font-family: var(--font-mono); font-weight:700; color: var(--accent-cyan);">${s.code}</td>
+                        <td style="font-weight:700;">${s.name}</td>
+                        <td><span class="score-pill">${s.score}分</span></td>
+                        <td style="font-family: var(--font-mono); font-weight:700; color: var(--accent-gold);">${s.gross_margin}</td>
+                        <td style="font-family: var(--font-mono); font-weight:700;">${s.eps_single}</td>
+                        <td style="font-size:13px; color: var(--text-secondary); max-width:350px;">${s.chokepoint}</td>
+                        <td style="font-size:13px; color: var(--text-secondary); max-width:300px;">${s.chips_summary}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('tab-cards').style.display = 'none';
+            document.getElementById('tab-table').style.display = 'none';
+            document.getElementById('tab-chokepoint').style.display = 'none';
+
+            if (tabName === 'cards') {
+                document.getElementById('tab-cards').style.display = 'grid';
+            } else if (tabName === 'table') {
+                document.getElementById('tab-table').style.display = 'block';
+            } else if (tabName === 'chokepoint') {
+                document.getElementById('tab-chokepoint').style.display = 'block';
+            }
+
+            event.target.classList.add('active');
+        }
+
+        // Auto load on start
+        window.addEventListener('DOMContentLoaded', loadStockData);
+    </script>
+</body>
+</html>
