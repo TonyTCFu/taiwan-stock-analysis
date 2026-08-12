@@ -33,379 +33,78 @@
             --font-mono: 'Calibri', 'JetBrains Mono', monospace;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-primary);
-            font-family: var(--font-main);
-            line-height: 1.5;
-            min-height: 100vh;
-            padding-bottom: 50px;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg-main); color: var(--text-primary); font-family: var(--font-main); line-height: 1.5; min-height: 100vh; padding-bottom: 50px; }
 
         header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            position: sticky; top: 0; z-index: 100;
             background: rgba(10, 14, 23, 0.88);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-color);
-            padding: 16px 24px;
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color); padding: 16px 24px;
         }
+        .header-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .logo-group { display: flex; align-items: center; gap: 12px; }
+        .logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; color: #fff; box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4); }
+        .logo-title h1 { font-size: 20px; font-weight: 700; background: linear-gradient(120deg, #ffffff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .logo-title p { font-size: 12px; color: var(--text-secondary); }
+        .header-meta { display: flex; align-items: center; gap: 16px; font-size: 13px; }
+        .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 20px; color: var(--accent-green); font-weight: 600; font-size: 12px; }
+        .status-dot { width: 8px; height: 8px; background-color: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
+        .update-time { color: var(--text-secondary); font-family: var(--font-mono); }
+        .version-tag { font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan); background: rgba(6, 182, 212, 0.1); padding: 2px 6px; border-radius: 4px; }
 
-        .header-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
+        main { max-width: 1400px; margin: 24px auto; padding: 0 24px; }
 
-        .logo-group {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .tab-bar { display: flex; gap: 8px; margin-bottom: 24px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; overflow-x: auto; }
+        .tab-btn { padding: 10px 18px; background: transparent; border: 1px solid transparent; border-radius: 8px; color: var(--text-secondary); font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s ease; white-space: nowrap; }
+        .tab-btn:hover { color: var(--text-primary); background: rgba(255, 255, 255, 0.04); }
+        .tab-btn.active { color: #fff; background: var(--bg-card); border-color: var(--border-highlight); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 20px;
-            color: #fff;
-            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
-        }
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px; }
+        .stock-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px; transition: all 0.3s; }
+        .stock-card:hover { transform: translateY(-4px); border-color: var(--border-highlight); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5); }
+        
+        .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+        .stock-name-group h2 { font-size: 20px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
+        .stock-code { font-family: var(--font-mono); font-size: 13px; background: rgba(255, 255, 255, 0.08); padding: 2px 8px; border-radius: 6px; color: var(--accent-cyan); }
+        .score-pill { background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2)); border: 1px solid rgba(139, 92, 246, 0.4); padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 700; color: #a78bfa; }
 
-        .logo-title h1 {
-            font-size: 20px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            background: linear-gradient(120deg, #ffffff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        .price-hero { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+        .current-price { font-family: var(--font-mono); font-size: 32px; font-weight: 800; letter-spacing: -1px; }
+        .price-change { font-family: var(--font-mono); font-size: 16px; font-weight: 700; }
+        .up { color: var(--accent-red); } .down { color: var(--accent-green); }
 
-        .logo-title p {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
-        .header-meta {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            font-size: 13px;
-        }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 20px;
-            color: var(--accent-green);
-            font-weight: 600;
-            font-size: 12px;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent-green);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--accent-green);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(1.2); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        .update-time {
-            color: var(--text-secondary);
-            font-family: var(--font-mono);
-        }
-
-        .version-tag {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            color: var(--accent-cyan);
-            background: rgba(6, 182, 212, 0.1);
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
-        main {
-            max-width: 1400px;
-            margin: 24px auto;
-            padding: 0 24px;
-        }
-
-        .tab-bar {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 24px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 12px;
-            overflow-x: auto;
-        }
-
-        .tab-btn {
-            padding: 10px 18px;
-            background: transparent;
-            border: 1px solid transparent;
-            border-radius: 8px;
-            color: var(--text-secondary);
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-
-        .tab-btn:hover {
-            color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .tab-btn.active {
-            color: #fff;
-            background: var(--bg-card);
-            border-color: var(--border-highlight);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-            gap: 20px;
-        }
-
-        .stock-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stock-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--border-highlight);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .card-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 16px;
-        }
-
-        .stock-name-group h2 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .stock-code {
-            font-family: var(--font-mono);
-            font-size: 13px;
-            background: rgba(255, 255, 255, 0.08);
-            padding: 2px 8px;
-            border-radius: 6px;
-            color: var(--accent-cyan);
-        }
-
-        .score-pill {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2));
-            border: 1px solid rgba(139, 92, 246, 0.4);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 700;
-            color: #a78bfa;
-        }
-
-        .price-hero {
-            display: flex;
-            align-items: baseline;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-
-        .current-price {
-            font-family: var(--font-mono);
-            font-size: 32px;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
-
-        .price-change {
-            font-family: var(--font-mono);
-            font-size: 16px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .ohlc-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 4px;
-            background: rgba(255, 255, 255, 0.02);
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 11px;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-
+        .ohlc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; background: rgba(255, 255, 255, 0.02); padding: 8px; border-radius: 8px; font-size: 11px; margin-bottom: 16px; text-align: center; }
         .ohlc-item .lbl { color: var(--text-muted); }
         .ohlc-item .val { font-family: var(--font-mono); font-weight: 700; color: var(--text-primary); }
 
-        .up { color: var(--accent-red); }
-        .down { color: var(--accent-green); }
+        .chokepoint-box { background: rgba(255, 255, 255, 0.03); border-left: 3px solid var(--accent-purple); padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
 
-        .chokepoint-box {
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 3px solid var(--accent-purple);
-            padding: 10px 14px;
-            border-radius: 0 8px 8px 0;
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-        }
+        .section-badge { font-size: 12px; font-weight: 700; color: var(--accent-gold); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+        .info-panel { background: rgba(255, 255, 255, 0.02); border-radius: 8px; padding: 10px; font-size: 12px; margin-bottom: 12px; }
 
-        .metrics-row {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            padding: 12px 0;
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 16px;
-            text-align: center;
-        }
+        .metrics-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 12px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); margin-bottom: 16px; text-align: center; }
+        .metric-item .label { font-size: 11px; color: var(--text-muted); margin-bottom: 2px; }
+        .metric-item .val { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--text-primary); }
 
-        .metric-item .label {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-bottom: 2px;
-        }
+        .strategy-zone { display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
+        .zone-row { display: flex; justify-content: space-between; padding: 6px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.02); }
 
-        .metric-item .val {
-            font-family: var(--font-mono);
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
+        .table-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+        th { background: rgba(255, 255, 255, 0.04); color: var(--text-secondary); padding: 14px 16px; font-weight: 600; border-bottom: 1px solid var(--border-color); white-space: nowrap; }
+        td { padding: 16px; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
+        tr:hover td { background: rgba(255, 255, 255, 0.02); }
 
-        .strategy-zone {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            font-size: 13px;
-        }
+        .btn-refresh { padding: 8px 16px; background: var(--accent-blue); color: #fff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .btn-refresh:hover { background: #2563eb; }
 
-        .zone-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 10px;
-            border-radius: 6px;
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .table-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px;
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 14px;
-        }
-
-        th {
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--text-secondary);
-            padding: 14px 16px;
-            font-weight: 600;
-            border-bottom: 1px solid var(--border-color);
-            white-space: nowrap;
-        }
-
-        td {
-            padding: 16px;
-            border-bottom: 1px solid var(--border-color);
-            vertical-align: middle;
-        }
-
-        tr:hover td {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .btn-refresh {
-            padding: 8px 16px;
-            background: var(--accent-blue);
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .btn-refresh:hover {
-            background: #2563eb;
-        }
-
-        footer {
-            max-width: 1400px;
-            margin: 40px auto 0;
-            padding: 20px 24px;
-            text-align: center;
-            font-size: 12px;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
-        }
+        footer { max-width: 1400px; margin: 40px auto 0; padding: 20px 24px; text-align: center; font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--border-color); }
 
         @media (max-width: 768px) {
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-            .header-container {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+            .cards-grid { grid-template-columns: 1fr; }
+            .header-container { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
@@ -417,16 +116,14 @@
                 <div class="logo-icon">台</div>
                 <div class="logo-title">
                     <h1>台湾股市分析</h1>
-                    <p>Taiwan Stock Analysis | 永丰金 Shioaji 实时行情仪表盘</p>
+                    <p>Taiwan Stock Analysis | 永丰金 Shioaji 交易所直连与法人筹码</p>
                 </div>
             </div>
             <div class="header-meta">
-                <span class="status-badge">
-                    <span class="status-dot"></span> 永丰金 Shioaji 直连
-                </span>
+                <span class="status-badge"><span class="status-dot"></span> TWSE 实时行情</span>
                 <span class="version-tag" id="cache-ver">vLIVE</span>
-                <span class="update-time" id="update-time">更新时间: 加载中...</span>
-                <button class="btn-refresh" onclick="loadStockData(true)">🔄 强制刷新缓存</button>
+                <span class="update-time" id="update-time">定盘时间: 加载中...</span>
+                <button class="btn-refresh" onclick="loadStockData(true)">🔄 强制刷新行情</button>
             </div>
         </div>
     </header>
@@ -434,8 +131,9 @@
     <main>
         <div class="tab-bar">
             <button class="tab-btn active" onclick="switchTab('cards')">📊 核心卡位龙头行情概览</button>
+            <button class="tab-btn" onclick="switchTab('flow')">🏦 三大法人进出与资金流向</button>
+            <button class="tab-btn" onclick="switchTab('earnings')">🏢 财报公布日与预测</button>
             <button class="tab-btn" onclick="switchTab('table')">🎯 买卖策略与决策速查</button>
-            <button class="tab-btn" onclick="switchTab('chokepoint')">🛡️ Serenity 卡位与风控评估</button>
         </div>
 
         <!-- TAB 1: CARDS -->
@@ -443,7 +141,46 @@
             <!-- Dynamically populated -->
         </div>
 
-        <!-- TAB 2: TABLE -->
+        <!-- TAB 2: INSTITUTIONAL FLOW -->
+        <div id="tab-flow" class="table-card" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>代码</th>
+                        <th>公司名称</th>
+                        <th>外资买卖超</th>
+                        <th>投信买卖超</th>
+                        <th>自营商买卖超</th>
+                        <th>主力资金大单流向</th>
+                        <th>筹码沉淀与散户融资情况</th>
+                    </tr>
+                </thead>
+                <tbody id="flow-body">
+                    <!-- Dynamically populated -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TAB 3: EARNINGS DATES -->
+        <div id="tab-earnings" class="table-card" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>代码</th>
+                        <th>公司名称</th>
+                        <th>最新单季 EPS</th>
+                        <th>毛利率</th>
+                        <th>年化 ROE</th>
+                        <th>下一次财报/法说会公布日</th>
+                    </tr>
+                </thead>
+                <tbody id="earnings-body">
+                    <!-- Dynamically populated -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TAB 4: BUY/SELL STRATEGY TABLE -->
         <div id="tab-table" class="table-card" style="display: none;">
             <table>
                 <thead>
@@ -453,12 +190,11 @@
                         <th>开盘价</th>
                         <th>最高价</th>
                         <th>最低价</th>
-                        <th>最新价(收盘)</th>
+                        <th>最新收盘价</th>
                         <th>涨跌幅</th>
                         <th>建议买入位 (试仓)</th>
                         <th>黄金重仓位</th>
                         <th>波段止盈位</th>
-                        <th>长线目标价</th>
                         <th>防守止损价</th>
                     </tr>
                 </thead>
@@ -467,43 +203,20 @@
                 </tbody>
             </table>
         </div>
-
-        <!-- TAB 3: CHOKEPOINT & RISK -->
-        <div id="tab-chokepoint" class="table-card" style="display: none;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>代码</th>
-                        <th>公司名称</th>
-                        <th>卡位评分</th>
-                        <th>毛利率</th>
-                        <th>单季 EPS</th>
-                        <th>Serenity 供应链卡位与护城河逻辑</th>
-                        <th>筹码与三大法人资金特征</th>
-                    </tr>
-                </thead>
-                <tbody id="chokepoint-body">
-                    <!-- Dynamically populated -->
-                </tbody>
-            </table>
-        </div>
     </main>
 
     <footer>
-        <p>台湾股市分析 Dashboard | 数据源: 永丰金 Shioaji API (TWSE 交易所直连) | 框架基准: Serenity Hunter (逆向拆解) + Serenity Analyst (九步风控)</p>
-        <p>© 2026 Tony Fu. 自动化每日定点更新 | 本系统仅供量化模型评估参考，不构成直接买卖指令。</p>
+        <p>台湾股市分析 Dashboard | 数据源: 永丰金 Shioaji API (TWSE 实时盘口) | 交易时间: 09:00 - 13:30 (TPE time)</p>
+        <p>© 2026 Tony Fu. 全自动公网推送 | 本系统仅供量化模型评估参考，不构成直接买卖指令。</p>
     </footer>
 
     <script>
         let stockDataCache = null;
 
-        // Anti-caching query timestamp loader
         async function loadStockData(forceRefresh = false) {
             try {
                 const timestamp = forceRefresh ? Date.now() : new Date().getTime();
-                const res = await fetch(`data/stock_data.json?v=${timestamp}`, {
-                    cache: 'no-store'
-                });
+                const res = await fetch(`data/stock_data.json?v=${timestamp}`, { cache: 'no-store' });
                 const json = await res.json();
                 stockDataCache = json;
                 renderDashboard(json);
@@ -513,7 +226,7 @@
         }
 
         function renderDashboard(data) {
-            document.getElementById('update-time').innerText = 'Shioaji 定盘时间: ' + data.updated_at;
+            document.getElementById('update-time').innerText = 'Shioaji 定盘: ' + data.updated_at;
             document.getElementById('cache-ver').innerText = 'v' + (data.updated_at ? data.updated_at.replace(/[- :]/g, '').slice(4, 12) : 'LIVE');
             
             // Render Cards
@@ -542,30 +255,29 @@
                             <div class="ohlc-item"><span class="lbl">开盘:</span> <span class="val">${s.open_price}</span></div>
                             <div class="ohlc-item"><span class="lbl">最高:</span> <span class="val">${s.high_price}</span></div>
                             <div class="ohlc-item"><span class="lbl">最低:</span> <span class="val">${s.low_price}</span></div>
-                            <div class="ohlc-item"><span class="lbl">成交:</span> <span class="val">${s.last_price}</span></div>
+                            <div class="ohlc-item"><span class="lbl">收盘:</span> <span class="val">${s.last_price}</span></div>
                         </div>
 
                         <div class="chokepoint-box">
-                            <strong>定位：</strong>${s.chokepoint}
+                            <strong>卡位定位：</strong>${s.chokepoint}
+                        </div>
+
+                        <div class="section-badge">🏢 财报公布日与表现</div>
+                        <div class="info-panel">
+                            <strong>日期：</strong>${s.earnings_date}
+                        </div>
+
+                        <div class="section-badge">🏦 三大法人与资金进出</div>
+                        <div class="info-panel">
+                            <div><strong>外资：</strong>${s.institutional_flow.foreign_net} | <strong>投信：</strong>${s.institutional_flow.trust_net}</div>
+                            <div style="margin-top:4px; color: var(--text-secondary);">${s.institutional_flow.summary}</div>
                         </div>
 
                         <div class="metrics-row">
-                            <div class="metric-item">
-                                <div class="label">毛利率</div>
-                                <div class="val">${s.gross_margin}</div>
-                            </div>
-                            <div class="metric-item">
-                                <div class="label">ROE</div>
-                                <div class="val">${s.roe}</div>
-                            </div>
-                            <div class="metric-item">
-                                <div class="label">单季 EPS</div>
-                                <div class="val">${s.eps_single}</div>
-                            </div>
-                            <div class="metric-item">
-                                <div class="label">今日张数</div>
-                                <div class="val">${(s.volume).toLocaleString()}</div>
-                            </div>
+                            <div class="metric-item"><div class="label">毛利率</div><div class="val">${s.gross_margin}</div></div>
+                            <div class="metric-item"><div class="label">ROE</div><div class="val">${s.roe}</div></div>
+                            <div class="metric-item"><div class="label">单季 EPS</div><div class="val">${s.eps_single}</div></div>
+                            <div class="metric-item"><div class="label">今日张数</div><div class="val">${(s.volume).toLocaleString()}</div></div>
                         </div>
 
                         <div class="strategy-zone">
@@ -578,13 +290,40 @@
                                 <span class="zone-val" style="color: #fca5a5;">${s.buy_zone_heavy}</span>
                             </div>
                             <div class="zone-row" style="background: rgba(16, 185, 129, 0.1); border-left: 3px solid #10b981;">
-                                <span class="zone-tag" style="color: #34d399;">🎯 波段止盈 / 长线目标</span>
+                                <span class="zone-tag" style="color: #34d399;">🎯 波段止盈 / 目标</span>
                                 <span class="zone-val" style="color: #6ee7b7;">${s.take_profit} / ${s.target_price}</span>
                             </div>
                         </div>
                     </div>
                 `;
             }).join('');
+
+            // Render Institutional Flow Table
+            const flowBody = document.getElementById('flow-body');
+            flowBody.innerHTML = data.stocks.map(s => `
+                <tr>
+                    <td style="font-family: var(--font-mono); font-weight:700; color: var(--accent-cyan);">${s.code}</td>
+                    <td style="font-weight:700;">${s.name}</td>
+                    <td style="font-family: var(--font-mono); color: var(--accent-red); font-weight:700;">${s.institutional_flow.foreign_net}</td>
+                    <td style="font-family: var(--font-mono); color: var(--accent-green); font-weight:700;">${s.institutional_flow.trust_net}</td>
+                    <td style="font-family: var(--font-mono);">${s.institutional_flow.dealer_net}</td>
+                    <td style="color: var(--accent-gold); font-weight:600;">${s.capital_inflow.large_order_ratio}</td>
+                    <td style="font-size:13px; color: var(--text-secondary);">${s.capital_inflow.capital_status}</td>
+                </tr>
+            `).join('');
+
+            // Render Earnings Table
+            const earningsBody = document.getElementById('earnings-body');
+            earningsBody.innerHTML = data.stocks.map(s => `
+                <tr>
+                    <td style="font-family: var(--font-mono); font-weight:700; color: var(--accent-cyan);">${s.code}</td>
+                    <td style="font-weight:700;">${s.name}</td>
+                    <td style="font-family: var(--font-mono); font-weight:700;">${s.eps_single}</td>
+                    <td style="font-family: var(--font-mono); color: var(--accent-gold); font-weight:700;">${s.gross_margin}</td>
+                    <td style="font-family: var(--font-mono);">${s.roe}</td>
+                    <td style="color: #a78bfa; font-weight:600;">${s.earnings_date}</td>
+                </tr>
+            `).join('');
 
             // Render Table 1
             const tableBody = document.getElementById('table-body');
@@ -602,24 +341,7 @@
                         <td style="color: #93c5fd; font-weight:600;">${s.buy_zone_sub}</td>
                         <td style="color: #fca5a5; font-weight:700;">${s.buy_zone_heavy}</td>
                         <td style="color: #34d399; font-weight:600;">${s.take_profit}</td>
-                        <td style="color: #a78bfa; font-weight:700;">${s.target_price}</td>
                         <td style="color: #f87171; font-weight:700;">${s.stop_loss}</td>
-                    </tr>
-                `;
-            }).join('');
-
-            // Render Chokepoint Table
-            const chokepointBody = document.getElementById('chokepoint-body');
-            chokepointBody.innerHTML = data.stocks.map(s => {
-                return `
-                    <tr>
-                        <td style="font-family: var(--font-mono); font-weight:700; color: var(--accent-cyan);">${s.code}</td>
-                        <td style="font-weight:700;">${s.name}</td>
-                        <td><span class="score-pill">${s.score}分</span></td>
-                        <td style="font-family: var(--font-mono); font-weight:700; color: var(--accent-gold);">${s.gross_margin}</td>
-                        <td style="font-family: var(--font-mono); font-weight:700;">${s.eps_single}</td>
-                        <td style="font-size:13px; color: var(--text-secondary); max-width:350px;">${s.chokepoint}</td>
-                        <td style="font-size:13px; color: var(--text-secondary); max-width:300px;">${s.chips_summary}</td>
                     </tr>
                 `;
             }).join('');
@@ -628,15 +350,18 @@
         function switchTab(tabName) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById('tab-cards').style.display = 'none';
+            document.getElementById('tab-flow').style.display = 'none';
+            document.getElementById('tab-earnings').style.display = 'none';
             document.getElementById('tab-table').style.display = 'none';
-            document.getElementById('tab-chokepoint').style.display = 'none';
 
             if (tabName === 'cards') {
                 document.getElementById('tab-cards').style.display = 'grid';
+            } else if (tabName === 'flow') {
+                document.getElementById('tab-flow').style.display = 'block';
+            } else if (tabName === 'earnings') {
+                document.getElementById('tab-earnings').style.display = 'block';
             } else if (tabName === 'table') {
                 document.getElementById('tab-table').style.display = 'block';
-            } else if (tabName === 'chokepoint') {
-                document.getElementById('tab-chokepoint').style.display = 'block';
             }
 
             event.target.classList.add('active');
