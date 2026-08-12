@@ -5,7 +5,6 @@ import openpyxl
 from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 from openpyxl.utils import get_column_letter
 
-# Load Shioaji fresh JSON data
 json_path = "/Users/TonyFu/.gemini/antigravity/scratch/taiwan-stock-dashboard/data/stock_data.json"
 with open(json_path, encoding="utf-8") as f:
     stock_payload = json.load(f)
@@ -41,12 +40,11 @@ fill_zebra = PatternFill(start_color="F7F9FC", end_color="F7F9FC", fill_type="so
 thin_side = Side(style='thin', color='D9D9D9')
 border_grid = Border(left=thin_side, right=thin_side, top=thin_side, bottom=thin_side)
 
-# SHEET 1: 全景深度分析 (Shioaji 实时版)
 ws1 = wb.active
 ws1.title = "核心卡位龙头全景深度分析"
 ws1.views.sheetView[0].showGridLines = True
 
-ws1.merge_cells('A1:N1')
+ws1.merge_cells('A1:O1')
 t1 = ws1['A1']
 t1.value = "台股 5 大 AI 核心卡位龙头深度投资与买卖点筹码量化分析表"
 t1.font = font_title
@@ -54,9 +52,9 @@ t1.alignment = Alignment(horizontal="center", vertical="center")
 t1.fill = fill_title
 ws1.row_dimensions[1].height = 42
 
-ws1.merge_cells('A2:N2')
+ws1.merge_cells('A2:O2')
 s1 = ws1['A2']
-s1.value = f"数据更新时间: {updated_at} | 行情数据源: {data_source} (含当日开盘/最高/最低/收盘/成交量) | 框架: Serenity Hunter + Analyst"
+s1.value = f"定盘时间: {updated_at} | 数据源: {data_source} | 包含三大法人买卖超、财报发布日及主力资金分析"
 s1.font = font_subtitle
 s1.alignment = Alignment(horizontal="center", vertical="center")
 s1.fill = fill_subtitle
@@ -64,8 +62,9 @@ ws1.row_dimensions[2].height = 24
 
 headers1 = [
     "股票代码", "公司名称", "核心卡位定位", "当日开/高/低/收盘 (Shioaji)",
-    "获利率指标 (毛利/净利/ROE/EPS)", "长期产业分析与前景", "选择理由 (Serenity 护城河)",
-    "参考最新价", "建议买入区间 (分批/重仓)", "阶段止盈/卖出区间", "长线目标价", "防守止损价", "筹码与成交量量化特征", "单日成交量 (张)"
+    "获利率指标 (毛利/净利/ROE/EPS)", "财报公布日/预估", "三大法人买卖超 (外资/投信)",
+    "主力资金进出与筹码沉淀", "选择理由 (Serenity 护城河)", "参考最新价",
+    "建议买入区间", "阶段止盈/卖出区间", "长线目标价", "防守止损价", "单日成交量"
 ]
 
 ws1.row_dimensions[3].height = 36
@@ -80,7 +79,8 @@ for row_idx, s in enumerate(stocks, 4):
     is_zebra = (row_idx % 2 == 1)
     
     ohlc_str = f"开盘: {s['open_price']}\n最高: {s['high_price']}\n最低: {s['low_price']}\n收盘: {s['last_price']}"
-    profit_str = f"• 毛利率：{s['gross_margin']}\n• 净利率：{s['net_margin']}\n• 年化 ROE：{s['roe']}\n• 单季 EPS：{s['eps_single']}"
+    profit_str = f"• 毛利率：{s['gross_margin']}\n• 净利率：{s['net_margin']}\n• ROE：{s['roe']}\n• EPS：{s['eps_single']}"
+    inst_str = f"外资: {s['institutional_flow']['foreign_net']}\n投信: {s['institutional_flow']['trust_net']}\n{s['institutional_flow']['summary']}"
     buy_str = f"建议买点：{s['buy_zone_sub']}\n黄金重仓：{s['buy_zone_heavy']}"
     
     row_data = [
@@ -89,14 +89,15 @@ for row_idx, s in enumerate(stocks, 4):
         s['chokepoint'],
         ohlc_str,
         profit_str,
-        "AI 算力芯片及超级机柜供应链物理不可替代点，具备强资本/技术与专利护城河。",
+        s['earnings_date'],
+        inst_str,
+        f"{s['capital_inflow']['large_order_ratio']}\n{s['capital_inflow']['capital_status']}",
         f"【Chokepoint {s['score']}分】卡位最上游铲子卖家，客户切换周期超 12-36 个月，垄断护城河极深。",
         f"NT$ {s['last_price']}",
         buy_str,
         s['take_profit'],
         s['target_price'],
         s['stop_loss'],
-        s['chips_summary'],
         f"{s['volume']:,} 张"
     ]
     
@@ -110,27 +111,27 @@ for row_idx, s in enumerate(stocks, 4):
         if col_idx == 1:
             cell.font = font_cell_code
             cell.alignment = Alignment(horizontal="center", vertical="center")
-        elif col_idx in [2, 4]:
+        elif col_idx in [2, 4, 6]:
             cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
             if col_idx == 2:
                 cell.font = Font(name="Microsoft YaHei", size=10, bold=True, color="1F4E79")
-        elif col_idx == 8:
+        elif col_idx == 10:
             cell.font = font_price_ref
             cell.alignment = Alignment(horizontal="center", vertical="center")
-        elif col_idx in [9, 10, 11, 12, 14]:
+        elif col_idx in [11, 12, 13, 14, 15]:
             cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
-            if col_idx == 9:
+            if col_idx == 11:
                 cell.font = font_buy_zone
-            elif col_idx == 10:
-                cell.font = font_sell_zone
-            elif col_idx == 11:
-                cell.font = font_target_price
             elif col_idx == 12:
+                cell.font = font_sell_zone
+            elif col_idx == 13:
+                cell.font = font_target_price
+            elif col_idx == 14:
                 cell.font = font_stop_loss
         else:
             cell.alignment = Alignment(horizontal="left", vertical="center", wrap_text=True)
 
-col1_widths = {1: 13, 2: 18, 3: 26, 4: 22, 5: 28, 6: 35, 7: 32, 8: 16, 9: 26, 10: 20, 11: 18, 12: 16, 13: 32, 14: 16}
+col1_widths = {1: 13, 2: 18, 3: 26, 4: 20, 5: 26, 6: 25, 7: 30, 8: 30, 9: 30, 10: 16, 11: 26, 12: 20, 13: 18, 14: 16, 15: 16}
 for col_idx, width in col1_widths.items():
     ws1.column_dimensions[get_column_letter(col_idx)].width = width
 
@@ -148,7 +149,7 @@ ws2.row_dimensions[1].height = 42
 
 ws2.merge_cells('A2:I2')
 s2 = ws2['A2']
-s2.value = f"数据源: 永丰金 Shioaji 实时盘口 | 更新时间: {updated_at} | 策略: 3-3-4 分批建仓"
+s2.value = f"数据源: 永丰金 Shioaji 实时盘口 | 定盘时间: {updated_at} | 策略: 3-3-4 分批建仓"
 s2.font = font_subtitle
 s2.alignment = Alignment(horizontal="center", vertical="center")
 s2.fill = fill_subtitle
@@ -196,4 +197,4 @@ for col_idx, width in col2_widths.items():
 
 wb.save(target_excel_path)
 shutil.copyfile(target_excel_path, artifact_excel_path)
-print(f"Shioaji 实时 Excel 更新完成: {target_excel_path}")
+print(f"Shioaji 财报与三大法人 Excel 更新完成: {target_excel_path}")
