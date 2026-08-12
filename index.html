@@ -308,120 +308,141 @@
             
             // Render Cards
             const cardsContainer = document.getElementById('tab-cards');
-            cardsContainer.innerHTML = data.stocks.map(s => {
-                const isUp = s.change >= 0;
-                const changeClass = isUp ? 'up' : 'down';
-                const changeSign = isUp ? '+' : '';
-                
-                return `
-                    <div class="stock-card">
-                        <div class="card-top">
-                            <div class="stock-name-group">
-                                <h2>${s.name}</h2>
-                                <span class="stock-code">${s.code}</span>
+            if (cardsContainer) {
+                cardsContainer.innerHTML = data.stocks.map(s => {
+                    const isUp = s.change >= 0;
+                    const changeClass = isUp ? 'up' : 'down';
+                    const changeSign = isUp ? '+' : '';
+                    const flow = s.institutional_flow || { foreign_net: '-', trust_net: '-', dealer_net: '-', summary: '-' };
+                    const cap = s.capital_inflow || { large_order_ratio: '-', capital_status: '-' };
+                    const openPx = s.open_price !== undefined ? s.open_price : (s.day_open !== undefined ? s.day_open : s.last_price);
+                    const highPx = s.high_price !== undefined ? s.high_price : (s.day_high !== undefined ? s.day_high : s.last_price);
+                    const lowPx = s.low_price !== undefined ? s.low_price : (s.day_low !== undefined ? s.day_low : s.last_price);
+                    const earnDate = s.earnings_date || '已发布';
+                    
+                    return `
+                        <div class="stock-card">
+                            <div class="card-top">
+                                <div class="stock-name-group">
+                                    <h2>${s.name}</h2>
+                                    <span class="stock-code">${s.code}</span>
+                                </div>
+                                <div class="score-pill">卡位 ${s.score}分</div>
                             </div>
-                            <div class="score-pill">卡位 ${s.score}分</div>
-                        </div>
 
-                        <div class="price-hero">
-                            <span class="current-price" style="color: ${isUp ? '#ef4444' : '#10b981'}">NT$ ${s.last_price}</span>
-                            <span class="price-change ${changeClass}">${changeSign}${s.change} (${changeSign}${s.change_pct}%)</span>
-                        </div>
-
-                        <div class="ohlc-grid">
-                            <div class="ohlc-item"><span class="lbl">开盘:</span> <span class="val">${s.open_price}</span></div>
-                            <div class="ohlc-item"><span class="lbl">最高:</span> <span class="val">${s.high_price}</span></div>
-                            <div class="ohlc-item"><span class="lbl">最低:</span> <span class="val">${s.low_price}</span></div>
-                            <div class="ohlc-item"><span class="lbl">收盘:</span> <span class="val">${s.last_price}</span></div>
-                        </div>
-
-                        <div class="chokepoint-box">
-                            <strong>卡位定位：</strong>${s.chokepoint}
-                        </div>
-
-                        <div class="section-badge">🏢 财报公布日与表现</div>
-                        <div class="info-panel">
-                            <strong>日期：</strong>${s.earnings_date}
-                        </div>
-
-                        <div class="section-badge">🏦 三大法人与资金进出</div>
-                        <div class="info-panel">
-                            <div><strong>外资：</strong>${s.institutional_flow.foreign_net} | <strong>投信：</strong>${s.institutional_flow.trust_net}</div>
-                            <div style="margin-top:4px; color: var(--text-secondary);">${s.institutional_flow.summary}</div>
-                        </div>
-
-                        <div class="metrics-row">
-                            <div class="metric-item"><div class="label">毛利率</div><div class="val">${s.gross_margin}</div></div>
-                            <div class="metric-item"><div class="label">ROE</div><div class="val">${s.roe}</div></div>
-                            <div class="metric-item"><div class="label">单季 EPS</div><div class="val">${s.eps_single}</div></div>
-                            <div class="metric-item"><div class="label">今日张数</div><div class="val">${(s.volume).toLocaleString()}</div></div>
-                        </div>
-
-                        <div class="strategy-zone">
-                            <div class="zone-row" style="background: rgba(59, 130, 246, 0.1); border-left: 3px solid #3b82f6;">
-                                <span class="zone-tag" style="color: #60a5fa;">📥 建议买入位</span>
-                                <span class="zone-val" style="color: #93c5fd;">${s.buy_zone_sub}</span>
+                            <div class="price-hero">
+                                <span class="current-price" style="color: ${isUp ? '#ef4444' : '#10b981'}">NT$ ${s.last_price}</span>
+                                <span class="price-change ${changeClass}">${changeSign}${s.change} (${changeSign}${s.change_pct}%)</span>
                             </div>
-                            <div class="zone-row" style="background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444;">
-                                <span class="zone-tag" style="color: #f87171;">🛡️ 黄金重仓位</span>
-                                <span class="zone-val" style="color: #fca5a5;">${s.buy_zone_heavy}</span>
+
+                            <div class="ohlc-grid">
+                                <div class="ohlc-item"><span class="lbl">开盘:</span> <span class="val">${openPx}</span></div>
+                                <div class="ohlc-item"><span class="lbl">最高:</span> <span class="val">${highPx}</span></div>
+                                <div class="ohlc-item"><span class="lbl">最低:</span> <span class="val">${lowPx}</span></div>
+                                <div class="ohlc-item"><span class="lbl">收盘:</span> <span class="val">${s.last_price}</span></div>
                             </div>
-                            <div class="zone-row" style="background: rgba(16, 185, 129, 0.1); border-left: 3px solid #10b981;">
-                                <span class="zone-tag" style="color: #34d399;">🎯 波段止盈 / 目标</span>
-                                <span class="zone-val" style="color: #6ee7b7;">${s.take_profit} / ${s.target_price}</span>
+
+                            <div class="chokepoint-box">
+                                <strong>卡位定位：</strong>${s.chokepoint}
+                            </div>
+
+                            <div class="section-badge">🏢 财报公布日与表现</div>
+                            <div class="info-panel">
+                                <strong>日期：</strong>${earnDate}
+                            </div>
+
+                            <div class="section-badge">🏦 三大法人与资金进出</div>
+                            <div class="info-panel">
+                                <div><strong>外资：</strong>${flow.foreign_net} | <strong>投信：</strong>${flow.trust_net}</div>
+                                <div style="margin-top:4px; color: var(--text-secondary);">${flow.summary}</div>
+                            </div>
+
+                            <div class="metrics-row">
+                                <div class="metric-item"><div class="label">毛利率</div><div class="val">${s.gross_margin}</div></div>
+                                <div class="metric-item"><div class="label">ROE</div><div class="val">${s.roe}</div></div>
+                                <div class="metric-item"><div class="label">单季 EPS</div><div class="val">${s.eps_single}</div></div>
+                                <div class="metric-item"><div class="label">今日张数</div><div class="val">${(s.volume || 0).toLocaleString()}</div></div>
+                            </div>
+
+                            <div class="strategy-zone">
+                                <div class="zone-row" style="background: rgba(59, 130, 246, 0.1); border-left: 3px solid #3b82f6;">
+                                    <span class="zone-tag" style="color: #60a5fa;">📥 建议买入位</span>
+                                    <span class="zone-val" style="color: #93c5fd;">${s.buy_zone_sub}</span>
+                                </div>
+                                <div class="zone-row" style="background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444;">
+                                    <span class="zone-tag" style="color: #f87171;">🛡️ 黄金重仓位</span>
+                                    <span class="zone-val" style="color: #fca5a5;">${s.buy_zone_heavy}</span>
+                                </div>
+                                <div class="zone-row" style="background: rgba(16, 185, 129, 0.1); border-left: 3px solid #10b981;">
+                                    <span class="zone-tag" style="color: #34d399;">🎯 波段止盈 / 目标</span>
+                                    <span class="zone-val" style="color: #6ee7b7;">${s.take_profit} / ${s.target_price}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `;
-            }).join('');
+                    `;
+                }).join('');
+            }
 
             // Render Institutional Flow Table
             const flowBody = document.getElementById('flow-body');
-            flowBody.innerHTML = data.stocks.map(s => `
-                <tr>
-                    <td style="font-family: var(--font-mono); font-weight:700; color: var(--accent-cyan);">${s.code}</td>
-                    <td style="font-weight:700;">${s.name}</td>
-                    <td style="font-family: var(--font-mono); color: var(--accent-red); font-weight:700;">${s.institutional_flow.foreign_net}</td>
-                    <td style="font-family: var(--font-mono); color: var(--accent-green); font-weight:700;">${s.institutional_flow.trust_net}</td>
-                    <td style="font-family: var(--font-mono);">${s.institutional_flow.dealer_net}</td>
-                    <td style="color: var(--accent-gold); font-weight:600;">${s.capital_inflow.large_order_ratio}</td>
-                    <td style="font-size:13px; color: var(--text-secondary);">${s.capital_inflow.capital_status}</td>
-                </tr>
-            `).join('');
+            if (flowBody) {
+                flowBody.innerHTML = data.stocks.map(s => {
+                    const flow = s.institutional_flow || { foreign_net: '-', trust_net: '-', dealer_net: '-' };
+                    const cap = s.capital_inflow || { large_order_ratio: '-', capital_status: '-' };
+                    return `
+                        <tr>
+                            <td style="font-family: var(--font-mono); font-weight:700; color: var(--accent-cyan);">${s.code}</td>
+                            <td style="font-weight:700;">${s.name}</td>
+                            <td style="font-family: var(--font-mono); color: var(--accent-red); font-weight:700;">${flow.foreign_net}</td>
+                            <td style="font-family: var(--font-mono); color: var(--accent-green); font-weight:700;">${flow.trust_net}</td>
+                            <td style="font-family: var(--font-mono);">${flow.dealer_net}</td>
+                            <td style="color: var(--accent-gold); font-weight:600;">${cap.large_order_ratio}</td>
+                            <td style="font-size:13px; color: var(--text-secondary);">${cap.capital_status}</td>
+                        </tr>
+                    `;
+                }).join('');
+            }
 
             // Render Earnings Table
             const earningsBody = document.getElementById('earnings-body');
-            earningsBody.innerHTML = data.stocks.map(s => `
-                <tr>
-                    <td style="font-family: var(--font-mono); font-weight:700; color: var(--accent-cyan);">${s.code}</td>
-                    <td style="font-weight:700;">${s.name}</td>
-                    <td style="font-family: var(--font-mono); font-weight:700;">${s.eps_single}</td>
-                    <td style="font-family: var(--font-mono); color: var(--accent-gold); font-weight:700;">${s.gross_margin}</td>
-                    <td style="font-family: var(--font-mono);">${s.roe}</td>
-                    <td style="color: #a78bfa; font-weight:600;">${s.earnings_date}</td>
-                </tr>
-            `).join('');
-
-            // Render Table 1
-            const tableBody = document.getElementById('table-body');
-            tableBody.innerHTML = data.stocks.map(s => {
-                const isUp = s.change >= 0;
-                return `
+            if (earningsBody) {
+                earningsBody.innerHTML = data.stocks.map(s => `
                     <tr>
                         <td style="font-family: var(--font-mono); font-weight:700; color: var(--accent-cyan);">${s.code}</td>
                         <td style="font-weight:700;">${s.name}</td>
-                        <td style="font-family: var(--font-mono);">${s.open_price}</td>
-                        <td style="font-family: var(--font-mono);">${s.high_price}</td>
-                        <td style="font-family: var(--font-mono);">${s.low_price}</td>
-                        <td style="font-family: var(--font-mono); font-weight:800; color: ${isUp ? '#ef4444' : '#10b981'};">NT$ ${s.last_price}</td>
-                        <td style="font-family: var(--font-mono); font-weight:700;" class="${isUp ? 'up' : 'down'}">${s.change >= 0 ? '+' : ''}${s.change_pct}%</td>
-                        <td style="color: #93c5fd; font-weight:600;">${s.buy_zone_sub}</td>
-                        <td style="color: #fca5a5; font-weight:700;">${s.buy_zone_heavy}</td>
-                        <td style="color: #34d399; font-weight:600;">${s.take_profit}</td>
-                        <td style="color: #f87171; font-weight:700;">${s.stop_loss}</td>
+                        <td style="font-family: var(--font-mono); font-weight:700;">${s.eps_single}</td>
+                        <td style="font-family: var(--font-mono); color: var(--accent-gold); font-weight:700;">${s.gross_margin}</td>
+                        <td style="font-family: var(--font-mono);">${s.roe}</td>
+                        <td style="color: #a78bfa; font-weight:600;">${s.earnings_date || '已发布'}</td>
                     </tr>
-                `;
-            }).join('');
+                `).join('');
+            }
+
+            // Render Table 1
+            const tableBody = document.getElementById('table-body');
+            if (tableBody) {
+                tableBody.innerHTML = data.stocks.map(s => {
+                    const isUp = s.change >= 0;
+                    const openPx = s.open_price !== undefined ? s.open_price : (s.day_open !== undefined ? s.day_open : s.last_price);
+                    const highPx = s.high_price !== undefined ? s.high_price : (s.day_high !== undefined ? s.day_high : s.last_price);
+                    const lowPx = s.low_price !== undefined ? s.low_price : (s.day_low !== undefined ? s.day_low : s.last_price);
+                    return `
+                        <tr>
+                            <td style="font-family: var(--font-mono); font-weight:700; color: var(--accent-cyan);">${s.code}</td>
+                            <td style="font-weight:700;">${s.name}</td>
+                            <td style="font-family: var(--font-mono);">${openPx}</td>
+                            <td style="font-family: var(--font-mono);">${highPx}</td>
+                            <td style="font-family: var(--font-mono);">${lowPx}</td>
+                            <td style="font-family: var(--font-mono); font-weight:800; color: ${isUp ? '#ef4444' : '#10b981'};">NT$ ${s.last_price}</td>
+                            <td style="font-family: var(--font-mono); font-weight:700;" class="${isUp ? 'up' : 'down'}">${s.change >= 0 ? '+' : ''}${s.change_pct}%</td>
+                            <td style="color: #93c5fd; font-weight:600;">${s.buy_zone_sub}</td>
+                            <td style="color: #fca5a5; font-weight:700;">${s.buy_zone_heavy}</td>
+                            <td style="color: #34d399; font-weight:600;">${s.take_profit}</td>
+                            <td style="color: #f87171; font-weight:700;">${s.stop_loss}</td>
+                        </tr>
+                    `;
+                }).join('');
+            }
         }
 
         function switchTab(tabName) {
@@ -441,10 +462,15 @@
                 document.getElementById('tab-table').style.display = 'block';
             }
 
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
         }
 
+        // Trigger loading immediately
+        loadStockData(false);
         window.addEventListener('DOMContentLoaded', () => loadStockData(false));
+        window.addEventListener('load', () => loadStockData(false));
     </script>
 </body>
 </html>
