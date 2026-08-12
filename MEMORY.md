@@ -2,7 +2,7 @@
 
 ## 1. 项目核心决策 (Architecture Decision Records)
 - **Active Workspace 路径**: `/Users/TonyFu/Desktop/台湾股市分析`
-- **公网 Dashboard URL**: `https://tonytcfu.github.io/taiwan-stock-analysis/` (页面标签: **台湾股市分析**)
+- **公网 Dashboard URL**: `https://tonytcfu.github.io/taiwan-stock-analysis/` (页面标签/名称: **台股龍頭股**)
 - **iCloud 桌面 Excel 路径**: `/Users/TonyFu/Desktop/台湾股市分析/台股 5 大 AI 核心卡位龙头深度投资与买卖点筹码量化分析表.xlsx`
 - **数据源与接口**: 永丰金 Shioaji Python SDK (直连 TWSE/TPEx 交易所实时盘口与三大法人筹码，关联账户 `H121527648` / `傅天君`)。
 - **凭证加载与安全**: 本地读取凭证文件 `/Users/TonyFu/Documents/台股量化Antigravity/.shioaji.local.env`，遵循 R.A.I.L.G.U.A.R.D 规范，任何明文 Key 严禁提交至版本控制或公网。

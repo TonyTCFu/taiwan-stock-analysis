@@ -6,7 +6,15 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>台湾股市分析 - 5大 AI 核心卡位龙头每日行情与风控仪表盘</title>
+    <title>台股龍頭股 - 5大 AI 核心卡位龙头每日行情与风控仪表盘</title>
+    <link rel="icon" type="image/jpeg" href="assets/app_icon.jpg">
+    <link rel="shortcut icon" type="image/jpeg" href="assets/app_icon.jpg">
+    <link rel="apple-touch-icon" href="assets/app_icon.jpg">
+    <meta name="apple-mobile-web-app-title" content="台股龍頭股">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta property="og:title" content="台股龍頭股 - 每日行情与风控仪表盘">
+    <meta property="og:image" content="assets/app_icon.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -43,9 +51,9 @@
             border-bottom: 1px solid var(--border-color); padding: 16px 24px;
         }
         .header-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-        .logo-group { display: flex; align-items: center; gap: 12px; }
-        .logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; color: #fff; box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4); }
-        .logo-title h1 { font-size: 20px; font-weight: 700; background: linear-gradient(120deg, #ffffff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .logo-group { display: flex; align-items: center; gap: 14px; }
+        .app-logo-img { width: 44px; height: 44px; border-radius: 10px; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3); object-fit: cover; border: 1px solid rgba(255, 215, 0, 0.3); }
+        .logo-title h1 { font-size: 21px; font-weight: 800; background: linear-gradient(120deg, #ffffff, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .logo-title p { font-size: 12px; color: var(--text-secondary); }
         .header-meta { display: flex; align-items: center; gap: 16px; font-size: 13px; }
         .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 20px; color: var(--accent-green); font-weight: 600; font-size: 12px; }
@@ -113,9 +121,9 @@
     <header>
         <div class="header-container">
             <div class="logo-group">
-                <div class="logo-icon">台</div>
+                <img src="assets/app_icon.jpg" alt="台股龍頭股" class="app-logo-img">
                 <div class="logo-title">
-                    <h1>台湾股市分析</h1>
+                    <h1>台股龍頭股</h1>
                     <p>Taiwan Stock Analysis | 永丰金 Shioaji 交易所直连与法人筹码</p>
                 </div>
             </div>
@@ -206,7 +214,7 @@
     </main>
 
     <footer>
-        <p>台湾股市分析 Dashboard | 数据源: 永丰金 Shioaji API (TWSE 实时盘口) | 交易时间: 09:00 - 13:30 (TPE time)</p>
+        <p>台股龍頭股 Dashboard | 数据源: 永丰金 Shioaji API (TWSE 实时盘口) | 交易时间: 09:00 - 13:30 (TPE time)</p>
         <p>© 2026 Tony Fu. 全自动公网推送 | 本系统仅供量化模型评估参考，不构成直接买卖指令。</p>
     </footer>
 

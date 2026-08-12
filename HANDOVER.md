@@ -9,7 +9,7 @@
 | 项目要素 | 详细信息 / 路径 |
 | :--- | :--- |
 | **项目工作区 (Active Workspace)** | `/Users/TonyFu/Desktop/台湾股市分析` |
-| **公网 Web Dashboard 调阅地址** | [https://tonytcfu.github.io/taiwan-stock-analysis/](https://tonytcfu.github.io/taiwan-stock-analysis/) *(标签: **台湾股市分析**)* |
+| **公网 Web Dashboard 调阅地址** | [https://tonytcfu.github.io/taiwan-stock-analysis/](https://tonytcfu.github.io/taiwan-stock-analysis/) *(标签/名称: **台股龍頭股**)* |
 | **iCloud 桌面量化分析 Excel** | `/Users/TonyFu/Desktop/台湾股市分析/台股 5 大 AI 核心卡位龙头深度投资与买卖点筹码量化分析表.xlsx` |
 | **完整深度分析总结报告** | `/Users/TonyFu/Desktop/台湾股市分析/REPORTS/20260812_taiwan_stock_deep_dive.md` |
 | **数据源接口** | 永丰金 Shioaji Python SDK (直连 TWSE/TPEx 交易所实时盘口与三大法人筹码，关联账户 `H121527648` / `傅天君`) |
