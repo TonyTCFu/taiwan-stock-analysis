@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>台湾股市分析 - 5大 AI 核心卡位龙头每日行情与风控仪表盘</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,12 +48,11 @@
             padding-bottom: 50px;
         }
 
-        /* Glassmorphism Navigation Header */
         header {
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(10, 14, 23, 0.85);
+            background: rgba(10, 14, 23, 0.88);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-color);
@@ -141,14 +143,21 @@
             font-family: var(--font-mono);
         }
 
-        /* Container Layout */
+        .version-tag {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--accent-cyan);
+            background: rgba(6, 182, 212, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
         main {
             max-width: 1400px;
             margin: 24px auto;
             padding: 0 24px;
         }
 
-        /* Navigation Tabs */
         .tab-bar {
             display: flex;
             gap: 8px;
@@ -183,7 +192,6 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        /* Cards Grid Layout */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -245,7 +253,7 @@
             display: flex;
             align-items: baseline;
             gap: 12px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .current-price {
@@ -264,7 +272,22 @@
             gap: 4px;
         }
 
-        .up { color: var(--accent-red); } /* Taiwan Stock convention: Red is UP, Green is DOWN */
+        .ohlc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 11px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .ohlc-item .lbl { color: var(--text-muted); }
+        .ohlc-item .val { font-family: var(--font-mono); font-weight: 700; color: var(--text-primary); }
+
+        .up { color: var(--accent-red); }
         .down { color: var(--accent-green); }
 
         .chokepoint-box {
@@ -316,16 +339,6 @@
             background: rgba(255, 255, 255, 0.02);
         }
 
-        .zone-tag {
-            font-weight: 600;
-        }
-
-        .zone-val {
-            font-family: var(--font-mono);
-            font-weight: 700;
-        }
-
-        /* Executive Table Styling */
         .table-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -404,15 +417,16 @@
                 <div class="logo-icon">台</div>
                 <div class="logo-title">
                     <h1>台湾股市分析</h1>
-                    <p>Taiwan Stock Analysis | 5大 AI 核心卡位龙头动态仪表盘</p>
+                    <p>Taiwan Stock Analysis | 永丰金 Shioaji 实时行情仪表盘</p>
                 </div>
             </div>
             <div class="header-meta">
                 <span class="status-badge">
-                    <span class="status-dot"></span> 自动推送到公网
+                    <span class="status-dot"></span> 永丰金 Shioaji 直连
                 </span>
+                <span class="version-tag" id="cache-ver">vLIVE</span>
                 <span class="update-time" id="update-time">更新时间: 加载中...</span>
-                <button class="btn-refresh" onclick="loadStockData()">🔄 刷新行情</button>
+                <button class="btn-refresh" onclick="loadStockData(true)">🔄 强制刷新缓存</button>
             </div>
         </div>
     </header>
@@ -436,10 +450,13 @@
                     <tr>
                         <th>代码</th>
                         <th>公司名称</th>
-                        <th>当前价</th>
+                        <th>开盘价</th>
+                        <th>最高价</th>
+                        <th>最低价</th>
+                        <th>最新价(收盘)</th>
                         <th>涨跌幅</th>
-                        <th>建议买入位 (分批/试仓)</th>
-                        <th>黄金重仓位 (强支撑)</th>
+                        <th>建议买入位 (试仓)</th>
+                        <th>黄金重仓位</th>
                         <th>波段止盈位</th>
                         <th>长线目标价</th>
                         <th>防守止损价</th>
@@ -473,26 +490,31 @@
     </main>
 
     <footer>
-        <p>台湾股市分析 Dashboard | 数据来源: TWSE / Yahoo Finance | 框架基准: Serenity Hunter (逆向拆解) + Serenity Analyst (九步风控)</p>
+        <p>台湾股市分析 Dashboard | 数据源: 永丰金 Shioaji API (TWSE 交易所直连) | 框架基准: Serenity Hunter (逆向拆解) + Serenity Analyst (九步风控)</p>
         <p>© 2026 Tony Fu. 自动化每日定点更新 | 本系统仅供量化模型评估参考，不构成直接买卖指令。</p>
     </footer>
 
     <script>
         let stockDataCache = null;
 
-        async function loadStockData() {
+        // Anti-caching query timestamp loader
+        async function loadStockData(forceRefresh = false) {
             try {
-                const res = await fetch('data/stock_data.json?t=' + new Date().getTime());
+                const timestamp = forceRefresh ? Date.now() : new Date().getTime();
+                const res = await fetch(`data/stock_data.json?v=${timestamp}`, {
+                    cache: 'no-store'
+                });
                 const json = await res.json();
                 stockDataCache = json;
                 renderDashboard(json);
             } catch (e) {
-                console.error("加载数据失败:", e);
+                console.error("加载实时数据失败:", e);
             }
         }
 
         function renderDashboard(data) {
-            document.getElementById('update-time').innerText = '数据更新时间: ' + data.updated_at;
+            document.getElementById('update-time').innerText = 'Shioaji 定盘时间: ' + data.updated_at;
+            document.getElementById('cache-ver').innerText = 'v' + (data.updated_at ? data.updated_at.replace(/[- :]/g, '').slice(4, 12) : 'LIVE');
             
             // Render Cards
             const cardsContainer = document.getElementById('tab-cards');
@@ -516,6 +538,13 @@
                             <span class="price-change ${changeClass}">${changeSign}${s.change} (${changeSign}${s.change_pct}%)</span>
                         </div>
 
+                        <div class="ohlc-grid">
+                            <div class="ohlc-item"><span class="lbl">开盘:</span> <span class="val">${s.open_price}</span></div>
+                            <div class="ohlc-item"><span class="lbl">最高:</span> <span class="val">${s.high_price}</span></div>
+                            <div class="ohlc-item"><span class="lbl">最低:</span> <span class="val">${s.low_price}</span></div>
+                            <div class="ohlc-item"><span class="lbl">成交:</span> <span class="val">${s.last_price}</span></div>
+                        </div>
+
                         <div class="chokepoint-box">
                             <strong>定位：</strong>${s.chokepoint}
                         </div>
@@ -534,8 +563,8 @@
                                 <div class="val">${s.eps_single}</div>
                             </div>
                             <div class="metric-item">
-                                <div class="label">成交量</div>
-                                <div class="val">${(s.volume / 1000).toFixed(1)}k</div>
+                                <div class="label">今日张数</div>
+                                <div class="val">${(s.volume).toLocaleString()}</div>
                             </div>
                         </div>
 
@@ -565,6 +594,9 @@
                     <tr>
                         <td style="font-family: var(--font-mono); font-weight:700; color: var(--accent-cyan);">${s.code}</td>
                         <td style="font-weight:700;">${s.name}</td>
+                        <td style="font-family: var(--font-mono);">${s.open_price}</td>
+                        <td style="font-family: var(--font-mono);">${s.high_price}</td>
+                        <td style="font-family: var(--font-mono);">${s.low_price}</td>
                         <td style="font-family: var(--font-mono); font-weight:800; color: ${isUp ? '#ef4444' : '#10b981'};">NT$ ${s.last_price}</td>
                         <td style="font-family: var(--font-mono); font-weight:700;" class="${isUp ? 'up' : 'down'}">${s.change >= 0 ? '+' : ''}${s.change_pct}%</td>
                         <td style="color: #93c5fd; font-weight:600;">${s.buy_zone_sub}</td>
@@ -610,8 +642,7 @@
             event.target.classList.add('active');
         }
 
-        // Auto load on start
-        window.addEventListener('DOMContentLoaded', loadStockData);
+        window.addEventListener('DOMContentLoaded', () => loadStockData(false));
     </script>
 </body>
 </html>
