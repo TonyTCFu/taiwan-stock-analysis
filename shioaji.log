@@ -58,3 +58,9 @@
 [pid:34104] 2026-08-12T06:13:17.882332Z  INFO shioaji::contracts_v2::traffic: contract disk cache cache="hit" block="base" region=TW security_type=STK bytes=9301
 [pid:34104] 2026-08-12T06:13:17.885459Z  INFO shioaji::contracts_v2::traffic: contract disk cache cache="hit" block="info" region=TW security_type=STK bytes=84362
 [pid:34104] 2026-08-12T06:13:18.104784Z  INFO shioaji::api::token_pool: Successfully released token slot 1 via temporary runtime
+[pid:34294] 2026-08-12T06:21:36.582478Z  INFO shioaji::api::api_v1::auth::token_login: Found cached token from slot 1, verifying...
+[pid:34294] 2026-08-12T06:21:37.462380Z  INFO shioaji::api::api_v1::auth::token_login: Cached token is valid, using it
+[pid:34294] 2026-08-12T06:21:37.586705Z  INFO shioaji::contracts_v2::traffic: contract backend response endpoint="contracts_version" regions=Some([TW]) security_types=Some([Stock]) bytes=198
+[pid:34294] 2026-08-12T06:21:37.608325Z  INFO shioaji::contracts_v2::traffic: contract disk cache cache="hit" block="base" region=TW security_type=STK bytes=9301
+[pid:34294] 2026-08-12T06:21:37.610598Z  INFO shioaji::contracts_v2::traffic: contract disk cache cache="hit" block="info" region=TW security_type=STK bytes=84362
+[pid:34294] 2026-08-12T06:21:37.882917Z  INFO shioaji::api::token_pool: Successfully released token slot 1 via temporary runtime
