@@ -202,24 +202,48 @@ def fetch_shioaji():
     print("Shioaji 实时行情登录成功！")
 
     codes = list(STOCKS_META.keys())
-    contracts = [api.Contracts.Stocks[code] for code in codes]
+    try:
+        contracts = [api.contracts.Stocks[code] for code in codes]
+    except Exception:
+        contracts = [api.Contracts.Stocks[code] for code in codes]
+        
     snapshots = api.snapshots(contracts)
+    snap_dict = {s.code: s for s in snapshots}
+
+    # Fetch TWSE official MIS real-time quotes for intraday precision
+    twse_mis_data = {}
+    try:
+        import urllib.request
+        ex_ch_param = "|".join([f"tse_{c}.tw" for c in codes])
+        url = f"https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch={ex_ch_param}"
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            mis_json = json.loads(resp.read().decode('utf-8'))
+            for item in mis_json.get('msgArray', []):
+                code_key = item.get('c')
+                if code_key:
+                    twse_mis_data[code_key] = item
+    except Exception as e:
+        print(f"TWSE MIS fetch notice: {e}")
 
     now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     results = []
 
-    for s in snapshots:
-        code = s.code
+    for code in codes:
         meta = STOCKS_META[code]
+        s = snap_dict.get(code)
+        mis = twse_mis_data.get(code, {})
         
-        open_price = float(s.open) if s.open else 0.0
-        high_price = float(s.high) if s.high else 0.0
-        low_price = float(s.low) if s.low else 0.0
-        close_price = float(s.close) if s.close else 0.0
-        volume = int(s.total_volume) if s.total_volume else 0
+        # Real-time prices preference: TWSE MIS > Shioaji Snapshot
+        last_price = float(mis.get('z')) if mis.get('z') and mis.get('z') != '-' else (float(s.close) if s and s.close else 0.0)
+        prev_close = float(mis.get('y')) if mis.get('y') and mis.get('y') != '-' else (float(s.yesterday_close) if s and hasattr(s, 'yesterday_close') and s.yesterday_close else last_price)
+        open_price = float(mis.get('o')) if mis.get('o') and mis.get('o') != '-' else (float(s.open) if s and s.open else last_price)
+        high_price = float(mis.get('h')) if mis.get('h') and mis.get('h') != '-' else (float(s.high) if s and s.high else last_price)
+        low_price = float(mis.get('l')) if mis.get('l') and mis.get('l') != '-' else (float(s.low) if s and s.low else last_price)
+        volume = int(mis.get('v')) if mis.get('v') and mis.get('v') != '-' else (int(s.total_volume) if s and s.total_volume else 0)
         
-        change = round(close_price - open_price, 1) if open_price else 0.0
-        change_pct = round((change / open_price) * 100, 2) if open_price else 0.0
+        change = round(last_price - prev_close, 1) if prev_close else 0.0
+        change_pct = round((change / prev_close) * 100, 2) if prev_close else 0.0
         
         results.append({
             "symbol": meta["symbol"],
@@ -228,10 +252,11 @@ def fetch_shioaji():
             "en_name": meta["en_name"],
             "chokepoint": meta["chokepoint"],
             "score": meta["score"],
-            "open_price": open_price,
-            "high_price": high_price,
-            "low_price": low_price,
-            "last_price": close_price,
+            "open_price": round(open_price, 1),
+            "high_price": round(high_price, 1),
+            "low_price": round(low_price, 1),
+            "last_price": round(last_price, 1),
+            "prev_close": round(prev_close, 1),
             "change": change,
             "change_pct": change_pct,
             "volume": volume,
