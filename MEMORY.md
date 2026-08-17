@@ -10,6 +10,7 @@
 - **实时刷新边界**: GitHub Pages 页面通过公网 Render 行情网关 `https://futienchun-com-dashboard.onrender.com/api/live-quotes` 执行刷新；网关服务端只读调用 Shioaji snapshot，并独立抓取 TWSE MIS 交叉核对/降级，凭证只存在 Render 环境变量，不进入浏览器或仓库。本机 `dashboard_server.py` 仅作为开发/故障排查桥接服务。
 - **服务部署状态**: 公网按钮必须走 Render 行情网关，不能依赖用户设备上的 Python、Shioaji 或本地文件；前端在公网网关失败时明确报错，不静默伪装成刷新成功。
 - **公网验收基线（2026-08-17）**: Render 服务 `srv-d8onljk8aovs7385cqo0` 已配置 Shioaji 凭证；GitHub Pages 点击“强制刷新行情”实际返回 Shioaji snapshot 5/5 与 TWSE MIS 5/5，且页面显示 Asia/Taipei 时间。网关以 30 秒全局冷却保护 Shioaji 流量；Render Python 3.14 对 TWSE 旧证书需保留 TLS 校验但移除 `VERIFY_X509_STRICT` 标志。
+- **跨设备交接入口**: 本轮的根因、架构、仓库提交、凭证边界、完整验收和故障排查统一记录在 `HANDOVER.md` 的“2026-08-17 公网实时行情改造交接”章节；其他设备进入工作区后先读该章节，再处理后续任务。
 
 ## 2. 台股 5 大 AI 核心卡位龙头 Serenity 评估库
 

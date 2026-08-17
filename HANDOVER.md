@@ -17,7 +17,85 @@
 
 ---
 
-## 二、 对话框迁移的核心内容汇总 (Migrated Core Contents)
+## 二、 2026-08-17 公网实时行情改造交接（必须阅读）
+
+### 1. 问题、根因与已完成方案
+
+**原问题**：公网 GitHub Pages 的“强制刷新行情”按钮只能重新载入静态 `data/stock_data.json`，无法在用户的 iPhone、iPad、其他电脑或公网浏览器中执行 Python / Shioaji，因此看似刷新、实际没有请求实时行情。
+
+**根因**：GitHub Pages 是静态托管，浏览器既不能运行 Python，也不能安全持有 Shioaji 凭证。把按钮绑定到本机 `dashboard_server.py` 只会在本机有效，不能满足多设备使用。
+
+**现行架构**：
+
+```text
+任意设备的 GitHub Pages Dashboard
+  └─ 点击“强制刷新行情”
+      └─ POST Render /api/live-quotes
+          ├─ Shioaji Snapshot（主源，5 档标的）
+          └─ TWSE MIS（独立交叉核对；Shioaji 不可用时降级）
+      └─ 浏览器仅更新当前页面的实时行情字段与状态，不接触凭证
+```
+
+### 2. 公网服务与凭证边界
+
+| 项目 | 已确认状态 |
+| :--- | :--- |
+| Dashboard 前端 | `TonyTCFu/taiwan-stock-analysis` 的 GitHub Pages |
+| 行情网关 | `https://futienchun-com-dashboard.onrender.com/api/live-quotes` |
+| Render 服务 ID | `srv-d8onljk8aovs7385cqo0` |
+| Render 后端仓库 | `TonyTCFu/futienchun-com-dashboard`，分支 `main` |
+| Shioaji 凭证 | 仅存在 Render Environment 的 `SHIOAJI_API_KEY` / `SHIOAJI_SECRET_KEY`；严禁写入仓库、前端、日志、Markdown 或聊天记录 |
+| GitHub Secrets | 不会自动同步到 Render；Render 必须单独配置两个变量 |
+| 行情权限 | 仅 `api.login`、合约读取、`api.snapshots`、`api.logout`；不调用下单、改单、查持仓或资金 API |
+
+本机 `/usr/bin/python3` 已安装 `shioaji 1.7.2` 并完成真实只读登录与 5/5 Snapshot 验证；这是开发验证，不是公网按钮的运行依赖。
+
+### 3. 代码与部署记录
+
+**GitHub Pages 仓库 `TonyTCFu/taiwan-stock-analysis`**：
+
+| 提交 | 作用 |
+| :--- | :--- |
+| `10bf39d` | 前端按钮改为调用公网 Render 行情网关；状态区显示 Shioaji / TWSE 两路结果 |
+| `2cdc101` | 推送本机 Shioaji 真实快照与公网架构说明 |
+| `0e6db56`、`e5c19ad` | 更新本交接和记忆文档的公网验收基线 |
+
+**Render 后端仓库 `TonyTCFu/futienchun-com-dashboard`**：
+
+| 提交 | 作用 |
+| :--- | :--- |
+| `df49bb7` | 新增 `scripts/live_quotes.py` 与 `POST /api/live-quotes`，加入 CORS 白名单和刷新冷却 |
+| `0c7c3d1` | 修复 Render Python 3.14 访问 TWSE MIS 时的 `Missing Subject Key Identifier`；仍保留 TLS 证书校验，只移除 `VERIFY_X509_STRICT` 兼容性标志 |
+| `084b823` | 所有实时响应时间改为 `Asia/Taipei`，避免 Render UTC 时间在页面显示错误 |
+
+后端的关键文件为：
+
+- `scripts/live_quotes.py`：只读 Shioaji Snapshot + TWSE MIS 行情聚合。
+- `scripts/serve_dashboard.py`：`/api/live-quotes`、CORS、30 秒全局冷却与既有静态站服务。
+- `render.yaml`：声明 Render 所需变量名与允许来源；不包含变量值。
+
+### 4. 最终公网验收（已通过）
+
+2026-08-17 以真实浏览器打开 `https://tonytcfu.github.io/taiwan-stock-analysis/`，实际点击“🔄 强制刷新行情”后，页面从静态状态切换为：
+
+- `Shioaji 已连接 · TWSE 已更新`
+- 5/5 Shioaji Snapshot 成功
+- 5/5 TWSE MIS 成功
+- 公网 `POST /api/live-quotes` 返回 HTTP 200 与允许 GitHub Pages 的 CORS 来源
+- 页面显示的台湾时间为 `2026-08-17 23:22:42`，不再误用 Render UTC
+
+### 5. 使用与故障排查
+
+1. 任意设备只需打开 GitHub Pages，点击“强制刷新行情”；不需要安装 Python、Shioaji 或登入 Render。
+2. 连续刷新少于 30 秒会返回 HTTP 429，这是保护 Shioaji 登录/行情流量的设计；等待后重试。
+3. 若页面显示 Shioaji 未连接但 TWSE 已更新，先查 Render Environment 是否仍有两个变量名和值；不在浏览器或 GitHub Pages 中配置凭证。
+4. 若页面显示 TWSE 未更新，先查 Render `/api/live-quotes` 的响应 `sources.twse_mis.detail`。已知 Python 3.14 证书严格校验问题已由 `0c7c3d1` 修复，若复发不可用 `verify=False` 绕过 TLS。
+5. 若 GitHub 推送后 Render 没有自动部署，Render 曾出现 GitHub 部署故障提示；在 Render 服务页选择 `Manual Deploy` → `Deploy latest commit`，然后再做一次公网按钮验收。
+6. 截图中出现的 `[rebuild] Dashboard 重建失败` 是既有定时离线模型重建任务，和本实时按钮调用路径独立；它不阻断 `/api/live-quotes`。修复该任务时不得为了消除日志而禁用交易日的模型/模拟盘重建，需单独定位其离线资产缓存问题。
+
+---
+
+## 三、 对话框迁移的核心内容汇总 (Migrated Core Contents)
 
 ### 1. 技能盘点与分析方法论 (Skills & Methodology)
 对话中成功盘点并调用了以下专业技能：
@@ -37,7 +115,7 @@
 
 ---
 
-## 三、 代码资产与文件功能交接 (Codebase Inventory)
+## 四、 代码资产与文件功能交接 (Codebase Inventory)
 
 1. **`fetch_shioaji_data.py`**:
    - 依赖 `shioaji` Python SDK，自动读取本地环境 `.shioaji.local.env`。
@@ -59,7 +137,7 @@
 
 ---
 
-## 四、 运维与日常使用指南 (Operations Manual)
+## 五、 运维与日常使用指南 (Operations Manual)
 
 ### 1. 每日盘后一键更新行情与推送至公网
 在终端中执行以下命令（推荐在 `Active Workspace` 路径下）：
@@ -100,7 +178,7 @@ python3 /Users/TonyFu/Desktop/台湾股市分析/create_shioaji_excel.py
 
 ---
 
-## 五、 风控提示与后续扩展建议
+## 六、 风控提示与后续扩展建议
 
 1. **财务预告日跟踪**: 鸿海即将在 2026-08-14（本周五）举办法说会，建议关注其 GB200 出货量及毛利率指导。
 2. **凭证保护**: `.shioaji.local.env` 严禁提交至 Git 仓库；公网网关凭证只配置在 Render 环境变量，不复制到 GitHub Pages、前端代码、日志或 JSON。
