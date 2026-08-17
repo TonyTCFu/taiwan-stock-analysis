@@ -79,6 +79,8 @@ Dashboard 的“强制刷新行情”现在调用公网 Render 行情网关，�
 
 公网网关服务端读取 Render 的 `SHIOAJI_API_KEY` / `SHIOAJI_SECRET_KEY` 环境变量，只执行只读行情请求；Shioaji 为主源，TWSE MIS 独立交叉核对并作为降级源。两者状态会回传到页面并写入响应的 `sources`。
 
+Render 的两个凭证必须在 Render Environment 单独配置，GitHub Actions Secrets 不会自动同步。网关有 30 秒全局冷却，连续点击会收到 429，属于保护机制；2026-08-17 已完成公网验收，Shioaji 与 TWSE MIS 均返回 5/5。
+
 本机桥接服务仅用于开发或公网网关故障排查：
 
 ```bash
