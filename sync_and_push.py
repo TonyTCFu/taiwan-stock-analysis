@@ -21,11 +21,13 @@ def run_cmd(cmd, cwd=ROOT):
     return res.returncode == 0
 
 def main():
-    print("=== 1. 读取 永丰金 Shioaji API 实时行情 (2330, 2059, 2383, 3017, 2317) ===")
-    run_cmd(f"{sys.executable} fetch_shioaji_data.py")
+    print("=== 1. 刷新 Shioaji 主源 / TWSE MIS 降级行情 (2330, 2059, 2383, 3017, 2317) ===")
+    if not run_cmd(f"{sys.executable} fetch_shioaji_data.py"):
+        raise SystemExit("行情刷新失败，已停止后续 Excel、commit 和 push，避免发布陈旧数据。")
 
     print("\n=== 2. 重新绘制并更新 iCloud 桌面 Excel 研报 ===")
-    run_cmd(f"{sys.executable} create_shioaji_excel.py")
+    if not run_cmd(f"{sys.executable} create_shioaji_excel.py"):
+        raise SystemExit("Excel 更新失败，已停止 commit 和 push。")
 
     print("\n=== 3. 提交代码并自动化推送到公网 (GitHub Pages) ===")
     now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")

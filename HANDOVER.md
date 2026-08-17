@@ -47,12 +47,14 @@
    - 自动化绘制美化版 Excel 研报，设置微软雅黑与 Calibri 字体、定制列宽行高与色阶，输出至桌面 `台股 5 大 AI 核心卡位龙头深度投资与买卖点筹码量化分析表.xlsx`。
 3. **`sync_and_push.py`**:
    - 连贯同步管道：调用 `fetch_shioaji_data.py` $\rightarrow$ 调用 `create_shioaji_excel.py` $\rightarrow$ `git add .` & `git commit`（生成版本号如 `v20260812_133552`） $\rightarrow$ `git push origin main` 推送到 GitHub Pages。
-4. **`index.html`**:
+4. **`dashboard_server.py`**:
+   - 本机 Dashboard 刷新桥接服务；`POST /api/refresh` 会实际调用只读 Shioaji snapshot，并独立抓取 TWSE MIS 进行交叉核对。
+5. **`index.html`**:
    - Modern Dark Glassmorphism 响应式 Web 仪表盘。
    - 包含多 Tab 分页（核心龙头概览、Serenity 卡位评估、买卖策略矩阵、三大法人筹码、财报公布日预告）。
-5. **`AGENTS.md` & `MEMORY.md`**:
+6. **`AGENTS.md` & `MEMORY.md`**:
    - 记录项目编码标准、技能集成规范、安全约束与架构决策。
-6. **`REPORTS/20260812_taiwan_stock_deep_dive.md`**:
+7. **`REPORTS/20260812_taiwan_stock_deep_dive.md`**:
    - 归档对话框全部深度研究细节的完整 Markdown 报告。
 
 ---
@@ -69,12 +71,22 @@ python3 /Users/TonyFu/Desktop/台湾股市分析/sync_and_push.py
 > 2. 自动更新 iCloud 桌面 Excel；
 > 3. 自动打包提交 Git 并推送到公网 Pages。
 
-### 2. 单独重新生成 iCloud 桌面 Excel
+### 2. 本机 Dashboard 实时刷新
+
+GitHub Pages 只能读取已经发布的静态 JSON，浏览器不能直接执行 Python 或读取本机 Shioaji 凭证。要让 Dashboard 的“强制刷新行情”真正抓取行情，先在项目目录启动本机桥接服务：
+
+```bash
+python3 dashboard_server.py
+```
+
+然后打开 `http://127.0.0.1:8765/`。按钮会调用本机 `POST /api/refresh`：Shioaji snapshot 为主源，TWSE MIS 独立作为交叉核对/降级源；页面会分别显示两者是否成功。公网 URL 上的按钮只能重载已发布数据，并会明确提示这一限制。
+
+### 3. 单独重新生成 iCloud 桌面 Excel
 ```bash
 python3 /Users/TonyFu/Desktop/台湾股市分析/create_shioaji_excel.py
 ```
 
-### 3. 多端调阅公网 Dashboard
+### 4. 多端调阅公网 Dashboard
 在 iPhone、iPad、Mac 或任意浏览器打开：
 `https://tonytcfu.github.io/taiwan-stock-analysis/`
 

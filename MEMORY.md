@@ -7,7 +7,8 @@
 - **数据源与接口**: 永丰金 Shioaji Python SDK (直连 TWSE/TPEx 交易所实时盘口与三大法人筹码，关联账户 `H121527648` / `傅天君`)。
 - **凭证加载与安全**: 本地读取凭证文件 `/Users/TonyFu/Documents/台股量化Antigravity/.shioaji.local.env`，遵循 R.A.I.L.G.U.A.R.D 规范，任何明文 Key 严禁提交至版本控制或公网。
 - **防缓存与前端加载**: `index.html` 配置 HTTP header `Cache-Control: no-cache`，Ajax 请求拼附 `v=TIMESTAMP` 时间戳强制获取最新数据。
-- **服务部署状态**: 本地 HTTP 预览服务（端口 8899）已关闭（进程清空），完全依赖公网 GitHub Pages 进行多端（Phone / Tablet / PC）实时调阅。
+- **实时刷新边界**: GitHub Pages 是静态托管，前端按钮不能直接启动 Python/Shioaji；本机必须通过 `dashboard_server.py` 提供 `POST /api/refresh`。本机刷新以 Shioaji read-only snapshot 为主源，TWSE MIS 独立抓取为交叉核对/降级源，并把两者状态写入 `data/stock_data.json.sources`。
+- **服务部署状态**: 公网仍由 GitHub Pages 提供静态调阅；需要实际点击刷新时，启动本机 `dashboard_server.py`（默认端口 8765），再打开本机地址。公网按钮不能执行本机 Python。
 
 ## 2. 台股 5 大 AI 核心卡位龙头 Serenity 评估库
 
@@ -39,6 +40,7 @@
 │   └── stock_data.json                # Shioaji API 实时行情与三大法人 JSON 缓存
 ├── index.html                         # 响应式 Web Dashboard 静态页面
 ├── fetch_shioaji_data.py              # Shioaji SDK 盘口与筹码抓取核心脚本
+├── dashboard_server.py                # 本机 Dashboard -> Shioaji/TWSE 刷新桥接服务
 ├── create_shioaji_excel.py             # Openpyxl 绘制 iCloud 桌面美化 Excel 脚本
 ├── sync_and_push.py                   # 自动定盘、更新版本号并 Push 到 GitHub Pages 脚本
 └── deploy_to_github.sh                # GitHub 部署自动化脚本

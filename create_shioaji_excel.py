@@ -1,11 +1,12 @@
 import os
 import json
-import shutil
 import openpyxl
+from pathlib import Path
 from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 from openpyxl.utils import get_column_letter
 
-json_path = "/Users/TonyFu/.gemini/antigravity/scratch/taiwan-stock-dashboard/data/stock_data.json"
+project_root = Path(__file__).resolve().parent
+json_path = project_root / "data" / "stock_data.json"
 with open(json_path, encoding="utf-8") as f:
     stock_payload = json.load(f)
 
@@ -13,11 +14,10 @@ updated_at = stock_payload.get("updated_at", "")
 data_source = stock_payload.get("data_source", "永丰金 Shioaji API")
 stocks = stock_payload.get("stocks", [])
 
-desktop_dir = "/Users/TonyFu/Desktop/台湾股市分析"
+desktop_dir = project_root
 os.makedirs(desktop_dir, exist_ok=True)
 excel_filename = "台股 5 大 AI 核心卡位龙头深度投资与买卖点筹码量化分析表.xlsx"
-target_excel_path = os.path.join(desktop_dir, excel_filename)
-artifact_excel_path = "/Users/TonyFu/.gemini/antigravity/brain/236b9bdf-d399-4da3-8f7f-3f6b26ffcc9f/台股核心卡位龙头5强深度投资与买卖点分析表.xlsx"
+target_excel_path = desktop_dir / excel_filename
 
 wb = openpyxl.Workbook()
 
@@ -196,5 +196,4 @@ for col_idx, width in col2_widths.items():
     ws2.column_dimensions[get_column_letter(col_idx)].width = width
 
 wb.save(target_excel_path)
-shutil.copyfile(target_excel_path, artifact_excel_path)
 print(f"Shioaji 财报与三大法人 Excel 更新完成: {target_excel_path}")

@@ -2,7 +2,26 @@ import os
 import json
 import datetime
 from pathlib import Path
-import shioaji as sj
+
+
+def _as_float(value, default=0.0):
+    """Return a numeric quote field without turning TWSE '-' into an error."""
+    if value in (None, "", "-"):
+        return default
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _as_int(value, default=0):
+    """Return an integer quote field without failing on missing market data."""
+    if value in (None, "", "-"):
+        return default
+    try:
+        return int(float(value))
+    except (TypeError, ValueError):
+        return default
 
 def load_shioaji_env():
     possible_paths = [
@@ -188,59 +207,117 @@ STOCKS_META = {
     }
 }
 
-def fetch_shioaji():
+def fetch_twse_mis(codes):
+    """Fetch the public TWSE MIS quote feed independently of Shioaji login."""
+    import urllib.request
+
+    ex_ch_param = "|".join([f"tse_{code}.tw" for code in codes])
+    url = f"https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch={ex_ch_param}"
+    request = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(request, timeout=5) as response:
+        payload = json.loads(response.read().decode("utf-8"))
+
+    quote_rows = {
+        item.get("c"): item
+        for item in payload.get("msgArray", [])
+        if item.get("c")
+    }
+    if not quote_rows:
+        raise RuntimeError("TWSE MIS returned no quote rows")
+
+    quote_times = [item.get("t") for item in quote_rows.values() if item.get("t")]
+    return quote_rows, {
+        "status": "ok",
+        "quote_count": len(quote_rows),
+        "retrieved_at": datetime.datetime.now().isoformat(timespec="seconds"),
+        "market_time": max(quote_times) if quote_times else None,
+    }
+
+
+def fetch_shioaji_snapshots(codes):
+    """Fetch read-only Shioaji snapshots and never call an order API."""
+    try:
+        import shioaji as sj
+    except ImportError:
+        return {}, {"status": "unavailable", "detail": "shioaji package is not installed"}
+
     load_shioaji_env()
     api_key = os.environ.get("SHIOAJI_API_KEY")
     secret_key = os.environ.get("SHIOAJI_SECRET_KEY")
 
     if not api_key or not secret_key:
-        raise ValueError("SHIOAJI_API_KEY / SHIOAJI_SECRET_KEY 未能找到！请检查 .shioaji.local.env 配置")
+        return {}, {"status": "unavailable", "detail": "Shioaji credentials are not configured"}
 
     print(f"正在建立 永丰金 Shioaji API 实时行情连接...")
     api = sj.Shioaji(simulation=False)
-    api.login(api_key=api_key, secret_key=secret_key)
-    print("Shioaji 实时行情登录成功！")
-
-    codes = list(STOCKS_META.keys())
     try:
-        contracts = [api.contracts.Stocks[code] for code in codes]
-    except Exception:
-        contracts = [api.Contracts.Stocks[code] for code in codes]
-        
-    snapshots = api.snapshots(contracts)
-    snap_dict = {s.code: s for s in snapshots}
+        api.login(api_key=api_key, secret_key=secret_key)
+        print("Shioaji 实时行情登录成功！")
+        try:
+            contracts = [api.Contracts.Stocks[code] for code in codes]
+        except Exception:
+            contracts = [api.contracts.Stocks[code] for code in codes]
+        snapshots = api.snapshots(contracts)
+        snap_dict = {snapshot.code: snapshot for snapshot in snapshots}
+        return snap_dict, {
+            "status": "ok" if snap_dict else "unavailable",
+            "quote_count": len(snap_dict),
+            "retrieved_at": datetime.datetime.now().isoformat(timespec="seconds"),
+            "quote_mode": "snapshot",
+        }
+    except Exception as exc:
+        return {}, {"status": "unavailable", "detail": f"{type(exc).__name__}: {exc}"}
+    finally:
+        try:
+            api.logout()
+        except Exception:
+            pass
 
-    # Fetch TWSE official MIS real-time quotes for intraday precision
+
+def fetch_shioaji():
+    codes = list(STOCKS_META.keys())
+    shioaji_data, shioaji_status = fetch_shioaji_snapshots(codes)
+
     twse_mis_data = {}
     try:
-        import urllib.request
-        ex_ch_param = "|".join([f"tse_{c}.tw" for c in codes])
-        url = f"https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch={ex_ch_param}"
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req, timeout=5) as resp:
-            mis_json = json.loads(resp.read().decode('utf-8'))
-            for item in mis_json.get('msgArray', []):
-                code_key = item.get('c')
-                if code_key:
-                    twse_mis_data[code_key] = item
-    except Exception as e:
-        print(f"TWSE MIS fetch notice: {e}")
+        twse_mis_data, twse_status = fetch_twse_mis(codes)
+    except Exception as exc:
+        twse_status = {"status": "unavailable", "detail": f"{type(exc).__name__}: {exc}"}
+        print(f"TWSE MIS fetch notice: {twse_status['detail']}")
+
+    if not shioaji_data and not twse_mis_data:
+        raise RuntimeError(
+            "Neither Shioaji nor TWSE MIS returned quotes; existing stock_data.json was preserved"
+        )
+
+    if shioaji_data and twse_mis_data:
+        data_source = "Shioaji Snapshot (primary) + TWSE MIS cross-check"
+    elif shioaji_data:
+        data_source = "Shioaji Snapshot"
+    else:
+        data_source = "TWSE MIS fallback (Shioaji unavailable)"
 
     now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     results = []
 
     for code in codes:
         meta = STOCKS_META[code]
-        s = snap_dict.get(code)
+        s = shioaji_data.get(code)
         mis = twse_mis_data.get(code, {})
-        
-        # Real-time prices preference: TWSE MIS > Shioaji Snapshot
-        last_price = float(mis.get('z')) if mis.get('z') and mis.get('z') != '-' else (float(s.close) if s and s.close else 0.0)
-        prev_close = float(mis.get('y')) if mis.get('y') and mis.get('y') != '-' else (float(s.yesterday_close) if s and hasattr(s, 'yesterday_close') and s.yesterday_close else last_price)
-        open_price = float(mis.get('o')) if mis.get('o') and mis.get('o') != '-' else (float(s.open) if s and s.open else last_price)
-        high_price = float(mis.get('h')) if mis.get('h') and mis.get('h') != '-' else (float(s.high) if s and s.high else last_price)
-        low_price = float(mis.get('l')) if mis.get('l') and mis.get('l') != '-' else (float(s.low) if s and s.low else last_price)
-        volume = int(mis.get('v')) if mis.get('v') and mis.get('v') != '-' else (int(s.total_volume) if s and s.total_volume else 0)
+
+        shioaji_last = _as_float(getattr(s, "close", None)) if s else 0.0
+        twse_last = _as_float(mis.get("z"))
+        quote_source = "Shioaji Snapshot" if shioaji_last else "TWSE MIS"
+        last_price = shioaji_last or twse_last
+        prev_close = (
+            _as_float(getattr(s, "yesterday_close", None)) if s else 0.0
+        ) or _as_float(mis.get("y")) or last_price
+        open_price = (_as_float(getattr(s, "open", None)) if s else 0.0) or _as_float(mis.get("o")) or last_price
+        high_price = (_as_float(getattr(s, "high", None)) if s else 0.0) or _as_float(mis.get("h")) or last_price
+        low_price = (_as_float(getattr(s, "low", None)) if s else 0.0) or _as_float(mis.get("l")) or last_price
+        volume = (_as_int(getattr(s, "total_volume", None)) if s else 0) or _as_int(mis.get("v"))
+
+        quote_time = mis.get("t") if quote_source == "TWSE MIS" else shioaji_status.get("retrieved_at")
         
         change = round(last_price - prev_close, 1) if prev_close else 0.0
         change_pct = round((change / prev_close) * 100, 2) if prev_close else 0.0
@@ -260,6 +337,8 @@ def fetch_shioaji():
             "change": change,
             "change_pct": change_pct,
             "volume": volume,
+            "quote_source": quote_source,
+            "quote_time": quote_time,
             "gross_margin": meta["gross_margin"],
             "net_margin": meta["net_margin"],
             "roe": meta["roe"],
@@ -277,9 +356,14 @@ def fetch_shioaji():
 
     payload = {
         "updated_at": now_str,
-        "data_source": "永丰金 Shioaji API (TWSE 实时盘口)",
+        "data_source": data_source,
         "market": "台湾股票市场 (TWSE)",
         "trading_hours": "09:00 - 13:30 (TPE time)",
+        "sources": {
+            "shioaji": shioaji_status,
+            "twse_mis": twse_status,
+            "selected_quote_source": data_source,
+        },
         "stocks": results
     }
 
