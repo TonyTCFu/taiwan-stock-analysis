@@ -7,8 +7,8 @@
 - **数据源与接口**: 永丰金 Shioaji Python SDK (直连 TWSE/TPEx 交易所实时盘口与三大法人筹码，关联账户 `H121527648` / `傅天君`)。
 - **凭证加载与安全**: 本地读取凭证文件 `/Users/TonyFu/Documents/台股量化Antigravity/.shioaji.local.env`，遵循 R.A.I.L.G.U.A.R.D 规范，任何明文 Key 严禁提交至版本控制或公网。
 - **防缓存与前端加载**: `index.html` 配置 HTTP header `Cache-Control: no-cache`，Ajax 请求拼附 `v=TIMESTAMP` 时间戳强制获取最新数据。
-- **实时刷新边界**: GitHub Pages 是静态托管，前端按钮不能直接启动 Python/Shioaji；本机必须通过 `dashboard_server.py` 提供 `POST /api/refresh`。本机刷新以 Shioaji read-only snapshot 为主源，TWSE MIS 独立抓取为交叉核对/降级源，并把两者状态写入 `data/stock_data.json.sources`。
-- **服务部署状态**: 公网仍由 GitHub Pages 提供静态调阅；需要实际点击刷新时，启动本机 `dashboard_server.py`（默认端口 8765），再打开本机地址。公网按钮不能执行本机 Python。
+- **实时刷新边界**: GitHub Pages 页面通过公网 Render 行情网关 `https://futienchun-com-dashboard.onrender.com/api/live-quotes` 执行刷新；网关服务端只读调用 Shioaji snapshot，并独立抓取 TWSE MIS 交叉核对/降级，凭证只存在 Render 环境变量，不进入浏览器或仓库。本机 `dashboard_server.py` 仅作为开发/故障排查桥接服务。
+- **服务部署状态**: 公网按钮必须走 Render 行情网关，不能依赖用户设备上的 Python、Shioaji 或本地文件；前端在公网网关失败时明确报错，不静默伪装成刷新成功。
 
 ## 2. 台股 5 大 AI 核心卡位龙头 Serenity 评估库
 

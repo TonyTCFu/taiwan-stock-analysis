@@ -71,15 +71,21 @@ python3 /Users/TonyFu/Desktop/台湾股市分析/sync_and_push.py
 > 2. 自动更新 iCloud 桌面 Excel；
 > 3. 自动打包提交 Git 并推送到公网 Pages。
 
-### 2. 本机 Dashboard 实时刷新
+### 2. Dashboard 公网实时刷新
 
-GitHub Pages 只能读取已经发布的静态 JSON，浏览器不能直接执行 Python 或读取本机 Shioaji 凭证。要让 Dashboard 的“强制刷新行情”真正抓取行情，先在项目目录启动本机桥接服务：
+Dashboard 的“强制刷新行情”现在调用公网 Render 行情网关，用户从任何设备打开 GitHub Pages 都能执行，不依赖该设备安装 Python/Shioaji：
+
+`POST https://futienchun-com-dashboard.onrender.com/api/live-quotes`
+
+公网网关服务端读取 Render 的 `SHIOAJI_API_KEY` / `SHIOAJI_SECRET_KEY` 环境变量，只执行只读行情请求；Shioaji 为主源，TWSE MIS 独立交叉核对并作为降级源。两者状态会回传到页面并写入响应的 `sources`。
+
+本机桥接服务仅用于开发或公网网关故障排查：
 
 ```bash
 python3 dashboard_server.py
 ```
 
-然后打开 `http://127.0.0.1:8765/`。按钮会调用本机 `POST /api/refresh`：Shioaji snapshot 为主源，TWSE MIS 独立作为交叉核对/降级源；页面会分别显示两者是否成功。公网 URL 上的按钮只能重载已发布数据，并会明确提示这一限制。
+然后打开 `http://127.0.0.1:8765/`。按钮会调用本机 `POST /api/refresh`；这不是公网使用路径。
 
 ### 3. 单独重新生成 iCloud 桌面 Excel
 ```bash
@@ -95,5 +101,5 @@ python3 /Users/TonyFu/Desktop/台湾股市分析/create_shioaji_excel.py
 ## 五、 风控提示与后续扩展建议
 
 1. **财务预告日跟踪**: 鸿海即将在 2026-08-14（本周五）举办法说会，建议关注其 GB200 出货量及毛利率指导。
-2. **凭证保护**: `.shioaji.local.env` 严禁提交至 Git 仓库，维持本地加载模式。
+2. **凭证保护**: `.shioaji.local.env` 严禁提交至 Git 仓库；公网网关凭证只配置在 Render 环境变量，不复制到 GitHub Pages、前端代码、日志或 JSON。
 3. **扩展标的池**: 如需新增台股标的（如散热双雄双鸿 3324 或 CCL 龙头台燿 6274），只需修改 `fetch_shioaji_data.py` 中的 `STOCK_LIST` 字典即可。
