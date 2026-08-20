@@ -92,3 +92,14 @@
 [pid:64090] 2026-08-13T06:54:32.447931Z  INFO shioaji::contracts_v2::traffic: contract disk cache cache="hit" block="base" region=TW security_type=STK bytes=9308
 [pid:64090] 2026-08-13T06:54:32.450860Z  INFO shioaji::contracts_v2::traffic: contract disk cache cache="hit" block="info" region=TW security_type=STK bytes=84357
 [pid:64090] 2026-08-13T06:54:34.201223Z  INFO shioaji::api::token_pool: Successfully released token slot 1 via temporary runtime
+[pid:74024] 2026-08-20T05:14:46.324132Z  INFO shioaji::api::token_pool: Removed invalid token from slot 1
+[pid:74024] 2026-08-20T05:14:46.326284Z  INFO shioaji::api::api_v1::auth::token_login: No cached token available, performing new login
+[pid:74024] 2026-08-20T05:14:49.136284Z  INFO shioaji::api::api_v1::auth::token_login: Stored new token in slot 1
+[pid:74024] 2026-08-20T05:14:50.630092Z  INFO shioaji::contracts_v2::traffic: contract backend response endpoint="contracts_version" regions=Some([TW]) security_types=Some([Stock]) bytes=198
+[pid:74024] 2026-08-20T05:14:50.634688Z  INFO shioaji::contracts_v2::traffic: contract disk cache cache="miss_or_stale" block="base" region=TW security_type=STK bytes=0
+[pid:74024] 2026-08-20T05:14:51.176576Z  INFO shioaji::contracts_v2::traffic: contract backend response endpoint="contracts_base" region=TW security_type=STK bytes=51392
+[pid:74024] 2026-08-20T05:14:51.200931Z  INFO shioaji::contracts_v2::traffic: contract disk cache cache="stale" block="info" region=TW security_type=STK bytes=84357
+[pid:74024] 2026-08-20T05:14:51.906751Z  INFO shioaji::contracts_v2::traffic: contract backend response endpoint="contracts_info" region=TW security_type=STK shard="" bytes=308857
+[pid:74024] 2026-08-20T05:14:52.842728Z  INFO shioaji::api::token_pool: Removed invalid token from slot 1
+[pid:74024] 2026-08-20T05:14:52.844879Z  INFO shioaji::api: msg receiver error: Closed
+[pid:74024] 2026-08-20T05:14:52.844910Z  INFO shioaji::api: P2P receiver closed: Closed

@@ -280,6 +280,39 @@
         }
 
         const PUBLIC_LIVE_QUOTES_API = 'https://futienchun-com-dashboard.onrender.com/api/live-quotes';
+        const LOCAL_STORAGE_KEY = 'TAIWAN_STOCK_PERSISTED_DATA_V2';
+
+        function getPersistedData() {
+            try {
+                const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (parsed && parsed.updated_at && parsed.stocks) return parsed;
+                }
+            } catch (e) {
+                console.warn("Failed to read persisted data from localStorage:", e);
+            }
+            return null;
+        }
+
+        function savePersistedData(data) {
+            try {
+                if (data && data.updated_at && data.stocks) {
+                    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
+                }
+            } catch (e) {
+                console.warn("Failed to save data to localStorage:", e);
+            }
+        }
+
+        function parseTimestamp(tsStr) {
+            if (!tsStr) return 0;
+            try {
+                return new Date(tsStr.replace(/-/g, '/')).getTime() || 0;
+            } catch (e) {
+                return 0;
+            }
+        }
 
         async function refreshWithLiveBridge() {
             const endpoint = isLocalRefreshBridge() ? '/api/refresh' : PUBLIC_LIVE_QUOTES_API;
@@ -310,24 +343,45 @@
                 btn.style.opacity = '0.7';
             }
             try {
-                let json;
+                let json = null;
                 let refreshedByBridge = false;
+
                 if (forceRefresh) {
-                    json = await refreshWithLiveBridge();
-                    refreshedByBridge = true;
+                    try {
+                        json = await refreshWithLiveBridge();
+                        refreshedByBridge = true;
+                    } catch (err) {
+                        console.warn("Bridge refresh error, fallback to published/persisted data:", err);
+                    }
                 }
-                json = json || await fetchPublishedData();
-                stockDataCache = json;
-                renderDashboard(json);
-                
-                if (forceRefresh) {
-                    if (refreshedByBridge) {
-                        showToast(`✅ 已通过公网行情服务更新行情<br><span style="font-size:11px;color:#94a3b8">${json.data_source} | 更新: ${json.updated_at}</span>`);
+
+                const published = await fetchPublishedData().catch(() => null);
+                const persisted = getPersistedData();
+
+                if (forceRefresh && json) {
+                    savePersistedData(json);
+                } else {
+                    if (published && persisted) {
+                        const pubTime = parseTimestamp(published.updated_at);
+                        const perTime = parseTimestamp(persisted.updated_at);
+                        json = (perTime > pubTime) ? persisted : published;
+                    } else {
+                        json = published || persisted;
+                    }
+                }
+
+                if (json) {
+                    stockDataCache = json;
+                    savePersistedData(json);
+                    renderDashboard(json);
+
+                    if (forceRefresh) {
+                        showToast(`✅ 行情已更新并持久化保存至本地<br><span style="font-size:11px;color:#94a3b8">数据源: ${json.data_source || '实时行情'} | 更新时间: ${json.updated_at}</span>`);
                     }
                 }
             } catch (e) {
                 console.error("加载实时数据失败:", e);
-                if (forceRefresh) showToast(`❌ 实时行情刷新失败<br><span style="font-size:11px;color:#fca5a5">${e.message || '请检查本地服务与行情凭证'}</span>`);
+                if (forceRefresh) showToast(`❌ 实时行情刷新失败<br><span style="font-size:11px;color:#fca5a5">${e.message || '请检查网络或服务设置'}</span>`);
             } finally {
                 if (forceRefresh && btn) {
                     btn.innerHTML = '🔄 强制刷新行情';
