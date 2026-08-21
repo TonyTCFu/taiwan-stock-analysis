@@ -8,6 +8,7 @@
 - **凭证加载与安全**: 本地读取凭证文件 `/Users/TonyFu/Documents/台股量化Antigravity/.shioaji.local.env`，遵循 R.A.I.L.G.U.A.R.D 规范，任何明文 Key 严禁提交至版本控制或公网。
 - **防缓存与前端加载**: `index.html` 配置 HTTP header `Cache-Control: no-cache`，Ajax 请求拼附 `v=TIMESTAMP` 时间戳强制获取最新数据。
 - **实时刷新边界**: GitHub Pages 页面通过公网 Render 行情网关 `https://futienchun-com-dashboard.onrender.com/api/live-quotes` 执行刷新；网关服务端只读调用 Shioaji snapshot，并独立抓取 TWSE MIS 交叉核对/降级，凭证只存在 Render 环境变量，不进入浏览器或仓库。本机 `dashboard_server.py` 仅作为开发/故障排查桥接服务。
+- **三大法人筹码管道改造 (2026-08-21)**: 彻底剔除历史硬编码静态常量，接入台湾证券交易所官方 T86 接口 (`https://www.twse.com.tw/rwd/zh/fund/T86?selectType=ALLBUT0999&response=json`)。系统自动抓取最新交易日的外资、投信、自营商真实买卖超张数与合计净额，结合单日成交量动态计算法人占量比与主力评述，并在数据中显式携带官方结算日期（如 `2026-08-21 官方结算`），杜绝盘后筹码失真。
 - **服务部署状态**: 公网按钮必须走 Render 行情网关，不能依赖用户设备上的 Python、Shioaji 或本地文件；前端在公网网关失败时明确报错，不静默伪装成刷新成功。
 - **公网验收基线（2026-08-17）**: Render 服务 `srv-d8onljk8aovs7385cqo0` 已配置 Shioaji 凭证；GitHub Pages 点击“强制刷新行情”实际返回 Shioaji snapshot 5/5 与 TWSE MIS 5/5，且页面显示 Asia/Taipei 时间。网关以 30 秒全局冷却保护 Shioaji 流量；Render Python 3.14 对 TWSE 旧证书需保留 TLS 校验但移除 `VERIFY_X509_STRICT` 标志。
 - **跨设备交接入口**: 本轮的根因、架构、仓库提交、凭证边界、完整验收和故障排查统一记录在 `HANDOVER.md` 的“2026-08-17 公网实时行情改造交接”章节；其他设备进入工作区后先读该章节，再处理后续任务。

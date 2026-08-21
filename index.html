@@ -193,11 +193,13 @@
                     <tr>
                         <th>代码</th>
                         <th>公司名称</th>
+                        <th>筹码结算日</th>
                         <th>外资买卖超</th>
                         <th>投信买卖超</th>
                         <th>自营商买卖超</th>
-                        <th>主力资金大单流向</th>
-                        <th>筹码沉淀与散户融资情况</th>
+                        <th>三大法人合计</th>
+                        <th>主力机构大单占量</th>
+                        <th>官方筹码动向评述</th>
                     </tr>
                 </thead>
                 <tbody id="flow-body">
@@ -401,6 +403,15 @@
             document.getElementById('update-time').innerText = `行情更新: ${data.updated_at}`;
             document.getElementById('cache-ver').innerText = 'v' + (data.updated_at ? data.updated_at.replace(/[- :]/g, '').slice(4, 12) : 'LIVE');
             
+            function formatNetTag(val) {
+                if (!val || val === '-') return `<span style="font-family: var(--font-mono); color: var(--text-muted);">-</span>`;
+                const str = String(val).trim();
+                const isBuy = str.startsWith('+');
+                const isSell = str.startsWith('-');
+                const color = isBuy ? 'var(--accent-red)' : (isSell ? 'var(--accent-green)' : 'var(--text-primary)');
+                return `<span style="font-family: var(--font-mono); font-weight:700; color: ${color};">${str}</span>`;
+            }
+
             // Render Cards
             const cardsContainer = document.getElementById('tab-cards');
             if (cardsContainer) {
@@ -408,7 +419,7 @@
                     const isUp = s.change >= 0;
                     const changeClass = isUp ? 'up' : 'down';
                     const changeSign = isUp ? '+' : '';
-                    const flow = s.institutional_flow || { foreign_net: '-', trust_net: '-', dealer_net: '-', summary: '-' };
+                    const flow = s.institutional_flow || { foreign_net: '-', trust_net: '-', dealer_net: '-', total_net: '-', summary: '-' };
                     const cap = s.capital_inflow || { large_order_ratio: '-', capital_status: '-' };
                     const openPx = s.open_price !== undefined ? s.open_price : (s.day_open !== undefined ? s.day_open : s.last_price);
                     const highPx = s.high_price !== undefined ? s.high_price : (s.day_high !== undefined ? s.day_high : s.last_price);
@@ -446,10 +457,15 @@
                                 <strong>日期：</strong>${earnDate}
                             </div>
 
-                            <div class="section-badge">🏦 三大法人与资金进出</div>
+                            <div class="section-badge">🏦 真实三大法人与主力资金</div>
                             <div class="info-panel">
-                                <div><strong>外资：</strong>${flow.foreign_net} | <strong>投信：</strong>${flow.trust_net}</div>
-                                <div style="margin-top:4px; color: var(--text-secondary);">${flow.summary}</div>
+                                <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px; margin-bottom:4px;">
+                                    <span>外资: ${formatNetTag(flow.foreign_net)}</span>
+                                    <span>投信: ${formatNetTag(flow.trust_net)}</span>
+                                    <span>自营: ${formatNetTag(flow.dealer_net)}</span>
+                                    <span>合计: ${formatNetTag(flow.total_net)}</span>
+                                </div>
+                                <div style="margin-top:4px; font-size:11px; color: var(--text-secondary);">${flow.summary}</div>
                             </div>
 
                             <div class="metrics-row">
@@ -482,17 +498,19 @@
             const flowBody = document.getElementById('flow-body');
             if (flowBody) {
                 flowBody.innerHTML = data.stocks.map(s => {
-                    const flow = s.institutional_flow || { foreign_net: '-', trust_net: '-', dealer_net: '-' };
+                    const flow = s.institutional_flow || { foreign_net: '-', trust_net: '-', dealer_net: '-', total_net: '-', date: '-' };
                     const cap = s.capital_inflow || { large_order_ratio: '-', capital_status: '-' };
                     return `
                         <tr>
                             <td style="font-family: var(--font-mono); font-weight:700; color: var(--accent-cyan);">${s.code}</td>
                             <td style="font-weight:700;">${s.name}</td>
-                            <td style="font-family: var(--font-mono); color: var(--accent-red); font-weight:700;">${flow.foreign_net}</td>
-                            <td style="font-family: var(--font-mono); color: var(--accent-green); font-weight:700;">${flow.trust_net}</td>
-                            <td style="font-family: var(--font-mono);">${flow.dealer_net}</td>
-                            <td style="color: var(--accent-gold); font-weight:600;">${cap.large_order_ratio}</td>
-                            <td style="font-size:13px; color: var(--text-secondary);">${cap.capital_status}</td>
+                            <td style="font-family: var(--font-mono); font-size:12px; color: var(--text-muted);">${flow.date || '-'}</td>
+                            <td>${formatNetTag(flow.foreign_net)}</td>
+                            <td>${formatNetTag(flow.trust_net)}</td>
+                            <td>${formatNetTag(flow.dealer_net)}</td>
+                            <td>${formatNetTag(flow.total_net)}</td>
+                            <td style="color: var(--accent-gold); font-weight:600; font-size:13px;">${cap.large_order_ratio}</td>
+                            <td style="font-size:12px; color: var(--text-secondary);">${flow.summary}</td>
                         </tr>
                     `;
                 }).join('');
