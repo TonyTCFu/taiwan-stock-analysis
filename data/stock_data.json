@@ -1,20 +1,25 @@
 {
-  "updated_at": "2026-08-26 15:24:17",
+  "updated_at": "2026-08-27 16:29:12",
   "data_source": "Shioaji Snapshot (primary) + TWSE MIS cross-check",
   "market": "台湾股票市场 (TWSE)",
   "trading_hours": "09:00 - 13:30 (TPE time)",
   "sources": {
     "shioaji": {
       "status": "ok",
-      "quote_count": 5,
-      "retrieved_at": "2026-08-26T15:24:16+08:00",
+      "quote_count": 10,
+      "retrieved_at": "2026-08-27T16:29:10",
       "quote_mode": "snapshot"
     },
     "twse_mis": {
       "status": "ok",
-      "quote_count": 5,
-      "retrieved_at": "2026-08-26T15:24:17+08:00",
+      "quote_count": 10,
+      "retrieved_at": "2026-08-27T16:29:10",
       "market_time": "13:30:00"
+    },
+    "twse_t86_flow": {
+      "status": "ok",
+      "date": "2026-08-26",
+      "retrieved_at": "2026-08-27T16:29:12"
     },
     "selected_quote_source": "Shioaji Snapshot (primary) + TWSE MIS cross-check"
   },
@@ -26,31 +31,45 @@
       "en_name": "TSMC",
       "chokepoint": "晶圆代工霸主、CoWoS 高阶封装瓶颈、2nm/3nm 垄断",
       "score": 98,
-      "open_price": 2375.0,
-      "high_price": 2425.0,
-      "low_price": 2375.0,
-      "last_price": 2415.0,
-      "prev_close": 2400.0,
-      "change": 15.0,
-      "change_pct": 0.62,
-      "volume": 17627,
+      "open_price": 2430.0,
+      "high_price": 2435.0,
+      "low_price": 2410.0,
+      "last_price": 2410.0,
+      "prev_close": 2415.0,
+      "change": -5.0,
+      "change_pct": -0.21,
+      "volume": 16222,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-08-26T15:24:16+08:00",
+      "quote_time": "2026-08-27T16:29:10",
       "gross_margin": "65.0% - 67.0%",
       "net_margin": ">43.0%",
       "roe": "40.5%",
       "eps_single": "22.08 元 (26Q1)",
       "earnings_date": "2026-10-15 (26Q3 法说会) | 每月 10 日发布营收",
+      "industry": null,
+      "score_basis": null,
+      "investment_case": null,
+      "earnings_trend": null,
+      "quarterly_earnings": [],
+      "market_snapshot": null,
+      "valuation": null,
+      "market_factors": null,
+      "risk_factors": [],
+      "recommendation": null,
+      "strategy_note": null,
+      "source_links": [],
       "institutional_flow": {
-        "foreign_net": "+2,450 张",
-        "trust_net": "+680 张",
-        "dealer_net": "-120 张",
-        "summary": "外资持股 74.2%，高档回调接盘，投信连续 5 日买超，主力资金控盘极稳。"
+        "foreign_net": "+5204 张",
+        "trust_net": "-521 张",
+        "dealer_net": "+226 张",
+        "total_net": "+4910 张",
+        "date": "2026-08-26",
+        "summary": "[2026-08-26 官方结算] 外资主力大幅回流 (+5,204 张)，投信阶段获利减仓 (-521 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "62.5% 买盘大单",
-        "margin_balance": "融券低位、融资减少 (筹码洗净)",
-        "capital_status": "主力资金呈净流入 (+18.5 亿 NTD)，散户筹码清洗彻底。"
+        "large_order_ratio": "法人净买超 4,910 张 (占量 30.3%)",
+        "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
+        "capital_status": "[2026-08-26 筹码] 主力机构呈净买入 (+4,910 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "+1.8% (处于健康均线排列)",
@@ -70,31 +89,45 @@
       "en_name": "King Slide",
       "chokepoint": "AI 超级机柜精密导轨绝对垄断者（市占率超 70%）",
       "score": 92,
-      "open_price": 14295.0,
-      "high_price": 14590.0,
-      "low_price": 13855.0,
-      "last_price": 14510.0,
-      "prev_close": 14285.0,
-      "change": 225.0,
-      "change_pct": 1.58,
-      "volume": 463,
+      "open_price": 14695.0,
+      "high_price": 14815.0,
+      "low_price": 14085.0,
+      "last_price": 14340.0,
+      "prev_close": 14460.0,
+      "change": -120.0,
+      "change_pct": -0.83,
+      "volume": 343,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-08-26T15:24:16+08:00",
+      "quote_time": "2026-08-27T16:29:10",
       "gross_margin": "87.0%",
       "net_margin": ">52.0%",
       "roe": "21.72%",
       "eps_single": "74.38 元 (26Q2)",
       "earnings_date": "2026-11-06 (26Q3 财报) | 每月 10 日发布营收",
+      "industry": null,
+      "score_basis": null,
+      "investment_case": null,
+      "earnings_trend": null,
+      "quarterly_earnings": [],
+      "market_snapshot": null,
+      "valuation": null,
+      "market_factors": null,
+      "risk_factors": [],
+      "recommendation": null,
+      "strategy_note": null,
+      "source_links": [],
       "institutional_flow": {
-        "foreign_net": "-15 张",
-        "trust_net": "+120 张",
-        "dealer_net": "+5 张",
-        "summary": "内资投信死锁筹码，外资高档极少调节，筹码集中度高达 82%。"
+        "foreign_net": "+43 张",
+        "trust_net": "-9 张",
+        "dealer_net": "+21 张",
+        "total_net": "+56 张",
+        "date": "2026-08-26",
+        "summary": "[2026-08-26 官方结算] 外资主力大幅回流 (+43 张)，投信阶段获利减仓 (-9 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "71.0% 法人特定大单",
-        "margin_balance": "极低融资、资券比健康",
-        "capital_status": "高单价低流动性，主力锁筹意愿极强，空头无借券源（易轧空）。"
+        "large_order_ratio": "法人净买超 56 张 (占量 16.3%)",
+        "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
+        "capital_status": "[2026-08-26 筹码] 主力机构呈净买入 (+56 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "+3.2%",
@@ -114,31 +147,45 @@
       "en_name": "EMC",
       "chokepoint": "800G/1.6T 高阶 CCL (M8/M9 铜箔基板) 瓶颈材料龙头",
       "score": 88,
-      "open_price": 5565.0,
-      "high_price": 5920.0,
-      "low_price": 5555.0,
-      "last_price": 5895.0,
-      "prev_close": 5595.0,
-      "change": 300.0,
-      "change_pct": 5.36,
-      "volume": 1752,
+      "open_price": 5960.0,
+      "high_price": 5960.0,
+      "low_price": 5355.0,
+      "last_price": 5500.0,
+      "prev_close": 5895.0,
+      "change": -395.0,
+      "change_pct": -6.7,
+      "volume": 3079,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-08-26T15:24:16+08:00",
+      "quote_time": "2026-08-27T16:29:10",
       "gross_margin": "33.8%",
       "net_margin": "~19.5%",
       "roe": "18.58%",
       "eps_single": "27.55 元 (26Q2)",
       "earnings_date": "2026-10-29 (26Q3 财报) | 每月 10 日发布营收",
+      "industry": null,
+      "score_basis": null,
+      "investment_case": null,
+      "earnings_trend": null,
+      "quarterly_earnings": [],
+      "market_snapshot": null,
+      "valuation": null,
+      "market_factors": null,
+      "risk_factors": [],
+      "recommendation": null,
+      "strategy_note": null,
+      "source_links": [],
       "institutional_flow": {
-        "foreign_net": "+850 张",
-        "trust_net": "+1,120 张",
-        "dealer_net": "+110 张",
-        "summary": "三大法人同步买超（买超最强），主力资金连续 8 日流入。"
+        "foreign_net": "+52 张",
+        "trust_net": "+43 张",
+        "dealer_net": "-21 张",
+        "total_net": "+75 张",
+        "date": "2026-08-26",
+        "summary": "[2026-08-26 官方结算] 外资与投信联手买超 (+75 张)，内外部机构共振做多。"
       },
       "capital_inflow": {
-        "large_order_ratio": "68.4% 主力大单",
-        "margin_balance": "融资小幅减少，筹码归户良好",
-        "capital_status": "M8/M9 材料放量带起涨价潮，资金流入显著加快。"
+        "large_order_ratio": "法人净买超 75 张 (占量 2.4%)",
+        "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
+        "capital_status": "[2026-08-26 筹码] 主力机构呈净买入 (+75 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "+4.5% (多头强劲攻势)",
@@ -158,31 +205,45 @@
       "en_name": "AVC",
       "chokepoint": "AI 服务器水冷/液冷系统级解决方案霸主",
       "score": 85,
-      "open_price": 2880.0,
-      "high_price": 3155.0,
-      "low_price": 2850.0,
-      "last_price": 3155.0,
-      "prev_close": 2950.0,
-      "change": 205.0,
-      "change_pct": 6.95,
-      "volume": 4944,
+      "open_price": 3305.0,
+      "high_price": 3440.0,
+      "low_price": 3265.0,
+      "last_price": 3340.0,
+      "prev_close": 3155.0,
+      "change": 185.0,
+      "change_pct": 5.86,
+      "volume": 5609,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-08-26T15:24:16+08:00",
+      "quote_time": "2026-08-27T16:29:10",
       "gross_margin": "33.8% - 35.0%",
       "net_margin": "~14.2%",
       "roe": "17.03%",
       "eps_single": "20.17 元 (26Q1)",
       "earnings_date": "2026-11-10 (26Q3 法说会) | 每月 10 日发布营收",
+      "industry": null,
+      "score_basis": null,
+      "investment_case": null,
+      "earnings_trend": null,
+      "quarterly_earnings": [],
+      "market_snapshot": null,
+      "valuation": null,
+      "market_factors": null,
+      "risk_factors": [],
+      "recommendation": null,
+      "strategy_note": null,
+      "source_links": [],
       "institutional_flow": {
-        "foreign_net": "-320 张",
-        "trust_net": "+1,450 张",
-        "dealer_net": "+80 张",
-        "summary": "外资洗盘抛售，但投信逢低狂吞大吃，投信呈现单边净买超。"
+        "foreign_net": "-623 张",
+        "trust_net": "+440 张",
+        "dealer_net": "+119 张",
+        "total_net": "-62 张",
+        "date": "2026-08-26",
+        "summary": "[2026-08-26 官方结算] 投信内资买超 (+440 张) 逢低承接，外资高档调节 (-623 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "59.2% 大单比重",
-        "margin_balance": "融券微增、融资洗盘下落",
-        "capital_status": "水冷良率及出货背书，内资主力坚定接盘。"
+        "large_order_ratio": "法人净卖超 62 张 (占量 1.1%)",
+        "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
+        "capital_status": "[2026-08-26 筹码] 主力机构呈净卖出 (-62 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "+3.8%",
@@ -202,42 +263,533 @@
       "en_name": "Hon Hai",
       "chokepoint": "NVL72/GB200 AI 超级机柜系统级垂直集成与交付独霸",
       "score": 81,
-      "open_price": 243.0,
-      "high_price": 248.0,
-      "low_price": 241.5,
-      "last_price": 246.5,
-      "prev_close": 243.0,
-      "change": 3.5,
-      "change_pct": 1.44,
-      "volume": 23519,
+      "open_price": 248.5,
+      "high_price": 256.5,
+      "low_price": 248.5,
+      "last_price": 252.0,
+      "prev_close": 246.5,
+      "change": 5.5,
+      "change_pct": 2.23,
+      "volume": 40735,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-08-26T15:24:16+08:00",
+      "quote_time": "2026-08-27T16:29:10",
       "gross_margin": "6.2% - 6.8%",
       "net_margin": "~2.8%",
       "roe": "11.25%",
       "eps_single": "3.23 元 (25Q4)",
       "earnings_date": "2026-08-14 (26Q2 法说会 - 本周五) | 每月 5 日发布营收",
+      "industry": null,
+      "score_basis": null,
+      "investment_case": null,
+      "earnings_trend": null,
+      "quarterly_earnings": [],
+      "market_snapshot": null,
+      "valuation": null,
+      "market_factors": null,
+      "risk_factors": [],
+      "recommendation": null,
+      "strategy_note": null,
+      "source_links": [],
       "institutional_flow": {
-        "foreign_net": "+12,400 张",
-        "trust_net": "+2,100 张",
-        "dealer_net": "+1,800 张",
-        "summary": "三大法人全线买超 (+1.63 万张)，外资巨量买盘回流第一名。"
+        "foreign_net": "-2072 张",
+        "trust_net": "+11 张",
+        "dealer_net": "+701 张",
+        "total_net": "-1358 张",
+        "date": "2026-08-26",
+        "summary": "[2026-08-26 官方结算] 投信内资买超 (+11 张) 逢低承接，外资高档调节 (-2,072 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "74.8% 机构级买单",
-        "margin_balance": "融资低位，法人锁筹拉升",
-        "capital_status": "巨额资金持续流入，AI 伺服器占比突破 50% 引发重估潮。"
+        "large_order_ratio": "法人净卖超 1,358 张 (占量 3.3%)",
+        "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
+        "capital_status": "[2026-08-26 筹码] 主力机构呈净卖出 (-1,358 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "+2.1%",
         "amplitude": "2.44% (大盘股稳健放量大涨)",
-        "trend_evaluation": "7 月营收创历史新高，本周五法说会在即，技术面突破 268 元压力。"
+        "trend_evaluation": "7 月营收创历史新高，法说会催化，AI 服务器占比突破 50%。"
       },
       "buy_zone_sub": "255 - 270 元",
       "buy_zone_heavy": "238 - 248 元",
       "take_profit": "315 - 335 元",
       "target_price": "360 - 380 元",
       "stop_loss": "225 元"
+    },
+    {
+      "symbol": "2308.TW",
+      "code": "2308",
+      "name": "台達電",
+      "en_name": "Delta Electronics",
+      "chokepoint": "高效率電源、資料中心基礎設施與熱管理的系統級整合",
+      "score": 85,
+      "open_price": 1780.0,
+      "high_price": 1820.0,
+      "low_price": 1760.0,
+      "last_price": 1770.0,
+      "prev_close": 1750.0,
+      "change": 20.0,
+      "change_pct": 1.14,
+      "volume": 8286,
+      "quote_source": "Shioaji Snapshot",
+      "quote_time": "2026-08-27T16:29:10",
+      "gross_margin": "35.6% (26Q2)",
+      "net_margin": "13.7% (26Q2)",
+      "roe": "待更新",
+      "eps_single": "9.68 元 (26Q2)",
+      "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
+      "industry": "電源管理、資料中心基礎設施與熱管理",
+      "score_basis": "獲利趨勢、技術門檻、估值與風險綜合評估；非官方評等",
+      "investment_case": "AI 資料中心的電力效率、電源管理與熱管理需求同步成長。2026Q2 營收 1,832 億元、營益率 16.7%、稅後淨利 251.36 億元。",
+      "earnings_trend": "EPS 6.67 → 7.91 → 9.68，連續兩季走高；電源電子與基礎設施部門獲利分別年增 50% 與 121%。",
+      "quarterly_earnings": [
+        {
+          "period": "2025Q4",
+          "revenue": "待更新",
+          "operating_margin": "待更新",
+          "net_income": "約 173 億元",
+          "eps": "6.67 元"
+        },
+        {
+          "period": "2026Q1",
+          "revenue": "待更新",
+          "operating_margin": "待更新",
+          "net_income": "205.56 億元",
+          "eps": "7.91 元"
+        },
+        {
+          "period": "2026Q2",
+          "revenue": "1,832 億元",
+          "operating_margin": "16.7%",
+          "net_income": "251.36 億元",
+          "eps": "9.68 元"
+        }
+      ],
+      "market_snapshot": "8/27 約 NT$1,770；PER 約 56 倍；近 3 個月約 -25.9%，近 1 年約 +147%。",
+      "valuation": "獲利品質高，但 PER 已反映相當多 AI 基礎設施成長預期。",
+      "market_factors": "AI 資料中心資本支出、電力效率要求與液冷導入是正面因素；利率上升或雲端資本支出放緩會造成估值壓縮。",
+      "risk_factors": [
+        "估值偏高",
+        "與既有 3017、2059 有 AI 伺服器產業暴露重疊",
+        "資料中心資本支出週期反轉"
+      ],
+      "recommendation": "核心追蹤",
+      "strategy_note": "分批觀察，不追高；等待估值回落或獲利再上修",
+      "source_links": [
+        {
+          "label": "2026Q2 官方法說資料",
+          "url": "https://filecenter.deltaww.com/ir/download/calendar/2Q26_Analyst%20Meeting.pdf"
+        },
+        {
+          "label": "行情與估值快照",
+          "url": "https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2308"
+        }
+      ],
+      "institutional_flow": {
+        "foreign_net": "+605 张",
+        "trust_net": "-1707 张",
+        "dealer_net": "+240 张",
+        "total_net": "-860 张",
+        "date": "2026-08-26",
+        "summary": "[2026-08-26 官方结算] 外资主力大幅回流 (+605 张)，投信阶段获利减仓 (-1,707 张)。"
+      },
+      "capital_inflow": {
+        "large_order_ratio": "法人净卖超 860 张 (占量 10.4%)",
+        "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
+        "capital_status": "[2026-08-26 筹码] 主力机构呈净卖出 (-860 张)，散户承接，筹码短期发散。"
+      },
+      "price_analytics": {
+        "ma20_bias": "近 3 個月回落約 25.9%",
+        "amplitude": "高估值成長股，波動偏高",
+        "trend_evaluation": "獲利趨勢向上，但必須以後續營益率與 AI 基礎設施訂單驗證估值。"
+      },
+      "buy_zone_sub": "分批觀察（不追高）",
+      "buy_zone_heavy": "等待估值明顯回落",
+      "take_profit": "依獲利與趨勢再評估",
+      "target_price": "不預設固定目標",
+      "stop_loss": "跌破基本面假設即檢視"
+    },
+    {
+      "symbol": "2345.TW",
+      "code": "2345",
+      "name": "智邦",
+      "en_name": "Accton Technology",
+      "chokepoint": "800G/1.6T 高速交換器與 AI 集群網路整合的高門檻環節",
+      "score": 86,
+      "open_price": 2120.0,
+      "high_price": 2130.0,
+      "low_price": 2065.0,
+      "last_price": 2090.0,
+      "prev_close": 2055.0,
+      "change": 35.0,
+      "change_pct": 1.7,
+      "volume": 2370,
+      "quote_source": "Shioaji Snapshot",
+      "quote_time": "2026-08-27T16:29:10",
+      "gross_margin": "19.7% (26Q2)",
+      "net_margin": "約 11.6% (26Q2)",
+      "roe": "待更新",
+      "eps_single": "19.78 元 (26Q2)",
+      "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
+      "industry": "AI 高速網路交換器與資料中心網通",
+      "score_basis": "獲利趨勢、技術門檻、估值與風險綜合評估；非官方評等",
+      "investment_case": "AI 集群規模提升帶動高速交換器升級。2026Q2 營收 955.38 億元、營益率約 15.0%、母公司稅後淨利 110.53 億元。",
+      "earnings_trend": "EPS 14.95 → 14.92 → 19.78；Q2 EPS 季增約 32.5%，營益率由 12.7% 提升至約 15.0%。",
+      "quarterly_earnings": [
+        {
+          "period": "2025Q4",
+          "revenue": "720.18 億元",
+          "operating_margin": "12.7%",
+          "net_income": "83.56 億元",
+          "eps": "14.95 元"
+        },
+        {
+          "period": "2026Q1",
+          "revenue": "701.21 億元",
+          "operating_margin": "14.3%",
+          "net_income": "83.41 億元",
+          "eps": "14.92 元"
+        },
+        {
+          "period": "2026Q2",
+          "revenue": "955.38 億元",
+          "operating_margin": "15.0%",
+          "net_income": "110.53 億元",
+          "eps": "19.78 元"
+        }
+      ],
+      "market_snapshot": "8/26 收約 NT$2,055；PER 約 32 倍；近 3 個月約 -7.2%，近 6 個月約 +41.7%。",
+      "valuation": "五檔新增標的中估值相對合理，但市場已反映高速網通成長。",
+      "market_factors": "雲端服務商 AI 資本支出、800G/1.6T 升級與高速光互連需求是主要催化；客戶集中與供應鏈交期是反向因素。",
+      "risk_factors": [
+        "大型雲端客戶集中",
+        "高速交換器世代轉換造成產品週期風險",
+        "AI 資本支出若放緩將影響訂單能見度"
+      ],
+      "recommendation": "核心追蹤／首選",
+      "strategy_note": "可列入優先研究，仍採分批而非追價買進",
+      "source_links": [
+        {
+          "label": "季度財務資料",
+          "url": "https://fubon-ebrokerdj.fbs.com.tw/z/zc/zcq/zcq_2345.djhtm"
+        },
+        {
+          "label": "行情與估值快照",
+          "url": "https://goodinfo.tw/tw/ShowK_Chart.asp?STOCK_ID=2345"
+        },
+        {
+          "label": "公司高速網通資料",
+          "url": "https://www.accton.com.tw/wp-content/uploads/2024/07/20240712031358.pdf"
+        }
+      ],
+      "institutional_flow": {
+        "foreign_net": "+325 张",
+        "trust_net": "-617 张",
+        "dealer_net": "+28 张",
+        "total_net": "-262 张",
+        "date": "2026-08-26",
+        "summary": "[2026-08-26 官方结算] 外资主力大幅回流 (+325 张)，投信阶段获利减仓 (-617 张)。"
+      },
+      "capital_inflow": {
+        "large_order_ratio": "法人净卖超 262 张 (占量 11.1%)",
+        "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
+        "capital_status": "[2026-08-26 筹码] 主力机构呈净卖出 (-262 张)，散户承接，筹码短期发散。"
+      },
+      "price_analytics": {
+        "ma20_bias": "近 3 個月約 -7.2%，相對大幅上漲後整理",
+        "amplitude": "高速網通成長股，波動中高",
+        "trend_evaluation": "Q2 營收與 EPS 同步加速，是新增標的中基本面與估值平衡度最佳者。"
+      },
+      "buy_zone_sub": "分批觀察（不追高）",
+      "buy_zone_heavy": "等待成長預期降溫",
+      "take_profit": "依訂單與 EPS 趨勢再評估",
+      "target_price": "不預設固定目標",
+      "stop_loss": "營益率與訂單能見度轉弱即檢視"
+    },
+    {
+      "symbol": "2360.TW",
+      "code": "2360",
+      "name": "致茂",
+      "en_name": "Chroma ATE",
+      "chokepoint": "高精度測試、量測與先進封裝檢測，屬 AI 硬體量產的關鍵驗證設備",
+      "score": 84,
+      "open_price": 2010.0,
+      "high_price": 2085.0,
+      "low_price": 1970.0,
+      "last_price": 1990.0,
+      "prev_close": 1980.0,
+      "change": 10.0,
+      "change_pct": 0.51,
+      "volume": 1800,
+      "quote_source": "Shioaji Snapshot",
+      "quote_time": "2026-08-27T16:29:10",
+      "gross_margin": "約 60.5% (26Q2)",
+      "net_margin": "約 37.9% (26Q2)",
+      "roe": "待更新",
+      "eps_single": "約 12.15 元 (26Q2)",
+      "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
+      "industry": "半導體、AI、光通訊與先進封裝測試設備",
+      "score_basis": "獲利趨勢、技術門檻、估值與風險綜合評估；非官方評等",
+      "investment_case": "AI/HPC、GPU、CPU、交換器與光通訊升級拉動測試需求。2026Q2 營收 135.29 億元、毛利率約 60.5%、營益率約 38.7%。",
+      "earnings_trend": "EPS 6.04 → 9.12 → 約 12.15；連續三季創高，獲利增速在新增五檔中最強。",
+      "quarterly_earnings": [
+        {
+          "period": "2025Q4",
+          "revenue": "85.80 億元",
+          "operating_margin": "約 34.8%",
+          "net_income": "25.50 億元",
+          "eps": "6.04 元"
+        },
+        {
+          "period": "2026Q1",
+          "revenue": "118.60 億元",
+          "operating_margin": "約 40.4%",
+          "net_income": "38.64 億元",
+          "eps": "9.12 元"
+        },
+        {
+          "period": "2026Q2",
+          "revenue": "135.29 億元",
+          "operating_margin": "約 38.7%",
+          "net_income": "51.23 億元",
+          "eps": "約 12.15 元"
+        }
+      ],
+      "market_snapshot": "8/27 約 NT$1,990；PER 約 51 倍；近 3 個月約 -22.6%，近 1 年約 +262%。",
+      "valuation": "基本面強，但一年漲幅與 PER 都高，適合分批觀察，不適合只看題材追價。",
+      "market_factors": "先進封裝、AI 伺服器、光通訊與高功率電源測試需求是正面因素；半導體資本支出與客戶驗證時程會影響短期營收。",
+      "risk_factors": [
+        "估值與波動偏高",
+        "半導體資本支出循環",
+        "擴產與資本支出造成現金流、稀釋或折舊壓力"
+      ],
+      "recommendation": "核心追蹤／高波動",
+      "strategy_note": "保留名單，但以回檔分批為主；關注毛利率與現金流是否維持",
+      "source_links": [
+        {
+          "label": "公司業務與技術範圍",
+          "url": "https://www.chromaate.com/tw/chroma/aboutchroma"
+        },
+        {
+          "label": "季度結果公告",
+          "url": "https://www.chromaate.com/tw/investors/quarterly_results"
+        },
+        {
+          "label": "行情與估值快照",
+          "url": "https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2360"
+        }
+      ],
+      "institutional_flow": {
+        "foreign_net": "-186 张",
+        "trust_net": "-131 张",
+        "dealer_net": "+75 张",
+        "total_net": "-242 张",
+        "date": "2026-08-26",
+        "summary": "[2026-08-26 官方结算] 外资与投信偏空调节 (-242 张)，机构筹码阶段获利了结。"
+      },
+      "capital_inflow": {
+        "large_order_ratio": "法人净卖超 242 张 (占量 13.4%)",
+        "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
+        "capital_status": "[2026-08-26 筹码] 主力机构呈净卖出 (-242 张)，散户承接，筹码短期发散。"
+      },
+      "price_analytics": {
+        "ma20_bias": "近 3 個月約 -22.6%，高檔修正",
+        "amplitude": "近 1 年約 +262%，波動極高",
+        "trend_evaluation": "獲利趨勢最強，但市場已給予高溢價，必須用下一季毛利率與訂單驗證。"
+      },
+      "buy_zone_sub": "回檔分批觀察",
+      "buy_zone_heavy": "等待估值與波動收斂",
+      "take_profit": "依 EPS 與毛利率再評估",
+      "target_price": "不預設固定目標",
+      "stop_loss": "獲利趨勢反轉即檢視"
+    },
+    {
+      "symbol": "3711.TW",
+      "code": "3711",
+      "name": "日月光投控",
+      "en_name": "ASE Technology Holding",
+      "chokepoint": "AI 晶片大規模封裝測試與先進封裝產能，屬量產環節的關鍵瓶頸",
+      "score": 79,
+      "open_price": 608.0,
+      "high_price": 608.0,
+      "low_price": 593.0,
+      "last_price": 605.0,
+      "prev_close": 592.0,
+      "change": 13.0,
+      "change_pct": 2.2,
+      "volume": 11136,
+      "quote_source": "Shioaji Snapshot",
+      "quote_time": "2026-08-27T16:29:10",
+      "gross_margin": "待更新",
+      "net_margin": "約 11.0% (26Q2)",
+      "roe": "18.2% 年化 (26H1)",
+      "eps_single": "4.80 元 (26Q2)",
+      "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
+      "industry": "IC 封裝測試、先進封裝與 Panel-Level Packaging",
+      "score_basis": "獲利趨勢、技術門檻、估值與風險綜合評估；非官方評等",
+      "investment_case": "AI 加速器、Chiplet 與先進封裝擴產帶動封測需求。2026Q2 營收約 1,911 億元、營益率 11.1%、EPS 4.80 元。",
+      "earnings_trend": "EPS 約 3.4 → 3.24 → 4.80；Q2 顯著反彈，2026H1 EPS 8.04 元。",
+      "quarterly_earnings": [
+        {
+          "period": "2025Q4",
+          "revenue": "約 1,779 億元",
+          "operating_margin": "約 9.9%",
+          "net_income": "約 147.1 億元",
+          "eps": "約 3.4 元"
+        },
+        {
+          "period": "2026Q1",
+          "revenue": "約 1,737 億元",
+          "operating_margin": "10.1%",
+          "net_income": "約 141.5 億元",
+          "eps": "3.24 元"
+        },
+        {
+          "period": "2026Q2",
+          "revenue": "約 1,911 億元",
+          "operating_margin": "11.1%",
+          "net_income": "約 210.7 億元",
+          "eps": "4.80 元"
+        }
+      ],
+      "market_snapshot": "8/27 約 NT$605；PER 約 44 倍；近 3 個月約 -2.4%，近 1 年約 +138%。",
+      "valuation": "相較純 AI 設備股波動較低，但仍受封測資本支出與景氣循環影響。",
+      "market_factors": "AI 晶片封裝測試、Chiplet、Panel-Level Packaging 與高階封裝產能擴建是正面因素；折舊、負債與客戶稼動率是反向因素。",
+      "risk_factors": [
+        "封裝測試景氣循環",
+        "擴產帶來折舊與資本支出壓力",
+        "與既有 2330 的先進封裝產業暴露重疊"
+      ],
+      "recommendation": "觀察／可小部位",
+      "strategy_note": "等待先進封裝稼動率與營益率連續改善，再提高評級",
+      "source_links": [
+        {
+          "label": "公司先進封裝資料",
+          "url": "https://ase-holding.webflow.io/press-room-ch/310x310"
+        },
+        {
+          "label": "財報與行情快照",
+          "url": "https://goodinfo.tw/tw/StockFinDetail.asp?QRY_TIME=20262&RPT_CAT=IS_M_QUAR&STOCK_ID=3711"
+        }
+      ],
+      "institutional_flow": {
+        "foreign_net": "+939 张",
+        "trust_net": "-802 张",
+        "dealer_net": "+246 张",
+        "total_net": "+385 张",
+        "date": "2026-08-26",
+        "summary": "[2026-08-26 官方结算] 外资主力大幅回流 (+939 张)，投信阶段获利减仓 (-802 张)。"
+      },
+      "capital_inflow": {
+        "large_order_ratio": "法人净买超 385 张 (占量 3.5%)",
+        "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
+        "capital_status": "[2026-08-26 筹码] 主力机构呈净买入 (+385 张)，筹码向法人端汇聚沉淀。"
+      },
+      "price_analytics": {
+        "ma20_bias": "近 3 個月約 -2.4%，相對穩定",
+        "amplitude": "近 1 年約 +138%，仍屬高檔區",
+        "trend_evaluation": "Q2 獲利反彈，但要觀察先進封裝擴產是否轉化為持續營益率改善。"
+      },
+      "buy_zone_sub": "小部位觀察",
+      "buy_zone_heavy": "等待營益率連續改善",
+      "take_profit": "依封裝稼動率再評估",
+      "target_price": "不預設固定目標",
+      "stop_loss": "資本支出與折舊失控即檢視"
+    },
+    {
+      "symbol": "2454.TW",
+      "code": "2454",
+      "name": "聯發科",
+      "en_name": "MediaTek",
+      "chokepoint": "高階 SoC、AI ASIC 設計/IP 與客戶軟硬體生態整合的高門檻",
+      "score": 77,
+      "open_price": 4005.0,
+      "high_price": 4005.0,
+      "low_price": 3865.0,
+      "last_price": 3865.0,
+      "prev_close": 3945.0,
+      "change": -80.0,
+      "change_pct": -2.03,
+      "volume": 5069,
+      "quote_source": "Shioaji Snapshot",
+      "quote_time": "2026-08-27T16:29:10",
+      "gross_margin": "46.2% (26Q2)",
+      "net_margin": "約 16.2% (26Q2)",
+      "roe": "待更新",
+      "eps_single": "15.28 元 (26Q2)",
+      "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
+      "industry": "Fabless IC、手機/邊緣 AI SoC 與 AI ASIC",
+      "score_basis": "獲利趨勢、技術門檻、估值與風險綜合評估；非官方評等",
+      "investment_case": "公司仍具高毛利與正獲利，但 AI ASIC 商業化尚在驗證期。2026Q2 營收約 1,521.83 億元、營益率 15.0%、EPS 15.28 元。",
+      "earnings_trend": "EPS 14.39 → 15.17 → 15.28；近兩季大致穩定，但 2026Q2 淨利年減約 12.3%，尚未形成強勁加速。",
+      "quarterly_earnings": [
+        {
+          "period": "2025Q4",
+          "revenue": "1,501.88 億元",
+          "operating_margin": "14.5%",
+          "net_income": "230.74 億元",
+          "eps": "14.39 元"
+        },
+        {
+          "period": "2026Q1",
+          "revenue": "1,491.51 億元",
+          "operating_margin": "15.3%",
+          "net_income": "243.76 億元",
+          "eps": "15.17 元"
+        },
+        {
+          "period": "2026Q2",
+          "revenue": "1,521.83 億元",
+          "operating_margin": "15.0%",
+          "net_income": "246.05 億元",
+          "eps": "15.28 元"
+        }
+      ],
+      "market_snapshot": "8/27 約 NT$3,865；PER 約 64 倍；近 3 個月約 -15%。",
+      "valuation": "獲利穩定但 PER 偏高，必須等 AI ASIC 實際營收與毛利貢獻確認。",
+      "market_factors": "AI ASIC、邊緣 AI、車用與高速連接是中長期因素；手機景氣、客戶自研與 ASIC 導入時程是短期變數。",
+      "risk_factors": [
+        "PER 偏高",
+        "AI ASIC 尚未完成規模化驗證",
+        "手機與消費電子週期、客戶自研競爭"
+      ],
+      "recommendation": "觀察",
+      "strategy_note": "等 AI ASIC 營收與淨利年增轉正，再考慮提高評級",
+      "source_links": [
+        {
+          "label": "2026Q1 官方法說資料",
+          "url": "https://www.mediatek.com/hubfs/MediaTek%20Assets/Pdfs/Quarterly%20Earnings%20Release/2026/Quarterly%20Earnings%20Release-2026Q1/%5B%E6%B3%95%E8%87%AA%E8%AA%87%E6%9C%83%E8%B3%87%E6%96%99%5DQ1%E7%B0%A1%E5%A0%B1%E8%B3%87%E6%96%99.pdf"
+        },
+        {
+          "label": "投資人關係頁面",
+          "url": "https://www.mediatek.com/zh-tw/investor-relations"
+        },
+        {
+          "label": "行情與估值快照",
+          "url": "https://goodinfo.tw/tw/ShowK_Chart.asp?CHT_CAT2=DATE&STOCK_ID=2454"
+        }
+      ],
+      "institutional_flow": {
+        "foreign_net": "+1231 张",
+        "trust_net": "-227 张",
+        "dealer_net": "+142 张",
+        "total_net": "+1147 张",
+        "date": "2026-08-26",
+        "summary": "[2026-08-26 官方结算] 外资主力大幅回流 (+1,231 张)，投信阶段获利减仓 (-227 张)。"
+      },
+      "capital_inflow": {
+        "large_order_ratio": "法人净买超 1,147 张 (占量 22.6%)",
+        "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
+        "capital_status": "[2026-08-26 筹码] 主力机构呈净买入 (+1,147 张)，筹码向法人端汇聚沉淀。"
+      },
+      "price_analytics": {
+        "ma20_bias": "近 3 個月約 -15%，高檔整理",
+        "amplitude": "近一年漲幅大，估值對消息敏感",
+        "trend_evaluation": "目前屬正獲利但成長驗證中的觀察股，不列入前三檔核心。"
+      },
+      "buy_zone_sub": "觀察，不追價",
+      "buy_zone_heavy": "等待 AI ASIC 驗證",
+      "take_profit": "依 ASIC 營收再評估",
+      "target_price": "不預設固定目標",
+      "stop_loss": "獲利與 ASIC 時程轉弱即檢視"
     }
   ]
 }
