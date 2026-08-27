@@ -13,6 +13,7 @@ with open(json_path, encoding="utf-8") as f:
 updated_at = stock_payload.get("updated_at", "")
 data_source = stock_payload.get("data_source", "永丰金 Shioaji API")
 stocks = stock_payload.get("stocks", [])
+stock_count = len(stocks)
 
 desktop_dir = project_root
 os.makedirs(desktop_dir, exist_ok=True)
@@ -46,7 +47,7 @@ ws1.views.sheetView[0].showGridLines = True
 
 ws1.merge_cells('A1:O1')
 t1 = ws1['A1']
-t1.value = "台股 5 大 AI 核心卡位龙头深度投资与买卖点筹码量化分析表"
+t1.value = f"台股 {stock_count} 檔 AI 核心卡位龙头深度投资与买卖点筹码量化分析表"
 t1.font = font_title
 t1.alignment = Alignment(horizontal="center", vertical="center")
 t1.fill = fill_title
@@ -141,7 +142,7 @@ ws2.views.sheetView[0].showGridLines = True
 
 ws2.merge_cells('A1:I1')
 t2 = ws2['A1']
-t2.value = "台股 5 大卡位龙头 Shioaji 实时买卖点与风控决策面板"
+t2.value = f"台股 {stock_count} 檔卡位龙头 Shioaji 实时买卖点与风控决策面板"
 t2.font = font_title
 t2.alignment = Alignment(horizontal="center", vertical="center")
 t2.fill = fill_title

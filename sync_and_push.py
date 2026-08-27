@@ -21,7 +21,7 @@ def run_cmd(cmd, cwd=ROOT):
     return res.returncode == 0
 
 def main():
-    print("=== 1. 刷新 Shioaji 主源 / TWSE MIS 降级行情 (2330, 2059, 2383, 3017, 2317) ===")
+    print("=== 1. 刷新 Shioaji 主源 / TWSE MIS 降级行情（以 STOCKS_META 全部标的为准） ===")
     if not run_cmd(f"{sys.executable} fetch_shioaji_data.py"):
         raise SystemExit("行情刷新失败，已停止后续 Excel、commit 和 push，避免发布陈旧数据。")
 

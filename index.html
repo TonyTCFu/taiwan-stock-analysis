@@ -6,14 +6,14 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>台股龍頭股 - 5大 AI 核心卡位龙头每日行情与风控仪表盘</title>
+    <title>台股龍頭股 - 10大 AI 核心卡位龙头每日行情与风控仪表盘</title>
     <link rel="icon" type="image/jpeg" href="assets/app_icon.jpg">
     <link rel="shortcut icon" type="image/jpeg" href="assets/app_icon.jpg">
     <link rel="apple-touch-icon" href="assets/app_icon.jpg">
     <meta name="apple-mobile-web-app-title" content="台股龍頭股">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta property="og:title" content="台股龍頭股 - 每日行情与风控仪表盘">
+    <meta property="og:title" content="台股龍頭股 - 10大核心卡位龙头每日行情与风控仪表盘">
     <meta property="og:image" content="assets/app_icon.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -152,6 +152,348 @@
             .toast-notification { bottom: 15px; right: 15px; left: 15px; }
         }
     </style>
+    <style>
+        /* Visual layer: keep the dashboard's content and behavior intact. */
+        :root {
+            --bg-main: #070a08;
+            --bg-card: #101512;
+            --bg-card-hover: #141b17;
+            --border-color: rgba(216, 235, 224, 0.12);
+            --border-highlight: rgba(0, 230, 154, 0.42);
+            --text-primary: #f5f8f6;
+            --text-secondary: #93a1aa;
+            --text-muted: #69777f;
+            --accent-blue: #14dce2;
+            --accent-cyan: #14dce2;
+            --accent-green: #00e69a;
+            --accent-red: #ff4774;
+            --accent-purple: #00e69a;
+            --accent-gold: #ffae32;
+        }
+
+        body {
+            background: #070a08;
+            color: var(--text-primary);
+            letter-spacing: 0.01em;
+            padding-bottom: 64px;
+        }
+
+        header {
+            background: rgba(7, 10, 8, 0.94);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom-color: rgba(216, 235, 224, 0.1);
+            padding: 20px 28px;
+        }
+
+        .header-container,
+        main,
+        footer {
+            max-width: 1160px;
+        }
+
+        .header-container { gap: 20px; }
+        .logo-group { gap: 12px; }
+        .app-logo-img {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            border-color: rgba(0, 230, 154, 0.28);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.36);
+        }
+        .logo-title h1 {
+            font-size: 22px;
+            letter-spacing: 0.02em;
+            background: linear-gradient(118deg, #ffffff 12%, #b4f6d7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .logo-title p { color: var(--text-muted); font-size: 11px; }
+        .header-meta { gap: 10px; font-size: 12px; }
+        .status-badge {
+            border-radius: 8px;
+            padding: 7px 10px;
+            background: rgba(0, 230, 154, 0.07);
+            border-color: rgba(0, 230, 154, 0.24);
+            color: #65f0bb;
+        }
+        .status-dot { box-shadow: 0 0 10px rgba(0, 230, 154, 0.65); }
+        .version-tag {
+            color: #9fe5e9;
+            background: rgba(20, 220, 226, 0.08);
+            border: 1px solid rgba(20, 220, 226, 0.14);
+            border-radius: 5px;
+            padding: 3px 7px;
+        }
+        .update-time { color: var(--text-muted); }
+
+        main { margin: 42px auto 56px; padding: 0 28px; }
+        .tab-bar {
+            gap: 0;
+            margin-bottom: 34px;
+            padding-bottom: 0;
+            border-bottom-color: rgba(216, 235, 224, 0.12);
+        }
+        .tab-btn {
+            position: relative;
+            padding: 15px 18px 16px;
+            border: 0;
+            border-radius: 10px 10px 0 0;
+            color: var(--text-muted);
+            font-size: 14px;
+            letter-spacing: 0.01em;
+        }
+        .tab-btn:hover { color: var(--text-primary); background: rgba(255, 255, 255, 0.025); }
+        .tab-btn.active {
+            color: #69f0bb;
+            background: rgba(0, 230, 154, 0.055);
+            border: 0;
+            box-shadow: none;
+        }
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -2px;
+            left: 0;
+            height: 3px;
+            background: var(--accent-green);
+            box-shadow: 0 0 14px rgba(0, 230, 154, 0.45);
+        }
+
+        .cards-grid { grid-template-columns: repeat(auto-fit, minmax(430px, 1fr)); gap: 22px; }
+        .stock-card {
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-card);
+            border-color: rgba(216, 235, 224, 0.13);
+            border-radius: 17px;
+            padding: 27px 28px 26px;
+            box-shadow: 0 18px 32px rgba(0, 0, 0, 0.16);
+        }
+        .stock-card::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            bottom: 18px;
+            left: 0;
+            width: 4px;
+            border-radius: 0 4px 4px 0;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 14px rgba(20, 220, 226, 0.32);
+        }
+        .stock-card:nth-child(2n)::before { background: var(--accent-green); box-shadow: 0 0 14px rgba(0, 230, 154, 0.32); }
+        .stock-card:nth-child(3n)::before { background: var(--accent-gold); box-shadow: 0 0 14px rgba(255, 174, 50, 0.28); }
+        .stock-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(0, 230, 154, 0.42);
+            box-shadow: 0 22px 42px rgba(0, 0, 0, 0.28);
+        }
+        .card-top { margin-bottom: 20px; }
+        .stock-name-group h2 { font-size: 23px; letter-spacing: 0.01em; }
+        .stock-code {
+            display: inline-block;
+            margin-top: 6px;
+            background: rgba(216, 235, 224, 0.075);
+            color: #a4d4d5;
+            border-radius: 6px;
+            padding: 3px 8px;
+        }
+        .score-pill {
+            background: rgba(20, 220, 226, 0.07);
+            border-color: rgba(20, 220, 226, 0.22);
+            border-radius: 7px;
+            color: #93e6e9;
+            padding: 5px 9px;
+        }
+        .price-hero { gap: 14px; margin-bottom: 16px; }
+        .current-price { font-size: 34px; letter-spacing: -0.045em; }
+        .price-change { font-size: 15px; }
+        .ohlc-grid {
+            gap: 6px;
+            padding: 11px 8px;
+            background: #0c110f;
+            border: 1px solid rgba(216, 235, 224, 0.06);
+            border-radius: 10px;
+            margin-bottom: 18px;
+        }
+        .ohlc-item .lbl { color: var(--text-muted); }
+        .chokepoint-box {
+            background: rgba(0, 230, 154, 0.035);
+            border-left-color: var(--accent-green);
+            border-radius: 0 10px 10px 0;
+            padding: 12px 14px;
+            color: #a8b5bb;
+            margin-bottom: 19px;
+        }
+        .research-panel {
+            background: linear-gradient(135deg, rgba(20, 220, 226, 0.035), rgba(0, 230, 154, 0.025));
+            border: 1px solid rgba(20, 220, 226, 0.14);
+            border-radius: 11px;
+            padding: 14px;
+            margin-bottom: 18px;
+        }
+        .research-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 11px;
+        }
+        .research-panel-title {
+            color: #79e8eb;
+            font-size: 12px;
+            font-weight: 800;
+        }
+        .research-badge {
+            color: #72efbd;
+            font-size: 11px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 9px;
+            margin-bottom: 11px;
+        }
+        .research-item {
+            min-width: 0;
+            padding: 9px;
+            background: rgba(7, 10, 8, 0.36);
+            border-radius: 8px;
+        }
+        .research-label {
+            display: block;
+            margin-bottom: 3px;
+            color: var(--text-muted);
+            font-size: 10px;
+        }
+        .research-value {
+            color: #d2dcde;
+            font-size: 12px;
+            line-height: 1.55;
+        }
+        .research-copy {
+            color: #b8c5c9;
+            font-size: 12px;
+            line-height: 1.65;
+            margin-top: 8px;
+        }
+        .research-copy strong { color: #8deee0; }
+        .quarterly-earnings {
+            overflow-x: auto;
+            margin-top: 10px;
+            border: 1px solid rgba(216, 235, 224, 0.08);
+            border-radius: 8px;
+        }
+        .quarterly-row {
+            display: grid;
+            grid-template-columns: 0.9fr 1.2fr 1fr 1.2fr 0.9fr;
+            min-width: 430px;
+            gap: 7px;
+            padding: 7px 8px;
+            color: #c0cccf;
+            font-size: 10px;
+            border-bottom: 1px solid rgba(216, 235, 224, 0.06);
+        }
+        .quarterly-row:last-child { border-bottom: 0; }
+        .quarterly-row.header { color: #78e8eb; font-weight: 800; background: rgba(20, 220, 226, 0.05); }
+        .research-risk { color: #ffb0c4; }
+        .research-sources { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
+        .research-sources a {
+            color: #8deee0;
+            font-size: 10px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(141, 238, 224, 0.35);
+        }
+        .research-sources a:hover { color: #fff; border-bottom-color: #fff; }
+        .section-badge { color: #6af0ba; margin-bottom: 8px; }
+        .info-panel {
+            background: #0c110f;
+            border: 1px solid rgba(216, 235, 224, 0.06);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 14px;
+            color: #b5c0c4;
+        }
+        .metrics-row {
+            gap: 4px;
+            padding: 15px 0;
+            border-color: rgba(216, 235, 224, 0.11);
+            margin-bottom: 18px;
+        }
+        .metric-item .label { color: var(--text-muted); }
+        .strategy-zone { gap: 9px; }
+        .zone-row {
+            padding: 9px 11px;
+            border-radius: 8px;
+            background: #0c110f !important;
+            border-left-width: 3px !important;
+        }
+        .strategy-zone .zone-row:nth-child(1) { border-left-color: var(--accent-cyan) !important; }
+        .strategy-zone .zone-row:nth-child(2) { border-left-color: var(--accent-red) !important; }
+        .strategy-zone .zone-row:nth-child(3) { border-left-color: var(--accent-green) !important; }
+        .strategy-zone .zone-row:nth-child(1) .zone-tag,
+        .strategy-zone .zone-row:nth-child(1) .zone-val { color: #79e8eb !important; }
+        .strategy-zone .zone-row:nth-child(2) .zone-tag,
+        .strategy-zone .zone-row:nth-child(2) .zone-val { color: #ffb0c4 !important; }
+        .strategy-zone .zone-row:nth-child(3) .zone-tag,
+        .strategy-zone .zone-row:nth-child(3) .zone-val { color: #72efbd !important; }
+
+        .table-card {
+            background: var(--bg-card);
+            border-color: rgba(216, 235, 224, 0.13);
+            border-radius: 17px;
+            box-shadow: 0 18px 32px rgba(0, 0, 0, 0.16);
+        }
+        th {
+            background: #101512;
+            color: #a9b6bc;
+            border-bottom-color: rgba(0, 230, 154, 0.38);
+        }
+        td { border-bottom-color: rgba(216, 235, 224, 0.08); }
+        tr:hover td { background: rgba(0, 230, 154, 0.035); }
+
+        .btn-refresh {
+            background: rgba(0, 230, 154, 0.075);
+            border: 1px solid rgba(0, 230, 154, 0.58);
+            border-radius: 10px;
+            color: #7bf3c3;
+            font-weight: 800;
+            padding: 9px 14px;
+            box-shadow: inset 0 0 0 1px rgba(0, 230, 154, 0.07);
+        }
+        .btn-refresh:hover { background: rgba(0, 230, 154, 0.15); box-shadow: 0 0 16px rgba(0, 230, 154, 0.16); }
+        .toast-notification {
+            background: #101512;
+            border-color: rgba(0, 230, 154, 0.38);
+            border-radius: 12px;
+            box-shadow: 0 16px 34px rgba(0, 0, 0, 0.42);
+        }
+        footer { margin-top: 56px; padding: 22px 28px; color: var(--text-muted); border-top-color: rgba(216, 235, 224, 0.1); }
+
+        @media (max-width: 768px) {
+            header { padding: 17px 20px; }
+            .header-container { gap: 16px; }
+            .header-meta { width: 100%; flex-wrap: wrap; gap: 8px; }
+            .update-time { flex: 1 1 190px; }
+            .btn-refresh { margin-left: auto; }
+            main { margin: 28px auto 42px; padding: 0 18px; }
+            .tab-bar { margin-bottom: 26px; }
+            .tab-btn { padding: 13px 14px 14px; font-size: 13px; }
+            .cards-grid { grid-template-columns: 1fr; gap: 18px; }
+            .stock-card { border-radius: 15px; padding: 23px 20px 22px; }
+            .stock-card::before { top: 15px; bottom: 15px; }
+            .stock-name-group h2 { font-size: 22px; }
+            .current-price { font-size: 32px; }
+            .ohlc-grid { grid-template-columns: repeat(2, 1fr); row-gap: 9px; }
+            .metrics-row { grid-template-columns: repeat(2, 1fr); row-gap: 12px; }
+            .research-grid { grid-template-columns: 1fr; }
+            .table-card { border-radius: 15px; }
+            footer { margin-top: 40px; padding: 18px 20px; }
+        }
+    </style>
 </head>
 <body>
 
@@ -283,6 +625,24 @@
 
         const PUBLIC_LIVE_QUOTES_API = 'https://futienchun-com-dashboard.onrender.com/api/live-quotes';
         const LOCAL_STORAGE_KEY = 'TAIWAN_STOCK_PERSISTED_DATA_V2';
+        const EXPECTED_STOCK_CODES = ['2330', '2059', '2383', '3017', '2317', '2308', '2345', '2360', '3711', '2454'];
+
+        function isCompleteStockPayload(payload) {
+            if (!payload || !Array.isArray(payload.stocks)) return false;
+            const codes = new Set(payload.stocks.map(stock => String(stock.code)));
+            return EXPECTED_STOCK_CODES.every(code => codes.has(code));
+        }
+
+        function escapeResearchText(value) {
+            return String(value ?? '').replace(/[&<>"']/g, char => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[char]));
+        }
+
+        function safeResearchUrl(value) {
+            const url = String(value ?? '').trim();
+            return /^https?:\/\//i.test(url) ? url.replace(/"/g, '%22') : '#';
+        }
 
         function getPersistedData() {
             try {
@@ -351,6 +711,10 @@
                 if (forceRefresh) {
                     try {
                         json = await refreshWithLiveBridge();
+                        if (!isCompleteStockPayload(json)) {
+                            const receivedCount = Array.isArray(json && json.stocks) ? json.stocks.length : 0;
+                            throw new Error(`公网行情网关仅返回 ${receivedCount}/10 档，未完成全部标的刷新`);
+                        }
                         refreshedByBridge = true;
                     } catch (err) {
                         console.warn("Bridge refresh error, fallback to published/persisted data:", err);
@@ -378,7 +742,11 @@
                     renderDashboard(json);
 
                     if (forceRefresh) {
-                        showToast(`✅ 行情已更新并持久化保存至本地<br><span style="font-size:11px;color:#94a3b8">数据源: ${json.data_source || '实时行情'} | 更新时间: ${json.updated_at}</span>`);
+                        if (refreshedByBridge) {
+                            showToast(`✅ 10 檔行情已更新並持久化保存至本地<br><span style="font-size:11px;color:#94a3b8">数据源: ${json.data_source || '实时行情'} | 更新时间: ${json.updated_at}</span>`);
+                        } else {
+                            showToast(`⚠️ 公网行情网关未完成 10 檔刷新<br><span style="font-size:11px;color:#fca5a5">当前显示已发布数据；请稍后重试强制刷新</span>`);
+                        }
                     }
                 }
             } catch (e) {
@@ -397,8 +765,11 @@
             const sources = data.sources || {};
             const shioajiOk = sources.shioaji && sources.shioaji.status === 'ok';
             const twseOk = sources.twse_mis && sources.twse_mis.status === 'ok';
+            const totalStocks = Array.isArray(data.stocks) ? data.stocks.length : EXPECTED_STOCK_CODES.length;
+            const shioajiCount = sources.shioaji && sources.shioaji.quote_count ? sources.shioaji.quote_count : 0;
+            const twseCount = sources.twse_mis && sources.twse_mis.quote_count ? sources.twse_mis.quote_count : 0;
             if (sourceStatus) {
-                sourceStatus.innerHTML = `<span class="status-dot"></span> Shioaji ${shioajiOk ? '已连接' : '未连接'} · TWSE ${twseOk ? '已更新' : '未更新'}`;
+                sourceStatus.innerHTML = `<span class="status-dot"></span> Shioaji ${shioajiOk ? '已连接' : '未连接'} (${shioajiCount}/${totalStocks}) · TWSE ${twseOk ? '已更新' : '未更新'} (${twseCount}/${totalStocks})`;
             }
             document.getElementById('update-time').innerText = `行情更新: ${data.updated_at}`;
             document.getElementById('cache-ver').innerText = 'v' + (data.updated_at ? data.updated_at.replace(/[- :]/g, '').slice(4, 12) : 'LIVE');
@@ -410,6 +781,43 @@
                 const isSell = str.startsWith('-');
                 const color = isBuy ? 'var(--accent-red)' : (isSell ? 'var(--accent-green)' : 'var(--text-primary)');
                 return `<span style="font-family: var(--font-mono); font-weight:700; color: ${color};">${str}</span>`;
+            }
+
+            function renderResearchBlock(stock) {
+                if (!stock.industry && !stock.earnings_trend && !stock.market_factors) return '';
+                const quarters = Array.isArray(stock.quarterly_earnings) ? stock.quarterly_earnings : [];
+                const risks = Array.isArray(stock.risk_factors) ? stock.risk_factors : [];
+                const sources = Array.isArray(stock.source_links) ? stock.source_links : [];
+                const quarterRows = quarters.map(q => `
+                    <div class="quarterly-row">
+                        <span>${escapeResearchText(q.period)}</span>
+                        <span>${escapeResearchText(q.revenue)}</span>
+                        <span>${escapeResearchText(q.operating_margin)}</span>
+                        <span>${escapeResearchText(q.net_income)}</span>
+                        <span>${escapeResearchText(q.eps)}</span>
+                    </div>
+                `).join('');
+                const riskText = risks.length ? risks.map(risk => escapeResearchText(risk)).join(' · ') : '待補充';
+                const sourceLinks = sources.map(source => `<a href="${safeResearchUrl(source.url)}" target="_blank" rel="noopener noreferrer">${escapeResearchText(source.label)}</a>`).join('');
+                return `
+                    <div class="research-panel">
+                        <div class="research-panel-header">
+                            <span class="research-panel-title">📚 基本面／產業研究</span>
+                            <span class="research-badge">${escapeResearchText(stock.recommendation || '研究資料')}</span>
+                        </div>
+                        <div class="research-grid">
+                            <div class="research-item"><span class="research-label">所處行業</span><span class="research-value">${escapeResearchText(stock.industry)}</span></div>
+                            <div class="research-item"><span class="research-label">市場行情與估值</span><span class="research-value">${escapeResearchText(stock.market_snapshot)}<br>${escapeResearchText(stock.valuation)}</span></div>
+                            <div class="research-item"><span class="research-label">三季獲利趨勢</span><span class="research-value">${escapeResearchText(stock.earnings_trend)}</span></div>
+                            <div class="research-item"><span class="research-label">研究策略</span><span class="research-value">${escapeResearchText(stock.strategy_note)}</span></div>
+                        </div>
+                        <div class="research-copy"><strong>投資邏輯：</strong>${escapeResearchText(stock.investment_case)}</div>
+                        <div class="research-copy"><strong>市場因素：</strong>${escapeResearchText(stock.market_factors)}</div>
+                        <div class="research-copy research-risk"><strong>主要風險：</strong>${riskText}</div>
+                        ${quarterRows ? `<div class="quarterly-earnings"><div class="quarterly-row header"><span>季度</span><span>營收</span><span>營益率</span><span>稅後淨利</span><span>EPS</span></div>${quarterRows}</div>` : ''}
+                        ${sourceLinks ? `<div class="research-sources">${sourceLinks}</div>` : ''}
+                    </div>
+                `;
             }
 
             // Render Cards
@@ -451,6 +859,8 @@
                             <div class="chokepoint-box">
                                 <strong>卡位定位：</strong>${s.chokepoint}
                             </div>
+
+                            ${renderResearchBlock(s)}
 
                             <div class="section-badge">🏢 财报公布日与表现</div>
                             <div class="info-panel">

@@ -152,6 +152,214 @@ STOCKS_META = {
         "take_profit": "315 - 335 元",
         "target_price": "360 - 380 元",
         "stop_loss": "225 元"
+    },
+    "2308": {
+        "symbol": "2308.TW",
+        "name": "台達電",
+        "en_name": "Delta Electronics",
+        "industry": "電源管理、資料中心基礎設施與熱管理",
+        "chokepoint": "高效率電源、資料中心基礎設施與熱管理的系統級整合",
+        "score": 85,
+        "score_basis": "獲利趨勢、技術門檻、估值與風險綜合評估；非官方評等",
+        "investment_case": "AI 資料中心的電力效率、電源管理與熱管理需求同步成長。2026Q2 營收 1,832 億元、營益率 16.7%、稅後淨利 251.36 億元。",
+        "earnings_trend": "EPS 6.67 → 7.91 → 9.68，連續兩季走高；電源電子與基礎設施部門獲利分別年增 50% 與 121%。",
+        "quarterly_earnings": [
+            {"period": "2025Q4", "revenue": "待更新", "operating_margin": "待更新", "net_income": "約 173 億元", "eps": "6.67 元"},
+            {"period": "2026Q1", "revenue": "待更新", "operating_margin": "待更新", "net_income": "205.56 億元", "eps": "7.91 元"},
+            {"period": "2026Q2", "revenue": "1,832 億元", "operating_margin": "16.7%", "net_income": "251.36 億元", "eps": "9.68 元"}
+        ],
+        "market_snapshot": "8/27 約 NT$1,770；PER 約 56 倍；近 3 個月約 -25.9%，近 1 年約 +147%。",
+        "valuation": "獲利品質高，但 PER 已反映相當多 AI 基礎設施成長預期。",
+        "market_factors": "AI 資料中心資本支出、電力效率要求與液冷導入是正面因素；利率上升或雲端資本支出放緩會造成估值壓縮。",
+        "risk_factors": ["估值偏高", "與既有 3017、2059 有 AI 伺服器產業暴露重疊", "資料中心資本支出週期反轉"],
+        "recommendation": "核心追蹤",
+        "strategy_note": "分批觀察，不追高；等待估值回落或獲利再上修",
+        "source_links": [
+            {"label": "2026Q2 官方法說資料", "url": "https://filecenter.deltaww.com/ir/download/calendar/2Q26_Analyst%20Meeting.pdf"},
+            {"label": "行情與估值快照", "url": "https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2308"}
+        ],
+        "gross_margin": "35.6% (26Q2)",
+        "net_margin": "13.7% (26Q2)",
+        "roe": "待更新",
+        "eps_single": "9.68 元 (26Q2)",
+        "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
+        "price_analytics": {
+            "ma20_bias": "近 3 個月回落約 25.9%",
+            "amplitude": "高估值成長股，波動偏高",
+            "trend_evaluation": "獲利趨勢向上，但必須以後續營益率與 AI 基礎設施訂單驗證估值。"
+        },
+        "buy_zone_sub": "分批觀察（不追高）",
+        "buy_zone_heavy": "等待估值明顯回落",
+        "take_profit": "依獲利與趨勢再評估",
+        "target_price": "不預設固定目標",
+        "stop_loss": "跌破基本面假設即檢視"
+    },
+    "2345": {
+        "symbol": "2345.TW",
+        "name": "智邦",
+        "en_name": "Accton Technology",
+        "industry": "AI 高速網路交換器與資料中心網通",
+        "chokepoint": "800G/1.6T 高速交換器與 AI 集群網路整合的高門檻環節",
+        "score": 86,
+        "score_basis": "獲利趨勢、技術門檻、估值與風險綜合評估；非官方評等",
+        "investment_case": "AI 集群規模提升帶動高速交換器升級。2026Q2 營收 955.38 億元、營益率約 15.0%、母公司稅後淨利 110.53 億元。",
+        "earnings_trend": "EPS 14.95 → 14.92 → 19.78；Q2 EPS 季增約 32.5%，營益率由 12.7% 提升至約 15.0%。",
+        "quarterly_earnings": [
+            {"period": "2025Q4", "revenue": "720.18 億元", "operating_margin": "12.7%", "net_income": "83.56 億元", "eps": "14.95 元"},
+            {"period": "2026Q1", "revenue": "701.21 億元", "operating_margin": "14.3%", "net_income": "83.41 億元", "eps": "14.92 元"},
+            {"period": "2026Q2", "revenue": "955.38 億元", "operating_margin": "15.0%", "net_income": "110.53 億元", "eps": "19.78 元"}
+        ],
+        "market_snapshot": "8/26 收約 NT$2,055；PER 約 32 倍；近 3 個月約 -7.2%，近 6 個月約 +41.7%。",
+        "valuation": "五檔新增標的中估值相對合理，但市場已反映高速網通成長。",
+        "market_factors": "雲端服務商 AI 資本支出、800G/1.6T 升級與高速光互連需求是主要催化；客戶集中與供應鏈交期是反向因素。",
+        "risk_factors": ["大型雲端客戶集中", "高速交換器世代轉換造成產品週期風險", "AI 資本支出若放緩將影響訂單能見度"],
+        "recommendation": "核心追蹤／首選",
+        "strategy_note": "可列入優先研究，仍採分批而非追價買進",
+        "source_links": [
+            {"label": "季度財務資料", "url": "https://fubon-ebrokerdj.fbs.com.tw/z/zc/zcq/zcq_2345.djhtm"},
+            {"label": "行情與估值快照", "url": "https://goodinfo.tw/tw/ShowK_Chart.asp?STOCK_ID=2345"},
+            {"label": "公司高速網通資料", "url": "https://www.accton.com.tw/wp-content/uploads/2024/07/20240712031358.pdf"}
+        ],
+        "gross_margin": "19.7% (26Q2)",
+        "net_margin": "約 11.6% (26Q2)",
+        "roe": "待更新",
+        "eps_single": "19.78 元 (26Q2)",
+        "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
+        "price_analytics": {
+            "ma20_bias": "近 3 個月約 -7.2%，相對大幅上漲後整理",
+            "amplitude": "高速網通成長股，波動中高",
+            "trend_evaluation": "Q2 營收與 EPS 同步加速，是新增標的中基本面與估值平衡度最佳者。"
+        },
+        "buy_zone_sub": "分批觀察（不追高）",
+        "buy_zone_heavy": "等待成長預期降溫",
+        "take_profit": "依訂單與 EPS 趨勢再評估",
+        "target_price": "不預設固定目標",
+        "stop_loss": "營益率與訂單能見度轉弱即檢視"
+    },
+    "2360": {
+        "symbol": "2360.TW",
+        "name": "致茂",
+        "en_name": "Chroma ATE",
+        "industry": "半導體、AI、光通訊與先進封裝測試設備",
+        "chokepoint": "高精度測試、量測與先進封裝檢測，屬 AI 硬體量產的關鍵驗證設備",
+        "score": 84,
+        "score_basis": "獲利趨勢、技術門檻、估值與風險綜合評估；非官方評等",
+        "investment_case": "AI/HPC、GPU、CPU、交換器與光通訊升級拉動測試需求。2026Q2 營收 135.29 億元、毛利率約 60.5%、營益率約 38.7%。",
+        "earnings_trend": "EPS 6.04 → 9.12 → 約 12.15；連續三季創高，獲利增速在新增五檔中最強。",
+        "quarterly_earnings": [
+            {"period": "2025Q4", "revenue": "85.80 億元", "operating_margin": "約 34.8%", "net_income": "25.50 億元", "eps": "6.04 元"},
+            {"period": "2026Q1", "revenue": "118.60 億元", "operating_margin": "約 40.4%", "net_income": "38.64 億元", "eps": "9.12 元"},
+            {"period": "2026Q2", "revenue": "135.29 億元", "operating_margin": "約 38.7%", "net_income": "51.23 億元", "eps": "約 12.15 元"}
+        ],
+        "market_snapshot": "8/27 約 NT$1,990；PER 約 51 倍；近 3 個月約 -22.6%，近 1 年約 +262%。",
+        "valuation": "基本面強，但一年漲幅與 PER 都高，適合分批觀察，不適合只看題材追價。",
+        "market_factors": "先進封裝、AI 伺服器、光通訊與高功率電源測試需求是正面因素；半導體資本支出與客戶驗證時程會影響短期營收。",
+        "risk_factors": ["估值與波動偏高", "半導體資本支出循環", "擴產與資本支出造成現金流、稀釋或折舊壓力"],
+        "recommendation": "核心追蹤／高波動",
+        "strategy_note": "保留名單，但以回檔分批為主；關注毛利率與現金流是否維持",
+        "source_links": [
+            {"label": "公司業務與技術範圍", "url": "https://www.chromaate.com/tw/chroma/aboutchroma"},
+            {"label": "季度結果公告", "url": "https://www.chromaate.com/tw/investors/quarterly_results"},
+            {"label": "行情與估值快照", "url": "https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2360"}
+        ],
+        "gross_margin": "約 60.5% (26Q2)",
+        "net_margin": "約 37.9% (26Q2)",
+        "roe": "待更新",
+        "eps_single": "約 12.15 元 (26Q2)",
+        "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
+        "price_analytics": {
+            "ma20_bias": "近 3 個月約 -22.6%，高檔修正",
+            "amplitude": "近 1 年約 +262%，波動極高",
+            "trend_evaluation": "獲利趨勢最強，但市場已給予高溢價，必須用下一季毛利率與訂單驗證。"
+        },
+        "buy_zone_sub": "回檔分批觀察",
+        "buy_zone_heavy": "等待估值與波動收斂",
+        "take_profit": "依 EPS 與毛利率再評估",
+        "target_price": "不預設固定目標",
+        "stop_loss": "獲利趨勢反轉即檢視"
+    },
+    "3711": {
+        "symbol": "3711.TW",
+        "name": "日月光投控",
+        "en_name": "ASE Technology Holding",
+        "industry": "IC 封裝測試、先進封裝與 Panel-Level Packaging",
+        "chokepoint": "AI 晶片大規模封裝測試與先進封裝產能，屬量產環節的關鍵瓶頸",
+        "score": 79,
+        "score_basis": "獲利趨勢、技術門檻、估值與風險綜合評估；非官方評等",
+        "investment_case": "AI 加速器、Chiplet 與先進封裝擴產帶動封測需求。2026Q2 營收約 1,911 億元、營益率 11.1%、EPS 4.80 元。",
+        "earnings_trend": "EPS 約 3.4 → 3.24 → 4.80；Q2 顯著反彈，2026H1 EPS 8.04 元。",
+        "quarterly_earnings": [
+            {"period": "2025Q4", "revenue": "約 1,779 億元", "operating_margin": "約 9.9%", "net_income": "約 147.1 億元", "eps": "約 3.4 元"},
+            {"period": "2026Q1", "revenue": "約 1,737 億元", "operating_margin": "10.1%", "net_income": "約 141.5 億元", "eps": "3.24 元"},
+            {"period": "2026Q2", "revenue": "約 1,911 億元", "operating_margin": "11.1%", "net_income": "約 210.7 億元", "eps": "4.80 元"}
+        ],
+        "market_snapshot": "8/27 約 NT$605；PER 約 44 倍；近 3 個月約 -2.4%，近 1 年約 +138%。",
+        "valuation": "相較純 AI 設備股波動較低，但仍受封測資本支出與景氣循環影響。",
+        "market_factors": "AI 晶片封裝測試、Chiplet、Panel-Level Packaging 與高階封裝產能擴建是正面因素；折舊、負債與客戶稼動率是反向因素。",
+        "risk_factors": ["封裝測試景氣循環", "擴產帶來折舊與資本支出壓力", "與既有 2330 的先進封裝產業暴露重疊"],
+        "recommendation": "觀察／可小部位",
+        "strategy_note": "等待先進封裝稼動率與營益率連續改善，再提高評級",
+        "source_links": [
+            {"label": "公司先進封裝資料", "url": "https://ase-holding.webflow.io/press-room-ch/310x310"},
+            {"label": "財報與行情快照", "url": "https://goodinfo.tw/tw/StockFinDetail.asp?QRY_TIME=20262&RPT_CAT=IS_M_QUAR&STOCK_ID=3711"}
+        ],
+        "gross_margin": "待更新",
+        "net_margin": "約 11.0% (26Q2)",
+        "roe": "18.2% 年化 (26H1)",
+        "eps_single": "4.80 元 (26Q2)",
+        "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
+        "price_analytics": {
+            "ma20_bias": "近 3 個月約 -2.4%，相對穩定",
+            "amplitude": "近 1 年約 +138%，仍屬高檔區",
+            "trend_evaluation": "Q2 獲利反彈，但要觀察先進封裝擴產是否轉化為持續營益率改善。"
+        },
+        "buy_zone_sub": "小部位觀察",
+        "buy_zone_heavy": "等待營益率連續改善",
+        "take_profit": "依封裝稼動率再評估",
+        "target_price": "不預設固定目標",
+        "stop_loss": "資本支出與折舊失控即檢視"
+    },
+    "2454": {
+        "symbol": "2454.TW",
+        "name": "聯發科",
+        "en_name": "MediaTek",
+        "industry": "Fabless IC、手機/邊緣 AI SoC 與 AI ASIC",
+        "chokepoint": "高階 SoC、AI ASIC 設計/IP 與客戶軟硬體生態整合的高門檻",
+        "score": 77,
+        "score_basis": "獲利趨勢、技術門檻、估值與風險綜合評估；非官方評等",
+        "investment_case": "公司仍具高毛利與正獲利，但 AI ASIC 商業化尚在驗證期。2026Q2 營收約 1,521.83 億元、營益率 15.0%、EPS 15.28 元。",
+        "earnings_trend": "EPS 14.39 → 15.17 → 15.28；近兩季大致穩定，但 2026Q2 淨利年減約 12.3%，尚未形成強勁加速。",
+        "quarterly_earnings": [
+            {"period": "2025Q4", "revenue": "1,501.88 億元", "operating_margin": "14.5%", "net_income": "230.74 億元", "eps": "14.39 元"},
+            {"period": "2026Q1", "revenue": "1,491.51 億元", "operating_margin": "15.3%", "net_income": "243.76 億元", "eps": "15.17 元"},
+            {"period": "2026Q2", "revenue": "1,521.83 億元", "operating_margin": "15.0%", "net_income": "246.05 億元", "eps": "15.28 元"}
+        ],
+        "market_snapshot": "8/27 約 NT$3,865；PER 約 64 倍；近 3 個月約 -15%。",
+        "valuation": "獲利穩定但 PER 偏高，必須等 AI ASIC 實際營收與毛利貢獻確認。",
+        "market_factors": "AI ASIC、邊緣 AI、車用與高速連接是中長期因素；手機景氣、客戶自研與 ASIC 導入時程是短期變數。",
+        "risk_factors": ["PER 偏高", "AI ASIC 尚未完成規模化驗證", "手機與消費電子週期、客戶自研競爭"],
+        "recommendation": "觀察",
+        "strategy_note": "等 AI ASIC 營收與淨利年增轉正，再考慮提高評級",
+        "source_links": [
+            {"label": "2026Q1 官方法說資料", "url": "https://www.mediatek.com/hubfs/MediaTek%20Assets/Pdfs/Quarterly%20Earnings%20Release/2026/Quarterly%20Earnings%20Release-2026Q1/%5B%E6%B3%95%E8%87%AA%E8%AA%87%E6%9C%83%E8%B3%87%E6%96%99%5DQ1%E7%B0%A1%E5%A0%B1%E8%B3%87%E6%96%99.pdf"},
+            {"label": "投資人關係頁面", "url": "https://www.mediatek.com/zh-tw/investor-relations"},
+            {"label": "行情與估值快照", "url": "https://goodinfo.tw/tw/ShowK_Chart.asp?CHT_CAT2=DATE&STOCK_ID=2454"}
+        ],
+        "gross_margin": "46.2% (26Q2)",
+        "net_margin": "約 16.2% (26Q2)",
+        "roe": "待更新",
+        "eps_single": "15.28 元 (26Q2)",
+        "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
+        "price_analytics": {
+            "ma20_bias": "近 3 個月約 -15%，高檔整理",
+            "amplitude": "近一年漲幅大，估值對消息敏感",
+            "trend_evaluation": "目前屬正獲利但成長驗證中的觀察股，不列入前三檔核心。"
+        },
+        "buy_zone_sub": "觀察，不追價",
+        "buy_zone_heavy": "等待 AI ASIC 驗證",
+        "take_profit": "依 ASIC 營收再評估",
+        "target_price": "不預設固定目標",
+        "stop_loss": "獲利與 ASIC 時程轉弱即檢視"
     }
 }
 
@@ -414,6 +622,18 @@ def fetch_shioaji():
             "roe": meta["roe"],
             "eps_single": meta["eps_single"],
             "earnings_date": meta["earnings_date"],
+            "industry": meta.get("industry"),
+            "score_basis": meta.get("score_basis"),
+            "investment_case": meta.get("investment_case"),
+            "earnings_trend": meta.get("earnings_trend"),
+            "quarterly_earnings": meta.get("quarterly_earnings", []),
+            "market_snapshot": meta.get("market_snapshot"),
+            "valuation": meta.get("valuation"),
+            "market_factors": meta.get("market_factors"),
+            "risk_factors": meta.get("risk_factors", []),
+            "recommendation": meta.get("recommendation"),
+            "strategy_note": meta.get("strategy_note"),
+            "source_links": meta.get("source_links", []),
             "institutional_flow": inst_flow,
             "capital_inflow": cap_inflow,
             "price_analytics": meta["price_analytics"],
