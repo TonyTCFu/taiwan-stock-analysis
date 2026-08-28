@@ -364,6 +364,121 @@ STOCKS_META = {
 }
 
 
+# Weekly review snapshot. The structural score in STOCKS_META remains the
+# long-term moat score; this review score adds current earnings, price action,
+# valuation, and institutional-flow checks without changing the quote pipeline.
+WEEKLY_REVIEW = {
+    "as_of": "2026-08-28",
+    "period": "2026-W35",
+    "method_version": "weekly-v1",
+    "cache_version": "20260828-weekly-r1",
+    "title": "每週復盤｜名單與評分",
+    "description": "本週複核 10 檔既有名單；分數是研究模型的相對排序，不是官方評等，也不保證報酬。",
+    "criteria": [
+        {"key": "earnings", "label": "獲利趨勢", "weight": 30, "rule": "最近三季獲利、EPS、營益率方向與獲利可持續性"},
+        {"key": "moat", "label": "行業／技術卡位", "weight": 25, "rule": "是否處在供應鏈瓶頸、技術門檻與客戶切換成本"},
+        {"key": "momentum", "label": "行情動能", "weight": 15, "rule": "近 5／20／60 交易日報酬與 20／60 日均線相對位置"},
+        {"key": "valuation", "label": "估值合理性", "weight": 15, "rule": "PER／市場預期與獲利成長是否匹配；估值過熱扣分"},
+        {"key": "risk_flow", "label": "籌碼／風險", "weight": 15, "rule": "TWSE T86 三大法人、集中度、波動與產業重疊風險"}
+    ],
+    "bands": [
+        {"range": "90-100", "label": "核心", "rule": "基本面與卡位強，回檔優先研究"},
+        {"range": "80-89", "label": "核心追蹤", "rule": "可保留，但需依估值與行情分批"},
+        {"range": "70-79", "label": "觀察／小部位", "rule": "保留名單，等待獲利或估值改善"},
+        {"range": "0-69", "label": "降級", "rule": "重新檢查是否仍符合名單條件"}
+    ],
+    "market_context": "基準日為 2026-08-28 收盤快照；行情使用 Shioaji Snapshot／TWSE MIS，法人籌碼使用 TWSE T86，近 5／20／60 交易日收盤與均線用 Yahoo Finance 歷史行情交叉計算。",
+    "summary": "本週 10 檔全部保留。2345、2308、2360列核心追蹤；2059與3017獲利及動能強但短線過熱；3711與2454維持觀察，等待獲利品質或AI新業務進一步驗證。",
+    "source_links": [
+        {"label": "TWSE T86 官方法人資料", "url": "https://www.twse.com.tw/rwd/zh/fund/T86?selectType=ALLBUT0999&response=json"},
+        {"label": "Shioaji Snapshot 官方文件", "url": "https://sinotrade.github.io/tutor/market_data/snapshot/"},
+        {"label": "Yahoo Finance 歷史行情", "url": "https://finance.yahoo.com/quote/2330.TW/history/"}
+    ],
+    "stocks": {
+        "2330": {
+            "score": 88,
+            "action": "保留／核心",
+            "component_scores": {"earnings": 29, "moat": 25, "momentum": 11, "valuation": 10, "risk_flow": 13},
+            "market_metrics": {"five_day_return_pct": 0.41, "twenty_day_return_pct": -0.21, "sixty_day_return_pct": 1.47, "ma20_bias_pct": 1.29, "ma60_bias_pct": 1.50},
+            "reason": "獲利與先進製程卡位仍是名單最強，但本週 20 日報酬接近零、估值仍有溢價，因此綜合分低於長期卡位分，定位為核心持有而非追價。",
+            "next_week_watch": "Q2 法說展望、先進封裝／2nm 需求與外資買超是否延續。"
+        },
+        "2059": {
+            "score": 86,
+            "action": "保留／逢回",
+            "component_scores": {"earnings": 30, "moat": 25, "momentum": 15, "valuation": 5, "risk_flow": 11},
+            "market_metrics": {"five_day_return_pct": 6.84, "twenty_day_return_pct": 82.17, "sixty_day_return_pct": 167.29, "ma20_bias_pct": 13.86, "ma60_bias_pct": 55.77},
+            "reason": "獲利、伺服器導軌卡位與行情都強，但 20 日及 60 日漲幅過大、股價遠離均線，估值與回撤風險抵銷部分優勢。",
+            "next_week_watch": "量價是否背離、法人成交是否轉為連續賣超，以及新產能對 EPS 的實際貢獻。"
+        },
+        "2383": {
+            "score": 79,
+            "action": "保留／逢回",
+            "component_scores": {"earnings": 28, "moat": 24, "momentum": 11, "valuation": 9, "risk_flow": 7},
+            "market_metrics": {"five_day_return_pct": -3.35, "twenty_day_return_pct": 15.70, "sixty_day_return_pct": 13.66, "ma20_bias_pct": -2.25, "ma60_bias_pct": 3.98},
+            "reason": "高階 CCL 卡位與中期報酬仍正面，但本週回落且法人單日淨賣超，短線籌碼不支持追價，維持回檔研究。",
+            "next_week_watch": "M8／M9 訂單、毛利率是否維持，以及法人賣超是否收斂。"
+        },
+        "3017": {
+            "score": 86,
+            "action": "保留／逢回不追高",
+            "component_scores": {"earnings": 28, "moat": 24, "momentum": 15, "valuation": 6, "risk_flow": 13},
+            "market_metrics": {"five_day_return_pct": 17.28, "twenty_day_return_pct": 44.83, "sixty_day_return_pct": 23.99, "ma20_bias_pct": 13.39, "ma60_bias_pct": 30.49},
+            "reason": "液冷瓶頸與獲利趨勢支持保留，投信也有承接；但短線漲幅與均線乖離偏高，評分保留強度、不把動能當成安全邊際。",
+            "next_week_watch": "水冷板與快換接頭出貨、毛利率，以及高檔成交量是否失控。"
+        },
+        "2317": {
+            "score": 77,
+            "action": "保留／觀察",
+            "component_scores": {"earnings": 24, "moat": 21, "momentum": 8, "valuation": 11, "risk_flow": 13},
+            "market_metrics": {"five_day_return_pct": 3.05, "twenty_day_return_pct": 1.00, "sixty_day_return_pct": -13.65, "ma20_bias_pct": -0.47, "ma60_bias_pct": 0.41},
+            "reason": "Q2 營收、營業利益與淨利創同期高，法人也偏買超；但近 60 日仍為負、毛利率低於高毛利技術股，定位為穩健觀察而非高彈性首選。",
+            "next_week_watch": "AI 伺服器／雲端網路出貨、營益率改善能否延續，以及匯率與關稅影響。"
+        },
+        "2308": {
+            "score": 83,
+            "action": "保留／核心追蹤",
+            "component_scores": {"earnings": 29, "moat": 23, "momentum": 13, "valuation": 6, "risk_flow": 12},
+            "market_metrics": {"five_day_return_pct": 4.57, "twenty_day_return_pct": 11.59, "sixty_day_return_pct": -24.54, "ma20_bias_pct": 4.21, "ma60_bias_pct": -3.02},
+            "reason": "電源與熱管理屬資料中心必要環節，獲利連兩季走高且本週動能回升；但 60 日仍弱、PER 偏高，先列核心追蹤，不追高。",
+            "next_week_watch": "資料中心電源與熱管理訂單、營益率再上修，以及 60 日均線能否收復。"
+        },
+        "2345": {
+            "score": 77,
+            "action": "保留／核心追蹤",
+            "component_scores": {"earnings": 29, "moat": 24, "momentum": 11, "valuation": 9, "risk_flow": 4},
+            "market_metrics": {"five_day_return_pct": 4.42, "twenty_day_return_pct": 0.00, "sixty_day_return_pct": -15.34, "ma20_bias_pct": -3.19, "ma60_bias_pct": -7.99},
+            "reason": "Q2 EPS 與營益率改善、800G／1.6T 卡位明確，基本面維持首選；但股價仍低於 20／60 日均線，且本週三大法人同步賣超，暫不把核心追蹤等同於立即買進。",
+            "next_week_watch": "7 月營收、800G／1.6T 訂單能見度、法人賣超是否停止，以及股價能否站回 20 日線。"
+        },
+        "2360": {
+            "score": 75,
+            "action": "保留／高波動觀察",
+            "component_scores": {"earnings": 30, "moat": 24, "momentum": 7, "valuation": 5, "risk_flow": 9},
+            "market_metrics": {"five_day_return_pct": -4.29, "twenty_day_return_pct": -4.29, "sixty_day_return_pct": -23.28, "ma20_bias_pct": -3.64, "ma60_bias_pct": -4.32},
+            "reason": "連續三季 EPS 創高且測試設備技術門檻高，獲利分數最高；但近期價格走弱、PER 與一年漲幅偏高，採回檔觀察而非追價。",
+            "next_week_watch": "先進封裝／光通訊測試訂單、毛利率與自由現金流，並觀察跌勢是否止穩。"
+        },
+        "3711": {
+            "score": 77,
+            "action": "保留／小部位觀察",
+            "component_scores": {"earnings": 24, "moat": 22, "momentum": 11, "valuation": 9, "risk_flow": 11},
+            "market_metrics": {"five_day_return_pct": 5.79, "twenty_day_return_pct": 11.89, "sixty_day_return_pct": 4.72, "ma20_bias_pct": 2.90, "ma60_bias_pct": 0.79},
+            "reason": "Q2 EPS 反彈、先進封裝技術與產能具卡位價值，行情也轉強；但營益率改善尚需連續驗證，且擴產折舊會壓縮彈性。",
+            "next_week_watch": "先進封裝稼動率、營益率連續性、資本支出與折舊負擔。"
+        },
+        "2454": {
+            "score": 75,
+            "action": "保留／觀察不追價",
+            "component_scores": {"earnings": 23, "moat": 22, "momentum": 12, "valuation": 6, "risk_flow": 12},
+            "market_metrics": {"five_day_return_pct": 5.15, "twenty_day_return_pct": 12.10, "sixty_day_return_pct": -10.05, "ma20_bias_pct": 1.41, "ma60_bias_pct": 0.48},
+            "reason": "高階 SoC 與 AI ASIC 設計能力維持技術門檻，短線行情轉強；但 PER 偏高、近 60 日仍弱，且 AI ASIC 尚未完成規模化獲利驗證。",
+            "next_week_watch": "AI ASIC 實際營收／毛利貢獻、手機需求與客戶自研競爭。"
+        }
+    }
+}
+
+
 def fetch_twse_mis(codes):
     """Fetch the public TWSE MIS quote feed independently of Shioaji login."""
     ex_ch_param = "|".join([f"tse_{code}.tw" for code in codes])
@@ -607,6 +722,7 @@ def fetch_shioaji():
             "en_name": meta["en_name"],
             "chokepoint": meta["chokepoint"],
             "score": meta["score"],
+            "weekly_review": WEEKLY_REVIEW["stocks"].get(code),
             "open_price": round(open_price, 1),
             "high_price": round(high_price, 1),
             "low_price": round(low_price, 1),
@@ -646,9 +762,11 @@ def fetch_shioaji():
 
     payload = {
         "updated_at": now_str,
+        "cache_version": WEEKLY_REVIEW["cache_version"],
         "data_source": data_source,
         "market": "台湾股票市场 (TWSE)",
         "trading_hours": "09:00 - 13:30 (TPE time)",
+        "weekly_review": WEEKLY_REVIEW,
         "sources": {
             "shioaji": shioaji_status,
             "twse_mis": twse_status,

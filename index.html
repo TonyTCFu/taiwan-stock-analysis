@@ -408,6 +408,60 @@
             border-bottom: 1px solid rgba(141, 238, 224, 0.35);
         }
         .research-sources a:hover { color: #fff; border-bottom-color: #fff; }
+        .weekly-review-panel {
+            background: linear-gradient(135deg, rgba(0, 230, 154, 0.045), rgba(20, 220, 226, 0.035));
+            border: 1px solid rgba(0, 230, 154, 0.22);
+            border-radius: 17px;
+            padding: 22px;
+            margin-bottom: 30px;
+            box-shadow: 0 18px 32px rgba(0, 0, 0, 0.14);
+        }
+        .weekly-review-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        .weekly-review-title { color: #69f0bb; font-size: 18px; font-weight: 800; }
+        .weekly-review-meta { color: var(--text-muted); font-family: var(--font-mono); font-size: 11px; }
+        .weekly-review-summary { color: #c5d0d2; font-size: 13px; line-height: 1.7; margin-bottom: 14px; }
+        .weekly-review-context { color: var(--text-secondary); font-size: 11px; line-height: 1.65; margin-bottom: 16px; }
+        .weekly-criteria, .weekly-bands { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin-bottom: 16px; }
+        .weekly-bands { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        .weekly-criterion, .weekly-band {
+            min-width: 0;
+            background: rgba(7, 10, 8, 0.45);
+            border: 1px solid rgba(216, 235, 224, 0.09);
+            border-radius: 9px;
+            padding: 10px;
+        }
+        .weekly-criterion strong, .weekly-band strong { display: block; color: #79e8eb; font-size: 12px; margin-bottom: 3px; }
+        .weekly-criterion span, .weekly-band span { color: var(--text-muted); font-size: 10px; line-height: 1.5; }
+        .weekly-band strong { color: #72efbd; }
+        .weekly-review-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+        .weekly-review-card {
+            min-width: 0;
+            background: #0c110f;
+            border: 1px solid rgba(216, 235, 224, 0.1);
+            border-radius: 11px;
+            padding: 14px;
+        }
+        .weekly-review-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 9px; }
+        .weekly-review-stock { color: #f5f8f6; font-size: 15px; font-weight: 800; }
+        .weekly-review-code { color: #a4d4d5; font-family: var(--font-mono); font-size: 11px; margin-left: 5px; }
+        .weekly-score { color: #fff; font-family: var(--font-mono); font-size: 22px; font-weight: 800; line-height: 1; white-space: nowrap; }
+        .weekly-score small { color: #72efbd; font-family: var(--font-main); font-size: 10px; font-weight: 700; }
+        .weekly-action { color: #ffae32; font-size: 11px; font-weight: 800; margin-bottom: 8px; }
+        .weekly-components { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 9px; }
+        .weekly-component { color: #b8c5c9; background: rgba(20, 220, 226, 0.06); border-radius: 5px; padding: 3px 6px; font-family: var(--font-mono); font-size: 10px; }
+        .weekly-metrics { color: #93a1aa; font-family: var(--font-mono); font-size: 10px; line-height: 1.6; margin-bottom: 8px; }
+        .weekly-review-reason, .weekly-review-watch { color: #c0cccf; font-size: 11px; line-height: 1.65; }
+        .weekly-review-watch { color: #8deee0; margin-top: 6px; }
+        .weekly-review-watch strong, .weekly-review-reason strong { color: #79e8eb; }
+        .weekly-review-sources { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+        .weekly-review-sources a { color: #8deee0; font-size: 10px; text-decoration: none; border-bottom: 1px solid rgba(141, 238, 224, 0.35); }
+        .weekly-review-sources a:hover { color: #fff; border-bottom-color: #fff; }
         .section-badge { color: #6af0ba; margin-bottom: 8px; }
         .info-panel {
             background: #0c110f;
@@ -490,6 +544,9 @@
             .ohlc-grid { grid-template-columns: repeat(2, 1fr); row-gap: 9px; }
             .metrics-row { grid-template-columns: repeat(2, 1fr); row-gap: 12px; }
             .research-grid { grid-template-columns: 1fr; }
+            .weekly-review-panel { padding: 16px; border-radius: 15px; }
+            .weekly-review-header { flex-direction: column; gap: 5px; }
+            .weekly-criteria, .weekly-bands, .weekly-review-grid { grid-template-columns: 1fr; }
             .table-card { border-radius: 15px; }
             footer { margin-top: 40px; padding: 18px 20px; }
         }
@@ -516,6 +573,10 @@
     </header>
 
     <main>
+        <section id="weekly-review" class="weekly-review-panel" aria-live="polite">
+            <div class="weekly-review-summary">每週復盤資料載入中...</div>
+        </section>
+
         <div class="tab-bar">
             <button class="tab-btn active" onclick="switchTab('cards')">📊 核心卡位龙头行情概览</button>
             <button class="tab-btn" onclick="switchTab('flow')">🏦 三大法人进出与资金流向</button>
@@ -772,7 +833,8 @@
                 sourceStatus.innerHTML = `<span class="status-dot"></span> Shioaji ${shioajiOk ? '已连接' : '未连接'} (${shioajiCount}/${totalStocks}) · TWSE ${twseOk ? '已更新' : '未更新'} (${twseCount}/${totalStocks})`;
             }
             document.getElementById('update-time').innerText = `行情更新: ${data.updated_at}`;
-            document.getElementById('cache-ver').innerText = 'v' + (data.updated_at ? data.updated_at.replace(/[- :]/g, '').slice(4, 12) : 'LIVE');
+            const cacheVersion = data.cache_version || (data.updated_at ? data.updated_at.replace(/[- :]/g, '').slice(4, 12) : 'LIVE');
+            document.getElementById('cache-ver').innerText = cacheVersion.startsWith('v') ? cacheVersion : 'v' + cacheVersion;
             
             function formatNetTag(val) {
                 if (!val || val === '-') return `<span style="font-family: var(--font-mono); color: var(--text-muted);">-</span>`;
@@ -782,6 +844,60 @@
                 const color = isBuy ? 'var(--accent-red)' : (isSell ? 'var(--accent-green)' : 'var(--text-primary)');
                 return `<span style="font-family: var(--font-mono); font-weight:700; color: ${color};">${str}</span>`;
             }
+
+            function formatReviewPct(value) {
+                const numeric = Number(value);
+                if (!Number.isFinite(numeric)) return '-';
+                return `${numeric > 0 ? '+' : ''}${numeric.toFixed(2)}%`;
+            }
+
+            function renderWeeklyReview(review) {
+                const container = document.getElementById('weekly-review');
+                if (!container || !review || !review.stocks) return;
+                const criteria = Array.isArray(review.criteria) ? review.criteria : [];
+                const bands = Array.isArray(review.bands) ? review.bands : [];
+                const reviewCards = data.stocks.map(stock => {
+                    const weekly = stock.weekly_review || review.stocks[String(stock.code)];
+                    if (!weekly) return '';
+                    const components = weekly.component_scores || {};
+                    const metrics = weekly.market_metrics || {};
+                    const componentHtml = criteria.map(item => `<span class="weekly-component">${escapeResearchText(item.label)} ${escapeResearchText(components[item.key] ?? '-')}/${escapeResearchText(item.weight)}</span>`).join('');
+                    return `
+                        <article class="weekly-review-card">
+                            <div class="weekly-review-card-top">
+                                <div class="weekly-review-stock">${escapeResearchText(stock.name)}<span class="weekly-review-code">${escapeResearchText(stock.code)}</span></div>
+                                <div class="weekly-score">${escapeResearchText(weekly.score)}<small>/100</small></div>
+                            </div>
+                            <div class="weekly-action">${escapeResearchText(weekly.action)}</div>
+                            <div class="weekly-components">${componentHtml}</div>
+                            <div class="weekly-metrics">5日 ${formatReviewPct(metrics.five_day_return_pct)} · 20日 ${formatReviewPct(metrics.twenty_day_return_pct)} · 60日 ${formatReviewPct(metrics.sixty_day_return_pct)} · 20日線 ${formatReviewPct(metrics.ma20_bias_pct)} · 60日線 ${formatReviewPct(metrics.ma60_bias_pct)}</div>
+                            <div class="weekly-review-reason"><strong>评分理由：</strong>${escapeResearchText(weekly.reason)}</div>
+                            <div class="weekly-review-watch"><strong>下週观察：</strong>${escapeResearchText(weekly.next_week_watch)}</div>
+                        </article>
+                    `;
+                }).join('');
+                const criteriaHtml = criteria.map(item => `
+                    <div class="weekly-criterion"><strong>${escapeResearchText(item.label)} ${escapeResearchText(item.weight)}分</strong><span>${escapeResearchText(item.rule)}</span></div>
+                `).join('');
+                const bandsHtml = bands.map(item => `
+                    <div class="weekly-band"><strong>${escapeResearchText(item.range)}｜${escapeResearchText(item.label)}</strong><span>${escapeResearchText(item.rule)}</span></div>
+                `).join('');
+                const sourceLinks = Array.isArray(review.source_links) ? review.source_links.map(source => `<a href="${safeResearchUrl(source.url)}" target="_blank" rel="noopener noreferrer">${escapeResearchText(source.label)}</a>`).join('') : '';
+                container.innerHTML = `
+                    <div class="weekly-review-header">
+                        <div class="weekly-review-title">📈 ${escapeResearchText(review.title || '每週復盤｜名單與評分')}</div>
+                        <div class="weekly-review-meta">${escapeResearchText(review.as_of || '-')} · ${escapeResearchText(review.period || '-')} · ${escapeResearchText(review.method_version || 'weekly')}</div>
+                    </div>
+                    <div class="weekly-review-summary">${escapeResearchText(review.description || '')}<br>${escapeResearchText(review.summary || '')}</div>
+                    <div class="weekly-review-context">${escapeResearchText(review.market_context || '')}</div>
+                    <div class="weekly-criteria">${criteriaHtml}</div>
+                    <div class="weekly-bands">${bandsHtml}</div>
+                    <div class="weekly-review-grid">${reviewCards}</div>
+                    <div class="weekly-review-sources">${sourceLinks}</div>
+                `;
+            }
+
+            renderWeeklyReview(data.weekly_review);
 
             function renderResearchBlock(stock) {
                 if (!stock.industry && !stock.earnings_trend && !stock.market_factors) return '';
@@ -827,6 +943,7 @@
                     const isUp = s.change >= 0;
                     const changeClass = isUp ? 'up' : 'down';
                     const changeSign = isUp ? '+' : '';
+                    const weeklyReview = s.weekly_review || {};
                     const flow = s.institutional_flow || { foreign_net: '-', trust_net: '-', dealer_net: '-', total_net: '-', summary: '-' };
                     const cap = s.capital_inflow || { large_order_ratio: '-', capital_status: '-' };
                     const openPx = s.open_price !== undefined ? s.open_price : (s.day_open !== undefined ? s.day_open : s.last_price);
@@ -841,7 +958,7 @@
                                     <h2>${s.name}</h2>
                                     <span class="stock-code">${s.code}</span>
                                 </div>
-                                <div class="score-pill">卡位 ${s.score}分</div>
+                                <div class="score-pill">卡位 ${s.score}分${weeklyReview.score !== undefined ? `<br><span style="color:#72efbd;">周评 ${weeklyReview.score}分</span>` : ''}</div>
                             </div>
 
                             <div class="price-hero">
