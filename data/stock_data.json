@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-28 22:03:11",
+  "updated_at": "2026-08-28 22:07:00",
   "cache_version": "20260828-weekly-r1",
   "data_source": "Shioaji Snapshot (primary) + TWSE MIS cross-check",
   "market": "台湾股票市场 (TWSE)",
@@ -66,7 +66,7 @@
       }
     ],
     "market_context": "基準日為 2026-08-28 收盤快照；行情使用 Shioaji Snapshot／TWSE MIS，法人籌碼使用 TWSE T86，近 5／20／60 交易日收盤與均線用 Yahoo Finance 歷史行情交叉計算。",
-    "summary": "本週 10 檔全部保留。2345、2308、2360列核心追蹤；2059與3017獲利及動能強但短線過熱；3711與2454維持觀察，等待獲利品質或AI新業務進一步驗證。",
+    "summary": "本週 10 檔全部保留。2308列核心追蹤；2345基本面優先但等待價格與法人確認；2360保留但高波動；2059與3017獲利及動能強但短線過熱；3711與2454維持觀察，等待獲利品質或AI新業務進一步驗證。",
     "source_links": [
       {
         "label": "TWSE T86 官方法人資料",
@@ -204,7 +204,7 @@
       },
       "2345": {
         "score": 77,
-        "action": "保留／核心追蹤",
+        "action": "保留／優先觀察",
         "component_scores": {
           "earnings": 29,
           "moat": 24,
@@ -288,19 +288,19 @@
     "shioaji": {
       "status": "ok",
       "quote_count": 10,
-      "retrieved_at": "2026-08-28T22:03:09",
+      "retrieved_at": "2026-08-28T22:06:59",
       "quote_mode": "snapshot"
     },
     "twse_mis": {
       "status": "ok",
       "quote_count": 10,
-      "retrieved_at": "2026-08-28T22:03:09",
+      "retrieved_at": "2026-08-28T22:06:59",
       "market_time": "13:30:00"
     },
     "twse_t86_flow": {
       "status": "ok",
       "date": "2026-08-28",
-      "retrieved_at": "2026-08-28T22:03:11"
+      "retrieved_at": "2026-08-28T22:07:00"
     },
     "selected_quote_source": "Shioaji Snapshot (primary) + TWSE MIS cross-check"
   },
@@ -341,7 +341,7 @@
       "change_pct": 0.41,
       "volume": 13554,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-08-28T22:03:09",
+      "quote_time": "2026-08-28T22:06:59",
       "gross_margin": "65.0% - 67.0%",
       "net_margin": ">43.0%",
       "roe": "40.5%",
@@ -419,7 +419,7 @@
       "change_pct": -0.28,
       "volume": 388,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-08-28T22:03:09",
+      "quote_time": "2026-08-28T22:06:59",
       "gross_margin": "87.0%",
       "net_margin": ">52.0%",
       "roe": "21.72%",
@@ -497,7 +497,7 @@
       "change_pct": 0.27,
       "volume": 1865,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-08-28T22:03:09",
+      "quote_time": "2026-08-28T22:06:59",
       "gross_margin": "33.8%",
       "net_margin": "~19.5%",
       "roe": "18.58%",
@@ -575,7 +575,7 @@
       "change_pct": 0.6,
       "volume": 3817,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-08-28T22:03:09",
+      "quote_time": "2026-08-28T22:06:59",
       "gross_margin": "33.8% - 35.0%",
       "net_margin": "~14.2%",
       "roe": "17.03%",
@@ -653,7 +653,7 @@
       "change_pct": 0.4,
       "volume": 30705,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-08-28T22:03:09",
+      "quote_time": "2026-08-28T22:06:59",
       "gross_margin": "6.2% - 6.8%",
       "net_margin": "~2.8%",
       "roe": "11.25%",
@@ -731,7 +731,7 @@
       "change_pct": 3.39,
       "volume": 12486,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-08-28T22:03:09",
+      "quote_time": "2026-08-28T22:06:59",
       "gross_margin": "35.6% (26Q2)",
       "net_margin": "13.7% (26Q2)",
       "roe": "待更新",
@@ -817,7 +817,7 @@
       "score": 86,
       "weekly_review": {
         "score": 77,
-        "action": "保留／核心追蹤",
+        "action": "保留／優先觀察",
         "component_scores": {
           "earnings": 29,
           "moat": 24,
@@ -844,7 +844,7 @@
       "change_pct": 1.67,
       "volume": 2243,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-08-28T22:03:09",
+      "quote_time": "2026-08-28T22:06:59",
       "gross_margin": "19.7% (26Q2)",
       "net_margin": "約 11.6% (26Q2)",
       "roe": "待更新",
@@ -961,7 +961,7 @@
       "change_pct": 1.01,
       "volume": 1434,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-08-28T22:03:09",
+      "quote_time": "2026-08-28T22:06:59",
       "gross_margin": "約 60.5% (26Q2)",
       "net_margin": "約 37.9% (26Q2)",
       "roe": "待更新",
@@ -1078,7 +1078,7 @@
       "change_pct": 2.64,
       "volume": 17519,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-08-28T22:03:09",
+      "quote_time": "2026-08-28T22:06:59",
       "gross_margin": "待更新",
       "net_margin": "約 11.0% (26Q2)",
       "roe": "18.2% 年化 (26H1)",
@@ -1191,7 +1191,7 @@
       "change_pct": 3.1,
       "volume": 4184,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-08-28T22:03:09",
+      "quote_time": "2026-08-28T22:06:59",
       "gross_margin": "46.2% (26Q2)",
       "net_margin": "約 16.2% (26Q2)",
       "roe": "待更新",

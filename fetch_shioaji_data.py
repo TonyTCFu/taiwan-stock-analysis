@@ -388,7 +388,7 @@ WEEKLY_REVIEW = {
         {"range": "0-69", "label": "降級", "rule": "重新檢查是否仍符合名單條件"}
     ],
     "market_context": "基準日為 2026-08-28 收盤快照；行情使用 Shioaji Snapshot／TWSE MIS，法人籌碼使用 TWSE T86，近 5／20／60 交易日收盤與均線用 Yahoo Finance 歷史行情交叉計算。",
-    "summary": "本週 10 檔全部保留。2345、2308、2360列核心追蹤；2059與3017獲利及動能強但短線過熱；3711與2454維持觀察，等待獲利品質或AI新業務進一步驗證。",
+    "summary": "本週 10 檔全部保留。2308列核心追蹤；2345基本面優先但等待價格與法人確認；2360保留但高波動；2059與3017獲利及動能強但短線過熱；3711與2454維持觀察，等待獲利品質或AI新業務進一步驗證。",
     "source_links": [
         {"label": "TWSE T86 官方法人資料", "url": "https://www.twse.com.tw/rwd/zh/fund/T86?selectType=ALLBUT0999&response=json"},
         {"label": "Shioaji Snapshot 官方文件", "url": "https://sinotrade.github.io/tutor/market_data/snapshot/"},
@@ -445,7 +445,7 @@ WEEKLY_REVIEW = {
         },
         "2345": {
             "score": 77,
-            "action": "保留／核心追蹤",
+            "action": "保留／優先觀察",
             "component_scores": {"earnings": 29, "moat": 24, "momentum": 11, "valuation": 9, "risk_flow": 4},
             "market_metrics": {"five_day_return_pct": 4.42, "twenty_day_return_pct": 0.00, "sixty_day_return_pct": -15.34, "ma20_bias_pct": -3.19, "ma60_bias_pct": -7.99},
             "reason": "Q2 EPS 與營益率改善、800G／1.6T 卡位明確，基本面維持首選；但股價仍低於 20／60 日均線，且本週三大法人同步賣超，暫不把核心追蹤等同於立即買進。",
