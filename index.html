@@ -573,15 +573,12 @@
     </header>
 
     <main>
-        <section id="weekly-review" class="weekly-review-panel" aria-live="polite">
-            <div class="weekly-review-summary">每週復盤資料載入中...</div>
-        </section>
-
         <div class="tab-bar">
             <button class="tab-btn active" onclick="switchTab('cards')">📊 核心卡位龙头行情概览</button>
             <button class="tab-btn" onclick="switchTab('flow')">🏦 三大法人进出与资金流向</button>
             <button class="tab-btn" onclick="switchTab('earnings')">🏢 财报公布日与预测</button>
             <button class="tab-btn" onclick="switchTab('table')">🎯 买卖策略与决策速查</button>
+            <button class="tab-btn" onclick="switchTab('weekly-review')">📈 每周复盘｜名单与评分</button>
         </div>
 
         <!-- TAB 1: CARDS -->
@@ -652,6 +649,13 @@
                     <!-- Dynamically populated -->
                 </tbody>
             </table>
+        </div>
+
+        <!-- TAB 5: WEEKLY REVIEW -->
+        <div id="tab-weekly-review" class="weekly-review-tab" style="display: none;">
+            <section id="weekly-review" class="weekly-review-panel" aria-live="polite">
+                <div class="weekly-review-summary">每週復盤資料載入中...</div>
+            </section>
         </div>
     </main>
 
@@ -1091,6 +1095,7 @@
             document.getElementById('tab-flow').style.display = 'none';
             document.getElementById('tab-earnings').style.display = 'none';
             document.getElementById('tab-table').style.display = 'none';
+            document.getElementById('tab-weekly-review').style.display = 'none';
 
             if (tabName === 'cards') {
                 document.getElementById('tab-cards').style.display = 'grid';
@@ -1100,6 +1105,8 @@
                 document.getElementById('tab-earnings').style.display = 'block';
             } else if (tabName === 'table') {
                 document.getElementById('tab-table').style.display = 'block';
+            } else if (tabName === 'weekly-review') {
+                document.getElementById('tab-weekly-review').style.display = 'block';
             }
 
             if (event && event.target) {

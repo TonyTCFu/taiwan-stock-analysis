@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-08-29 02:53:35",
-  "cache_version": "20260828-weekly-r1",
+  "cache_version": "20260829-weekly-tab-r1",
   "data_source": "Shioaji Snapshot (primary) + TWSE MIS cross-check",
   "market": "台湾股票市场 (TWSE)",
   "trading_hours": "09:00 - 13:30 (TPE time)",
@@ -8,7 +8,7 @@
     "as_of": "2026-08-28",
     "period": "2026-W35",
     "method_version": "weekly-v1",
-    "cache_version": "20260828-weekly-r1",
+    "cache_version": "20260829-weekly-tab-r1",
     "title": "每週復盤｜名單與評分",
     "description": "本週複核 10 檔既有名單；分數是研究模型的相對排序，不是官方評等，也不保證報酬。",
     "criteria": [

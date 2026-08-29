@@ -371,7 +371,7 @@ WEEKLY_REVIEW = {
     "as_of": "2026-08-28",
     "period": "2026-W35",
     "method_version": "weekly-v1",
-    "cache_version": "20260828-weekly-r1",
+    "cache_version": "20260829-weekly-tab-r1",
     "title": "每週復盤｜名單與評分",
     "description": "本週複核 10 檔既有名單；分數是研究模型的相對排序，不是官方評等，也不保證報酬。",
     "criteria": [
