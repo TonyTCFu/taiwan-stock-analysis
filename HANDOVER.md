@@ -8,6 +8,7 @@
 - 前端将行情层叠加到最新基本面层，避免实时网关的旧静态资料覆盖已发布的月营收、季度指标或法说会状态。
 - `fundamental_status` 和 `fundamental_checked_at` 记录接口失败；失败时保留上一份已验证基本面。当前缓存版本为 `20260913-layered-sync-r1`。
 - 2026-08-14 鸿海法说会已在 Dashboard 标记为 `historical`，不再显示为即将举行。
+- 公网代码/数据/Excel 已发布到 `main` 提交 `5347e64`；当前公网 workflow 仍是旧的 06:30 UTC / 14:30 Asia/Taipei 调度，因为本次 GitHub 认证缺少 `workflow` scope。仓库本地 `.github/workflows/daily_update.yml` 已准备好 07:00 UTC / 15:00 Asia/Taipei 版本，补齐权限后单独推送该文件。
 
 > **交接背景**: 本项目已将对话框 `@[conversation:"台湾优质潜力股分析"]`（Conversation ID: `236b9bdf-d399-4da3-8f7f-3f6b26ffcc9f`）中的所有对话内容、分析成果、Serenity 估值模型、买卖点量化策略、Shioaji 交易所接口集成、iCloud 桌面 Excel 绘图及 Web Dashboard 自动化部署全量迁移并整合至当前工作区项目 `/Users/TonyFu/Desktop/台湾股市分析` 中。
 

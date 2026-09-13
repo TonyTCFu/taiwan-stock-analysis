@@ -5,6 +5,7 @@
 - **基本面资料保护 (2026-09-13)**: `fundamental_data.py` 使用 TWSE OpenAPI 月营收、季度营益分析、损益表与资产负债表；MOPS 作为法说会核对入口。接口部分失败时只记录 `fundamental_status` 与 `fundamental_checked_at`，保留上一份已验证字段，不以空值覆盖。Dashboard 将过去的法说会标记为 `historical`，不继续显示过期的“本周五”。
 - **分层前端合并与缓存版本 (2026-09-13)**: `index.html` 以基本面质量和覆盖度选择最新发布资料，再叠加较新的行情/法人字段；本轮缓存版本为 `20260913-layered-sync-r1`。Render 行情网关既有 30 秒冷却仅用于防止连续请求，不代表前端自动轮询。
 - **指标边界 (2026-09-13)**: 当前 ROE 使用官方单季归属母公司净利 ÷ 归属母公司权益 × 4 的单季年化口径，并在页面明示；基本面 API 的失败状态与最后成功更新时间分开展示。
+- **公网发布状态 (2026-09-13)**: Dashboard 代码、数据、Excel 已发布到 `main`（提交 `5347e64`），Pages 已验证缓存版本 `20260913-layered-sync-r1`。本地目标 workflow 已改为 07:00 UTC / 15:00 Asia/Taipei，但当前 GitHub 认证缺少 workflow scope，公网仍暂时使用旧的 06:30 UTC / 14:30 Asia/Taipei 调度；补齐权限后需单独发布 `.github/workflows/daily_update.yml`。
 - **Active Workspace 路径**: `/Users/TonyFu/Desktop/台湾股市分析`
 - **公网 Dashboard URL**: `https://tonytcfu.github.io/taiwan-stock-analysis/` (页面标签/名称: **台股龍頭股**)
 - **iCloud 桌面 Excel 路径**: `/Users/TonyFu/Desktop/台湾股市分析/台股 5 大 AI 核心卡位龙头深度投资与买卖点筹码量化分析表.xlsx`
