@@ -4,6 +4,8 @@ import datetime
 import urllib.request
 from pathlib import Path
 
+from fundamental_data import fetch_fundamental_snapshot
+
 
 def _as_float(value, default=0.0):
     """Return a numeric quote field without turning TWSE '-' into an error."""
@@ -23,6 +25,16 @@ def _as_int(value, default=0):
         return int(float(value))
     except (TypeError, ValueError):
         return default
+
+
+def latest_market_date(now):
+    """Return the latest trading-day date when the quote feed has no date field."""
+    candidate = now.date()
+    if candidate.weekday() >= 5 or now.time() < datetime.time(9, 0):
+        candidate -= datetime.timedelta(days=1)
+        while candidate.weekday() >= 5:
+            candidate -= datetime.timedelta(days=1)
+    return candidate.isoformat()
 
 
 def load_shioaji_env():
@@ -371,7 +383,7 @@ WEEKLY_REVIEW = {
     "as_of": "2026-08-28",
     "period": "2026-W35",
     "method_version": "weekly-v1",
-    "cache_version": "20260829-weekly-tab-r1",
+    "cache_version": "20260913-layered-sync-r1",
     "title": "每週復盤｜名單與評分",
     "description": "本週複核 10 檔既有名單；分數是研究模型的相對排序，不是官方評等，也不保證報酬。",
     "criteria": [
@@ -496,11 +508,16 @@ def fetch_twse_mis(codes):
         raise RuntimeError("TWSE MIS returned no quote rows")
 
     quote_times = [item.get("t") for item in quote_rows.values() if item.get("t")]
+    quote_dates = [item.get("d") for item in quote_rows.values() if item.get("d")]
+    market_date = next((date for date in quote_dates if date), None)
+    if market_date and len(market_date) == 8:
+        market_date = f"{market_date[:4]}-{market_date[4:6]}-{market_date[6:]}"
     return quote_rows, {
         "status": "ok",
         "quote_count": len(quote_rows),
         "retrieved_at": datetime.datetime.now().isoformat(timespec="seconds"),
         "market_time": max(quote_times) if quote_times else None,
+        "market_as_of": market_date,
     }
 
 
@@ -661,8 +678,34 @@ def compute_institutional_analysis(code, name, flow_data, volume_lots):
     return inst_flow, cap_inflow
 
 
+def merge_quarterly_earnings(existing, latest_quarter):
+    """Replace a same-period research row with the latest official row."""
+    rows = [row for row in (existing or []) if row.get("period") != latest_quarter.get("period")]
+    rows.append(latest_quarter)
+    return rows[-4:]
+
+
+def load_previous_payload():
+    """Load the last published payload so partial official fetches cannot erase good data."""
+    path = Path(__file__).resolve().parent / "data" / "stock_data.json"
+    try:
+        with path.open(encoding="utf-8") as handle:
+            payload = json.load(handle)
+        return payload if isinstance(payload, dict) else {}
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
 def fetch_shioaji():
     codes = list(STOCKS_META.keys())
+    now = datetime.datetime.now()
+    previous_payload = load_previous_payload()
+    previous_stocks = {
+        str(stock.get("code")): stock
+        for stock in previous_payload.get("stocks", [])
+        if isinstance(stock, dict) and stock.get("code")
+    }
+    fundamental_updates, fundamental_status = fetch_fundamental_snapshot(STOCKS_META, now)
     shioaji_data, shioaji_status = fetch_shioaji_snapshots(codes)
 
     twse_mis_data = {}
@@ -688,6 +731,7 @@ def fetch_shioaji():
         data_source = "TWSE MIS fallback (Shioaji unavailable)"
 
     now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    market_as_of = twse_status.get("market_as_of") or latest_market_date(now)
     results = []
 
     for code in codes:
@@ -714,7 +758,53 @@ def fetch_shioaji():
         
         # Real Institutional & Capital Analysis
         inst_flow, cap_inflow = compute_institutional_analysis(code, meta["name"], twse_flow_data, volume)
-        
+        fundamental = dict(fundamental_updates.get(code, {}))
+        previous_stock = previous_stocks.get(code, {})
+        if inst_flow.get("date") in (None, "-"):
+            previous_flow = previous_stock.get("institutional_flow")
+            previous_capital = previous_stock.get("capital_inflow")
+            if isinstance(previous_flow, dict) and previous_flow.get("date") not in (None, "-"):
+                inst_flow = previous_flow
+            if isinstance(previous_capital, dict) and previous_capital.get("capital_status") not in (None, "暂无法人筹码动向"):
+                cap_inflow = previous_capital
+        for field in (
+            "gross_margin",
+            "net_margin",
+            "roe",
+            "eps_single",
+            "earnings_date",
+            "event_status",
+            "event_checked_at",
+            "fundamental_as_of",
+            "latest_monthly_revenue",
+            "latest_quarter",
+        ):
+            if fundamental.get(field) is None and previous_stock.get(field) is not None:
+                fundamental[field] = previous_stock[field]
+        latest_quarter = fundamental.get("latest_quarter")
+        quarterly_earnings = list(previous_stock.get("quarterly_earnings") or meta.get("quarterly_earnings", []))
+        if latest_quarter:
+            quarterly_earnings = merge_quarterly_earnings(quarterly_earnings, latest_quarter)
+        source_links = list(meta.get("source_links", []))
+        for source in fundamental.get("official_source_links", []):
+            if source["url"] not in {item.get("url") for item in source_links}:
+                source_links.append(source)
+        # Rebuild this derived sentence from the research baseline each run so
+        # repeated refreshes do not append the same official note indefinitely.
+        earnings_trend = meta.get("earnings_trend", "")
+        official_notes = [
+            fundamental.get("latest_monthly_revenue"),
+            (
+                f"{latest_quarter['period']} 官方季度資料：EPS {latest_quarter['eps']}、"
+                f"營益率 {latest_quarter['operating_margin']}。"
+                if latest_quarter
+                else None
+            ),
+        ]
+        official_note = "最新官方資料：" + "；".join(note for note in official_notes if note)
+        if official_note:
+            earnings_trend = f"{earnings_trend} {official_note}" if earnings_trend else official_note
+
         results.append({
             "symbol": meta["symbol"],
             "code": code,
@@ -733,23 +823,29 @@ def fetch_shioaji():
             "volume": volume,
             "quote_source": quote_source,
             "quote_time": quote_time,
-            "gross_margin": meta["gross_margin"],
-            "net_margin": meta["net_margin"],
-            "roe": meta["roe"],
-            "eps_single": meta["eps_single"],
-            "earnings_date": meta["earnings_date"],
+            "gross_margin": fundamental.get("gross_margin", meta["gross_margin"]),
+            "net_margin": fundamental.get("net_margin", meta["net_margin"]),
+            "roe": fundamental.get("roe", meta["roe"]),
+            "eps_single": fundamental.get("eps_single", meta["eps_single"]),
+            "earnings_date": fundamental.get("earnings_date", meta["earnings_date"]),
+            "event_status": fundamental.get("event_status", "unknown"),
+            "event_checked_at": fundamental.get("event_checked_at"),
+            "fundamental_as_of": fundamental.get("fundamental_as_of"),
+            "fundamental_updated_at": fundamental_status.get("updated_at"),
+            "latest_monthly_revenue": fundamental.get("latest_monthly_revenue"),
+            "latest_quarter": latest_quarter,
             "industry": meta.get("industry"),
             "score_basis": meta.get("score_basis"),
             "investment_case": meta.get("investment_case"),
-            "earnings_trend": meta.get("earnings_trend"),
-            "quarterly_earnings": meta.get("quarterly_earnings", []),
+            "earnings_trend": earnings_trend,
+            "quarterly_earnings": quarterly_earnings,
             "market_snapshot": meta.get("market_snapshot"),
             "valuation": meta.get("valuation"),
             "market_factors": meta.get("market_factors"),
             "risk_factors": meta.get("risk_factors", []),
             "recommendation": meta.get("recommendation"),
             "strategy_note": meta.get("strategy_note"),
-            "source_links": meta.get("source_links", []),
+            "source_links": source_links,
             "institutional_flow": inst_flow,
             "capital_inflow": cap_inflow,
             "price_analytics": meta["price_analytics"],
@@ -762,6 +858,19 @@ def fetch_shioaji():
 
     payload = {
         "updated_at": now_str,
+        "quote_updated_at": now_str,
+        "market_as_of": market_as_of,
+        "fundamental_updated_at": (
+            fundamental_status.get("updated_at")
+            if fundamental_status.get("status") == "ok"
+            else previous_payload.get("fundamental_updated_at") or fundamental_status.get("updated_at")
+        ),
+        "fundamental_checked_at": fundamental_status.get("updated_at"),
+        "fundamental_as_of": fundamental_status.get("as_of") or previous_payload.get("fundamental_as_of"),
+        "fundamental_source": fundamental_status.get("source"),
+        "fundamental_status": fundamental_status,
+        "institutional_as_of": flow_status.get("date") or previous_payload.get("institutional_as_of"),
+        "research_updated_at": WEEKLY_REVIEW["as_of"],
         "cache_version": WEEKLY_REVIEW["cache_version"],
         "data_source": data_source,
         "market": "台湾股票市场 (TWSE)",

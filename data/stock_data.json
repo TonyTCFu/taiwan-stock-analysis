@@ -1,14 +1,50 @@
 {
-  "updated_at": "2026-09-11 19:39:04",
-  "cache_version": "20260829-weekly-tab-r1",
-  "data_source": "Shioaji Snapshot (primary) + TWSE MIS cross-check",
+  "updated_at": "2026-09-13 16:53:36",
+  "quote_updated_at": "2026-09-13 16:53:36",
+  "market_as_of": "2026-09-11",
+  "fundamental_updated_at": "2026-09-13 16:54:34",
+  "fundamental_checked_at": "2026-09-13 16:54:34",
+  "fundamental_as_of": "2026-09-13",
+  "fundamental_source": "TWSE OpenAPI fundamentals + MOPS event-calendar reference",
+  "fundamental_status": {
+    "status": "ok",
+    "updated_at": "2026-09-13 16:54:34",
+    "as_of": "2026-09-13",
+    "source": "TWSE OpenAPI fundamentals + MOPS event-calendar reference",
+    "sources": {
+      "monthly_revenue": {
+        "status": "ok",
+        "endpoint": "https://openapi.twse.com.tw/v1/opendata/t187ap05_L",
+        "row_count": 1074
+      },
+      "operating_analysis": {
+        "status": "ok",
+        "endpoint": "https://openapi.twse.com.tw/v1/opendata/t187ap17_L",
+        "row_count": 1053
+      },
+      "income_statement": {
+        "status": "ok",
+        "endpoint": "https://openapi.twse.com.tw/v1/opendata/t187ap06_L_ci",
+        "row_count": 1048
+      },
+      "balance_sheet": {
+        "status": "ok",
+        "endpoint": "https://openapi.twse.com.tw/v1/opendata/t187ap07_L_ci",
+        "row_count": 1048
+      }
+    }
+  },
+  "institutional_as_of": "2026-09-11",
+  "research_updated_at": "2026-08-28",
+  "cache_version": "20260913-layered-sync-r1",
+  "data_source": "Shioaji Snapshot",
   "market": "台湾股票市场 (TWSE)",
   "trading_hours": "09:00 - 13:30 (TPE time)",
   "weekly_review": {
     "as_of": "2026-08-28",
     "period": "2026-W35",
     "method_version": "weekly-v1",
-    "cache_version": "20260829-weekly-tab-r1",
+    "cache_version": "20260913-layered-sync-r1",
     "title": "每週復盤｜名單與評分",
     "description": "本週複核 10 檔既有名單；分數是研究模型的相對排序，不是官方評等，也不保證報酬。",
     "criteria": [
@@ -288,16 +324,19 @@
     "shioaji": {
       "status": "ok",
       "quote_count": 10,
-      "retrieved_at": "2026-09-11T19:39:02+08:00",
+      "retrieved_at": "2026-09-13T16:53:29",
       "quote_mode": "snapshot"
     },
     "twse_mis": {
-      "status": "ok",
-      "quote_count": 10,
-      "retrieved_at": "2026-09-11T19:39:03+08:00",
-      "market_time": "13:30:00"
+      "status": "unavailable",
+      "detail": "URLError: <urlopen error [Errno 54] Connection reset by peer>"
     },
-    "selected_quote_source": "Shioaji Snapshot (primary) + TWSE MIS cross-check"
+    "twse_t86_flow": {
+      "status": "ok",
+      "date": "2026-09-11",
+      "retrieved_at": "2026-09-13T16:53:36"
+    },
+    "selected_quote_source": "Shioaji Snapshot"
   },
   "stocks": [
     {
@@ -331,41 +370,74 @@
       "high_price": 2430.0,
       "low_price": 2405.0,
       "last_price": 2410.0,
-      "prev_close": 2450.0,
-      "change": -40.0,
-      "change_pct": -1.63,
+      "prev_close": 2410.0,
+      "change": 0.0,
+      "change_pct": 0.0,
       "volume": 18106,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-11T19:39:02+08:00",
-      "gross_margin": "65.0% - 67.0%",
-      "net_margin": ">43.0%",
-      "roe": "40.5%",
-      "eps_single": "22.08 元 (26Q1)",
+      "quote_time": "2026-09-13T16:53:29",
+      "gross_margin": "67.03% (2026Q2)",
+      "net_margin": "53.22% (2026Q2)",
+      "roe": "79.5% (單季年化, 2026Q2)",
+      "eps_single": "49.33 元 (2026Q2)",
       "earnings_date": "2026-10-15 (26Q3 法说会) | 每月 10 日发布营收",
+      "event_status": "scheduled",
+      "event_checked_at": "2026-09-13T16:54:34",
+      "fundamental_as_of": "2026-09-13",
+      "fundamental_updated_at": "2026-09-13 16:52:44",
+      "latest_monthly_revenue": "2026-08 營收 514,805 百萬元；月增 +10.10%；年增 +53.32%",
+      "latest_quarter": {
+        "period": "2026Q2",
+        "revenue": "2,404,484 百萬元",
+        "operating_margin": "59.29%",
+        "net_income": "1,279,042 百萬元",
+        "eps": "49.33 元"
+      },
       "industry": null,
       "score_basis": null,
       "investment_case": null,
-      "earnings_trend": null,
-      "quarterly_earnings": [],
+      "earnings_trend": "最新官方資料：2026-08 營收 514,805 百萬元；月增 +10.10%；年增 +53.32%；2026Q2 官方季度資料：EPS 49.33 元、營益率 59.29%。",
+      "quarterly_earnings": [
+        {
+          "period": "2026Q2",
+          "revenue": "2,404,484 百萬元",
+          "operating_margin": "59.29%",
+          "net_income": "1,279,042 百萬元",
+          "eps": "49.33 元"
+        }
+      ],
       "market_snapshot": null,
       "valuation": null,
       "market_factors": null,
       "risk_factors": [],
       "recommendation": null,
       "strategy_note": null,
-      "source_links": [],
+      "source_links": [
+        {
+          "label": "TWSE OpenAPI 月營收",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap05_L"
+        },
+        {
+          "label": "TWSE OpenAPI 季度營益分析",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap17_L"
+        },
+        {
+          "label": "MOPS 法說會一覽表",
+          "url": "https://mops.twse.com.tw/mops/web/t100sb02_1"
+        }
+      ],
       "institutional_flow": {
-        "foreign_net": "+3031 张",
-        "trust_net": "-1765 张",
-        "dealer_net": "-24 张",
-        "total_net": "+1243 张",
-        "date": "2026-08-28",
-        "summary": "[2026-08-28 官方结算] 外资主力大幅回流 (+3,031 张)，投信阶段获利减仓 (-1,765 张)。"
+        "foreign_net": "-8252 张",
+        "trust_net": "-181 张",
+        "dealer_net": "-401 张",
+        "total_net": "-8833 张",
+        "date": "2026-09-11",
+        "summary": "[2026-09-11 官方结算] 三大法人同步卖超 (-8,833 张)，短线筹码面临清洗。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净买超 1,243 张 (占量 9.2%)",
+        "large_order_ratio": "法人净卖超 8,833 张 (占量 48.8%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-08-28 筹码] 主力机构呈净买入 (+1,243 张)，筹码向法人端汇聚沉淀。"
+        "capital_status": "[2026-09-11 筹码] 主力机构呈净卖出 (-8,833 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "+1.8% (处于健康均线排列)",
@@ -409,41 +481,74 @@
       "high_price": 12300.0,
       "low_price": 11950.0,
       "last_price": 12080.0,
-      "prev_close": 12600.0,
-      "change": -520.0,
-      "change_pct": -4.13,
+      "prev_close": 12080.0,
+      "change": 0.0,
+      "change_pct": 0.0,
       "volume": 348,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-11T19:39:02+08:00",
-      "gross_margin": "87.0%",
-      "net_margin": ">52.0%",
-      "roe": "21.72%",
-      "eps_single": "74.38 元 (26Q2)",
+      "quote_time": "2026-09-13T16:53:29",
+      "gross_margin": "84.18% (2026Q2)",
+      "net_margin": "64.95% (2026Q2)",
+      "roe": "125.3% (單季年化, 2026Q2)",
+      "eps_single": "110.96 元 (2026Q2)",
       "earnings_date": "2026-11-06 (26Q3 财报) | 每月 10 日发布营收",
+      "event_status": "scheduled",
+      "event_checked_at": "2026-09-13T16:54:34",
+      "fundamental_as_of": "2026-09-13",
+      "fundamental_updated_at": "2026-09-13 16:52:44",
+      "latest_monthly_revenue": "2026-08 營收 6,466 百萬元；月增 +0.92%；年增 +344.42%",
+      "latest_quarter": {
+        "period": "2026Q2",
+        "revenue": "16,280 百萬元",
+        "operating_margin": "77.05%",
+        "net_income": "10,574 百萬元",
+        "eps": "110.96 元"
+      },
       "industry": null,
       "score_basis": null,
       "investment_case": null,
-      "earnings_trend": null,
-      "quarterly_earnings": [],
+      "earnings_trend": "最新官方資料：2026-08 營收 6,466 百萬元；月增 +0.92%；年增 +344.42%；2026Q2 官方季度資料：EPS 110.96 元、營益率 77.05%。",
+      "quarterly_earnings": [
+        {
+          "period": "2026Q2",
+          "revenue": "16,280 百萬元",
+          "operating_margin": "77.05%",
+          "net_income": "10,574 百萬元",
+          "eps": "110.96 元"
+        }
+      ],
       "market_snapshot": null,
       "valuation": null,
       "market_factors": null,
       "risk_factors": [],
       "recommendation": null,
       "strategy_note": null,
-      "source_links": [],
+      "source_links": [
+        {
+          "label": "TWSE OpenAPI 月營收",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap05_L"
+        },
+        {
+          "label": "TWSE OpenAPI 季度營益分析",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap17_L"
+        },
+        {
+          "label": "MOPS 法說會一覽表",
+          "url": "https://mops.twse.com.tw/mops/web/t100sb02_1"
+        }
+      ],
       "institutional_flow": {
-        "foreign_net": "+102 张",
-        "trust_net": "-59 张",
-        "dealer_net": "-10 张",
-        "total_net": "+34 张",
-        "date": "2026-08-28",
-        "summary": "[2026-08-28 官方结算] 外资主力大幅回流 (+102 张)，投信阶段获利减仓 (-59 张)。"
+        "foreign_net": "+60 张",
+        "trust_net": "-36 张",
+        "dealer_net": "-9 张",
+        "total_net": "+16 张",
+        "date": "2026-09-11",
+        "summary": "[2026-09-11 官方结算] 外资主力大幅回流 (+60 张)，投信阶段获利减仓 (-36 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净买超 34 张 (占量 8.8%)",
+        "large_order_ratio": "法人净买超 16 张 (占量 4.6%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-08-28 筹码] 主力机构呈净买入 (+34 张)，筹码向法人端汇聚沉淀。"
+        "capital_status": "[2026-09-11 筹码] 主力机构呈净买入 (+16 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "+3.2%",
@@ -487,41 +592,74 @@
       "high_price": 5420.0,
       "low_price": 5210.0,
       "last_price": 5365.0,
-      "prev_close": 5375.0,
-      "change": -10.0,
-      "change_pct": -0.19,
+      "prev_close": 5365.0,
+      "change": 0.0,
+      "change_pct": 0.0,
       "volume": 1026,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-11T19:39:02+08:00",
-      "gross_margin": "33.8%",
-      "net_margin": "~19.5%",
-      "roe": "18.58%",
-      "eps_single": "27.55 元 (26Q2)",
+      "quote_time": "2026-09-13T16:53:29",
+      "gross_margin": "32.03% (2026Q2)",
+      "net_margin": "18.93% (2026Q2)",
+      "roe": "104.3% (單季年化, 2026Q2)",
+      "eps_single": "42.46 元 (2026Q2)",
       "earnings_date": "2026-10-29 (26Q3 财报) | 每月 10 日发布营收",
+      "event_status": "scheduled",
+      "event_checked_at": "2026-09-13T16:54:34",
+      "fundamental_as_of": "2026-09-13",
+      "fundamental_updated_at": "2026-09-13 16:52:44",
+      "latest_monthly_revenue": "2026-08 營收 20,146 百萬元；月增 +4.89%；年增 +129.85%",
+      "latest_quarter": {
+        "period": "2026Q2",
+        "revenue": "80,342 百萬元",
+        "operating_margin": "24.72%",
+        "net_income": "15,213 百萬元",
+        "eps": "42.46 元"
+      },
       "industry": null,
       "score_basis": null,
       "investment_case": null,
-      "earnings_trend": null,
-      "quarterly_earnings": [],
+      "earnings_trend": "最新官方資料：2026-08 營收 20,146 百萬元；月增 +4.89%；年增 +129.85%；2026Q2 官方季度資料：EPS 42.46 元、營益率 24.72%。",
+      "quarterly_earnings": [
+        {
+          "period": "2026Q2",
+          "revenue": "80,342 百萬元",
+          "operating_margin": "24.72%",
+          "net_income": "15,213 百萬元",
+          "eps": "42.46 元"
+        }
+      ],
       "market_snapshot": null,
       "valuation": null,
       "market_factors": null,
       "risk_factors": [],
       "recommendation": null,
       "strategy_note": null,
-      "source_links": [],
+      "source_links": [
+        {
+          "label": "TWSE OpenAPI 月營收",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap05_L"
+        },
+        {
+          "label": "TWSE OpenAPI 季度營益分析",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap17_L"
+        },
+        {
+          "label": "MOPS 法說會一覽表",
+          "url": "https://mops.twse.com.tw/mops/web/t100sb02_1"
+        }
+      ],
       "institutional_flow": {
-        "foreign_net": "+45 张",
-        "trust_net": "-172 张",
-        "dealer_net": "-26 张",
-        "total_net": "-152 张",
-        "date": "2026-08-28",
-        "summary": "[2026-08-28 官方结算] 外资主力大幅回流 (+45 张)，投信阶段获利减仓 (-172 张)。"
+        "foreign_net": "-23 张",
+        "trust_net": "+110 张",
+        "dealer_net": "-19 张",
+        "total_net": "+69 张",
+        "date": "2026-09-11",
+        "summary": "[2026-09-11 官方结算] 投信内资买超 (+110 张) 逢低承接，外资高档调节 (-23 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 152 张 (占量 8.2%)",
+        "large_order_ratio": "法人净买超 69 张 (占量 6.7%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-08-28 筹码] 主力机构呈净卖出 (-152 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-09-11 筹码] 主力机构呈净买入 (+69 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "+4.5% (多头强劲攻势)",
@@ -565,41 +703,74 @@
       "high_price": 3390.0,
       "low_price": 3300.0,
       "last_price": 3370.0,
-      "prev_close": 3460.0,
-      "change": -90.0,
-      "change_pct": -2.6,
+      "prev_close": 3370.0,
+      "change": 0.0,
+      "change_pct": 0.0,
       "volume": 2004,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-11T19:39:02+08:00",
-      "gross_margin": "33.8% - 35.0%",
-      "net_margin": "~14.2%",
-      "roe": "17.03%",
-      "eps_single": "20.17 元 (26Q1)",
+      "quote_time": "2026-09-13T16:53:29",
+      "gross_margin": "31.17% (2026Q2)",
+      "net_margin": "19.31% (2026Q2)",
+      "roe": "126.7% (單季年化, 2026Q2)",
+      "eps_single": "44.54 元 (2026Q2)",
       "earnings_date": "2026-11-10 (26Q3 法说会) | 每月 10 日发布营收",
+      "event_status": "scheduled",
+      "event_checked_at": "2026-09-13T16:54:34",
+      "fundamental_as_of": "2026-09-13",
+      "fundamental_updated_at": "2026-09-13 16:52:44",
+      "latest_monthly_revenue": "2026-08 營收 19,481 百萬元；月增 +4.79%；年增 +54.34%",
+      "latest_quarter": {
+        "period": "2026Q2",
+        "revenue": "98,159 百萬元",
+        "operating_margin": "25.97%",
+        "net_income": "17,483 百萬元",
+        "eps": "44.54 元"
+      },
       "industry": null,
       "score_basis": null,
       "investment_case": null,
-      "earnings_trend": null,
-      "quarterly_earnings": [],
+      "earnings_trend": "最新官方資料：2026-08 營收 19,481 百萬元；月增 +4.79%；年增 +54.34%；2026Q2 官方季度資料：EPS 44.54 元、營益率 25.97%。",
+      "quarterly_earnings": [
+        {
+          "period": "2026Q2",
+          "revenue": "98,159 百萬元",
+          "operating_margin": "25.97%",
+          "net_income": "17,483 百萬元",
+          "eps": "44.54 元"
+        }
+      ],
       "market_snapshot": null,
       "valuation": null,
       "market_factors": null,
       "risk_factors": [],
       "recommendation": null,
       "strategy_note": null,
-      "source_links": [],
+      "source_links": [
+        {
+          "label": "TWSE OpenAPI 月營收",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap05_L"
+        },
+        {
+          "label": "TWSE OpenAPI 季度營益分析",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap17_L"
+        },
+        {
+          "label": "MOPS 法說會一覽表",
+          "url": "https://mops.twse.com.tw/mops/web/t100sb02_1"
+        }
+      ],
       "institutional_flow": {
-        "foreign_net": "-34 张",
-        "trust_net": "+626 张",
-        "dealer_net": "-90 张",
-        "total_net": "+503 张",
-        "date": "2026-08-28",
-        "summary": "[2026-08-28 官方结算] 投信内资买超 (+626 张) 逢低承接，外资高档调节 (-34 张)。"
+        "foreign_net": "-99 张",
+        "trust_net": "+45 张",
+        "dealer_net": "-40 张",
+        "total_net": "-94 张",
+        "date": "2026-09-11",
+        "summary": "[2026-09-11 官方结算] 投信内资买超 (+45 张) 逢低承接，外资高档调节 (-99 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净买超 503 张 (占量 13.2%)",
+        "large_order_ratio": "法人净卖超 94 张 (占量 4.7%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-08-28 筹码] 主力机构呈净买入 (+503 张)，筹码向法人端汇聚沉淀。"
+        "capital_status": "[2026-09-11 筹码] 主力机构呈净卖出 (-94 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "+3.8%",
@@ -643,41 +814,74 @@
       "high_price": 249.5,
       "low_price": 247.0,
       "last_price": 248.0,
-      "prev_close": 251.0,
-      "change": -3.0,
-      "change_pct": -1.2,
+      "prev_close": 248.0,
+      "change": 0.0,
+      "change_pct": 0.0,
       "volume": 23483,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-11T19:39:02+08:00",
-      "gross_margin": "6.2% - 6.8%",
-      "net_margin": "~2.8%",
-      "roe": "11.25%",
-      "eps_single": "3.23 元 (25Q4)",
-      "earnings_date": "2026-08-14 (26Q2 法说会 - 本周五) | 每月 5 日发布营收",
+      "quote_time": "2026-09-13T16:53:29",
+      "gross_margin": "6.15% (2026Q2)",
+      "net_margin": "2.73% (2026Q2)",
+      "roe": "23.0% (單季年化, 2026Q2)",
+      "eps_single": "7.84 元 (2026Q2)",
+      "earnings_date": "2026-08-14 (26Q2 法說會已舉行)；下一次財報/法說會日期待公司公告 | 每月 5 日发布营收",
+      "event_status": "historical",
+      "event_checked_at": "2026-09-13T16:54:34",
+      "fundamental_as_of": "2026-09-13",
+      "fundamental_updated_at": "2026-09-13 16:52:44",
+      "latest_monthly_revenue": "2026-08 營收 921,766 百萬元；月增 -2.61%；年增 +51.98%",
+      "latest_quarter": {
+        "period": "2026Q2",
+        "revenue": "4,645,428 百萬元",
+        "operating_margin": "3.67%",
+        "net_income": "109,893 百萬元",
+        "eps": "7.84 元"
+      },
       "industry": null,
       "score_basis": null,
       "investment_case": null,
-      "earnings_trend": null,
-      "quarterly_earnings": [],
+      "earnings_trend": "最新官方資料：2026-08 營收 921,766 百萬元；月增 -2.61%；年增 +51.98%；2026Q2 官方季度資料：EPS 7.84 元、營益率 3.67%。",
+      "quarterly_earnings": [
+        {
+          "period": "2026Q2",
+          "revenue": "4,645,428 百萬元",
+          "operating_margin": "3.67%",
+          "net_income": "109,893 百萬元",
+          "eps": "7.84 元"
+        }
+      ],
       "market_snapshot": null,
       "valuation": null,
       "market_factors": null,
       "risk_factors": [],
       "recommendation": null,
       "strategy_note": null,
-      "source_links": [],
+      "source_links": [
+        {
+          "label": "TWSE OpenAPI 月營收",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap05_L"
+        },
+        {
+          "label": "TWSE OpenAPI 季度營益分析",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap17_L"
+        },
+        {
+          "label": "MOPS 法說會一覽表",
+          "url": "https://mops.twse.com.tw/mops/web/t100sb02_1"
+        }
+      ],
       "institutional_flow": {
-        "foreign_net": "+1192 张",
-        "trust_net": "+307 张",
-        "dealer_net": "-724 张",
-        "total_net": "+776 张",
-        "date": "2026-08-28",
-        "summary": "[2026-08-28 官方结算] 外资与投信联手买超 (+776 张)，内外部机构共振做多。"
+        "foreign_net": "-3751 张",
+        "trust_net": "+410 张",
+        "dealer_net": "-45 张",
+        "total_net": "-3386 张",
+        "date": "2026-09-11",
+        "summary": "[2026-09-11 官方结算] 投信内资买超 (+410 张) 逢低承接，外资高档调节 (-3,751 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净买超 776 张 (占量 2.5%)",
+        "large_order_ratio": "法人净卖超 3,386 张 (占量 14.4%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-08-28 筹码] 主力机构呈净买入 (+776 张)，筹码向法人端汇聚沉淀。"
+        "capital_status": "[2026-09-11 筹码] 主力机构呈净卖出 (-3,386 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "+2.1%",
@@ -721,21 +925,33 @@
       "high_price": 1635.0,
       "low_price": 1595.0,
       "last_price": 1620.0,
-      "prev_close": 1675.0,
-      "change": -55.0,
-      "change_pct": -3.28,
+      "prev_close": 1620.0,
+      "change": 0.0,
+      "change_pct": 0.0,
       "volume": 13777,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-11T19:39:02+08:00",
-      "gross_margin": "35.6% (26Q2)",
-      "net_margin": "13.7% (26Q2)",
-      "roe": "待更新",
-      "eps_single": "9.68 元 (26Q2)",
+      "quote_time": "2026-09-13T16:53:29",
+      "gross_margin": "36.27% (2026Q2)",
+      "net_margin": "14.89% (2026Q2)",
+      "roe": "62.2% (單季年化, 2026Q2)",
+      "eps_single": "17.59 元 (2026Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
+      "event_status": "unknown",
+      "event_checked_at": "2026-09-13T16:54:34",
+      "fundamental_as_of": "2026-09-13",
+      "fundamental_updated_at": "2026-09-13 16:52:44",
+      "latest_monthly_revenue": "2026-08 營收 64,586 百萬元；月增 -3.71%；年增 +34.95%",
+      "latest_quarter": {
+        "period": "2026Q2",
+        "revenue": "342,609 百萬元",
+        "operating_margin": "17.22%",
+        "net_income": "45,691 百萬元",
+        "eps": "17.59 元"
+      },
       "industry": "電源管理、資料中心基礎設施與熱管理",
       "score_basis": "獲利趨勢、技術門檻、估值與風險綜合評估；非官方評等",
       "investment_case": "AI 資料中心的電力效率、電源管理與熱管理需求同步成長。2026Q2 營收 1,832 億元、營益率 16.7%、稅後淨利 251.36 億元。",
-      "earnings_trend": "EPS 6.67 → 7.91 → 9.68，連續兩季走高；電源電子與基礎設施部門獲利分別年增 50% 與 121%。",
+      "earnings_trend": "EPS 6.67 → 7.91 → 9.68，連續兩季走高；電源電子與基礎設施部門獲利分別年增 50% 與 121%。 最新官方資料：2026-08 營收 64,586 百萬元；月增 -3.71%；年增 +34.95%；2026Q2 官方季度資料：EPS 17.59 元、營益率 17.22%。",
       "quarterly_earnings": [
         {
           "period": "2025Q4",
@@ -753,10 +969,10 @@
         },
         {
           "period": "2026Q2",
-          "revenue": "1,832 億元",
-          "operating_margin": "16.7%",
-          "net_income": "251.36 億元",
-          "eps": "9.68 元"
+          "revenue": "342,609 百萬元",
+          "operating_margin": "17.22%",
+          "net_income": "45,691 百萬元",
+          "eps": "17.59 元"
         }
       ],
       "market_snapshot": "8/27 約 NT$1,770；PER 約 56 倍；近 3 個月約 -25.9%，近 1 年約 +147%。",
@@ -777,20 +993,32 @@
         {
           "label": "行情與估值快照",
           "url": "https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2308"
+        },
+        {
+          "label": "TWSE OpenAPI 月營收",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap05_L"
+        },
+        {
+          "label": "TWSE OpenAPI 季度營益分析",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap17_L"
+        },
+        {
+          "label": "MOPS 法說會一覽表",
+          "url": "https://mops.twse.com.tw/mops/web/t100sb02_1"
         }
       ],
       "institutional_flow": {
-        "foreign_net": "+1163 张",
-        "trust_net": "-732 张",
-        "dealer_net": "+114 张",
-        "total_net": "+546 张",
-        "date": "2026-08-28",
-        "summary": "[2026-08-28 官方结算] 外资主力大幅回流 (+1,163 张)，投信阶段获利减仓 (-732 张)。"
+        "foreign_net": "-3573 张",
+        "trust_net": "-536 张",
+        "dealer_net": "+303 张",
+        "total_net": "-3805 张",
+        "date": "2026-09-11",
+        "summary": "[2026-09-11 官方结算] 外资与投信偏空调节 (-3,805 张)，机构筹码阶段获利了结。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净买超 546 张 (占量 4.4%)",
+        "large_order_ratio": "法人净卖超 3,805 张 (占量 27.6%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-08-28 筹码] 主力机构呈净买入 (+546 张)，筹码向法人端汇聚沉淀。"
+        "capital_status": "[2026-09-11 筹码] 主力机构呈净卖出 (-3,805 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月回落約 25.9%",
@@ -834,21 +1062,33 @@
       "high_price": 1925.0,
       "low_price": 1870.0,
       "last_price": 1885.0,
-      "prev_close": 1965.0,
-      "change": -80.0,
-      "change_pct": -4.07,
+      "prev_close": 1885.0,
+      "change": 0.0,
+      "change_pct": 0.0,
       "volume": 3344,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-11T19:39:02+08:00",
-      "gross_margin": "19.7% (26Q2)",
-      "net_margin": "約 11.6% (26Q2)",
-      "roe": "待更新",
-      "eps_single": "19.78 元 (26Q2)",
+      "quote_time": "2026-09-13T16:53:29",
+      "gross_margin": "19.63% (2026Q2)",
+      "net_margin": "11.70% (2026Q2)",
+      "roe": "112.4% (單季年化, 2026Q2)",
+      "eps_single": "34.70 元 (2026Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
+      "event_status": "unknown",
+      "event_checked_at": "2026-09-13T16:54:34",
+      "fundamental_as_of": "2026-09-13",
+      "fundamental_updated_at": "2026-09-13 16:52:44",
+      "latest_monthly_revenue": "2026-08 營收 40,873 百萬元；月增 +3.55%；年增 +59.42%",
+      "latest_quarter": {
+        "period": "2026Q2",
+        "revenue": "165,658 百萬元",
+        "operating_margin": "14.72%",
+        "net_income": "19,394 百萬元",
+        "eps": "34.70 元"
+      },
       "industry": "AI 高速網路交換器與資料中心網通",
       "score_basis": "獲利趨勢、技術門檻、估值與風險綜合評估；非官方評等",
       "investment_case": "AI 集群規模提升帶動高速交換器升級。2026Q2 營收 955.38 億元、營益率約 15.0%、母公司稅後淨利 110.53 億元。",
-      "earnings_trend": "EPS 14.95 → 14.92 → 19.78；Q2 EPS 季增約 32.5%，營益率由 12.7% 提升至約 15.0%。",
+      "earnings_trend": "EPS 14.95 → 14.92 → 19.78；Q2 EPS 季增約 32.5%，營益率由 12.7% 提升至約 15.0%。 最新官方資料：2026-08 營收 40,873 百萬元；月增 +3.55%；年增 +59.42%；2026Q2 官方季度資料：EPS 34.70 元、營益率 14.72%。",
       "quarterly_earnings": [
         {
           "period": "2025Q4",
@@ -866,10 +1106,10 @@
         },
         {
           "period": "2026Q2",
-          "revenue": "955.38 億元",
-          "operating_margin": "15.0%",
-          "net_income": "110.53 億元",
-          "eps": "19.78 元"
+          "revenue": "165,658 百萬元",
+          "operating_margin": "14.72%",
+          "net_income": "19,394 百萬元",
+          "eps": "34.70 元"
         }
       ],
       "market_snapshot": "8/26 收約 NT$2,055；PER 約 32 倍；近 3 個月約 -7.2%，近 6 個月約 +41.7%。",
@@ -894,20 +1134,32 @@
         {
           "label": "公司高速網通資料",
           "url": "https://www.accton.com.tw/wp-content/uploads/2024/07/20240712031358.pdf"
+        },
+        {
+          "label": "TWSE OpenAPI 月營收",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap05_L"
+        },
+        {
+          "label": "TWSE OpenAPI 季度營益分析",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap17_L"
+        },
+        {
+          "label": "MOPS 法說會一覽表",
+          "url": "https://mops.twse.com.tw/mops/web/t100sb02_1"
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-532 张",
-        "trust_net": "-18 张",
-        "dealer_net": "-5 张",
-        "total_net": "-554 张",
-        "date": "2026-08-28",
-        "summary": "[2026-08-28 官方结算] 三大法人同步卖超 (-554 张)，短线筹码面临清洗。"
+        "foreign_net": "+572 张",
+        "trust_net": "-652 张",
+        "dealer_net": "-7 张",
+        "total_net": "-87 张",
+        "date": "2026-09-11",
+        "summary": "[2026-09-11 官方结算] 外资主力大幅回流 (+572 张)，投信阶段获利减仓 (-652 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 554 张 (占量 24.7%)",
+        "large_order_ratio": "法人净卖超 87 张 (占量 2.6%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-08-28 筹码] 主力机构呈净卖出 (-554 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-09-11 筹码] 主力机构呈净卖出 (-87 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月約 -7.2%，相對大幅上漲後整理",
@@ -951,21 +1203,33 @@
       "high_price": 2235.0,
       "low_price": 2120.0,
       "last_price": 2160.0,
-      "prev_close": 2180.0,
-      "change": -20.0,
-      "change_pct": -0.92,
+      "prev_close": 2160.0,
+      "change": 0.0,
+      "change_pct": 0.0,
       "volume": 2196,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-11T19:39:02+08:00",
-      "gross_margin": "約 60.5% (26Q2)",
-      "net_margin": "約 37.9% (26Q2)",
-      "roe": "待更新",
-      "eps_single": "約 12.15 元 (26Q2)",
+      "quote_time": "2026-09-13T16:53:29",
+      "gross_margin": "61.48% (2026Q2)",
+      "net_margin": "36.15% (2026Q2)",
+      "roe": "109.0% (單季年化, 2026Q2)",
+      "eps_single": "21.27 元 (2026Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
+      "event_status": "unknown",
+      "event_checked_at": "2026-09-13T16:54:34",
+      "fundamental_as_of": "2026-09-13",
+      "fundamental_updated_at": "2026-09-13 16:52:44",
+      "latest_monthly_revenue": "2026-08 營收 5,632 百萬元；月增 +3.65%；年增 +156.30%",
+      "latest_quarter": {
+        "period": "2026Q2",
+        "revenue": "25,389 百萬元",
+        "operating_margin": "39.54%",
+        "net_income": "8,987 百萬元",
+        "eps": "21.27 元"
+      },
       "industry": "半導體、AI、光通訊與先進封裝測試設備",
       "score_basis": "獲利趨勢、技術門檻、估值與風險綜合評估；非官方評等",
       "investment_case": "AI/HPC、GPU、CPU、交換器與光通訊升級拉動測試需求。2026Q2 營收 135.29 億元、毛利率約 60.5%、營益率約 38.7%。",
-      "earnings_trend": "EPS 6.04 → 9.12 → 約 12.15；連續三季創高，獲利增速在新增五檔中最強。",
+      "earnings_trend": "EPS 6.04 → 9.12 → 約 12.15；連續三季創高，獲利增速在新增五檔中最強。 最新官方資料：2026-08 營收 5,632 百萬元；月增 +3.65%；年增 +156.30%；2026Q2 官方季度資料：EPS 21.27 元、營益率 39.54%。",
       "quarterly_earnings": [
         {
           "period": "2025Q4",
@@ -983,10 +1247,10 @@
         },
         {
           "period": "2026Q2",
-          "revenue": "135.29 億元",
-          "operating_margin": "約 38.7%",
-          "net_income": "51.23 億元",
-          "eps": "約 12.15 元"
+          "revenue": "25,389 百萬元",
+          "operating_margin": "39.54%",
+          "net_income": "8,987 百萬元",
+          "eps": "21.27 元"
         }
       ],
       "market_snapshot": "8/27 約 NT$1,990；PER 約 51 倍；近 3 個月約 -22.6%，近 1 年約 +262%。",
@@ -1011,20 +1275,32 @@
         {
           "label": "行情與估值快照",
           "url": "https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2360"
+        },
+        {
+          "label": "TWSE OpenAPI 月營收",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap05_L"
+        },
+        {
+          "label": "TWSE OpenAPI 季度營益分析",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap17_L"
+        },
+        {
+          "label": "MOPS 法說會一覽表",
+          "url": "https://mops.twse.com.tw/mops/web/t100sb02_1"
         }
       ],
       "institutional_flow": {
-        "foreign_net": "+57 张",
-        "trust_net": "-33 张",
-        "dealer_net": "-13 张",
-        "total_net": "+12 张",
-        "date": "2026-08-28",
-        "summary": "[2026-08-28 官方结算] 外资主力大幅回流 (+57 张)，投信阶段获利减仓 (-33 张)。"
+        "foreign_net": "+143 张",
+        "trust_net": "+92 张",
+        "dealer_net": "-12 张",
+        "total_net": "+225 张",
+        "date": "2026-09-11",
+        "summary": "[2026-09-11 官方结算] 外资与投信联手买超 (+225 张)，内外部机构共振做多。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净买超 12 张 (占量 0.8%)",
+        "large_order_ratio": "法人净买超 225 张 (占量 10.2%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-08-28 筹码] 主力机构呈净买入 (+12 张)，筹码向法人端汇聚沉淀。"
+        "capital_status": "[2026-09-11 筹码] 主力机构呈净买入 (+225 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月約 -22.6%，高檔修正",
@@ -1068,21 +1344,33 @@
       "high_price": 630.0,
       "low_price": 605.0,
       "last_price": 618.0,
-      "prev_close": 650.0,
-      "change": -32.0,
-      "change_pct": -4.92,
+      "prev_close": 618.0,
+      "change": 0.0,
+      "change_pct": 0.0,
       "volume": 21532,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-11T19:39:02+08:00",
-      "gross_margin": "待更新",
-      "net_margin": "約 11.0% (26Q2)",
-      "roe": "18.2% 年化 (26H1)",
-      "eps_single": "4.80 元 (26Q2)",
+      "quote_time": "2026-09-13T16:53:29",
+      "gross_margin": "20.55% (2026Q2)",
+      "net_margin": "9.89% (2026Q2)",
+      "roe": "36.2% (單季年化, 2026Q2)",
+      "eps_single": "8.04 元 (2026Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
+      "event_status": "unknown",
+      "event_checked_at": "2026-09-13T16:54:34",
+      "fundamental_as_of": "2026-09-13",
+      "fundamental_updated_at": "2026-09-13 16:52:44",
+      "latest_monthly_revenue": "2026-08 營收 82,247 百萬元；月增 +11.47%；年增 +45.66%",
+      "latest_quarter": {
+        "period": "2026Q2",
+        "revenue": "364,726 百萬元",
+        "operating_margin": "10.59%",
+        "net_income": "35,200 百萬元",
+        "eps": "8.04 元"
+      },
       "industry": "IC 封裝測試、先進封裝與 Panel-Level Packaging",
       "score_basis": "獲利趨勢、技術門檻、估值與風險綜合評估；非官方評等",
       "investment_case": "AI 加速器、Chiplet 與先進封裝擴產帶動封測需求。2026Q2 營收約 1,911 億元、營益率 11.1%、EPS 4.80 元。",
-      "earnings_trend": "EPS 約 3.4 → 3.24 → 4.80；Q2 顯著反彈，2026H1 EPS 8.04 元。",
+      "earnings_trend": "EPS 約 3.4 → 3.24 → 4.80；Q2 顯著反彈，2026H1 EPS 8.04 元。 最新官方資料：2026-08 營收 82,247 百萬元；月增 +11.47%；年增 +45.66%；2026Q2 官方季度資料：EPS 8.04 元、營益率 10.59%。",
       "quarterly_earnings": [
         {
           "period": "2025Q4",
@@ -1100,10 +1388,10 @@
         },
         {
           "period": "2026Q2",
-          "revenue": "約 1,911 億元",
-          "operating_margin": "11.1%",
-          "net_income": "約 210.7 億元",
-          "eps": "4.80 元"
+          "revenue": "364,726 百萬元",
+          "operating_margin": "10.59%",
+          "net_income": "35,200 百萬元",
+          "eps": "8.04 元"
         }
       ],
       "market_snapshot": "8/27 約 NT$605；PER 約 44 倍；近 3 個月約 -2.4%，近 1 年約 +138%。",
@@ -1124,20 +1412,32 @@
         {
           "label": "財報與行情快照",
           "url": "https://goodinfo.tw/tw/StockFinDetail.asp?QRY_TIME=20262&RPT_CAT=IS_M_QUAR&STOCK_ID=3711"
+        },
+        {
+          "label": "TWSE OpenAPI 月營收",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap05_L"
+        },
+        {
+          "label": "TWSE OpenAPI 季度營益分析",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap17_L"
+        },
+        {
+          "label": "MOPS 法說會一覽表",
+          "url": "https://mops.twse.com.tw/mops/web/t100sb02_1"
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-568 张",
-        "trust_net": "+61 张",
-        "dealer_net": "+945 张",
-        "total_net": "+440 张",
-        "date": "2026-08-28",
-        "summary": "[2026-08-28 官方结算] 投信内资买超 (+61 张) 逢低承接，外资高档调节 (-568 张)。"
+        "foreign_net": "-8053 张",
+        "trust_net": "+679 张",
+        "dealer_net": "-445 张",
+        "total_net": "-7819 张",
+        "date": "2026-09-11",
+        "summary": "[2026-09-11 官方结算] 投信内资买超 (+679 张) 逢低承接，外资高档调节 (-8,053 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净买超 440 张 (占量 2.5%)",
+        "large_order_ratio": "法人净卖超 7,819 张 (占量 36.3%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-08-28 筹码] 主力机构呈净买入 (+440 张)，筹码向法人端汇聚沉淀。"
+        "capital_status": "[2026-09-11 筹码] 主力机构呈净卖出 (-7,819 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月約 -2.4%，相對穩定",
@@ -1181,21 +1481,33 @@
       "high_price": 4655.0,
       "low_price": 4535.0,
       "last_price": 4585.0,
-      "prev_close": 4720.0,
-      "change": -135.0,
-      "change_pct": -2.86,
+      "prev_close": 4585.0,
+      "change": 0.0,
+      "change_pct": 0.0,
       "volume": 6828,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-11T19:39:02+08:00",
-      "gross_margin": "46.2% (26Q2)",
-      "net_margin": "約 16.2% (26Q2)",
-      "roe": "待更新",
-      "eps_single": "15.28 元 (26Q2)",
+      "quote_time": "2026-09-13T16:53:29",
+      "gross_margin": "46.25% (2026Q2)",
+      "net_margin": "16.25% (2026Q2)",
+      "roe": "45.7% (單季年化, 2026Q2)",
+      "eps_single": "30.44 元 (2026Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
+      "event_status": "unknown",
+      "event_checked_at": "2026-09-13T16:54:34",
+      "fundamental_as_of": "2026-09-13",
+      "fundamental_updated_at": "2026-09-13 16:52:44",
+      "latest_monthly_revenue": "2026-08 營收 64,183 百萬元；月增 +32.41%；年增 +44.08%",
+      "latest_quarter": {
+        "period": "2026Q2",
+        "revenue": "301,333 百萬元",
+        "operating_margin": "15.19%",
+        "net_income": "48,489 百萬元",
+        "eps": "30.44 元"
+      },
       "industry": "Fabless IC、手機/邊緣 AI SoC 與 AI ASIC",
       "score_basis": "獲利趨勢、技術門檻、估值與風險綜合評估；非官方評等",
       "investment_case": "公司仍具高毛利與正獲利，但 AI ASIC 商業化尚在驗證期。2026Q2 營收約 1,521.83 億元、營益率 15.0%、EPS 15.28 元。",
-      "earnings_trend": "EPS 14.39 → 15.17 → 15.28；近兩季大致穩定，但 2026Q2 淨利年減約 12.3%，尚未形成強勁加速。",
+      "earnings_trend": "EPS 14.39 → 15.17 → 15.28；近兩季大致穩定，但 2026Q2 淨利年減約 12.3%，尚未形成強勁加速。 最新官方資料：2026-08 營收 64,183 百萬元；月增 +32.41%；年增 +44.08%；2026Q2 官方季度資料：EPS 30.44 元、營益率 15.19%。",
       "quarterly_earnings": [
         {
           "period": "2025Q4",
@@ -1213,10 +1525,10 @@
         },
         {
           "period": "2026Q2",
-          "revenue": "1,521.83 億元",
-          "operating_margin": "15.0%",
-          "net_income": "246.05 億元",
-          "eps": "15.28 元"
+          "revenue": "301,333 百萬元",
+          "operating_margin": "15.19%",
+          "net_income": "48,489 百萬元",
+          "eps": "30.44 元"
         }
       ],
       "market_snapshot": "8/27 約 NT$3,865；PER 約 64 倍；近 3 個月約 -15%。",
@@ -1241,20 +1553,32 @@
         {
           "label": "行情與估值快照",
           "url": "https://goodinfo.tw/tw/ShowK_Chart.asp?CHT_CAT2=DATE&STOCK_ID=2454"
+        },
+        {
+          "label": "TWSE OpenAPI 月營收",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap05_L"
+        },
+        {
+          "label": "TWSE OpenAPI 季度營益分析",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap17_L"
+        },
+        {
+          "label": "MOPS 法說會一覽表",
+          "url": "https://mops.twse.com.tw/mops/web/t100sb02_1"
         }
       ],
       "institutional_flow": {
-        "foreign_net": "+1096 张",
-        "trust_net": "-118 张",
-        "dealer_net": "+17 张",
-        "total_net": "+996 张",
-        "date": "2026-08-28",
-        "summary": "[2026-08-28 官方结算] 外资主力大幅回流 (+1,096 张)，投信阶段获利减仓 (-118 张)。"
+        "foreign_net": "-743 张",
+        "trust_net": "+108 张",
+        "dealer_net": "-22 张",
+        "total_net": "-656 张",
+        "date": "2026-09-11",
+        "summary": "[2026-09-11 官方结算] 投信内资买超 (+108 张) 逢低承接，外资高档调节 (-743 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净买超 996 张 (占量 23.8%)",
+        "large_order_ratio": "法人净卖超 656 张 (占量 9.6%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-08-28 筹码] 主力机构呈净买入 (+996 张)，筹码向法人端汇聚沉淀。"
+        "capital_status": "[2026-09-11 筹码] 主力机构呈净卖出 (-656 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月約 -15%，高檔整理",

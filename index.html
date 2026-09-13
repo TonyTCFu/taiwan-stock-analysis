@@ -60,6 +60,7 @@
         .status-dot { width: 8px; height: 8px; background-color: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green); animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
         .update-time { color: var(--text-secondary); font-family: var(--font-mono); }
+        .freshness-meta { color: var(--text-muted); font-size: 11px; line-height: 1.45; max-width: 430px; }
         .version-tag { font-family: var(--font-mono); font-size: 11px; color: var(--accent-cyan); background: rgba(6, 182, 212, 0.1); padding: 2px 6px; border-radius: 4px; }
 
         main { max-width: 1400px; margin: 24px auto; padding: 0 24px; }
@@ -226,6 +227,7 @@
             padding: 3px 7px;
         }
         .update-time { color: var(--text-muted); }
+        .freshness-meta { color: var(--text-muted); }
 
         main { margin: 42px auto 56px; padding: 0 28px; }
         .tab-bar {
@@ -532,6 +534,7 @@
             .header-container { gap: 16px; }
             .header-meta { width: 100%; flex-wrap: wrap; gap: 8px; }
             .update-time { flex: 1 1 190px; }
+            .freshness-meta { flex: 1 1 100%; max-width: none; }
             .btn-refresh { margin-left: auto; }
             main { margin: 28px auto 42px; padding: 0 18px; }
             .tab-bar { margin-bottom: 26px; }
@@ -567,6 +570,7 @@
                 <span class="status-badge" id="quote-status"><span class="status-dot"></span> 行情来源检测中</span>
                 <span class="version-tag" id="cache-ver">vLIVE</span>
                 <span class="update-time" id="update-time">定盘时间: 加载中...</span>
+                <span class="freshness-meta" id="freshness-meta">资料新鲜度：加载中...</span>
                 <button class="btn-refresh" onclick="loadStockData(true)">🔄 强制刷新行情</button>
             </div>
         </div>
@@ -691,6 +695,11 @@
         const PUBLIC_LIVE_QUOTES_API = 'https://futienchun-com-dashboard.onrender.com/api/live-quotes';
         const LOCAL_STORAGE_KEY = 'TAIWAN_STOCK_PERSISTED_DATA_V2';
         const EXPECTED_STOCK_CODES = ['2330', '2059', '2383', '3017', '2317', '2308', '2345', '2360', '3711', '2454'];
+        const MARKET_FIELDS = [
+            'open_price', 'high_price', 'low_price', 'last_price', 'prev_close',
+            'change', 'change_pct', 'volume', 'quote_source', 'quote_time',
+            'institutional_flow', 'capital_inflow'
+        ];
 
         function isCompleteStockPayload(payload) {
             if (!payload || !Array.isArray(payload.stocks)) return false;
@@ -735,10 +744,73 @@
         function parseTimestamp(tsStr) {
             if (!tsStr) return 0;
             try {
-                return new Date(tsStr.replace(/-/g, '/')).getTime() || 0;
+                return new Date(String(tsStr).replace(/-/g, '/')).getTime() || 0;
             } catch (e) {
                 return 0;
             }
+        }
+
+        function isPayload(payload) {
+            return payload && Array.isArray(payload.stocks) && payload.stocks.length > 0;
+        }
+
+        function payloadTime(payload, field) {
+            return isPayload(payload) ? parseTimestamp(payload[field]) : 0;
+        }
+
+        function pickNewestPayload(candidates, field) {
+            return candidates.filter(isPayload).sort((left, right) => {
+                return payloadTime(right, field) - payloadTime(left, field);
+            })[0] || candidates.find(isPayload) || null;
+        }
+
+        function fundamentalQuality(payload) {
+            if (!isPayload(payload)) return -1;
+            const status = payload.fundamental_status && payload.fundamental_status.status;
+            const statusScore = status === 'ok' ? 1000000 : (status === 'partial' ? 1000 : 0);
+            const coverage = payload.stocks.filter(stock => stock.latest_monthly_revenue && stock.latest_quarter).length;
+            return statusScore + coverage;
+        }
+
+        function pickFundamentalPayload(candidates) {
+            return candidates.filter(isPayload).sort((left, right) => {
+                const qualityDelta = fundamentalQuality(right) - fundamentalQuality(left);
+                if (qualityDelta !== 0) return qualityDelta;
+                return payloadTime(right, 'fundamental_updated_at') - payloadTime(left, 'fundamental_updated_at');
+            })[0] || null;
+        }
+
+        function mergeMarketLayer(fundamentalPayload, marketPayload) {
+            if (!isPayload(marketPayload)) return fundamentalPayload;
+            if (!isPayload(fundamentalPayload)) return marketPayload;
+
+            const fundamentalByCode = new Map(
+                fundamentalPayload.stocks.map(stock => [String(stock.code), stock])
+            );
+            const mergedStocks = marketPayload.stocks.map(marketStock => {
+                const baseStock = fundamentalByCode.get(String(marketStock.code)) || {};
+                const mergedStock = { ...baseStock };
+                MARKET_FIELDS.forEach(field => {
+                    if (marketStock[field] !== undefined) mergedStock[field] = marketStock[field];
+                });
+                return { ...mergedStock, code: marketStock.code };
+            });
+
+            return {
+                ...fundamentalPayload,
+                updated_at: marketPayload.updated_at || fundamentalPayload.updated_at,
+                quote_updated_at: marketPayload.quote_updated_at || marketPayload.updated_at || fundamentalPayload.quote_updated_at,
+                market_as_of: marketPayload.market_as_of || fundamentalPayload.market_as_of,
+                data_source: marketPayload.data_source || fundamentalPayload.data_source,
+                sources: marketPayload.sources || fundamentalPayload.sources,
+                stocks: mergedStocks
+            };
+        }
+
+        function mergeAvailableLayers(candidates) {
+            const fundamentalPayload = pickFundamentalPayload(candidates) || pickNewestPayload(candidates, 'fundamental_updated_at') || pickNewestPayload(candidates, 'updated_at');
+            const marketPayload = pickNewestPayload(candidates, 'quote_updated_at') || pickNewestPayload(candidates, 'updated_at');
+            return mergeMarketLayer(fundamentalPayload, marketPayload);
         }
 
         async function refreshWithLiveBridge() {
@@ -773,32 +845,25 @@
                 let json = null;
                 let refreshedByBridge = false;
 
+                const published = await fetchPublishedData().catch(() => null);
+                const persisted = getPersistedData();
+
                 if (forceRefresh) {
                     try {
-                        json = await refreshWithLiveBridge();
-                        if (!isCompleteStockPayload(json)) {
-                            const receivedCount = Array.isArray(json && json.stocks) ? json.stocks.length : 0;
+                        const livePayload = await refreshWithLiveBridge();
+                        if (!isCompleteStockPayload(livePayload)) {
+                            const receivedCount = Array.isArray(livePayload && livePayload.stocks) ? livePayload.stocks.length : 0;
                             throw new Error(`公网行情网关仅返回 ${receivedCount}/10 档，未完成全部标的刷新`);
                         }
+                        json = mergeAvailableLayers([published, persisted, livePayload]);
                         refreshedByBridge = true;
                     } catch (err) {
                         console.warn("Bridge refresh error, fallback to published/persisted data:", err);
                     }
                 }
 
-                const published = await fetchPublishedData().catch(() => null);
-                const persisted = getPersistedData();
-
-                if (forceRefresh && json) {
-                    savePersistedData(json);
-                } else {
-                    if (published && persisted) {
-                        const pubTime = parseTimestamp(published.updated_at);
-                        const perTime = parseTimestamp(persisted.updated_at);
-                        json = (perTime > pubTime) ? persisted : published;
-                    } else {
-                        json = published || persisted;
-                    }
+                if (!json) {
+                    json = mergeAvailableLayers([published, persisted]);
                 }
 
                 if (json) {
@@ -808,7 +873,7 @@
 
                     if (forceRefresh) {
                         if (refreshedByBridge) {
-                            showToast(`✅ 10 檔行情已更新並持久化保存至本地<br><span style="font-size:11px;color:#94a3b8">数据源: ${json.data_source || '实时行情'} | 更新时间: ${json.updated_at}</span>`);
+                            showToast(`✅ 行情已更新，基本面资料保持最新发布版本<br><span style="font-size:11px;color:#94a3b8">行情: ${json.quote_updated_at || json.updated_at} | 基本面: ${json.fundamental_updated_at || '待同步'}</span>`);
                         } else {
                             showToast(`⚠️ 公网行情网关未完成 10 檔刷新<br><span style="font-size:11px;color:#fca5a5">当前显示已发布数据；请稍后重试强制刷新</span>`);
                         }
@@ -836,7 +901,12 @@
             if (sourceStatus) {
                 sourceStatus.innerHTML = `<span class="status-dot"></span> Shioaji ${shioajiOk ? '已连接' : '未连接'} (${shioajiCount}/${totalStocks}) · TWSE ${twseOk ? '已更新' : '未更新'} (${twseCount}/${totalStocks})`;
             }
-            document.getElementById('update-time').innerText = `行情更新: ${data.updated_at}`;
+            const quoteUpdatedAt = data.quote_updated_at || data.updated_at || '-';
+            document.getElementById('update-time').innerText = `行情更新: ${quoteUpdatedAt}`;
+            const freshness = document.getElementById('freshness-meta');
+            if (freshness) {
+                freshness.innerText = `行情基准 ${data.market_as_of || '-'} · 法人结算 ${data.institutional_as_of || '-'} · 基本面 ${data.fundamental_updated_at || '-'} · 研究 ${data.research_updated_at || '-'}`;
+            }
             const cacheVersion = data.cache_version || (data.updated_at ? data.updated_at.replace(/[- :]/g, '').slice(4, 12) : 'LIVE');
             document.getElementById('cache-ver').innerText = cacheVersion.startsWith('v') ? cacheVersion : 'v' + cacheVersion;
             
@@ -925,9 +995,10 @@
                             <span class="research-panel-title">📚 基本面／產業研究</span>
                             <span class="research-badge">${escapeResearchText(stock.recommendation || '研究資料')}</span>
                         </div>
-                        <div class="research-grid">
+                            <div class="research-grid">
                             <div class="research-item"><span class="research-label">所處行業</span><span class="research-value">${escapeResearchText(stock.industry)}</span></div>
                             <div class="research-item"><span class="research-label">市場行情與估值</span><span class="research-value">${escapeResearchText(stock.market_snapshot)}<br>${escapeResearchText(stock.valuation)}</span></div>
+                            <div class="research-item"><span class="research-label">最新月營收</span><span class="research-value">${escapeResearchText(stock.latest_monthly_revenue || '待同步')}</span></div>
                             <div class="research-item"><span class="research-label">三季獲利趨勢</span><span class="research-value">${escapeResearchText(stock.earnings_trend)}</span></div>
                             <div class="research-item"><span class="research-label">研究策略</span><span class="research-value">${escapeResearchText(stock.strategy_note)}</span></div>
                         </div>
@@ -985,7 +1056,8 @@
 
                             <div class="section-badge">🏢 财报公布日与表现</div>
                             <div class="info-panel">
-                                <strong>日期：</strong>${earnDate}
+                                <strong>日期：</strong>${earnDate}<br>
+                                <span style="font-size:11px;color:var(--text-muted);">事件状态：${escapeResearchText(s.event_status || '待确认')} · 资料截至：${escapeResearchText(s.fundamental_as_of || data.fundamental_as_of || '-')}</span>
                             </div>
 
                             <div class="section-badge">🏦 真实三大法人与主力资金</div>
@@ -1114,10 +1186,8 @@
             }
         }
 
-        // Trigger loading immediately
-        loadStockData(false);
-        window.addEventListener('DOMContentLoaded', () => loadStockData(false));
-        window.addEventListener('load', () => loadStockData(false));
+        // Load the latest published/persisted layers once; manual refresh handles live quotes.
+        window.addEventListener('DOMContentLoaded', () => loadStockData(false), { once: true });
     </script>
 </body>
 </html>

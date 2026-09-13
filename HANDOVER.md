@@ -1,5 +1,14 @@
 # HANDOVER.md - 台湾股市分析项目全量项目交接与运维指南 (Handover Document)
 
+## 2026-09-13 分层同步更新
+
+- Dashboard 已取消 30 秒自动轮询；行情只在每日收盘后工作流更新，或用户点击“强制刷新行情”时更新。
+- 周末行情基准回退到最近交易日；本轮生成资料的行情基准为 `2026-09-11`。
+- 基本面/事件每日 15:00（Asia/Taipei）由 GitHub Actions 更新，研究评分仍以周评快照为准。
+- 前端将行情层叠加到最新基本面层，避免实时网关的旧静态资料覆盖已发布的月营收、季度指标或法说会状态。
+- `fundamental_status` 和 `fundamental_checked_at` 记录接口失败；失败时保留上一份已验证基本面。当前缓存版本为 `20260913-layered-sync-r1`。
+- 2026-08-14 鸿海法说会已在 Dashboard 标记为 `historical`，不再显示为即将举行。
+
 > **交接背景**: 本项目已将对话框 `@[conversation:"台湾优质潜力股分析"]`（Conversation ID: `236b9bdf-d399-4da3-8f7f-3f6b26ffcc9f`）中的所有对话内容、分析成果、Serenity 估值模型、买卖点量化策略、Shioaji 交易所接口集成、iCloud 桌面 Excel 绘图及 Web Dashboard 自动化部署全量迁移并整合至当前工作区项目 `/Users/TonyFu/Desktop/台湾股市分析` 中。
 
 ---
