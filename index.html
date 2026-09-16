@@ -704,7 +704,12 @@
         function isCompleteStockPayload(payload) {
             if (!payload || !Array.isArray(payload.stocks)) return false;
             const codes = new Set(payload.stocks.map(stock => String(stock.code)));
-            return EXPECTED_STOCK_CODES.every(code => codes.has(code));
+            const quoteStatus = payload.quote_status || {};
+            return EXPECTED_STOCK_CODES.every(code => codes.has(code))
+                && quoteStatus.status === 'ok'
+                && Boolean(payload.quote_updated_at)
+                && Boolean(payload.market_as_of)
+                && payload.stocks.every(stock => Number(stock.last_price) > 0);
         }
 
         function escapeResearchText(value) {

@@ -16,6 +16,7 @@ The top-level payload must contain:
 - `updated_at`: quote payload generation time, retained for backward compatibility.
 - `quote_updated_at`: quote-layer update time.
 - `market_as_of`: quote reference date. During market hours this is the current trading date; outside market hours it is the most recent trading date.
+- `quote_status`: complete only when all 10 tracked stocks have a valid fresh quote. A partial response must retain the previous published quote layer rather than advancing its date.
 - `fundamental_updated_at`: last successful fundamentals synchronization time.
 - `fundamental_checked_at`: time of the latest fundamentals synchronization attempt.
 - `fundamental_as_of`: publication date represented by the fundamentals data.

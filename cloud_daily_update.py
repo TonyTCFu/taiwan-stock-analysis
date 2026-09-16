@@ -16,6 +16,45 @@ LIVE_QUOTES_URL = "https://futienchun-com-dashboard.onrender.com/api/live-quotes
 TIMEOUT_SECONDS = 180
 PROJECT_ROOT = Path(__file__).resolve().parent
 OUTPUT_PATH = PROJECT_ROOT / "data" / "stock_data.json"
+CACHE_VERSION = "20260916-quote-sync-r2"
+
+
+def live_quote_payload_error(payload: object) -> str | None:
+    """Reject incomplete live data instead of advancing its freshness metadata."""
+    if not isinstance(payload, dict):
+        return "live-quotes returned a non-object payload"
+
+    stocks = payload.get("stocks")
+    if not isinstance(stocks, list):
+        return "live-quotes returned no stock list"
+
+    expected_codes = set(STOCKS_META)
+    by_code = {
+        str(stock.get("code")): stock
+        for stock in stocks
+        if isinstance(stock, dict) and stock.get("code")
+    }
+    missing_codes = sorted(expected_codes - set(by_code))
+    if missing_codes:
+        return "live-quotes is missing stocks: " + ", ".join(missing_codes)
+
+    invalid_codes = [
+        code
+        for code in sorted(expected_codes)
+        if not isinstance(by_code[code].get("last_price"), (int, float))
+        or by_code[code]["last_price"] <= 0
+    ]
+    if invalid_codes:
+        return "live-quotes has invalid prices: " + ", ".join(invalid_codes)
+
+    quote_status = payload.get("quote_status")
+    if not isinstance(quote_status, dict) or quote_status.get("status") != "ok":
+        return "live-quotes did not confirm a complete quote refresh"
+
+    if not payload.get("quote_updated_at") or not payload.get("market_as_of"):
+        return "live-quotes is missing quote freshness metadata"
+
+    return None
 
 
 def main() -> int:
@@ -49,10 +88,11 @@ def main() -> int:
         print(f"ERROR: live-quotes JSON decode failed: {exc}", file=sys.stderr)
         return 1
 
-    stocks = payload.get("stocks") if isinstance(payload, dict) else None
-    if not isinstance(stocks, list) or len(stocks) == 0:
-        print("ERROR: live-quotes returned empty stocks", file=sys.stderr)
+    payload_error = live_quote_payload_error(payload)
+    if payload_error:
+        print(f"ERROR: {payload_error}", file=sys.stderr)
         return 1
+    stocks = payload["stocks"]
 
     previous_stocks = {
         str(stock.get("code")): stock
@@ -103,9 +143,9 @@ def main() -> int:
                 links.append(source)
         stock["source_links"] = links
 
-    now_str = payload.get("updated_at")
-    payload["quote_updated_at"] = payload.get("quote_updated_at") or now_str
-    payload["market_as_of"] = payload.get("market_as_of") or previous_payload.get("market_as_of")
+    now_str = payload["quote_updated_at"]
+    payload["updated_at"] = now_str
+    payload["cache_version"] = CACHE_VERSION
     if fundamental_status.get("status") == "ok":
         payload["fundamental_updated_at"] = fundamental_status.get("updated_at")
         payload["fundamental_as_of"] = fundamental_status.get("as_of")

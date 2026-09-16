@@ -383,7 +383,7 @@ WEEKLY_REVIEW = {
     "as_of": "2026-08-28",
     "period": "2026-W35",
     "method_version": "weekly-v1",
-    "cache_version": "20260913-layered-sync-r1",
+    "cache_version": "20260916-quote-sync-r2",
     "title": "每週復盤｜名單與評分",
     "description": "本週複核 10 檔既有名單；分數是研究模型的相對排序，不是官方評等，也不保證報酬。",
     "criteria": [
@@ -856,10 +856,28 @@ def fetch_shioaji():
             "stop_loss": meta["stop_loss"]
         })
 
+    invalid_quote_codes = [
+        stock["code"]
+        for stock in results
+        if not isinstance(stock.get("last_price"), (int, float)) or stock["last_price"] <= 0
+    ]
+    if invalid_quote_codes:
+        raise RuntimeError(
+            "Live quote refresh was incomplete; existing stock_data.json was preserved for "
+            + ", ".join(invalid_quote_codes)
+        )
+
     payload = {
         "updated_at": now_str,
         "quote_updated_at": now_str,
         "market_as_of": market_as_of,
+        "quote_status": {
+            "status": "ok",
+            "updated_at": now_str,
+            "as_of": market_as_of,
+            "quote_count": len(results),
+            "source": data_source,
+        },
         "fundamental_updated_at": (
             fundamental_status.get("updated_at")
             if fundamental_status.get("status") == "ok"
