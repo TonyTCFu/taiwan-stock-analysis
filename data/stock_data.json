@@ -1,42 +1,42 @@
 {
-  "updated_at": "2026-09-16 20:18:39",
-  "quote_updated_at": "2026-09-16 20:18:39",
+  "updated_at": "2026-09-16 20:27:43",
+  "quote_updated_at": "2026-09-16 20:27:43",
   "market_as_of": "2026-09-16",
   "fundamental_updated_at": "2026-09-16 20:18:39",
-  "fundamental_checked_at": "2026-09-16 20:18:39",
+  "fundamental_checked_at": "2026-09-16 20:27:44",
   "fundamental_as_of": "2026-09-16",
   "fundamental_source": "TWSE OpenAPI fundamentals + MOPS event-calendar reference",
   "fundamental_status": {
-    "status": "ok",
-    "updated_at": "2026-09-16 20:18:39",
-    "as_of": "2026-09-16",
+    "status": "partial",
+    "updated_at": "2026-09-16 20:27:44",
+    "as_of": null,
     "source": "TWSE OpenAPI fundamentals + MOPS event-calendar reference",
     "sources": {
       "monthly_revenue": {
-        "status": "ok",
+        "status": "unavailable",
         "endpoint": "https://openapi.twse.com.tw/v1/opendata/t187ap05_L",
-        "row_count": 1081
+        "detail": "URLError: <urlopen error [Errno 54] Connection reset by peer>"
       },
       "operating_analysis": {
-        "status": "ok",
+        "status": "unavailable",
         "endpoint": "https://openapi.twse.com.tw/v1/opendata/t187ap17_L",
-        "row_count": 1053
+        "detail": "URLError: <urlopen error [Errno 54] Connection reset by peer>"
       },
       "income_statement": {
-        "status": "ok",
+        "status": "unavailable",
         "endpoint": "https://openapi.twse.com.tw/v1/opendata/t187ap06_L_ci",
-        "row_count": 1048
+        "detail": "URLError: <urlopen error [Errno 54] Connection reset by peer>"
       },
       "balance_sheet": {
-        "status": "ok",
+        "status": "unavailable",
         "endpoint": "https://openapi.twse.com.tw/v1/opendata/t187ap07_L_ci",
-        "row_count": 1048
+        "detail": "URLError: <urlopen error [Errno 54] Connection reset by peer>"
       }
     }
   },
-  "institutional_as_of": "2026-09-11",
+  "institutional_as_of": "2026-09-16",
   "research_updated_at": "2026-08-28",
-  "cache_version": "20260916-quote-sync-r2",
+  "cache_version": "20260916-quote-flow-sync-r3",
   "data_source": "Shioaji Snapshot (primary) + TWSE MIS cross-check",
   "market": "台湾股票市场 (TWSE)",
   "trading_hours": "09:00 - 13:30 (TPE time)",
@@ -324,16 +324,23 @@
     "shioaji": {
       "status": "ok",
       "quote_count": 10,
-      "retrieved_at": "2026-09-16T20:18:38+08:00",
+      "retrieved_at": "2026-09-16T20:27:41+08:00",
       "quote_mode": "snapshot"
     },
     "twse_mis": {
       "status": "ok",
       "quote_count": 10,
-      "retrieved_at": "2026-09-16T20:18:39+08:00",
+      "retrieved_at": "2026-09-16T20:27:43+08:00",
       "market_time": "13:30:00"
     },
-    "selected_quote_source": "Shioaji Snapshot (primary) + TWSE MIS cross-check"
+    "selected_quote_source": "Shioaji Snapshot (primary) + TWSE MIS cross-check",
+    "twse_t86_flow": {
+      "status": "ok",
+      "date": "2026-09-16",
+      "retrieved_at": "2026-09-16T20:27:44",
+      "flow_count": 10,
+      "as_of": "2026-09-16"
+    }
   },
   "stocks": [
     {
@@ -372,14 +379,14 @@
       "change_pct": 0.0,
       "volume": 17955,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-16T20:18:38+08:00",
+      "quote_time": "2026-09-16T20:27:41+08:00",
       "gross_margin": "67.03% (2026Q2)",
       "net_margin": "53.22% (2026Q2)",
       "roe": "79.5% (單季年化, 2026Q2)",
       "eps_single": "49.33 元 (2026Q2)",
       "earnings_date": "2026-10-15 (26Q3 法说会) | 每月 10 日发布营收",
       "event_status": "scheduled",
-      "event_checked_at": "2026-09-16T20:18:39",
+      "event_checked_at": "2026-09-16T20:27:44",
       "fundamental_as_of": "2026-09-16",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 514,805 百萬元；月增 +10.10%；年增 +53.32%",
@@ -424,17 +431,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-8252 张",
-        "trust_net": "-181 张",
-        "dealer_net": "-401 张",
-        "total_net": "-8833 张",
-        "date": "2026-09-11",
-        "summary": "[2026-09-11 官方结算] 三大法人同步卖超 (-8,833 张)，短线筹码面临清洗。"
+        "foreign_net": "-8745 张",
+        "trust_net": "+166 张",
+        "dealer_net": "+762 张",
+        "total_net": "-7816 张",
+        "date": "2026-09-16",
+        "summary": "[2026-09-16 官方结算] 投信内资买超 (+166 张) 逢低承接，外资高档调节 (-8,745 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 8,833 张 (占量 48.8%)",
+        "large_order_ratio": "法人净卖超 7,816 张 (占量 43.5%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-09-11 筹码] 主力机构呈净卖出 (-8,833 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-09-16 筹码] 主力机构呈净卖出 (-7,816 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "+1.8% (处于健康均线排列)",
@@ -483,14 +490,14 @@
       "change_pct": 2.82,
       "volume": 418,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-16T20:18:38+08:00",
+      "quote_time": "2026-09-16T20:27:41+08:00",
       "gross_margin": "84.18% (2026Q2)",
       "net_margin": "64.95% (2026Q2)",
       "roe": "125.3% (單季年化, 2026Q2)",
       "eps_single": "110.96 元 (2026Q2)",
       "earnings_date": "2026-11-06 (26Q3 财报) | 每月 10 日发布营收",
       "event_status": "scheduled",
-      "event_checked_at": "2026-09-16T20:18:39",
+      "event_checked_at": "2026-09-16T20:27:44",
       "fundamental_as_of": "2026-09-16",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 6,466 百萬元；月增 +0.92%；年增 +344.42%",
@@ -535,17 +542,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "+60 张",
-        "trust_net": "-36 张",
-        "dealer_net": "-9 张",
-        "total_net": "+16 张",
-        "date": "2026-09-11",
-        "summary": "[2026-09-11 官方结算] 外资主力大幅回流 (+60 张)，投信阶段获利减仓 (-36 张)。"
+        "foreign_net": "-64 张",
+        "trust_net": "+59 张",
+        "dealer_net": "-25 张",
+        "total_net": "-30 张",
+        "date": "2026-09-16",
+        "summary": "[2026-09-16 官方结算] 投信内资买超 (+59 张) 逢低承接，外资高档调节 (-64 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净买超 16 张 (占量 4.6%)",
+        "large_order_ratio": "法人净卖超 30 张 (占量 7.2%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-09-11 筹码] 主力机构呈净买入 (+16 张)，筹码向法人端汇聚沉淀。"
+        "capital_status": "[2026-09-16 筹码] 主力机构呈净卖出 (-30 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "+3.2%",
@@ -594,14 +601,14 @@
       "change_pct": -0.59,
       "volume": 1522,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-16T20:18:38+08:00",
+      "quote_time": "2026-09-16T20:27:41+08:00",
       "gross_margin": "32.03% (2026Q2)",
       "net_margin": "18.93% (2026Q2)",
       "roe": "104.3% (單季年化, 2026Q2)",
       "eps_single": "42.46 元 (2026Q2)",
       "earnings_date": "2026-10-29 (26Q3 财报) | 每月 10 日发布营收",
       "event_status": "scheduled",
-      "event_checked_at": "2026-09-16T20:18:39",
+      "event_checked_at": "2026-09-16T20:27:44",
       "fundamental_as_of": "2026-09-16",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 20,146 百萬元；月增 +4.89%；年增 +129.85%",
@@ -646,17 +653,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-23 张",
-        "trust_net": "+110 张",
-        "dealer_net": "-19 张",
-        "total_net": "+69 张",
-        "date": "2026-09-11",
-        "summary": "[2026-09-11 官方结算] 投信内资买超 (+110 张) 逢低承接，外资高档调节 (-23 张)。"
+        "foreign_net": "+67 张",
+        "trust_net": "-147 张",
+        "dealer_net": "-75 张",
+        "total_net": "-154 张",
+        "date": "2026-09-16",
+        "summary": "[2026-09-16 官方结算] 外资主力大幅回流 (+67 张)，投信阶段获利减仓 (-147 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净买超 69 张 (占量 6.7%)",
+        "large_order_ratio": "法人净卖超 154 张 (占量 10.1%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-09-11 筹码] 主力机构呈净买入 (+69 张)，筹码向法人端汇聚沉淀。"
+        "capital_status": "[2026-09-16 筹码] 主力机构呈净卖出 (-154 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "+4.5% (多头强劲攻势)",
@@ -705,14 +712,14 @@
       "change_pct": 1.93,
       "volume": 2629,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-16T20:18:38+08:00",
+      "quote_time": "2026-09-16T20:27:41+08:00",
       "gross_margin": "31.17% (2026Q2)",
       "net_margin": "19.31% (2026Q2)",
       "roe": "126.7% (單季年化, 2026Q2)",
       "eps_single": "44.54 元 (2026Q2)",
       "earnings_date": "2026-11-10 (26Q3 法说会) | 每月 10 日发布营收",
       "event_status": "scheduled",
-      "event_checked_at": "2026-09-16T20:18:39",
+      "event_checked_at": "2026-09-16T20:27:44",
       "fundamental_as_of": "2026-09-16",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 19,481 百萬元；月增 +4.79%；年增 +54.34%",
@@ -757,17 +764,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-99 张",
-        "trust_net": "+45 张",
-        "dealer_net": "-40 张",
-        "total_net": "-94 张",
-        "date": "2026-09-11",
-        "summary": "[2026-09-11 官方结算] 投信内资买超 (+45 张) 逢低承接，外资高档调节 (-99 张)。"
+        "foreign_net": "-201 张",
+        "trust_net": "+80 张",
+        "dealer_net": "+30 张",
+        "total_net": "-91 张",
+        "date": "2026-09-16",
+        "summary": "[2026-09-16 官方结算] 投信内资买超 (+80 张) 逢低承接，外资高档调节 (-201 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 94 张 (占量 4.7%)",
+        "large_order_ratio": "法人净卖超 91 张 (占量 3.5%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-09-11 筹码] 主力机构呈净卖出 (-94 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-09-16 筹码] 主力机构呈净卖出 (-91 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "+3.8%",
@@ -816,14 +823,14 @@
       "change_pct": 0.61,
       "volume": 19274,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-16T20:18:38+08:00",
+      "quote_time": "2026-09-16T20:27:41+08:00",
       "gross_margin": "6.15% (2026Q2)",
       "net_margin": "2.73% (2026Q2)",
       "roe": "23.0% (單季年化, 2026Q2)",
       "eps_single": "7.84 元 (2026Q2)",
       "earnings_date": "2026-08-14 (26Q2 法說會已舉行)；下一次財報/法說會日期待公司公告 | 每月 5 日发布营收",
       "event_status": "historical",
-      "event_checked_at": "2026-09-16T20:18:39",
+      "event_checked_at": "2026-09-16T20:27:44",
       "fundamental_as_of": "2026-09-16",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 921,766 百萬元；月增 -2.61%；年增 +51.98%",
@@ -868,17 +875,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-3751 张",
-        "trust_net": "+410 张",
-        "dealer_net": "-45 张",
-        "total_net": "-3386 张",
-        "date": "2026-09-11",
-        "summary": "[2026-09-11 官方结算] 投信内资买超 (+410 张) 逢低承接，外资高档调节 (-3,751 张)。"
+        "foreign_net": "-1689 张",
+        "trust_net": "+1281 张",
+        "dealer_net": "-2184 张",
+        "total_net": "-2590 张",
+        "date": "2026-09-16",
+        "summary": "[2026-09-16 官方结算] 投信内资买超 (+1,281 张) 逢低承接，外资高档调节 (-1,689 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 3,386 张 (占量 14.4%)",
+        "large_order_ratio": "法人净卖超 2,590 张 (占量 13.4%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-09-11 筹码] 主力机构呈净卖出 (-3,386 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-09-16 筹码] 主力机构呈净卖出 (-2,590 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "+2.1%",
@@ -927,14 +934,14 @@
       "change_pct": 2.4,
       "volume": 10019,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-16T20:18:38+08:00",
+      "quote_time": "2026-09-16T20:27:41+08:00",
       "gross_margin": "36.27% (2026Q2)",
       "net_margin": "14.89% (2026Q2)",
       "roe": "62.2% (單季年化, 2026Q2)",
       "eps_single": "17.59 元 (2026Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
       "event_status": "unknown",
-      "event_checked_at": "2026-09-16T20:18:39",
+      "event_checked_at": "2026-09-16T20:27:44",
       "fundamental_as_of": "2026-09-16",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 64,586 百萬元；月增 -3.71%；年增 +34.95%",
@@ -1005,17 +1012,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-3573 张",
-        "trust_net": "-536 张",
-        "dealer_net": "+303 张",
-        "total_net": "-3805 张",
-        "date": "2026-09-11",
-        "summary": "[2026-09-11 官方结算] 外资与投信偏空调节 (-3,805 张)，机构筹码阶段获利了结。"
+        "foreign_net": "-845 张",
+        "trust_net": "+551 张",
+        "dealer_net": "-274 张",
+        "total_net": "-567 张",
+        "date": "2026-09-16",
+        "summary": "[2026-09-16 官方结算] 投信内资买超 (+551 张) 逢低承接，外资高档调节 (-845 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 3,805 张 (占量 27.6%)",
+        "large_order_ratio": "法人净卖超 567 张 (占量 5.7%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-09-11 筹码] 主力机构呈净卖出 (-3,805 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-09-16 筹码] 主力机构呈净卖出 (-567 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月回落約 25.9%",
@@ -1064,14 +1071,14 @@
       "change_pct": 0.0,
       "volume": 2310,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-16T20:18:38+08:00",
+      "quote_time": "2026-09-16T20:27:41+08:00",
       "gross_margin": "19.63% (2026Q2)",
       "net_margin": "11.70% (2026Q2)",
       "roe": "112.4% (單季年化, 2026Q2)",
       "eps_single": "34.70 元 (2026Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
       "event_status": "unknown",
-      "event_checked_at": "2026-09-16T20:18:39",
+      "event_checked_at": "2026-09-16T20:27:44",
       "fundamental_as_of": "2026-09-16",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 40,873 百萬元；月增 +3.55%；年增 +59.42%",
@@ -1146,17 +1153,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "+572 张",
-        "trust_net": "-652 张",
-        "dealer_net": "-7 张",
-        "total_net": "-87 张",
-        "date": "2026-09-11",
-        "summary": "[2026-09-11 官方结算] 外资主力大幅回流 (+572 张)，投信阶段获利减仓 (-652 张)。"
+        "foreign_net": "-259 张",
+        "trust_net": "-129 张",
+        "dealer_net": "-113 张",
+        "total_net": "-500 张",
+        "date": "2026-09-16",
+        "summary": "[2026-09-16 官方结算] 三大法人同步卖超 (-500 张)，短线筹码面临清洗。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 87 张 (占量 2.6%)",
+        "large_order_ratio": "法人净卖超 500 张 (占量 21.6%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-09-11 筹码] 主力机构呈净卖出 (-87 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-09-16 筹码] 主力机构呈净卖出 (-500 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月約 -7.2%，相對大幅上漲後整理",
@@ -1205,14 +1212,14 @@
       "change_pct": 0.48,
       "volume": 1073,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-16T20:18:38+08:00",
+      "quote_time": "2026-09-16T20:27:41+08:00",
       "gross_margin": "61.48% (2026Q2)",
       "net_margin": "36.15% (2026Q2)",
       "roe": "109.0% (單季年化, 2026Q2)",
       "eps_single": "21.27 元 (2026Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
       "event_status": "unknown",
-      "event_checked_at": "2026-09-16T20:18:39",
+      "event_checked_at": "2026-09-16T20:27:44",
       "fundamental_as_of": "2026-09-16",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 5,632 百萬元；月增 +3.65%；年增 +156.30%",
@@ -1287,17 +1294,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "+143 张",
-        "trust_net": "+92 张",
-        "dealer_net": "-12 张",
-        "total_net": "+225 张",
-        "date": "2026-09-11",
-        "summary": "[2026-09-11 官方结算] 外资与投信联手买超 (+225 张)，内外部机构共振做多。"
+        "foreign_net": "-104 张",
+        "trust_net": "+25 张",
+        "dealer_net": "+1 张",
+        "total_net": "-76 张",
+        "date": "2026-09-16",
+        "summary": "[2026-09-16 官方结算] 投信内资买超 (+25 张) 逢低承接，外资高档调节 (-104 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净买超 225 张 (占量 10.2%)",
+        "large_order_ratio": "法人净卖超 76 张 (占量 7.1%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-09-11 筹码] 主力机构呈净买入 (+225 张)，筹码向法人端汇聚沉淀。"
+        "capital_status": "[2026-09-16 筹码] 主力机构呈净卖出 (-76 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月約 -22.6%，高檔修正",
@@ -1346,14 +1353,14 @@
       "change_pct": 2.2,
       "volume": 8978,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-16T20:18:38+08:00",
+      "quote_time": "2026-09-16T20:27:41+08:00",
       "gross_margin": "20.55% (2026Q2)",
       "net_margin": "9.89% (2026Q2)",
       "roe": "36.2% (單季年化, 2026Q2)",
       "eps_single": "8.04 元 (2026Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
       "event_status": "unknown",
-      "event_checked_at": "2026-09-16T20:18:39",
+      "event_checked_at": "2026-09-16T20:27:44",
       "fundamental_as_of": "2026-09-16",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 82,247 百萬元；月增 +11.47%；年增 +45.66%",
@@ -1424,17 +1431,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-8053 张",
-        "trust_net": "+679 张",
-        "dealer_net": "-445 张",
-        "total_net": "-7819 张",
-        "date": "2026-09-11",
-        "summary": "[2026-09-11 官方结算] 投信内资买超 (+679 张) 逢低承接，外资高档调节 (-8,053 张)。"
+        "foreign_net": "+2606 张",
+        "trust_net": "-1038 张",
+        "dealer_net": "+95 张",
+        "total_net": "+1663 张",
+        "date": "2026-09-16",
+        "summary": "[2026-09-16 官方结算] 外资主力大幅回流 (+2,606 张)，投信阶段获利减仓 (-1,038 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 7,819 张 (占量 36.3%)",
+        "large_order_ratio": "法人净买超 1,663 张 (占量 18.5%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-09-11 筹码] 主力机构呈净卖出 (-7,819 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-09-16 筹码] 主力机构呈净买入 (+1,663 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月約 -2.4%，相對穩定",
@@ -1483,14 +1490,14 @@
       "change_pct": 2.26,
       "volume": 5889,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-09-16T20:18:38+08:00",
+      "quote_time": "2026-09-16T20:27:41+08:00",
       "gross_margin": "46.25% (2026Q2)",
       "net_margin": "16.25% (2026Q2)",
       "roe": "45.7% (單季年化, 2026Q2)",
       "eps_single": "30.44 元 (2026Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
       "event_status": "unknown",
-      "event_checked_at": "2026-09-16T20:18:39",
+      "event_checked_at": "2026-09-16T20:27:44",
       "fundamental_as_of": "2026-09-16",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 64,183 百萬元；月增 +32.41%；年增 +44.08%",
@@ -1565,17 +1572,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-743 张",
-        "trust_net": "+108 张",
-        "dealer_net": "-22 张",
-        "total_net": "-656 张",
-        "date": "2026-09-11",
-        "summary": "[2026-09-11 官方结算] 投信内资买超 (+108 张) 逢低承接，外资高档调节 (-743 张)。"
+        "foreign_net": "+997 张",
+        "trust_net": "-484 张",
+        "dealer_net": "+215 张",
+        "total_net": "+729 张",
+        "date": "2026-09-16",
+        "summary": "[2026-09-16 官方结算] 外资主力大幅回流 (+997 张)，投信阶段获利减仓 (-484 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 656 张 (占量 9.6%)",
+        "large_order_ratio": "法人净买超 729 张 (占量 12.4%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-09-11 筹码] 主力机构呈净卖出 (-656 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-09-16 筹码] 主力机构呈净买入 (+729 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月約 -15%，高檔整理",
@@ -1591,9 +1598,16 @@
   ],
   "quote_status": {
     "status": "ok",
-    "updated_at": "2026-09-16 20:18:39",
+    "updated_at": "2026-09-16 20:27:43",
     "as_of": "2026-09-16",
     "quote_count": 10,
     "source": "Shioaji Snapshot (primary) + TWSE MIS cross-check"
+  },
+  "institutional_status": {
+    "status": "ok",
+    "date": "2026-09-16",
+    "retrieved_at": "2026-09-16T20:27:44",
+    "flow_count": 10,
+    "as_of": "2026-09-16"
   }
 }

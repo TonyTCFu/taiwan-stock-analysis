@@ -9,14 +9,18 @@ from pathlib import Path
 
 import requests
 
-from fetch_shioaji_data import STOCKS_META
+from fetch_shioaji_data import (
+    STOCKS_META,
+    compute_institutional_analysis,
+    fetch_twse_institutional_flow,
+)
 from fundamental_data import fetch_fundamental_snapshot
 
 LIVE_QUOTES_URL = "https://futienchun-com-dashboard.onrender.com/api/live-quotes"
 TIMEOUT_SECONDS = 180
 PROJECT_ROOT = Path(__file__).resolve().parent
 OUTPUT_PATH = PROJECT_ROOT / "data" / "stock_data.json"
-CACHE_VERSION = "20260916-quote-sync-r2"
+CACHE_VERSION = "20260916-quote-flow-sync-r3"
 
 
 def live_quote_payload_error(payload: object) -> str | None:
@@ -99,17 +103,42 @@ def main() -> int:
         for stock in previous_payload.get("stocks", [])
         if isinstance(stock, dict) and stock.get("code")
     }
+    institutional_data, institutional_status = fetch_twse_institutional_flow(
+        list(STOCKS_META)
+    )
+    institutional_refresh_ok = (
+        institutional_status.get("status") == "ok"
+        and set(STOCKS_META).issubset(institutional_data)
+    )
     fundamental_updates, fundamental_status = fetch_fundamental_snapshot(STOCKS_META)
     for stock in stocks:
         code = str(stock.get("code", ""))
         previous_stock = previous_stocks.get(code, {})
-        current_flow = stock.get("institutional_flow") or {}
-        if current_flow.get("date") in (None, "-"):
+        if institutional_refresh_ok and code in STOCKS_META:
+            institutional_flow, capital_inflow = compute_institutional_analysis(
+                code,
+                STOCKS_META[code]["name"],
+                institutional_data,
+                stock.get("volume"),
+            )
+            stock["institutional_flow"] = institutional_flow
+            stock["capital_inflow"] = capital_inflow
+        else:
+            current_flow = stock.get("institutional_flow") or {}
             previous_flow = previous_stock.get("institutional_flow")
             previous_capital = previous_stock.get("capital_inflow")
-            if isinstance(previous_flow, dict) and previous_flow.get("date") not in (None, "-"):
+            if (
+                current_flow.get("date") in (None, "-")
+                and isinstance(previous_flow, dict)
+                and previous_flow.get("date") not in (None, "-")
+            ):
                 stock["institutional_flow"] = previous_flow
-            if isinstance(previous_capital, dict) and previous_capital.get("capital_status") not in (None, "暂无法人筹码动向"):
+            if (
+                current_flow.get("date") in (None, "-")
+                and isinstance(previous_capital, dict)
+                and previous_capital.get("capital_status")
+                not in (None, "暂无法人筹码动向")
+            ):
                 stock["capital_inflow"] = previous_capital
         update = fundamental_updates.get(code, {})
         for field in (
@@ -161,7 +190,23 @@ def main() -> int:
     payload["fundamental_checked_at"] = fundamental_status.get("updated_at")
     payload["fundamental_source"] = fundamental_status.get("source")
     payload["fundamental_status"] = fundamental_status
-    payload["institutional_as_of"] = payload.get("institutional_as_of") or previous_payload.get("institutional_as_of")
+    if institutional_refresh_ok:
+        payload["institutional_as_of"] = institutional_status["date"]
+    else:
+        payload["institutional_as_of"] = (
+            payload.get("institutional_as_of")
+            or previous_payload.get("institutional_as_of")
+        )
+    payload["institutional_status"] = {
+        **institutional_status,
+        "flow_count": len(institutional_data),
+        "as_of": institutional_status.get("date")
+        if institutional_refresh_ok
+        else payload["institutional_as_of"],
+    }
+    sources = payload.get("sources")
+    payload["sources"] = sources if isinstance(sources, dict) else {}
+    payload["sources"]["twse_t86_flow"] = payload["institutional_status"]
     payload["research_updated_at"] = payload.get("weekly_review", {}).get("as_of")
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)

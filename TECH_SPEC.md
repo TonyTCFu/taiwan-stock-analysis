@@ -26,6 +26,8 @@ The top-level payload must contain:
 
 Each stock's fundamentals fields must prefer the latest official synchronization. If an official endpoint fails, the previous verified value must be retained and the failure must be exposed in `fundamental_status` instead of replacing the value with an empty field.
 
+The institutional layer advances only when T86 returns every tracked stock for one official settlement date. A partial or unavailable T86 response retains the previous verified institutional layer and exposes its status separately.
+
 ## Frontend Behavior
 
 - On Dashboard load, read the latest published payload and merge a locally persisted newer quote layer when available. Do not start a 30-second polling loop.
