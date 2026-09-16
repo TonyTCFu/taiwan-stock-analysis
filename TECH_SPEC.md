@@ -30,8 +30,8 @@ The institutional layer advances only when T86 returns every tracked stock for o
 
 ## Frontend Behavior
 
-- On Dashboard load, read the latest published payload and merge a locally persisted newer quote layer when available. Do not start a 30-second polling loop.
-- On “Force refresh quotes”, request the live quote gateway and overlay its quote/institutional fields onto the best available fundamentals payload. A stale live gateway payload must not overwrite newer published fundamentals.
+- On Dashboard load, treat the latest published payload as authoritative for institutional flow, fundamentals, events, research, and cache version. A locally persisted payload may overlay only a newer complete quote layer. Do not start a 30-second polling loop.
+- On “Force refresh quotes”, request the live quote gateway and overlay only quote fields onto the latest published payload. Institutional flow changes only when the scheduled TWSE T86 10/10 settlement payload is published.
 - If a manual refresh fails, preserve the last available data and show a failure message; never show a false success state.
 - Show separate quote, institutional, fundamentals, and research timestamps near the Dashboard header.
 

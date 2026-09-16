@@ -693,12 +693,11 @@
         }
 
         const PUBLIC_LIVE_QUOTES_API = 'https://futienchun-com-dashboard.onrender.com/api/live-quotes';
-        const LOCAL_STORAGE_KEY = 'TAIWAN_STOCK_PERSISTED_DATA_V2';
+        const LOCAL_STORAGE_KEY = 'TAIWAN_STOCK_PERSISTED_DATA_V3';
         const EXPECTED_STOCK_CODES = ['2330', '2059', '2383', '3017', '2317', '2308', '2345', '2360', '3711', '2454'];
-        const MARKET_FIELDS = [
+        const QUOTE_FIELDS = [
             'open_price', 'high_price', 'low_price', 'last_price', 'prev_close',
-            'change', 'change_pct', 'volume', 'quote_source', 'quote_time',
-            'institutional_flow', 'capital_inflow'
+            'change', 'change_pct', 'volume', 'quote_source', 'quote_time'
         ];
 
         function isCompleteStockPayload(payload) {
@@ -769,51 +768,39 @@
             })[0] || candidates.find(isPayload) || null;
         }
 
-        function fundamentalQuality(payload) {
-            if (!isPayload(payload)) return -1;
-            const status = payload.fundamental_status && payload.fundamental_status.status;
-            const statusScore = status === 'ok' ? 1000000 : (status === 'partial' ? 1000 : 0);
-            const coverage = payload.stocks.filter(stock => stock.latest_monthly_revenue && stock.latest_quarter).length;
-            return statusScore + coverage;
-        }
+        function mergeMarketLayer(publishedPayload, marketPayload) {
+            if (!isPayload(marketPayload)) return publishedPayload;
+            if (!isPayload(publishedPayload)) return marketPayload;
 
-        function pickFundamentalPayload(candidates) {
-            return candidates.filter(isPayload).sort((left, right) => {
-                const qualityDelta = fundamentalQuality(right) - fundamentalQuality(left);
-                if (qualityDelta !== 0) return qualityDelta;
-                return payloadTime(right, 'fundamental_updated_at') - payloadTime(left, 'fundamental_updated_at');
-            })[0] || null;
-        }
-
-        function mergeMarketLayer(fundamentalPayload, marketPayload) {
-            if (!isPayload(marketPayload)) return fundamentalPayload;
-            if (!isPayload(fundamentalPayload)) return marketPayload;
-
-            const fundamentalByCode = new Map(
-                fundamentalPayload.stocks.map(stock => [String(stock.code), stock])
+            const marketByCode = new Map(
+                marketPayload.stocks.map(stock => [String(stock.code), stock])
             );
-            const mergedStocks = marketPayload.stocks.map(marketStock => {
-                const baseStock = fundamentalByCode.get(String(marketStock.code)) || {};
+            const mergedStocks = publishedPayload.stocks.map(baseStock => {
+                const marketStock = marketByCode.get(String(baseStock.code));
+                if (!marketStock) return baseStock;
                 const mergedStock = { ...baseStock };
-                MARKET_FIELDS.forEach(field => {
+                QUOTE_FIELDS.forEach(field => {
                     if (marketStock[field] !== undefined) mergedStock[field] = marketStock[field];
                 });
-                return { ...mergedStock, code: marketStock.code };
+                return { ...mergedStock, code: baseStock.code };
             });
 
             return {
-                ...fundamentalPayload,
-                updated_at: marketPayload.updated_at || fundamentalPayload.updated_at,
-                quote_updated_at: marketPayload.quote_updated_at || marketPayload.updated_at || fundamentalPayload.quote_updated_at,
-                market_as_of: marketPayload.market_as_of || fundamentalPayload.market_as_of,
-                data_source: marketPayload.data_source || fundamentalPayload.data_source,
-                sources: marketPayload.sources || fundamentalPayload.sources,
+                ...publishedPayload,
+                updated_at: marketPayload.updated_at || publishedPayload.updated_at,
+                quote_updated_at: marketPayload.quote_updated_at || marketPayload.updated_at || publishedPayload.quote_updated_at,
+                market_as_of: marketPayload.market_as_of || publishedPayload.market_as_of,
+                data_source: marketPayload.data_source || publishedPayload.data_source,
+                sources: marketPayload.sources || publishedPayload.sources,
                 stocks: mergedStocks
             };
         }
 
         function mergeAvailableLayers(candidates) {
-            const fundamentalPayload = pickFundamentalPayload(candidates) || pickNewestPayload(candidates, 'fundamental_updated_at') || pickNewestPayload(candidates, 'updated_at');
+            const [published, ...fallbackCandidates] = candidates;
+            const fundamentalPayload = isPayload(published)
+                ? published
+                : pickNewestPayload(fallbackCandidates, 'fundamental_updated_at') || pickNewestPayload(fallbackCandidates, 'updated_at');
             const marketPayload = pickNewestPayload(candidates, 'quote_updated_at') || pickNewestPayload(candidates, 'updated_at');
             return mergeMarketLayer(fundamentalPayload, marketPayload);
         }
