@@ -1006,7 +1006,14 @@
             // Render Cards
             const cardsContainer = document.getElementById('tab-cards');
             if (cardsContainer) {
-                cardsContainer.innerHTML = data.stocks.map(s => {
+                const sortedStocks = [...data.stocks].sort((a, b) => {
+                    const scoreA = Number(a.score);
+                    const scoreB = Number(b.score);
+                    const rankA = Number.isFinite(scoreA) ? scoreA : Number.NEGATIVE_INFINITY;
+                    const rankB = Number.isFinite(scoreB) ? scoreB : Number.NEGATIVE_INFINITY;
+                    return rankB - rankA;
+                });
+                cardsContainer.innerHTML = sortedStocks.map(s => {
                     const isUp = s.change >= 0;
                     const changeClass = isUp ? 'up' : 'down';
                     const changeSign = isUp ? '+' : '';

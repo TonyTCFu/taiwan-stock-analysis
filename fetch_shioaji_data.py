@@ -436,7 +436,7 @@ WEEKLY_REVIEW = {
     "as_of": "2026-08-28",
     "period": "2026-W35",
     "method_version": "weekly-v1",
-    "cache_version": "20260923-stock-universe-r4",
+    "cache_version": "20260923-stock-universe-r5",
     "title": "每週復盤｜名單與評分",
     "description": "本週複核既有名單；3653 健策為新納入標的，估值與行情動能完成核驗前不給週評分。分數是研究模型相對排序，不是官方評等，也不保證報酬。",
     "criteria": [
