@@ -1,8 +1,10 @@
 import os
 import json
 import datetime
+import re
 import urllib.request
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from fundamental_data import fetch_fundamental_snapshot
 
@@ -35,6 +37,37 @@ def latest_market_date(now):
         while candidate.weekday() >= 5:
             candidate -= datetime.timedelta(days=1)
     return candidate.isoformat()
+
+
+def next_research_review_at(now):
+    """Return the next weekday automatic data sync slot in Taiwan time."""
+    taipei = ZoneInfo("Asia/Taipei")
+    current = now.replace(tzinfo=taipei) if now.tzinfo is None else now.astimezone(taipei)
+    next_day = current.date() + datetime.timedelta(days=1)
+    while next_day.weekday() >= 5:
+        next_day += datetime.timedelta(days=1)
+    return f"{next_day.isoformat()} 14:30 Asia/Taipei"
+
+
+def market_snapshot_text(stock, market_as_of):
+    """Build quote prose from the same validated quote fields used by the card."""
+    price = _as_float(stock.get("last_price"))
+    change_pct = _as_float(stock.get("change_pct"))
+    if price <= 0:
+        return f"行情待同步；資料基準日 {market_as_of}。"
+    return (
+        f"{market_as_of} 收盤/最新 NT${price:,.2f}，"
+        f"日變動 {change_pct:+.2f}%；行情時間 {stock.get('quote_time') or '-'}。"
+    )
+
+
+def research_source_as_of(stock, market_as_of):
+    """Keep market, revenue, and quarterly source periods explicit."""
+    quarter = (stock.get("latest_quarter") or {}).get("period") or "季度待同步"
+    revenue = stock.get("latest_monthly_revenue") or ""
+    match = re.search(r"20\d{2}-\d{2}", revenue)
+    revenue_period = match.group(0) if match else "月營收待同步"
+    return f"行情 {market_as_of}；月營收 {revenue_period}；財報 {quarter}"
 
 
 def load_shioaji_env():
@@ -428,6 +461,160 @@ STOCKS_META = {
     }
 }
 
+RESEARCH_BASELINES = {
+    "2330": {
+        "industry": "專業晶圓代工；競爭核心為先進製程、良率、規模與先進封裝整合。",
+        "earnings_trend": "2026Q2 官方季報 EPS 27.25 元；TWSE OpenAPI 申報欄位可能為年初累計口徑，未拆分前不作跨季趨勢或 TTM 計算。",
+        "eps_single": "27.25 元 (2026Q2 單季；TSMC 官方財報)",
+        "investment_case": "公司以純晶圓代工為核心。2026Q2 官方資料顯示營收 NT$1,270.38B、單季 EPS NT$27.25，7nm 及以下製程占晶圓營收 77%；AI/HPC 對先進製程與封裝需求是主要成長來源。",
+        "market_factors": "正向：AI/HPC 晶片需求、先進製程與先進封裝滲透。反向：半導體景氣與客戶資本支出週期、海外廠成本與毛利稀釋、匯率及高資本支出。",
+        "risk_factors": ["地緣政治與台海營運中斷風險", "海外廠建置成本、爬坡與毛利稀釋", "半導體景氣、客戶資本支出及先進封裝需求反轉", "高資本支出與匯率波動"],
+        "strategy_note": "追蹤 2026-10-15 公司 Q3 法說、2nm 量產爬坡、先進封裝供需與毛利率；若成長預期或毛利率偏離公司指引，重估研究假設，不以題材替代估值。",
+        "source_links": [
+            {"label": "公司簡介", "url": "https://www.tsmc.com/english/aboutTSMC/company_profile"},
+            {"label": "2026Q2 官方財報與法說", "url": "https://investor.tsmc.com/english/quarterly-results/2026/q2"},
+            {"label": "2026 月營收", "url": "https://investor.tsmc.com/english/monthly-revenue/2026"},
+        ],
+    },
+    "2059": {
+        "industry": "精密滑軌、伺服器導軌套件與家具五金；伺服器產品包括導軌及線纜管理臂。",
+        "earnings_trend": "最新 TWSE OpenAPI 欄位為 2026Q2 申報值；在核實單季/累計口徑及取得完整四季數據前，不作季度趨勢或 TTM 計算。",
+        "eps_single": "74.38 元 (2026Q2 單季；公司法說資料)",
+        "investment_case": "公司官方產品頁列有伺服器導軌套件與線纜管理臂，並公布面向 NVIDIA MGX 生態的導軌方案。AI 機櫃重量、密度與維護需求增加，可能提升高規格導軌價值；實際受益仍須以公司營收、客戶集中及產能利用率驗證。",
+        "market_factors": "正向：AI 伺服器及資料中心機櫃擴建、機櫃設計複雜度提高。反向：大型客戶集中、客戶平台切換、擴產與新廠爬坡、伺服器資本支出週期及家具五金景氣。",
+        "risk_factors": ["伺服器大客戶與少數平台集中", "AI 資本支出放緩或平台轉換影響訂單", "擴產與新廠爬坡造成成本/現金流壓力", "高估值對成長預期變化敏感"],
+        "strategy_note": "以月營收、毛利率、應收帳款與產能爬坡交叉驗證伺服器需求；等待最新季度財報及公司法說更新後再檢視獲利延續性，不把單季或年初累計 EPS 當作 TTM。",
+        "source_links": [
+            {"label": "伺服器導軌與公司產品", "url": "https://www.kingslide.com/site_map"},
+            {"label": "公司 2026 MGX 導軌資訊", "url": "https://www.kingslide.com/blog/post/news/identifier/company-news-018/"},
+            {"label": "公司投資人專區入口", "url": "https://www.kingslide.com/"},
+        ],
+    },
+    "2383": {
+        "industry": "銅箔基板（CCL）與黏合片（Prepreg）材料；供應高速運算、網通及高頻高速電路板。",
+        "earnings_trend": "2026Q2 官方揭露的 EPS 42.46 元為 2026H1 累計值，不是單季數；未取得四季單季 EPS 前不推算 TTM。",
+        "eps_single": "27.55 元 (2026Q2 單季；公司季度財報)",
+        "investment_case": "公司官方資料將核心業務列為 CCL/Prepreg。2026Q2 公告的 2026H1 累計營收為 NT$80.34B、累計 EPS NT$42.46；這是半年度累計口徑，不是單季 EPS。高速網路與 AI 伺服器升級可能提高低損耗材料需求，仍需以產品組合與毛利率驗證。",
+        "market_factors": "正向：AI 伺服器、交換器速率升級及高速材料規格提升。反向：銅箔、樹脂等原料成本、客戶認證週期、擴產折舊、匯率及 PCB/網通景氣回落。",
+        "risk_factors": ["高階材料客戶認證或量產延遲", "銅箔/樹脂原料與匯率波動", "擴產折舊與營運資金需求", "AI 網通資本支出反轉及高估值波動"],
+        "strategy_note": "每月追蹤營收、季度檢視毛利率與產品組合；確認高階材料營收轉化為獲利而非只看需求敘事。估值需使用四季單季 EPS，資料不足時不報 TTM 本益比。",
+        "source_links": [
+            {"label": "公司業務與沿革", "url": "https://www.emctw.com/en-global/about_milestone/index"},
+            {"label": "公司季度財報", "url": "https://www.emctw.com/en-global/quarterly_results/index"},
+            {"label": "2026Q2 財報公告（2026-07-29）", "url": "https://www.emctw.com/en-global/investors_news/detail/2026072901/1"},
+        ],
+    },
+    "3017": {
+        "industry": "散熱與熱管理解決方案，涵蓋風扇、散熱模組、機殼及系統整合方案。",
+        "earnings_trend": "最新 TWSE OpenAPI 欄位為 2026Q2 申報值；在核實單季/累計口徑及取得完整四季數據前，不作季度趨勢或 TTM 計算。",
+        "eps_single": "24.37 元 (2026Q2 單季；公司季度財報)",
+        "investment_case": "公司定位為整體熱管理方案供應商，產品從散熱元件延伸至系統級冷卻方案。AI 伺服器功耗上升提高散熱設計價值；收入與毛利能否持續受益，仍取決於客戶驗證、量產良率與產品組合。",
+        "market_factors": "正向：AI/HPC 功耗密度提升、氣冷升級與液冷導入。反向：主要客戶/平台集中、量產時程延誤、競品價格、擴產折舊及伺服器資本支出反轉。",
+        "risk_factors": ["主要客戶/平台集中與新方案驗證延誤", "液冷競爭加劇、產品價格及毛利率壓力", "擴產折舊與產能利用率變化", "AI 伺服器投資週期反轉"],
+        "strategy_note": "追蹤新平台量產進度、月營收、毛利率、營業現金流與存貨；若營收增長未轉化為毛利/現金流改善，降低對成長敘事的權重。",
+        "source_links": [
+            {"label": "公司簡介與熱管理定位", "url": "https://www.avc.co/en-us/"},
+            {"label": "公司散熱解決方案", "url": "https://www.avc.co/en-us/ProductTechnology/%E6%95%A3%E7%86%B1%E7%94%A2%E5%93%81/%E6%95%A3%E7%86%B1%E6%96%B9%E6%A1%88"},
+            {"label": "公司投資人資訊入口", "url": "https://www.avc.co/en-us/"},
+        ],
+    },
+    "2317": {
+        "industry": "電子製造服務（EMS）、設計製造與系統組裝；業務涵蓋雲端網路、消費電子、電腦終端及元件。",
+        "earnings_trend": "2026Q2 公司公告單季 EPS 4.27 元、2026H1 累計 EPS 7.83 元；後者不可誤標為單季 EPS。",
+        "eps_single": "4.27 元 (2026Q2 單季；鴻海官方公告)",
+        "investment_case": "公司 2026Q2 官方公告：營收 NT$2.53T、歸屬母公司淨利 NT$60.0B、單季 EPS NT$4.27；雲端網路與 AI 伺服器是公司揭露的成長動能。規模及系統交付能力是優勢，但低毛利特性使營收成長不必然等於獲利率同步改善。",
+        "market_factors": "正向：AI 伺服器與雲端網路需求、客戶平台擴產。反向：低毛利與營運槓桿、客戶集中、產品組合變動、全球供應鏈/關稅、資本支出及消費電子週期。",
+        "risk_factors": ["EMS 低毛利，營收成長不一定帶動獲利等比例增加", "大型客戶與 AI 伺服器平台集中", "關稅、匯率及全球供應鏈調整", "消費電子需求週期與高額營運資金需求"],
+        "strategy_note": "追蹤雲端網路營收占比、毛利率/營益率、庫存與營運現金流；用季度獲利驗證 AI 伺服器成長，不因營收創高直接推定每股獲利加速。",
+        "source_links": [
+            {"label": "公司集團與業務介紹", "url": "https://www.foxconn.com/en-us/about/group-profile"},
+            {"label": "2026Q2 官方財報/法說資料", "url": "https://www.foxconn.com/en-us/investor-relations/investor-relations-activities/investor-conference/107"},
+            {"label": "公司投資人行事曆", "url": "https://www.foxconn.com/en-us/investor-relations/investor-relations-activities/event-calendar"},
+        ],
+    },
+    "2308": {
+        "industry": "電源與電力電子、資料中心基礎設施、熱管理、工業自動化及電動車相關產品。",
+        "earnings_trend": "2026Q2 EPS 9.68 元為公司季度簡報口徑；TWSE OpenAPI 的同期 EPS 欄位為 H1 累計，兩種口徑分開保存。",
+        "investment_case": "公司提供電源、熱管理與資料中心基礎設施產品。2026Q2 官方財報顯示資料中心與電源需求支撐營運；AI 機房的供電密度及能源效率需求是結構性機會，成長品質仍要看分部毛利和現金流。",
+        "market_factors": "正向：AI 資料中心擴建、電力轉換效率、液冷與電網投資。反向：雲端業者資本支出週期、材料/匯率、海外擴張成本、電動車需求與高估值對利率敏感。",
+        "strategy_note": "追蹤資料中心相關分部成長、營業利益率、現金流及資本支出回報；若成長僅由營收擴張帶動而利潤率下滑，重估預期。",
+        "source_links": [
+            {"label": "台達公司投資人專區", "url": "https://www.deltaww.com/en-US/investors"},
+            {"label": "2026Q2 法人說明會資料", "url": "https://www.deltaww.com/en-US/investors/analyst-meeting"},
+            {"label": "2026Q2 財報公告", "url": "https://www.deltaww.com/zh-TW/company/insights-stories/stories/41045"},
+        ],
+    },
+    "2345": {
+        "industry": "資料中心與雲端網路設備，涵蓋高速乙太網路交換器、開放式網路及網路設備設計製造。",
+        "earnings_trend": "2026Q2 EPS 19.78 元為公司季度口徑；TWSE OpenAPI 的同期 34.70 元為 H1 累計，不可混用。",
+        "investment_case": "公司官方產品與技術資料涵蓋 800G AI/ML 網路、資料中心交換器、液冷及高速網路技術。AI 叢集擴大與網路頻寬升級可能增加交換器需求；客戶集中及新平台轉換會令季度出貨波動。",
+        "market_factors": "正向：超大規模雲端業者 AI 投資、800G/更高速交換器迭代、開放網路。反向：大客戶集中、交換器世代轉換、供應鏈瓶頸、競爭與資本支出週期。",
+        "strategy_note": "逐季比對高速產品出貨、營收、毛利率及營運現金流；確認訂單轉收入及獲利後再評估成長持續性，不用單一季度年化估值。",
+        "source_links": [
+            {"label": "公司產品、資料中心與 800G AI 網路", "url": "https://www.accton.com.tw/"},
+            {"label": "公司財務報表與投資人專區入口", "url": "https://www.accton.com.tw/"},
+            {"label": "公司月營收/投資人資訊入口", "url": "https://www.accton.com.tw/"},
+        ],
+    },
+    "2360": {
+        "industry": "自動化測試與量測設備，涵蓋半導體、電源電子、光電及新能源等測試應用。",
+        "earnings_trend": "2026Q2 EPS 約 12.15 元為公司季度口徑；TWSE OpenAPI 的同期 21.27 元為 H1 累計，不可混用。",
+        "investment_case": "公司官方季度簡報持續揭露測試與量測設備營運。AI/HPC 晶片、先進封裝及高功率電源提高測試複雜度，有利高精度設備需求；實際轉單與獲利受客戶認證和資本支出時程影響。",
+        "market_factors": "正向：AI/HPC、先進封裝、光通訊及高功率電源測試。反向：半導體設備景氣循環、客戶驗證遞延、接單認列時點、研發投入及高估值波動。",
+        "strategy_note": "以訂單/營收、毛利率、應收帳款與營運現金流確認成長品質；設備收入認列具波動，不以單季高增速線性外推。",
+        "source_links": [
+            {"label": "公司季度財報簡報（含 2026Q2）", "url": "https://www.chromaate.com/en/investors/quarterly_results"},
+            {"label": "公司業務與測試技術", "url": "https://www.chromaate.com/tw/chroma/aboutchroma"},
+            {"label": "公司投資人專區", "url": "https://www.chromaate.com/en/investors"},
+        ],
+    },
+    "3711": {
+        "industry": "半導體封裝與測試（OSAT），包括晶圓凸塊、先進封裝、測試與電子製造服務。",
+        "earnings_trend": "2026Q2 EPS 4.80 元為公司季度口徑；TWSE OpenAPI 的同期 8.04 元為 H1 累計，不可混用。",
+        "investment_case": "ASE 官方資料顯示公司提供半導體組裝與測試服務，並推進 310×310mm 自動化面板級封裝產線，目標於 2027H1 進入量產。AI/HPC、Chiplet 與異質整合帶來高階封裝需求，但新產能回報需待客戶導入及稼動率驗證。",
+        "market_factors": "正向：AI 加速器、HBM/Chiplet 與先進封裝產能需求。反向：高資本支出與折舊、稼動率、客戶集中、封測景氣循環及不同業務的利潤率差異。",
+        "strategy_note": "追蹤先進封裝營收占比、稼動率、毛利率與新產線爬坡；把 2027H1 量產目標視為公司計畫而非已實現收入，定期檢查進度。",
+        "source_links": [
+            {"label": "ASE 官方財務資訊入口", "url": "https://ase.aseglobal.com/about-ase/financials/"},
+            {"label": "310×310 面板級封裝公告（2026-05-26）", "url": "https://www.aseglobal.com/press-room/310x310"},
+            {"label": "高雄新廠與 AI 封裝擴產（2026-03-11）", "url": "https://www.aseglobal.com/press-room/ase-breaks-ground-on-new-high-tech-facility-in-kaohsiung"},
+        ],
+    },
+    "2454": {
+        "industry": "無晶圓廠 IC 設計，核心涵蓋手機/連網 SoC、邊緣 AI、電源與 ASIC 設計。",
+        "earnings_trend": "2026Q2 EPS 15.28 元為公司季度口徑；TWSE OpenAPI 的同期 30.44 元為 H1 累計，不可混用。",
+        "investment_case": "MediaTek 的收入基礎仍包括手機與連網晶片，並拓展邊緣 AI、車用與 ASIC。AI ASIC 可帶來新增市場，但應以正式量產、客戶出貨及毛利貢獻驗證，不能只依合作或產品發布推估獲利。",
+        "market_factors": "正向：手機平台升級、邊緣 AI、Wi-Fi/連網、車用及 ASIC 專案。反向：手機需求與季節性、客戶自研晶片、晶圓代工成本、產品組合及 ASIC 專案驗證時程。",
+        "strategy_note": "季度追蹤手機/智慧裝置收入、毛利率、研發費用及 ASIC 專案商業化里程碑；區分已出貨收入與未量產的市場機會。",
+        "source_links": [
+            {"label": "公司投資人財務資訊（2026Q2）", "url": "https://www.mediatek.com/investor-relations/financial-information"},
+            {"label": "公司投資人關係與活動日曆", "url": "https://www.mediatek.com/investor-relations/ir-events"},
+            {"label": "公司技術與產品資訊", "url": "https://www.mediatek.com/"},
+        ],
+    },
+    "3653": {
+        "industry": "精密金屬加工與熱管理零組件；產品涵蓋散熱片、VC/微流道蓋板、氣冷/水冷模組及電子互連零件。",
+        "earnings_trend": "2026Q1/Q2 季度 EPS 依公司季度資料分列；本次不以不足四季的資料推算 TTM。",
+        "investment_case": "健策官方產品頁確認其產品從封裝端均熱片、VC/微流道蓋板延伸至系統端氣冷/水冷模組。AI/HPC 功耗提升可能提高熱管理價值，但新產品量產節奏、客戶集中與產能投資回報仍需財報驗證。",
+        "market_factors": "正向：AI/HPC 功耗密度、液冷滲透與高階封裝熱管理需求。反向：客戶/平台集中、驗證和量產時程、金屬原料價格、擴產折舊及短期成長率回落。",
+        "strategy_note": "追蹤官方月營收、季度毛利率、產能/資本支出與營業現金流；2026Q2 季報是最新完整季度資料，未取得四季可比 EPS 前不計算 TTM PER、不設目標價。",
+        "source_links": [
+            {"label": "健策官方產品與方案", "url": "https://www.jentech.com.tw/zh"},
+            {"label": "健策官方月營收", "url": "https://www.jentech.com.tw/zh/monthly-revenue"},
+            {"label": "TWSE 官方公司財務資料", "url": "https://openapi.twse.com.tw/v1/opendata/t187ap06_L_ci"},
+        ],
+    },
+}
+
+for stock_code, research in RESEARCH_BASELINES.items():
+    STOCKS_META[stock_code].update(research)
+    STOCKS_META[stock_code]["valuation"] = (
+        "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；"
+        "不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。"
+    )
+
+RESEARCH_CONTENT_CHECKED_AT = "2026-09-23"
+
 
 # Weekly review snapshot. The structural score in STOCKS_META remains the
 # long-term moat score; this review score adds current earnings, price action,
@@ -436,7 +623,7 @@ WEEKLY_REVIEW = {
     "as_of": "2026-08-28",
     "period": "2026-W35",
     "method_version": "weekly-v1",
-    "cache_version": "20260923-stock-universe-r5",
+    "cache_version": "20260923-research-r6",
     "title": "每週復盤｜名單與評分",
     "description": "本週複核既有名單；3653 健策為新納入標的，估值與行情動能完成核驗前不給週評分。分數是研究模型相對排序，不是官方評等，也不保證報酬。",
     "criteria": [
@@ -856,8 +1043,9 @@ def fetch_shioaji():
         official_notes = [
             fundamental.get("latest_monthly_revenue"),
             (
-                f"{latest_quarter['period']} 官方季度資料：EPS {latest_quarter['eps']}、"
-                f"營益率 {latest_quarter['operating_margin']}。"
+                f"{latest_quarter['period']} 官方季度資料：營益率 "
+                f"{latest_quarter['operating_margin']}；原始 EPS 欄位可能為年初累計，"
+                "不據此標示單季或計算 TTM。"
                 if latest_quarter
                 else None
             ),
@@ -887,7 +1075,9 @@ def fetch_shioaji():
             "gross_margin": fundamental.get("gross_margin", meta["gross_margin"]),
             "net_margin": fundamental.get("net_margin", meta["net_margin"]),
             "roe": fundamental.get("roe", meta["roe"]),
-            "eps_single": fundamental.get("eps_single", meta["eps_single"]),
+            # TWSE OpenAPI EPS may be year-to-date cumulative; only use
+            # individually verified single-quarter company disclosures.
+            "eps_single": meta["eps_single"],
             "earnings_date": fundamental.get("earnings_date", meta["earnings_date"]),
             "event_status": fundamental.get("event_status", "unknown"),
             "event_checked_at": fundamental.get("event_checked_at"),
@@ -895,12 +1085,22 @@ def fetch_shioaji():
             "fundamental_updated_at": fundamental_status.get("updated_at"),
             "latest_monthly_revenue": fundamental.get("latest_monthly_revenue"),
             "latest_quarter": latest_quarter,
+            "research_source_as_of": research_source_as_of({
+                "latest_quarter": latest_quarter,
+                "latest_monthly_revenue": fundamental.get("latest_monthly_revenue"),
+            }, market_as_of),
+            "research_checked_at": RESEARCH_CONTENT_CHECKED_AT,
+            "research_next_review_at": next_research_review_at(now),
             "industry": meta.get("industry"),
             "score_basis": meta.get("score_basis"),
             "investment_case": meta.get("investment_case"),
             "earnings_trend": earnings_trend,
             "quarterly_earnings": quarterly_earnings,
-            "market_snapshot": meta.get("market_snapshot"),
+            "market_snapshot": market_snapshot_text({
+                "last_price": last_price,
+                "change_pct": change_pct,
+                "quote_time": quote_time,
+            }, market_as_of),
             "valuation": meta.get("valuation"),
             "market_factors": meta.get("market_factors"),
             "risk_factors": meta.get("risk_factors", []),
@@ -949,7 +1149,8 @@ def fetch_shioaji():
         "fundamental_source": fundamental_status.get("source"),
         "fundamental_status": fundamental_status,
         "institutional_as_of": flow_status.get("date") or previous_payload.get("institutional_as_of"),
-        "research_updated_at": WEEKLY_REVIEW["as_of"],
+        "research_updated_at": RESEARCH_CONTENT_CHECKED_AT,
+        "research_next_review_at": next_research_review_at(now),
         "cache_version": WEEKLY_REVIEW["cache_version"],
         "data_source": data_source,
         "market": "台湾股票市场 (TWSE)",

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import sys
+import datetime
 from pathlib import Path
 
 import requests
@@ -13,6 +14,9 @@ from fetch_shioaji_data import (
     STOCKS_META,
     compute_institutional_analysis,
     fetch_twse_institutional_flow,
+    market_snapshot_text,
+    next_research_review_at,
+    research_source_as_of,
 )
 from fundamental_data import fetch_fundamental_snapshot
 
@@ -20,7 +24,8 @@ LIVE_QUOTES_URL = "https://futienchun-com-dashboard.onrender.com/api/live-quotes
 TIMEOUT_SECONDS = 180
 PROJECT_ROOT = Path(__file__).resolve().parent
 OUTPUT_PATH = PROJECT_ROOT / "data" / "stock_data.json"
-CACHE_VERSION = "20260923-stock-universe-r5"
+CACHE_VERSION = "20260923-research-r8"
+RESEARCH_CONTENT_CHECKED_AT = "2026-09-23"
 
 
 def live_quote_payload_error(payload: object) -> str | None:
@@ -145,7 +150,6 @@ def main() -> int:
             "gross_margin",
             "net_margin",
             "roe",
-            "eps_single",
             "earnings_date",
             "event_status",
             "event_checked_at",
@@ -166,6 +170,26 @@ def main() -> int:
             stock["quarterly_earnings"] = (rows + [latest_quarter])[-4:]
 
         links = list(stock.get("source_links") or [])
+        baseline = STOCKS_META.get(code, {})
+        for field in (
+            "industry",
+            "earnings_trend",
+            "investment_case",
+            "valuation",
+            "market_factors",
+            "risk_factors",
+            "recommendation",
+            "strategy_note",
+            "score_basis",
+        ):
+            if baseline.get(field) is not None:
+                stock[field] = baseline[field]
+        stock["eps_single"] = baseline.get("eps_single", stock.get("eps_single"))
+        stock["market_snapshot"] = market_snapshot_text(stock, payload["market_as_of"])
+        stock["research_source_as_of"] = research_source_as_of(stock, payload["market_as_of"])
+        stock["research_checked_at"] = RESEARCH_CONTENT_CHECKED_AT
+        stock["research_next_review_at"] = next_research_review_at(datetime.datetime.now())
+        links = list(baseline.get("source_links") or [])
         known_urls = {item.get("url") for item in links}
         for source in update.get("official_source_links", []):
             if source.get("url") not in known_urls:
@@ -207,7 +231,8 @@ def main() -> int:
     sources = payload.get("sources")
     payload["sources"] = sources if isinstance(sources, dict) else {}
     payload["sources"]["twse_t86_flow"] = payload["institutional_status"]
-    payload["research_updated_at"] = payload.get("weekly_review", {}).get("as_of")
+    payload["research_updated_at"] = RESEARCH_CONTENT_CHECKED_AT
+    payload["research_next_review_at"] = next_research_review_at(datetime.datetime.now())
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(

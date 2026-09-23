@@ -383,6 +383,7 @@
             margin-top: 8px;
         }
         .research-copy strong { color: #8deee0; }
+        .research-freshness { margin: 10px 0 14px; padding: 9px 11px; border-left: 2px solid var(--accent-cyan); background: rgba(6, 182, 212, 0.06); color: var(--text-muted); font-size: 11px; line-height: 1.6; }
         .quarterly-earnings {
             overflow-x: auto;
             margin-top: 10px;
@@ -619,7 +620,7 @@
                     <tr>
                         <th>代码</th>
                         <th>公司名称</th>
-                        <th>最新单季 EPS</th>
+                        <th>官方单季 EPS</th>
                         <th>毛利率</th>
                         <th>年化 ROE</th>
                         <th>下一次财报/法说会公布日</th>
@@ -897,7 +898,7 @@
             document.getElementById('update-time').innerText = `行情更新: ${quoteUpdatedAt}`;
             const freshness = document.getElementById('freshness-meta');
             if (freshness) {
-                freshness.innerText = `行情基准 ${data.market_as_of || '-'} · 法人结算 ${data.institutional_as_of || '-'} · 基本面 ${data.fundamental_updated_at || '-'} · 研究 ${data.research_updated_at || '-'}`;
+                freshness.innerText = `行情基准 ${data.market_as_of || '-'} · 法人结算 ${data.institutional_as_of || '-'} · 基本面 ${data.fundamental_updated_at || '-'} · 研究内容核对 ${data.research_updated_at || '-'} · 下次自动同步 ${data.research_next_review_at || '-'}`;
             }
             const cacheVersion = data.cache_version || (data.updated_at ? data.updated_at.replace(/[- :]/g, '').slice(4, 12) : 'LIVE');
             document.getElementById('cache-ver').innerText = cacheVersion.startsWith('v') ? cacheVersion : 'v' + cacheVersion;
@@ -987,6 +988,7 @@
                             <span class="research-panel-title">📚 基本面／產業研究</span>
                             <span class="research-badge">${escapeResearchText(stock.recommendation || '研究資料')}</span>
                         </div>
+                        <div class="research-freshness">资料基准：${escapeResearchText(stock.research_source_as_of || '-')}<br>研究内容核对：${escapeResearchText(stock.research_checked_at || data.research_updated_at || '-')} · 下次自动同步：${escapeResearchText(stock.research_next_review_at || data.research_next_review_at || '-')}</div>
                             <div class="research-grid">
                             <div class="research-item"><span class="research-label">所處行業</span><span class="research-value">${escapeResearchText(stock.industry)}</span></div>
                             <div class="research-item"><span class="research-label">市場行情與估值</span><span class="research-value">${escapeResearchText(stock.market_snapshot)}<br>${escapeResearchText(stock.valuation)}</span></div>
@@ -997,7 +999,7 @@
                         <div class="research-copy"><strong>投資邏輯：</strong>${escapeResearchText(stock.investment_case)}</div>
                         <div class="research-copy"><strong>市場因素：</strong>${escapeResearchText(stock.market_factors)}</div>
                         <div class="research-copy research-risk"><strong>主要風險：</strong>${riskText}</div>
-                        ${quarterRows ? `<div class="quarterly-earnings"><div class="quarterly-row header"><span>季度</span><span>營收</span><span>營益率</span><span>稅後淨利</span><span>EPS</span></div>${quarterRows}</div>` : ''}
+                        ${quarterRows ? `<div class="quarterly-earnings"><div class="research-freshness">TWSE OpenAPI 季报原表可能为年初累计值；此表列示申报口径，不等同单季数。TTM PER 仅在四季单季 EPS 核实后计算。</div><div class="quarterly-row header"><span>申报期间</span><span>营收原表</span><span>营益率</span><span>净利原表</span><span>EPS原表</span></div>${quarterRows}</div>` : ''}
                         ${sourceLinks ? `<div class="research-sources">${sourceLinks}</div>` : ''}
                     </div>
                 `;
@@ -1073,7 +1075,7 @@
                             <div class="metrics-row">
                                 <div class="metric-item"><div class="label">毛利率</div><div class="val">${s.gross_margin}</div></div>
                                 <div class="metric-item"><div class="label">ROE</div><div class="val">${s.roe}</div></div>
-                                <div class="metric-item"><div class="label">单季 EPS</div><div class="val">${s.eps_single}</div></div>
+                                <div class="metric-item"><div class="label">官方单季 EPS</div><div class="val">${s.eps_single}</div></div>
                                 <div class="metric-item"><div class="label">今日张数</div><div class="val">${(s.volume || 0).toLocaleString()}</div></div>
                             </div>
 
