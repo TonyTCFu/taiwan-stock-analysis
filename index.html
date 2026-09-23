@@ -6,14 +6,14 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>台股龍頭股 - 10大 AI 核心卡位龙头每日行情与风控仪表盘</title>
+    <title>台股龍頭股 - 11大 AI 核心卡位龙头每日行情与风控仪表盘</title>
     <link rel="icon" type="image/jpeg" href="assets/app_icon.jpg">
     <link rel="shortcut icon" type="image/jpeg" href="assets/app_icon.jpg">
     <link rel="apple-touch-icon" href="assets/app_icon.jpg">
     <meta name="apple-mobile-web-app-title" content="台股龍頭股">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta property="og:title" content="台股龍頭股 - 10大核心卡位龙头每日行情与风控仪表盘">
+    <meta property="og:title" content="台股龍頭股 - 11大核心卡位龙头每日行情与风控仪表盘">
     <meta property="og:image" content="assets/app_icon.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -693,8 +693,8 @@
         }
 
         const PUBLIC_LIVE_QUOTES_API = 'https://futienchun-com-dashboard.onrender.com/api/live-quotes';
-        const LOCAL_STORAGE_KEY = 'TAIWAN_STOCK_PERSISTED_DATA_V3';
-        const EXPECTED_STOCK_CODES = ['2330', '2059', '2383', '3017', '2317', '2308', '2345', '2360', '3711', '2454'];
+        const LOCAL_STORAGE_KEY = 'TAIWAN_STOCK_PERSISTED_DATA_V4';
+        const EXPECTED_STOCK_CODES = ['2330', '2059', '2383', '3017', '3653', '2317', '2308', '2345', '2360', '3711', '2454'];
         const QUOTE_FIELDS = [
             'open_price', 'high_price', 'low_price', 'last_price', 'prev_close',
             'change', 'change_pct', 'volume', 'quote_source', 'quote_time'
@@ -845,7 +845,7 @@
                         const livePayload = await refreshWithLiveBridge();
                         if (!isCompleteStockPayload(livePayload)) {
                             const receivedCount = Array.isArray(livePayload && livePayload.stocks) ? livePayload.stocks.length : 0;
-                            throw new Error(`公网行情网关仅返回 ${receivedCount}/10 档，未完成全部标的刷新`);
+                            throw new Error(`公网行情网关仅返回 ${receivedCount}/${EXPECTED_STOCK_CODES.length} 档，未完成全部标的刷新`);
                         }
                         json = mergeAvailableLayers([published, persisted, livePayload]);
                         refreshedByBridge = true;
@@ -867,7 +867,7 @@
                         if (refreshedByBridge) {
                             showToast(`✅ 行情已更新，基本面资料保持最新发布版本<br><span style="font-size:11px;color:#94a3b8">行情: ${json.quote_updated_at || json.updated_at} | 基本面: ${json.fundamental_updated_at || '待同步'}</span>`);
                         } else {
-                            showToast(`⚠️ 公网行情网关未完成 10 檔刷新<br><span style="font-size:11px;color:#fca5a5">当前显示已发布数据；请稍后重试强制刷新</span>`);
+                            showToast(`⚠️ 公网行情网关未完成 ${EXPECTED_STOCK_CODES.length} 檔刷新<br><span style="font-size:11px;color:#fca5a5">当前显示已发布数据；请稍后重试强制刷新</span>`);
                         }
                     }
                 }
@@ -932,7 +932,7 @@
                         <article class="weekly-review-card">
                             <div class="weekly-review-card-top">
                                 <div class="weekly-review-stock">${escapeResearchText(stock.name)}<span class="weekly-review-code">${escapeResearchText(stock.code)}</span></div>
-                                <div class="weekly-score">${escapeResearchText(weekly.score)}<small>/100</small></div>
+                                <div class="weekly-score">${escapeResearchText(weekly.score)}${Number.isFinite(Number(weekly.score)) ? '<small>/100</small>' : ''}</div>
                             </div>
                             <div class="weekly-action">${escapeResearchText(weekly.action)}</div>
                             <div class="weekly-components">${componentHtml}</div>

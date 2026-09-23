@@ -143,6 +143,49 @@ STOCKS_META = {
         "target_price": "3,700 - 4,000 元",
         "stop_loss": "2,100 元"
     },
+    "3653": {
+        "symbol": "3653.TW",
+        "name": "健策",
+        "en_name": "Jentech Precision",
+        "industry": "AI/HPC 熱管理、散熱元件與精密金屬加工",
+        "chokepoint": "由封裝端均熱片、VC／微流道蓋板到系統端液冷冷板的垂直熱管理產品鏈",
+        "score": 88,
+        "score_basis": "TypeSafe 結構化評分思路：以已核實獲利與官方產品定位評估基本面/卡位；估值、動能及風險權重未完成週度複核，此分數僅為初始研究分，不是 TypeSafe API 輸出或官方評等。",
+        "investment_case": "公司官方產品涵蓋封裝端均熱片、VC 與微流道蓋板，以及 HPC 液冷冷板。2026Q2 營收 72.75 億元、毛利率 46.81%、EPS 15.80 元；2026-08 營收 32.26 億元、年增 90.90%。",
+        "earnings_trend": "2026Q2 EPS 15.80 元，季增 65.8%、年增 101.3%；H1 累計 EPS 25.33 元。需留意營收及毛利能否延續，不以單季高成長外推全年。",
+        "quarterly_earnings": [
+            {"period": "2026Q1", "revenue": "53.05 億元", "operating_margin": "約 34.0%", "net_income": "約 14.0 億元", "eps": "9.53 元"},
+            {"period": "2026Q2", "revenue": "72.75 億元", "operating_margin": "約 37.8%", "net_income": "23.18 億元", "eps": "15.80 元"}
+        ],
+        "market_snapshot": "2026-09-22 收盤 NT$5,830；估值尚未以一致的最新獲利預估核算。",
+        "valuation": "股價與成長預期均高；缺少可靠的前瞻 EPS 與一致 PER 口徑，本次不下估值結論、不提供目標價。",
+        "market_factors": "AI 資料中心功耗提升帶動熱管理升級；液冷滲透、客戶驗證與量產速度是催化，客戶集中、產品迭代及擴產折舊是主要反向因素。",
+        "risk_factors": ["估值對成長預期敏感，需以最新獲利預估重估", "AI/HPC 客戶集中與量產時程風險", "短期營收高速成長未必線性延續", "需追蹤毛利率、現金流與擴產折舊"],
+        "recommendation": "新增觀察／待完成週度評分",
+        "strategy_note": "列入龍頭研究名單；未完成估值及動能檢核前，不據此形成買進建議。",
+        "source_links": [
+            {"label": "公司官方產品與 HPC 熱管理", "url": "https://www.jentech.com.tw/zh"},
+            {"label": "健策官方月營收", "url": "https://www.jentech.com.tw/zh/monthly-revenue"},
+            {"label": "2026Q2 財報資料", "url": "https://m.moneydj.com/f1a.aspx?a=826e52d0-6eb0-45d7-9955-81bb17c55dab"},
+            {"label": "2026-08 月營收公告", "url": "https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=0ee49ee4-edf5-41c9-b3c3-cafc5e95a6cd"},
+            {"label": "行情快照", "url": "https://cn.investing.com/equities/jentech-historical-data"}
+        ],
+        "gross_margin": "46.81% (2026Q2)",
+        "net_margin": "32.01% (2026Q2)",
+        "roe": "待官方同步",
+        "eps_single": "15.80 元 (2026Q2)",
+        "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
+        "price_analytics": {
+            "ma20_bias": "待計算；本次未完成歷史行情複核",
+            "amplitude": "高價成長股，需控制單一標的與產業集中風險",
+            "trend_evaluation": "基本面與熱管理產品鏈符合研究主題；估值與趨勢尚待量化檢核。"
+        },
+        "buy_zone_sub": "待估值與技術面複核",
+        "buy_zone_heavy": "暫不設定",
+        "take_profit": "依獲利與估值重新評估",
+        "target_price": "不預設固定目標",
+        "stop_loss": "依獲利趨勢與個人風險承受度管理"
+    },
     "2317": {
         "symbol": "2317.TW",
         "name": "鸿海",
@@ -383,9 +426,9 @@ WEEKLY_REVIEW = {
     "as_of": "2026-08-28",
     "period": "2026-W35",
     "method_version": "weekly-v1",
-    "cache_version": "20260916-quote-flow-sync-r3",
+    "cache_version": "20260923-stock-universe-r4",
     "title": "每週復盤｜名單與評分",
-    "description": "本週複核 10 檔既有名單；分數是研究模型的相對排序，不是官方評等，也不保證報酬。",
+    "description": "本週複核既有名單；3653 健策為新納入標的，估值與行情動能完成核驗前不給週評分。分數是研究模型相對排序，不是官方評等，也不保證報酬。",
     "criteria": [
         {"key": "earnings", "label": "獲利趨勢", "weight": 30, "rule": "最近三季獲利、EPS、營益率方向與獲利可持續性"},
         {"key": "moat", "label": "行業／技術卡位", "weight": 25, "rule": "是否處在供應鏈瓶頸、技術門檻與客戶切換成本"},
@@ -400,7 +443,7 @@ WEEKLY_REVIEW = {
         {"range": "0-69", "label": "降級", "rule": "重新檢查是否仍符合名單條件"}
     ],
     "market_context": "基準日為 2026-08-28 收盤快照；行情使用 Shioaji Snapshot／TWSE MIS，法人籌碼使用 TWSE T86，近 5／20／60 交易日收盤與均線用 Yahoo Finance 歷史行情交叉計算。",
-    "summary": "本週 10 檔全部保留。2308列核心追蹤；2345基本面優先但等待價格與法人確認；2360保留但高波動；2059與3017獲利及動能強但短線過熱；3711與2454維持觀察，等待獲利品質或AI新業務進一步驗證。",
+    "summary": "既有名單維持原研究結論；新增 3653 健策，初始卡位研究分 88，週評總分待估值、動能及風險資料核實後再評。",
     "source_links": [
         {"label": "TWSE T86 官方法人資料", "url": "https://www.twse.com.tw/rwd/zh/fund/T86?selectType=ALLBUT0999&response=json"},
         {"label": "Shioaji Snapshot 官方文件", "url": "https://sinotrade.github.io/tutor/market_data/snapshot/"},
@@ -430,6 +473,14 @@ WEEKLY_REVIEW = {
             "market_metrics": {"five_day_return_pct": -3.35, "twenty_day_return_pct": 15.70, "sixty_day_return_pct": 13.66, "ma20_bias_pct": -2.25, "ma60_bias_pct": 3.98},
             "reason": "高階 CCL 卡位與中期報酬仍正面，但本週回落且法人單日淨賣超，短線籌碼不支持追價，維持回檔研究。",
             "next_week_watch": "M8／M9 訂單、毛利率是否維持，以及法人賣超是否收斂。"
+        },
+        "3653": {
+            "score": "待評",
+            "action": "新增觀察／待完成週度評分",
+            "component_scores": {},
+            "market_metrics": {},
+            "reason": "本次新增研究名單；雖已有官方季度獲利與產品定位資料，估值、行情動能及風險分項尚未按週評方法完整核實，因此不填推測分數。",
+            "next_week_watch": "核實前瞻估值、近 5／20／60 日動能、法人趨勢及液冷產品出貨。"
         },
         "3017": {
             "score": 86,

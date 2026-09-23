@@ -14,7 +14,7 @@
 - **数据源与接口**: 永丰金 Shioaji Python SDK (直连 TWSE/TPEx 交易所实时盘口与三大法人筹码，关联账户 `H121527648` / `傅天君`)。
 - **凭证加载与安全**: 本地读取凭证文件 `/Users/TonyFu/Documents/台股量化Antigravity/.shioaji.local.env`，遵循 R.A.I.L.G.U.A.R.D 规范，任何明文 Key 严禁提交至版本控制或公网。
 - **防缓存与前端加载**: `index.html` 配置 HTTP header `Cache-Control: no-cache`，Ajax 请求拼附 `v=TIMESTAMP` 时间戳强制获取最新数据。
-- **实时刷新边界**: GitHub Pages 页面通过公网 Render 行情网关 `https://futienchun-com-dashboard.onrender.com/api/live-quotes` 执行刷新；网关服务端只读调用 Shioaji snapshot，并独立抓取 TWSE MIS 交叉核对/降级，凭证只存在 Render 环境变量，不进入浏览器或仓库。本机 `dashboard_server.py` 仅作为开发/故障排查桥接服务。当前标的池为 10 檔。
+- **实时刷新边界**: GitHub Pages 页面通过公网 Render 行情网关 `https://futienchun-com-dashboard.onrender.com/api/live-quotes` 执行刷新；网关服务端只读调用 Shioaji snapshot，并独立抓取 TWSE MIS 交叉核对/降级，凭证只存在 Render 环境变量，不进入浏览器或仓库。本机 `dashboard_server.py` 仅作为开发/故障排查桥接服务。当前标的池自 2026-09-23 起为 11 檔，含 3653 健策。
 - **三大法人筹码管道改造 (2026-08-21)**: 彻底剔除历史硬编码静态常量，接入台湾证券交易所官方 T86 接口 (`https://www.twse.com.tw/rwd/zh/fund/T86?selectType=ALLBUT0999&response=json`)。系统自动抓取最新交易日的外资、投信、自营商真实买卖超张数与合计净额，结合单日成交量动态计算法人占量比与主力评述，并在数据中显式携带官方结算日期（如 `2026-08-21 官方结算`），杜绝盘后筹码失真。
 - **服务部署状态**: 公网按钮必须走 Render 行情网关，不能依赖用户设备上的 Python、Shioaji 或本地文件；前端在公网网关失败时明确报错，不静默伪装成刷新成功。
 - **公网验收基线（2026-08-28）**: Render 服务 `srv-d8onljk8aovs7385cqo0` 已配置 Shioaji 凭证；GitHub Pages 点击“强制刷新行情”实际返回 Shioaji snapshot 10/10 与 TWSE MIS 10/10，且页面显示 Asia/Taipei 时间。网关以 30 秒全局冷却保护 Shioaji 流量；Render Python 3.14 对 TWSE 旧证书需保留 TLS 校验但移除 `VERIFY_X509_STRICT` 标志。该日页面缓存版本为 `20260828-weekly-r1`；当前分頁版缓存版本为 `20260829-weekly-tab-r1`。
@@ -53,6 +53,11 @@
 - 每週復盤完整內容已從 Dashboard 主頁固定顯示區移入第五個分頁「📈 每周复盘｜名单与评分」；既有四個分頁與資料、強制刷新邏輯保持不變。
 - 預設仍顯示「核心卡位龙头行情概览」，只有切換到第五個分頁時才顯示復盤規則、分級、10 檔評分卡與來源連結。
 - 2026-08-29 公網驗收：第五個分頁、既有四個分頁、390px 行動版與公網強制刷新均通過；刷新返回 Shioaji 10/10、TWSE 10/10，且無瀏覽器 console error/warn。
+
+### 2.4 2026-09-23 新增 3653 健策
+- 公司官方產品涵蓋均熱片、VC/微流道蓋板及 HPC 液冷冷板；2026Q2 EPS 15.80 元，2026-08 月營收年增 90.90%。
+- 結構卡位初始研究分 88 是專案判斷，非 TypeSafe API 輸出或官方評等；估值、動能及風險周評未核實時標為待評。
+- 網關、前端完整性清單及發布 JSON 均納入 3653，並保留行情、法人、基本面/事件、研究各自的來源與更新時間。
 
 ## 3. 买卖点量化策略矩阵
 
