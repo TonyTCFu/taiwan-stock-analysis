@@ -214,6 +214,18 @@ def fetch_fundamental_snapshot(
                 "eps": f"{eps:.2f} 元" if eps is not None else "待更新",
             }
 
+        verified_quarter = meta.get("verified_quarter_override")
+        if period and isinstance(verified_quarter, dict) and verified_quarter.get("period") == period:
+            gross_margin = verified_quarter.get("gross_margin", gross_margin)
+            operating_margin = verified_quarter.get("operating_margin", operating_margin)
+            net_margin = verified_quarter.get("net_margin", net_margin)
+            eps = _number(verified_quarter.get("eps_numeric"))
+            annualized_roe = None
+            current_quarter = {
+                key: verified_quarter[key]
+                for key in ("period", "revenue", "operating_margin", "net_income", "eps")
+            }
+
         monthly_period = str(rev.get("資料年月", "")).strip()
         monthly_year = _number(monthly_period[:3]) if len(monthly_period) >= 5 else None
         monthly_month = monthly_period[3:5] if len(monthly_period) >= 5 else ""

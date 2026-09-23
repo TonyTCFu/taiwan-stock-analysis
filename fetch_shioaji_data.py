@@ -157,6 +157,16 @@ STOCKS_META = {
             {"period": "2026Q1", "revenue": "53.05 億元", "operating_margin": "約 34.0%", "net_income": "約 14.0 億元", "eps": "9.53 元"},
             {"period": "2026Q2", "revenue": "72.75 億元", "operating_margin": "約 37.8%", "net_income": "23.18 億元", "eps": "15.80 元"}
         ],
+        "verified_quarter_override": {
+            "period": "2026Q2",
+            "revenue": "7,274.516 百萬元",
+            "gross_margin": "46.81%",
+            "operating_margin": "37.79%",
+            "net_margin": "32.01%",
+            "net_income": "2,318.490 百萬元",
+            "eps": "15.80 元",
+            "eps_numeric": 15.80
+        },
         "market_snapshot": "2026-09-22 收盤 NT$5,830；估值尚未以一致的最新獲利預估核算。",
         "valuation": "股價與成長預期均高；缺少可靠的前瞻 EPS 與一致 PER 口徑，本次不下估值結論、不提供目標價。",
         "market_factors": "AI 資料中心功耗提升帶動熱管理升級；液冷滲透、客戶驗證與量產速度是催化，客戶集中、產品迭代及擴產折舊是主要反向因素。",
