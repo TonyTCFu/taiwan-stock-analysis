@@ -1,15 +1,15 @@
 {
-  "updated_at": "2026-10-02 20:57:42",
-  "quote_updated_at": "2026-10-02 20:57:42",
-  "market_as_of": "2026-10-02",
-  "fundamental_updated_at": "2026-10-02 12:57:44",
-  "fundamental_checked_at": "2026-10-02 12:57:44",
-  "fundamental_as_of": "2026-10-02",
+  "updated_at": "2026-10-05 23:06:03",
+  "quote_updated_at": "2026-10-05 23:06:03",
+  "market_as_of": "2026-10-05",
+  "fundamental_updated_at": "2026-10-05 15:06:05",
+  "fundamental_checked_at": "2026-10-05 15:06:05",
+  "fundamental_as_of": "2026-10-05",
   "fundamental_source": "TWSE OpenAPI fundamentals + MOPS event-calendar reference",
   "fundamental_status": {
     "status": "ok",
-    "updated_at": "2026-10-02 12:57:44",
-    "as_of": "2026-10-02",
+    "updated_at": "2026-10-05 15:06:05",
+    "as_of": "2026-10-05",
     "source": "TWSE OpenAPI fundamentals + MOPS event-calendar reference",
     "sources": {
       "monthly_revenue": {
@@ -34,10 +34,10 @@
       }
     }
   },
-  "institutional_as_of": "2026-10-02",
+  "institutional_as_of": "2026-10-05",
   "research_updated_at": "2026-09-23",
   "cache_version": "20260923-research-r8",
-  "data_source": "Shioaji Snapshot (primary) + TWSE MIS cross-check",
+  "data_source": "Shioaji Snapshot",
   "market": "台湾股票市场 (TWSE)",
   "trading_hours": "09:00 - 13:30 (TPE time)",
   "weekly_review": {
@@ -324,22 +324,20 @@
     "shioaji": {
       "status": "ok",
       "quote_count": 11,
-      "retrieved_at": "2026-10-02T20:57:40+08:00",
+      "retrieved_at": "2026-10-05T23:05:53+08:00",
       "quote_mode": "snapshot"
     },
     "twse_mis": {
-      "status": "ok",
-      "quote_count": 11,
-      "retrieved_at": "2026-10-02T20:57:41+08:00",
-      "market_time": "13:30:00"
+      "status": "unavailable",
+      "detail": "TimeoutError: The read operation timed out"
     },
-    "selected_quote_source": "Shioaji Snapshot (primary) + TWSE MIS cross-check",
+    "selected_quote_source": "Shioaji Snapshot",
     "twse_t86_flow": {
       "status": "ok",
-      "date": "2026-10-02",
-      "retrieved_at": "2026-10-02T12:57:44",
+      "date": "2026-10-05",
+      "retrieved_at": "2026-10-05T15:06:05",
       "flow_count": 11,
-      "as_of": "2026-10-02"
+      "as_of": "2026-10-05"
     }
   },
   "stocks": [
@@ -370,24 +368,24 @@
         "reason": "獲利與先進製程卡位仍是名單最強，但本週 20 日報酬接近零、估值仍有溢價，因此綜合分低於長期卡位分，定位為核心持有而非追價。",
         "next_week_watch": "Q2 法說展望、先進封裝／2nm 需求與外資買超是否延續。"
       },
-      "open_price": 2505.0,
-      "high_price": 2515.0,
-      "low_price": 2495.0,
-      "last_price": 2500.0,
-      "prev_close": 2510.0,
-      "change": -10.0,
-      "change_pct": -0.4,
-      "volume": 13902,
+      "open_price": 2550.0,
+      "high_price": 2580.0,
+      "low_price": 2545.0,
+      "last_price": 2575.0,
+      "prev_close": 2575.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 20216,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-10-02T20:57:40+08:00",
+      "quote_time": "2026-10-05T23:05:53+08:00",
       "gross_margin": "67.03% (2026Q2)",
       "net_margin": "53.22% (2026Q2)",
       "roe": "79.5% (單季年化, 2026Q2)",
       "eps_single": "27.25 元 (2026Q2 單季；TSMC 官方財報)",
       "earnings_date": "2026-10-15 (26Q3 法说会) | 每月 10 日发布营收",
       "event_status": "scheduled",
-      "event_checked_at": "2026-10-02T12:57:44",
-      "fundamental_as_of": "2026-10-02",
+      "event_checked_at": "2026-10-05T15:06:05",
+      "fundamental_as_of": "2026-10-05",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 514,805 百萬元；月增 +10.10%；年增 +53.32%",
       "latest_quarter": {
@@ -410,7 +408,7 @@
           "eps": "49.33 元"
         }
       ],
-      "market_snapshot": "2026-10-02 收盤/最新 NT$2,500.00，日變動 -0.40%；行情時間 2026-10-02T20:57:40+08:00。",
+      "market_snapshot": "2026-10-05 收盤/最新 NT$2,575.00，日變動 +0.00%；行情時間 2026-10-05T23:05:53+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：AI/HPC 晶片需求、先進製程與先進封裝滲透。反向：半導體景氣與客戶資本支出週期、海外廠成本與毛利稀釋、匯率及高資本支出。",
       "risk_factors": [
@@ -448,17 +446,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-5914 张",
-        "trust_net": "+253 张",
-        "dealer_net": "+316 张",
-        "total_net": "-5344 张",
-        "date": "2026-10-02",
-        "summary": "[2026-10-02 官方结算] 投信内资买超 (+253 张) 逢低承接，外资高档调节 (-5,914 张)。"
+        "foreign_net": "+9770 张",
+        "trust_net": "+589 张",
+        "dealer_net": "+491 张",
+        "total_net": "+10851 张",
+        "date": "2026-10-05",
+        "summary": "[2026-10-05 官方结算] 三大法人全线买超 (+10,851 张)，外资与投信合力加仓。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 5,344 张 (占量 38.4%)",
+        "large_order_ratio": "法人净买超 10,851 张 (占量 53.7%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-10-02 筹码] 主力机构呈净卖出 (-5,344 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-10-05 筹码] 主力机构呈净买入 (+10,851 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "+1.8% (处于健康均线排列)",
@@ -470,9 +468,9 @@
       "take_profit": "2,750 - 2,900 元",
       "target_price": "3,200 - 3,500 元",
       "stop_loss": "1,980 元",
-      "research_source_as_of": "行情 2026-10-02；月營收 2026-08；財報 2026Q2",
+      "research_source_as_of": "行情 2026-10-05；月營收 2026-08；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-10-05 14:30 Asia/Taipei"
+      "research_next_review_at": "2026-10-06 14:30 Asia/Taipei"
     },
     {
       "symbol": "2059.TW",
@@ -501,24 +499,24 @@
         "reason": "獲利、伺服器導軌卡位與行情都強，但 20 日及 60 日漲幅過大、股價遠離均線，估值與回撤風險抵銷部分優勢。",
         "next_week_watch": "量價是否背離、法人成交是否轉為連續賣超，以及新產能對 EPS 的實際貢獻。"
       },
-      "open_price": 12000.0,
-      "high_price": 12295.0,
-      "low_price": 11700.0,
-      "last_price": 12145.0,
-      "prev_close": 11835.0,
-      "change": 310.0,
-      "change_pct": 2.62,
-      "volume": 472,
+      "open_price": 12500.0,
+      "high_price": 13355.0,
+      "low_price": 12450.0,
+      "last_price": 13355.0,
+      "prev_close": 13355.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 456,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-10-02T20:57:40+08:00",
+      "quote_time": "2026-10-05T23:05:53+08:00",
       "gross_margin": "84.18% (2026Q2)",
       "net_margin": "64.95% (2026Q2)",
       "roe": "125.3% (單季年化, 2026Q2)",
       "eps_single": "74.38 元 (2026Q2 單季；公司法說資料)",
       "earnings_date": "2026-11-06 (26Q3 财报) | 每月 10 日发布营收",
       "event_status": "scheduled",
-      "event_checked_at": "2026-10-02T12:57:44",
-      "fundamental_as_of": "2026-10-02",
+      "event_checked_at": "2026-10-05T15:06:05",
+      "fundamental_as_of": "2026-10-05",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 6,466 百萬元；月增 +0.92%；年增 +344.42%",
       "latest_quarter": {
@@ -541,7 +539,7 @@
           "eps": "110.96 元"
         }
       ],
-      "market_snapshot": "2026-10-02 收盤/最新 NT$12,145.00，日變動 +2.62%；行情時間 2026-10-02T20:57:40+08:00。",
+      "market_snapshot": "2026-10-05 收盤/最新 NT$13,355.00，日變動 +0.00%；行情時間 2026-10-05T23:05:53+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：AI 伺服器及資料中心機櫃擴建、機櫃設計複雜度提高。反向：大型客戶集中、客戶平台切換、擴產與新廠爬坡、伺服器資本支出週期及家具五金景氣。",
       "risk_factors": [
@@ -579,17 +577,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "+0 张",
-        "trust_net": "+24 张",
-        "dealer_net": "+14 张",
-        "total_net": "+38 张",
-        "date": "2026-10-02",
-        "summary": "[2026-10-02 官方结算] 三大法人合计净买超 38 张，多空资金处于换手态势。"
+        "foreign_net": "+10 张",
+        "trust_net": "+31 张",
+        "dealer_net": "-9 张",
+        "total_net": "+34 张",
+        "date": "2026-10-05",
+        "summary": "[2026-10-05 官方结算] 外资与投信联手买超 (+34 张)，内外部机构共振做多。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净买超 38 张 (占量 8.1%)",
+        "large_order_ratio": "法人净买超 34 张 (占量 7.5%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-10-02 筹码] 主力机构呈净买入 (+38 张)，筹码向法人端汇聚沉淀。"
+        "capital_status": "[2026-10-05 筹码] 主力机构呈净买入 (+34 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "+3.2%",
@@ -601,9 +599,9 @@
       "take_profit": "14,500 - 15,500 元",
       "target_price": "17,000 - 17,500 元",
       "stop_loss": "9,200 元",
-      "research_source_as_of": "行情 2026-10-02；月營收 2026-08；財報 2026Q2",
+      "research_source_as_of": "行情 2026-10-05；月營收 2026-08；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-10-05 14:30 Asia/Taipei"
+      "research_next_review_at": "2026-10-06 14:30 Asia/Taipei"
     },
     {
       "symbol": "2383.TW",
@@ -632,24 +630,24 @@
         "reason": "高階 CCL 卡位與中期報酬仍正面，但本週回落且法人單日淨賣超，短線籌碼不支持追價，維持回檔研究。",
         "next_week_watch": "M8／M9 訂單、毛利率是否維持，以及法人賣超是否收斂。"
       },
-      "open_price": 5040.0,
-      "high_price": 5190.0,
-      "low_price": 4975.0,
-      "last_price": 5185.0,
-      "prev_close": 4975.0,
-      "change": 210.0,
-      "change_pct": 4.22,
-      "volume": 2159,
+      "open_price": 5630.0,
+      "high_price": 5700.0,
+      "low_price": 5600.0,
+      "last_price": 5700.0,
+      "prev_close": 5700.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 981,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-10-02T20:57:40+08:00",
+      "quote_time": "2026-10-05T23:05:53+08:00",
       "gross_margin": "32.03% (2026Q2)",
       "net_margin": "18.93% (2026Q2)",
       "roe": "104.3% (單季年化, 2026Q2)",
       "eps_single": "27.55 元 (2026Q2 單季；公司季度財報)",
       "earnings_date": "2026-10-29 (26Q3 财报) | 每月 10 日发布营收",
       "event_status": "scheduled",
-      "event_checked_at": "2026-10-02T12:57:44",
-      "fundamental_as_of": "2026-10-02",
+      "event_checked_at": "2026-10-05T15:06:05",
+      "fundamental_as_of": "2026-10-05",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 20,146 百萬元；月增 +4.89%；年增 +129.85%",
       "latest_quarter": {
@@ -672,7 +670,7 @@
           "eps": "42.46 元"
         }
       ],
-      "market_snapshot": "2026-10-02 收盤/最新 NT$5,185.00，日變動 +4.22%；行情時間 2026-10-02T20:57:40+08:00。",
+      "market_snapshot": "2026-10-05 收盤/最新 NT$5,700.00，日變動 +0.00%；行情時間 2026-10-05T23:05:53+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：AI 伺服器、交換器速率升級及高速材料規格提升。反向：銅箔、樹脂等原料成本、客戶認證週期、擴產折舊、匯率及 PCB/網通景氣回落。",
       "risk_factors": [
@@ -710,17 +708,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "+2 张",
-        "trust_net": "+133 张",
-        "dealer_net": "+32 张",
-        "total_net": "+168 张",
-        "date": "2026-10-02",
-        "summary": "[2026-10-02 官方结算] 三大法人全线买超 (+168 张)，外资与投信合力加仓。"
+        "foreign_net": "-100 张",
+        "trust_net": "-18 张",
+        "dealer_net": "+136 张",
+        "total_net": "+19 张",
+        "date": "2026-10-05",
+        "summary": "[2026-10-05 官方结算] 外资与投信偏空调节 (19 张)，机构筹码阶段获利了结。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净买超 168 张 (占量 7.8%)",
+        "large_order_ratio": "法人净买超 19 张 (占量 1.9%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-10-02 筹码] 主力机构呈净买入 (+168 张)，筹码向法人端汇聚沉淀。"
+        "capital_status": "[2026-10-05 筹码] 主力机构呈净买入 (+19 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "+4.5% (多头强劲攻势)",
@@ -732,9 +730,9 @@
       "take_profit": "4,900 - 5,200 元",
       "target_price": "5,600 - 5,900 元",
       "stop_loss": "3,450 元",
-      "research_source_as_of": "行情 2026-10-02；月營收 2026-08；財報 2026Q2",
+      "research_source_as_of": "行情 2026-10-05；月營收 2026-08；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-10-05 14:30 Asia/Taipei"
+      "research_next_review_at": "2026-10-06 14:30 Asia/Taipei"
     },
     {
       "symbol": "3017.TW",
@@ -764,23 +762,23 @@
         "next_week_watch": "水冷板與快換接頭出貨、毛利率，以及高檔成交量是否失控。"
       },
       "open_price": 3570.0,
-      "high_price": 3570.0,
-      "low_price": 3385.0,
-      "last_price": 3440.0,
-      "prev_close": 3510.0,
-      "change": -70.0,
-      "change_pct": -1.99,
-      "volume": 3130,
+      "high_price": 3690.0,
+      "low_price": 3420.0,
+      "last_price": 3585.0,
+      "prev_close": 3585.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 4322,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-10-02T20:57:40+08:00",
+      "quote_time": "2026-10-05T23:05:53+08:00",
       "gross_margin": "31.17% (2026Q2)",
       "net_margin": "19.31% (2026Q2)",
       "roe": "126.7% (單季年化, 2026Q2)",
       "eps_single": "24.37 元 (2026Q2 單季；公司季度財報)",
       "earnings_date": "2026-11-10 (26Q3 法说会) | 每月 10 日发布营收",
       "event_status": "scheduled",
-      "event_checked_at": "2026-10-02T12:57:44",
-      "fundamental_as_of": "2026-10-02",
+      "event_checked_at": "2026-10-05T15:06:05",
+      "fundamental_as_of": "2026-10-05",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 19,481 百萬元；月增 +4.79%；年增 +54.34%",
       "latest_quarter": {
@@ -803,7 +801,7 @@
           "eps": "44.54 元"
         }
       ],
-      "market_snapshot": "2026-10-02 收盤/最新 NT$3,440.00，日變動 -1.99%；行情時間 2026-10-02T20:57:40+08:00。",
+      "market_snapshot": "2026-10-05 收盤/最新 NT$3,585.00，日變動 +0.00%；行情時間 2026-10-05T23:05:53+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：AI/HPC 功耗密度提升、氣冷升級與液冷導入。反向：主要客戶/平台集中、量產時程延誤、競品價格、擴產折舊及伺服器資本支出反轉。",
       "risk_factors": [
@@ -841,17 +839,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-342 张",
-        "trust_net": "-276 张",
-        "dealer_net": "+28 张",
-        "total_net": "-589 张",
-        "date": "2026-10-02",
-        "summary": "[2026-10-02 官方结算] 外资与投信偏空调节 (-589 张)，机构筹码阶段获利了结。"
+        "foreign_net": "+724 张",
+        "trust_net": "+246 张",
+        "dealer_net": "-33 张",
+        "total_net": "+938 张",
+        "date": "2026-10-05",
+        "summary": "[2026-10-05 官方结算] 外资与投信联手买超 (+938 张)，内外部机构共振做多。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 589 张 (占量 18.8%)",
+        "large_order_ratio": "法人净买超 938 张 (占量 21.7%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-10-02 筹码] 主力机构呈净卖出 (-589 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-10-05 筹码] 主力机构呈净买入 (+938 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "+3.8%",
@@ -863,9 +861,9 @@
       "take_profit": "3,100 - 3,300 元",
       "target_price": "3,700 - 4,000 元",
       "stop_loss": "2,100 元",
-      "research_source_as_of": "行情 2026-10-02；月營收 2026-08；財報 2026Q2",
+      "research_source_as_of": "行情 2026-10-05；月營收 2026-08；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-10-05 14:30 Asia/Taipei"
+      "research_next_review_at": "2026-10-06 14:30 Asia/Taipei"
     },
     {
       "symbol": "2317.TW",
@@ -894,24 +892,24 @@
         "reason": "Q2 營收、營業利益與淨利創同期高，法人也偏買超；但近 60 日仍為負、毛利率低於高毛利技術股，定位為穩健觀察而非高彈性首選。",
         "next_week_watch": "AI 伺服器／雲端網路出貨、營益率改善能否延續，以及匯率與關稅影響。"
       },
-      "open_price": 253.0,
-      "high_price": 253.0,
-      "low_price": 250.5,
-      "last_price": 251.0,
+      "open_price": 254.0,
+      "high_price": 256.0,
+      "low_price": 253.5,
+      "last_price": 254.0,
       "prev_close": 254.0,
-      "change": -3.0,
-      "change_pct": -1.18,
-      "volume": 28422,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 45279,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-10-02T20:57:40+08:00",
+      "quote_time": "2026-10-05T23:05:53+08:00",
       "gross_margin": "6.15% (2026Q2)",
       "net_margin": "2.73% (2026Q2)",
       "roe": "23.0% (單季年化, 2026Q2)",
       "eps_single": "4.27 元 (2026Q2 單季；鴻海官方公告)",
       "earnings_date": "2026-08-14 (26Q2 法說會已舉行)；下一次財報/法說會日期待公司公告 | 每月 5 日发布营收",
       "event_status": "historical",
-      "event_checked_at": "2026-10-02T12:57:44",
-      "fundamental_as_of": "2026-10-02",
+      "event_checked_at": "2026-10-05T15:06:05",
+      "fundamental_as_of": "2026-10-05",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 921,766 百萬元；月增 -2.61%；年增 +51.98%",
       "latest_quarter": {
@@ -934,7 +932,7 @@
           "eps": "7.84 元"
         }
       ],
-      "market_snapshot": "2026-10-02 收盤/最新 NT$251.00，日變動 -1.18%；行情時間 2026-10-02T20:57:40+08:00。",
+      "market_snapshot": "2026-10-05 收盤/最新 NT$254.00，日變動 +0.00%；行情時間 2026-10-05T23:05:53+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：AI 伺服器與雲端網路需求、客戶平台擴產。反向：低毛利與營運槓桿、客戶集中、產品組合變動、全球供應鏈/關稅、資本支出及消費電子週期。",
       "risk_factors": [
@@ -972,17 +970,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-15147 张",
-        "trust_net": "+223 张",
-        "dealer_net": "+15 张",
-        "total_net": "-14908 张",
-        "date": "2026-10-02",
-        "summary": "[2026-10-02 官方结算] 投信内资买超 (+223 张) 逢低承接，外资高档调节 (-15,147 张)。"
+        "foreign_net": "+13072 张",
+        "trust_net": "-64 张",
+        "dealer_net": "+374 张",
+        "total_net": "+13383 张",
+        "date": "2026-10-05",
+        "summary": "[2026-10-05 官方结算] 外资主力大幅回流 (+13,072 张)，投信阶段获利减仓 (-64 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 14,908 张 (占量 52.5%)",
+        "large_order_ratio": "法人净买超 13,383 张 (占量 29.6%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-10-02 筹码] 主力机构呈净卖出 (-14,908 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-10-05 筹码] 主力机构呈净买入 (+13,383 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "+2.1%",
@@ -994,9 +992,9 @@
       "take_profit": "315 - 335 元",
       "target_price": "360 - 380 元",
       "stop_loss": "225 元",
-      "research_source_as_of": "行情 2026-10-02；月營收 2026-08；財報 2026Q2",
+      "research_source_as_of": "行情 2026-10-05；月營收 2026-08；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-10-05 14:30 Asia/Taipei"
+      "research_next_review_at": "2026-10-06 14:30 Asia/Taipei"
     },
     {
       "symbol": "2308.TW",
@@ -1025,24 +1023,24 @@
         "reason": "電源與熱管理屬資料中心必要環節，獲利連兩季走高且本週動能回升；但 60 日仍弱、PER 偏高，先列核心追蹤，不追高。",
         "next_week_watch": "資料中心電源與熱管理訂單、營益率再上修，以及 60 日均線能否收復。"
       },
-      "open_price": 1895.0,
-      "high_price": 1915.0,
-      "low_price": 1880.0,
-      "last_price": 1885.0,
-      "prev_close": 1905.0,
-      "change": -20.0,
-      "change_pct": -1.05,
-      "volume": 5519,
+      "open_price": 1920.0,
+      "high_price": 2010.0,
+      "low_price": 1920.0,
+      "last_price": 2005.0,
+      "prev_close": 2005.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 15084,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-10-02T20:57:40+08:00",
+      "quote_time": "2026-10-05T23:05:53+08:00",
       "gross_margin": "36.27% (2026Q2)",
       "net_margin": "14.89% (2026Q2)",
       "roe": "62.2% (單季年化, 2026Q2)",
       "eps_single": "9.68 元 (26Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
       "event_status": "unknown",
-      "event_checked_at": "2026-10-02T12:57:44",
-      "fundamental_as_of": "2026-10-02",
+      "event_checked_at": "2026-10-05T15:06:05",
+      "fundamental_as_of": "2026-10-05",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 64,586 百萬元；月增 -3.71%；年增 +34.95%",
       "latest_quarter": {
@@ -1079,7 +1077,7 @@
           "eps": "17.59 元"
         }
       ],
-      "market_snapshot": "2026-10-02 收盤/最新 NT$1,885.00，日變動 -1.05%；行情時間 2026-10-02T20:57:40+08:00。",
+      "market_snapshot": "2026-10-05 收盤/最新 NT$2,005.00，日變動 +0.00%；行情時間 2026-10-05T23:05:53+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：AI 資料中心擴建、電力轉換效率、液冷與電網投資。反向：雲端業者資本支出週期、材料/匯率、海外擴張成本、電動車需求與高估值對利率敏感。",
       "risk_factors": [
@@ -1116,17 +1114,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-1541 张",
-        "trust_net": "+84 张",
-        "dealer_net": "+21 张",
-        "total_net": "-1436 张",
-        "date": "2026-10-02",
-        "summary": "[2026-10-02 官方结算] 投信内资买超 (+84 张) 逢低承接，外资高档调节 (-1,541 张)。"
+        "foreign_net": "+7962 张",
+        "trust_net": "+29 张",
+        "dealer_net": "+359 张",
+        "total_net": "+8351 张",
+        "date": "2026-10-05",
+        "summary": "[2026-10-05 官方结算] 三大法人全线买超 (+8,351 张)，外资与投信合力加仓。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 1,436 张 (占量 26.0%)",
+        "large_order_ratio": "法人净买超 8,351 张 (占量 55.4%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-10-02 筹码] 主力机构呈净卖出 (-1,436 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-10-05 筹码] 主力机构呈净买入 (+8,351 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月回落約 25.9%",
@@ -1138,9 +1136,9 @@
       "take_profit": "依獲利與趨勢再評估",
       "target_price": "不預設固定目標",
       "stop_loss": "跌破基本面假設即檢視",
-      "research_source_as_of": "行情 2026-10-02；月營收 2026-08；財報 2026Q2",
+      "research_source_as_of": "行情 2026-10-05；月營收 2026-08；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-10-05 14:30 Asia/Taipei"
+      "research_next_review_at": "2026-10-06 14:30 Asia/Taipei"
     },
     {
       "symbol": "2345.TW",
@@ -1169,24 +1167,24 @@
         "reason": "Q2 EPS 與營益率改善、800G／1.6T 卡位明確，基本面維持首選；但股價仍低於 20／60 日均線，且本週三大法人同步賣超，暫不把核心追蹤等同於立即買進。",
         "next_week_watch": "7 月營收、800G／1.6T 訂單能見度、法人賣超是否停止，以及股價能否站回 20 日線。"
       },
-      "open_price": 1955.0,
-      "high_price": 1980.0,
-      "low_price": 1920.0,
-      "last_price": 1965.0,
-      "prev_close": 1900.0,
-      "change": 65.0,
-      "change_pct": 3.42,
-      "volume": 4993,
+      "open_price": 2070.0,
+      "high_price": 2110.0,
+      "low_price": 2015.0,
+      "last_price": 2075.0,
+      "prev_close": 2075.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 5800,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-10-02T20:57:40+08:00",
+      "quote_time": "2026-10-05T23:05:53+08:00",
       "gross_margin": "19.63% (2026Q2)",
       "net_margin": "11.70% (2026Q2)",
       "roe": "112.4% (單季年化, 2026Q2)",
       "eps_single": "19.78 元 (26Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
       "event_status": "unknown",
-      "event_checked_at": "2026-10-02T12:57:44",
-      "fundamental_as_of": "2026-10-02",
+      "event_checked_at": "2026-10-05T15:06:05",
+      "fundamental_as_of": "2026-10-05",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 40,873 百萬元；月增 +3.55%；年增 +59.42%",
       "latest_quarter": {
@@ -1223,7 +1221,7 @@
           "eps": "34.70 元"
         }
       ],
-      "market_snapshot": "2026-10-02 收盤/最新 NT$1,965.00，日變動 +3.42%；行情時間 2026-10-02T20:57:40+08:00。",
+      "market_snapshot": "2026-10-05 收盤/最新 NT$2,075.00，日變動 +0.00%；行情時間 2026-10-05T23:05:53+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：超大規模雲端業者 AI 投資、800G/更高速交換器迭代、開放網路。反向：大客戶集中、交換器世代轉換、供應鏈瓶頸、競爭與資本支出週期。",
       "risk_factors": [
@@ -1260,17 +1258,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-413 张",
-        "trust_net": "+110 张",
-        "dealer_net": "-26 张",
-        "total_net": "-328 张",
-        "date": "2026-10-02",
-        "summary": "[2026-10-02 官方结算] 投信内资买超 (+110 张) 逢低承接，外资高档调节 (-413 张)。"
+        "foreign_net": "+213 张",
+        "trust_net": "-189 张",
+        "dealer_net": "+107 张",
+        "total_net": "+132 张",
+        "date": "2026-10-05",
+        "summary": "[2026-10-05 官方结算] 外资主力大幅回流 (+213 张)，投信阶段获利减仓 (-189 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 328 张 (占量 6.6%)",
+        "large_order_ratio": "法人净买超 132 张 (占量 2.3%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-10-02 筹码] 主力机构呈净卖出 (-328 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-10-05 筹码] 主力机构呈净买入 (+132 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月約 -7.2%，相對大幅上漲後整理",
@@ -1282,9 +1280,9 @@
       "take_profit": "依訂單與 EPS 趨勢再評估",
       "target_price": "不預設固定目標",
       "stop_loss": "營益率與訂單能見度轉弱即檢視",
-      "research_source_as_of": "行情 2026-10-02；月營收 2026-08；財報 2026Q2",
+      "research_source_as_of": "行情 2026-10-05；月營收 2026-08；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-10-05 14:30 Asia/Taipei"
+      "research_next_review_at": "2026-10-06 14:30 Asia/Taipei"
     },
     {
       "symbol": "2360.TW",
@@ -1313,24 +1311,24 @@
         "reason": "連續三季 EPS 創高且測試設備技術門檻高，獲利分數最高；但近期價格走弱、PER 與一年漲幅偏高，採回檔觀察而非追價。",
         "next_week_watch": "先進封裝／光通訊測試訂單、毛利率與自由現金流，並觀察跌勢是否止穩。"
       },
-      "open_price": 2145.0,
-      "high_price": 2225.0,
-      "low_price": 2135.0,
-      "last_price": 2190.0,
-      "prev_close": 2080.0,
-      "change": 110.0,
-      "change_pct": 5.29,
-      "volume": 3149,
+      "open_price": 2225.0,
+      "high_price": 2355.0,
+      "low_price": 2215.0,
+      "last_price": 2325.0,
+      "prev_close": 2325.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 2836,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-10-02T20:57:40+08:00",
+      "quote_time": "2026-10-05T23:05:53+08:00",
       "gross_margin": "61.48% (2026Q2)",
       "net_margin": "36.15% (2026Q2)",
       "roe": "109.0% (單季年化, 2026Q2)",
       "eps_single": "約 12.15 元 (26Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
       "event_status": "unknown",
-      "event_checked_at": "2026-10-02T12:57:44",
-      "fundamental_as_of": "2026-10-02",
+      "event_checked_at": "2026-10-05T15:06:05",
+      "fundamental_as_of": "2026-10-05",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 5,632 百萬元；月增 +3.65%；年增 +156.30%",
       "latest_quarter": {
@@ -1367,7 +1365,7 @@
           "eps": "21.27 元"
         }
       ],
-      "market_snapshot": "2026-10-02 收盤/最新 NT$2,190.00，日變動 +5.29%；行情時間 2026-10-02T20:57:40+08:00。",
+      "market_snapshot": "2026-10-05 收盤/最新 NT$2,325.00，日變動 +0.00%；行情時間 2026-10-05T23:05:53+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：AI/HPC、先進封裝、光通訊及高功率電源測試。反向：半導體設備景氣循環、客戶驗證遞延、接單認列時點、研發投入及高估值波動。",
       "risk_factors": [
@@ -1404,17 +1402,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "+1006 张",
-        "trust_net": "-458 张",
-        "dealer_net": "+15 张",
-        "total_net": "+564 张",
-        "date": "2026-10-02",
-        "summary": "[2026-10-02 官方结算] 外资主力大幅回流 (+1,006 张)，投信阶段获利减仓 (-458 张)。"
+        "foreign_net": "+578 张",
+        "trust_net": "-20 张",
+        "dealer_net": "-68 张",
+        "total_net": "+492 张",
+        "date": "2026-10-05",
+        "summary": "[2026-10-05 官方结算] 外资主力大幅回流 (+578 张)，投信阶段获利减仓 (-20 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净买超 564 张 (占量 17.9%)",
+        "large_order_ratio": "法人净买超 492 张 (占量 17.3%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-10-02 筹码] 主力机构呈净买入 (+564 张)，筹码向法人端汇聚沉淀。"
+        "capital_status": "[2026-10-05 筹码] 主力机构呈净买入 (+492 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月約 -22.6%，高檔修正",
@@ -1426,9 +1424,9 @@
       "take_profit": "依 EPS 與毛利率再評估",
       "target_price": "不預設固定目標",
       "stop_loss": "獲利趨勢反轉即檢視",
-      "research_source_as_of": "行情 2026-10-02；月營收 2026-08；財報 2026Q2",
+      "research_source_as_of": "行情 2026-10-05；月營收 2026-08；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-10-05 14:30 Asia/Taipei"
+      "research_next_review_at": "2026-10-06 14:30 Asia/Taipei"
     },
     {
       "symbol": "3711.TW",
@@ -1457,24 +1455,24 @@
         "reason": "Q2 EPS 反彈、先進封裝技術與產能具卡位價值，行情也轉強；但營益率改善尚需連續驗證，且擴產折舊會壓縮彈性。",
         "next_week_watch": "先進封裝稼動率、營益率連續性、資本支出與折舊負擔。"
       },
-      "open_price": 711.0,
-      "high_price": 722.0,
-      "low_price": 704.0,
-      "last_price": 713.0,
-      "prev_close": 710.0,
-      "change": 3.0,
-      "change_pct": 0.42,
-      "volume": 11136,
+      "open_price": 747.0,
+      "high_price": 758.0,
+      "low_price": 729.0,
+      "last_price": 742.0,
+      "prev_close": 742.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 16774,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-10-02T20:57:40+08:00",
+      "quote_time": "2026-10-05T23:05:53+08:00",
       "gross_margin": "20.55% (2026Q2)",
       "net_margin": "9.89% (2026Q2)",
       "roe": "36.2% (單季年化, 2026Q2)",
       "eps_single": "4.80 元 (26Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
       "event_status": "unknown",
-      "event_checked_at": "2026-10-02T12:57:44",
-      "fundamental_as_of": "2026-10-02",
+      "event_checked_at": "2026-10-05T15:06:05",
+      "fundamental_as_of": "2026-10-05",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 82,247 百萬元；月增 +11.47%；年增 +45.66%",
       "latest_quarter": {
@@ -1511,7 +1509,7 @@
           "eps": "8.04 元"
         }
       ],
-      "market_snapshot": "2026-10-02 收盤/最新 NT$713.00，日變動 +0.42%；行情時間 2026-10-02T20:57:40+08:00。",
+      "market_snapshot": "2026-10-05 收盤/最新 NT$742.00，日變動 +0.00%；行情時間 2026-10-05T23:05:53+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：AI 加速器、HBM/Chiplet 與先進封裝產能需求。反向：高資本支出與折舊、稼動率、客戶集中、封測景氣循環及不同業務的利潤率差異。",
       "risk_factors": [
@@ -1548,17 +1546,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "+3128 张",
-        "trust_net": "-2506 张",
-        "dealer_net": "+152 张",
-        "total_net": "+775 张",
-        "date": "2026-10-02",
-        "summary": "[2026-10-02 官方结算] 外资主力大幅回流 (+3,128 张)，投信阶段获利减仓 (-2,506 张)。"
+        "foreign_net": "+3081 张",
+        "trust_net": "-880 张",
+        "dealer_net": "+175 张",
+        "total_net": "+2376 张",
+        "date": "2026-10-05",
+        "summary": "[2026-10-05 官方结算] 外资主力大幅回流 (+3,081 张)，投信阶段获利减仓 (-880 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净买超 775 张 (占量 7.0%)",
+        "large_order_ratio": "法人净买超 2,376 张 (占量 14.2%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-10-02 筹码] 主力机构呈净买入 (+775 张)，筹码向法人端汇聚沉淀。"
+        "capital_status": "[2026-10-05 筹码] 主力机构呈净买入 (+2,376 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月約 -2.4%，相對穩定",
@@ -1570,9 +1568,9 @@
       "take_profit": "依封裝稼動率再評估",
       "target_price": "不預設固定目標",
       "stop_loss": "資本支出與折舊失控即檢視",
-      "research_source_as_of": "行情 2026-10-02；月營收 2026-08；財報 2026Q2",
+      "research_source_as_of": "行情 2026-10-05；月營收 2026-08；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-10-05 14:30 Asia/Taipei"
+      "research_next_review_at": "2026-10-06 14:30 Asia/Taipei"
     },
     {
       "symbol": "2454.TW",
@@ -1601,24 +1599,24 @@
         "reason": "高階 SoC 與 AI ASIC 設計能力維持技術門檻，短線行情轉強；但 PER 偏高、近 60 日仍弱，且 AI ASIC 尚未完成規模化獲利驗證。",
         "next_week_watch": "AI ASIC 實際營收／毛利貢獻、手機需求與客戶自研競爭。"
       },
-      "open_price": 4950.0,
-      "high_price": 4970.0,
-      "low_price": 4880.0,
-      "last_price": 4950.0,
-      "prev_close": 4980.0,
-      "change": -30.0,
-      "change_pct": -0.6,
-      "volume": 3839,
+      "open_price": 4980.0,
+      "high_price": 5165.0,
+      "low_price": 4980.0,
+      "last_price": 5165.0,
+      "prev_close": 5165.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 6758,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-10-02T20:57:40+08:00",
+      "quote_time": "2026-10-05T23:05:53+08:00",
       "gross_margin": "46.25% (2026Q2)",
       "net_margin": "16.25% (2026Q2)",
       "roe": "45.7% (單季年化, 2026Q2)",
       "eps_single": "15.28 元 (26Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
       "event_status": "unknown",
-      "event_checked_at": "2026-10-02T12:57:44",
-      "fundamental_as_of": "2026-10-02",
+      "event_checked_at": "2026-10-05T15:06:05",
+      "fundamental_as_of": "2026-10-05",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-08 營收 64,183 百萬元；月增 +32.41%；年增 +44.08%",
       "latest_quarter": {
@@ -1655,7 +1653,7 @@
           "eps": "30.44 元"
         }
       ],
-      "market_snapshot": "2026-10-02 收盤/最新 NT$4,950.00，日變動 -0.60%；行情時間 2026-10-02T20:57:40+08:00。",
+      "market_snapshot": "2026-10-05 收盤/最新 NT$5,165.00，日變動 +0.00%；行情時間 2026-10-05T23:05:53+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：手機平台升級、邊緣 AI、Wi-Fi/連網、車用及 ASIC 專案。反向：手機需求與季節性、客戶自研晶片、晶圓代工成本、產品組合及 ASIC 專案驗證時程。",
       "risk_factors": [
@@ -1692,17 +1690,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-1472 张",
-        "trust_net": "+224 张",
-        "dealer_net": "-7 张",
-        "total_net": "-1253 张",
-        "date": "2026-10-02",
-        "summary": "[2026-10-02 官方结算] 投信内资买超 (+224 张) 逢低承接，外资高档调节 (-1,472 张)。"
+        "foreign_net": "+1297 张",
+        "trust_net": "-62 张",
+        "dealer_net": "+121 张",
+        "total_net": "+1357 张",
+        "date": "2026-10-05",
+        "summary": "[2026-10-05 官方结算] 外资主力大幅回流 (+1,297 张)，投信阶段获利减仓 (-62 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 1,253 张 (占量 32.6%)",
+        "large_order_ratio": "法人净买超 1,357 张 (占量 20.1%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-10-02 筹码] 主力机构呈净卖出 (-1,253 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-10-05 筹码] 主力机构呈净买入 (+1,357 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月約 -15%，高檔整理",
@@ -1714,9 +1712,9 @@
       "take_profit": "依 ASIC 營收再評估",
       "target_price": "不預設固定目標",
       "stop_loss": "獲利與 ASIC 時程轉弱即檢視",
-      "research_source_as_of": "行情 2026-10-02；月營收 2026-08；財報 2026Q2",
+      "research_source_as_of": "行情 2026-10-05；月營收 2026-08；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-10-05 14:30 Asia/Taipei"
+      "research_next_review_at": "2026-10-06 14:30 Asia/Taipei"
     },
     {
       "symbol": "3653.TW",
@@ -1733,24 +1731,24 @@
         "reason": "本次新增研究名單；雖已有官方季度獲利與產品定位資料，估值、行情動能及風險分項尚未按週評方法完整核實，因此不填推測分數。",
         "next_week_watch": "核實前瞻估值、近 5／20／60 日動能、法人趨勢及液冷產品出貨。"
       },
-      "open_price": 6790.0,
-      "high_price": 7065.0,
+      "open_price": 6800.0,
+      "high_price": 7440.0,
       "low_price": 6760.0,
-      "last_price": 6800.0,
-      "prev_close": 6875.0,
-      "change": -75.0,
-      "change_pct": -1.09,
-      "volume": 1025,
+      "last_price": 7205.0,
+      "prev_close": 7205.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 1069,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-10-02T20:57:40+08:00",
+      "quote_time": "2026-10-05T23:05:53+08:00",
       "gross_margin": "46.81% (2026Q2)",
       "net_margin": "32.01% (2026Q2)",
       "roe": "63.1% (單季年化, 2026Q2)",
       "eps_single": "15.80 元 (2026Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
       "event_status": "unknown",
-      "event_checked_at": "2026-10-02T12:57:44",
-      "fundamental_as_of": "2026-10-02",
+      "event_checked_at": "2026-10-05T15:06:05",
+      "fundamental_as_of": "2026-10-05",
       "fundamental_updated_at": "2026-09-07 14:04:00",
       "latest_monthly_revenue": "2026-08 營收 3,226 百萬元；月增 +0.40%；年增 +90.90%",
       "latest_quarter": {
@@ -1780,7 +1778,7 @@
           "eps": "15.80 元"
         }
       ],
-      "market_snapshot": "2026-10-02 收盤/最新 NT$6,800.00，日變動 -1.09%；行情時間 2026-10-02T20:57:40+08:00。",
+      "market_snapshot": "2026-10-05 收盤/最新 NT$7,205.00，日變動 +0.00%；行情時間 2026-10-05T23:05:53+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：AI/HPC 功耗密度、液冷滲透與高階封裝熱管理需求。反向：客戶/平台集中、驗證和量產時程、金屬原料價格、擴產折舊及短期成長率回落。",
       "risk_factors": [
@@ -1818,17 +1816,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-220 张",
-        "trust_net": "+63 张",
-        "dealer_net": "+0 张",
-        "total_net": "-155 张",
-        "date": "2026-10-02",
-        "summary": "[2026-10-02 官方结算] 投信内资买超 (+63 张) 逢低承接，外资高档调节 (-220 张)。"
+        "foreign_net": "-100 张",
+        "trust_net": "+18 张",
+        "dealer_net": "-1 张",
+        "total_net": "-82 张",
+        "date": "2026-10-05",
+        "summary": "[2026-10-05 官方结算] 投信内资买超 (+18 张) 逢低承接，外资高档调节 (-100 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 155 张 (占量 15.1%)",
+        "large_order_ratio": "法人净卖超 82 张 (占量 7.7%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-10-02 筹码] 主力机构呈净卖出 (-155 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-10-05 筹码] 主力机构呈净卖出 (-82 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "待計算；本次未完成歷史行情複核",
@@ -1840,24 +1838,24 @@
       "take_profit": "依獲利與估值重新評估",
       "target_price": "不預設固定目標",
       "stop_loss": "依獲利趨勢與個人風險承受度管理",
-      "research_source_as_of": "行情 2026-10-02；月營收 2026-08；財報 2026Q2",
+      "research_source_as_of": "行情 2026-10-05；月營收 2026-08；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-10-05 14:30 Asia/Taipei"
+      "research_next_review_at": "2026-10-06 14:30 Asia/Taipei"
     }
   ],
   "quote_status": {
     "status": "ok",
-    "updated_at": "2026-10-02 20:57:42",
-    "as_of": "2026-10-02",
+    "updated_at": "2026-10-05 23:06:03",
+    "as_of": "2026-10-05",
     "quote_count": 11,
-    "source": "Shioaji Snapshot (primary) + TWSE MIS cross-check"
+    "source": "Shioaji Snapshot"
   },
   "institutional_status": {
     "status": "ok",
-    "date": "2026-10-02",
-    "retrieved_at": "2026-10-02T12:57:44",
+    "date": "2026-10-05",
+    "retrieved_at": "2026-10-05T15:06:05",
     "flow_count": 11,
-    "as_of": "2026-10-02"
+    "as_of": "2026-10-05"
   },
-  "research_next_review_at": "2026-10-05 14:30 Asia/Taipei"
+  "research_next_review_at": "2026-10-06 14:30 Asia/Taipei"
 }
