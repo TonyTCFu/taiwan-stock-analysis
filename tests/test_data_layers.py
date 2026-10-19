@@ -6,6 +6,7 @@ from fetch_shioaji_data import latest_market_date
 from fundamental_data import _refresh_event_label, _roc_date
 from sync_public_content import announcement_rows, parse_rss, refresh_content
 from cloud_daily_update import run_daily_pipeline
+from build_daily_report import render_report
 
 
 class DataLayerTests(unittest.TestCase):
@@ -65,6 +66,21 @@ class DataLayerTests(unittest.TestCase):
     def test_daily_pipeline_refreshes_content_after_quote_error(self, _quotes, content):
         self.assertEqual(run_daily_pipeline(), 0)
         content.assert_called_once_with(1)
+
+    def test_report_separates_check_time_from_source_date_and_marks_missing(self):
+        payload = {
+            "stocks": [{"code": "2330", "name": "台積電", "last_price": 100,
+                        "latest_quarter": {"period": "2026Q2"}, "research_checked_at": "2026-09-23"}],
+            "market_as_of": "2026-10-16",
+            "quote_updated_at": "2026-10-19 18:00:00",
+            "content_checked_at": "2026-10-19T18:00:00+08:00",
+            "content_sources": {"announcements": {"status": "unavailable", "checked_at": "2026-10-19T18:00:00+08:00"}},
+        }
+        report = render_report(payload, dt.datetime(2026, 10, 19, 18, tzinfo=dt.timezone(dt.timedelta(hours=8))))
+        self.assertIn("資料日期 2026-10-16", report)
+        self.assertIn("未取得", report)
+        self.assertIn("未接入可核驗的完整來源", report)
+        self.assertIn("2026Q2", report)
 
 
 if __name__ == "__main__":

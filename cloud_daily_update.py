@@ -24,7 +24,7 @@ LIVE_QUOTES_URL = "https://futienchun-com-dashboard.onrender.com/api/live-quotes
 TIMEOUT_SECONDS = 180
 PROJECT_ROOT = Path(__file__).resolve().parent
 OUTPUT_PATH = PROJECT_ROOT / "data" / "stock_data.json"
-CACHE_VERSION = "20260923-research-r8"
+CACHE_VERSION = "20261019-after-close-report-r3"
 RESEARCH_CONTENT_CHECKED_AT = "2026-09-23"
 
 

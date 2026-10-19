@@ -25,7 +25,7 @@ NEWS_FEEDS = {
     "market": ("中央社財經", "https://feeds.feedburner.com/rsscna/finance"),
     "industry": ("中央社科技", "https://feeds.feedburner.com/rsscna/technology"),
 }
-CACHE_VERSION = "20261019-auto-content-r2"
+CACHE_VERSION = "after-close-report-r3"
 COMPANY_ALIASES = {"2330": "台積電", "2383": "台光電", "2317": "鴻海"}
 
 
@@ -167,7 +167,7 @@ def refresh_content(payload: dict[str, Any], checked_at: str | None = None) -> d
             if company_results.get(code) or fallback:
                 stock["company_news"] = company_results.get(code) or fallback
     status["company_news"] = {"status": "ok" if company_results else "partial", "checked_at": now, "successful_stocks": len(company_results), "expected_stocks": len(STOCKS_META)}
-    payload["cache_version"] = CACHE_VERSION
+    payload["cache_version"] = f"{now[:16].replace('-', '').replace(':', '').replace('T', '-')}-{CACHE_VERSION}"
     payload["content_checked_at"] = now
     return payload
 
