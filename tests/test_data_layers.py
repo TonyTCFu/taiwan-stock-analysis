@@ -2,7 +2,7 @@ import datetime as dt
 import unittest
 from unittest.mock import patch
 
-from fetch_shioaji_data import latest_market_date
+from fetch_shioaji_data import latest_market_date, next_research_review_at
 from fundamental_data import _refresh_event_label, _roc_date
 from sync_public_content import announcement_rows, parse_rss, refresh_content
 from cloud_daily_update import run_daily_pipeline
@@ -34,6 +34,16 @@ class DataLayerTests(unittest.TestCase):
         self.assertEqual(
             latest_market_date(dt.datetime(2026, 9, 13, 16, 0)),
             "2026-09-11",
+        )
+
+    def test_next_data_sync_includes_weekend_news(self):
+        self.assertEqual(
+            next_research_review_at(dt.datetime(2026, 10, 23, 16, 0)),
+            "2026-10-24 15:00 Asia/Taipei",
+        )
+        self.assertEqual(
+            next_research_review_at(dt.datetime(2026, 10, 23, 14, 30)),
+            "2026-10-23 15:00 Asia/Taipei",
         )
 
     def test_announcements_match_code_and_keep_published_date(self):

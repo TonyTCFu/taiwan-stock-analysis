@@ -40,13 +40,11 @@ def latest_market_date(now):
 
 
 def next_research_review_at(now):
-    """Return the next weekday automatic data sync slot in Taiwan time."""
+    """Return the next automatic data sync slot in Taiwan time; not a research review."""
     taipei = ZoneInfo("Asia/Taipei")
     current = now.replace(tzinfo=taipei) if now.tzinfo is None else now.astimezone(taipei)
-    next_day = current.date() + datetime.timedelta(days=1)
-    while next_day.weekday() >= 5:
-        next_day += datetime.timedelta(days=1)
-    return f"{next_day.isoformat()} 14:30 Asia/Taipei"
+    next_slot = current.date() if current.time() < datetime.time(15, 0) else current.date() + datetime.timedelta(days=1)
+    return f"{next_slot.isoformat()} 15:00 Asia/Taipei"
 
 
 def market_snapshot_text(stock, market_as_of):

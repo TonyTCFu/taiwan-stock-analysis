@@ -1,7 +1,7 @@
 # MEMORY.md - 台湾股市龙头股分析项目架构决策与记忆归档
 
 ## 1. 项目核心决策 (Architecture Decision Records)
-- **收盤日報與排程（2026-10-19）**：`build_daily_report.py` 以已發布的 11 檔 JSON 生成 `REPORTS/daily/YYYY-MM-DD.md` 與公網 `REPORTS/daily/index.html`，逐類列來源 URL、實際資料日期、檢查時間與失敗／未接入狀態；研究評分與完整 MOPS 法說簡報未宣稱自動更新。Codex automation `automation-2`（「台股龍頭股收盤日報與資料更新」）針對本專案每日台北時間 18:00 執行更新、發布與寄送至已連接帳戶本人 `tony.tc.fu@gmail.com`。它在本機運行，設備離線／睡眠時無法保證觸發；GitHub Actions 仍為 14:30 交易日排程，因工作流寫入權限不足，尚未改成雲端 18:00 排程。每次資料同步遞增 `cache_version`，日報生成／公網驗證／郵件是否成功須分別核對。
+- **收盤日報與排程（2026-10-19）**：`build_daily_report.py` 以已發布的 11 檔 JSON 生成 `REPORTS/daily/YYYY-MM-DD.md` 與公網 `REPORTS/daily/index.html`，逐類列來源 URL、實際資料日期、檢查時間與失敗／未接入狀態；研究評分與完整 MOPS 法說簡報未宣稱自動更新。Codex automation `automation-2`（「台股龍頭股收盤日報與資料更新」）針對本專案每日台北時間 15:00 執行更新、發布與寄送至已連接帳戶本人 `tony.tc.fu@gmail.com`；此時來源尚未發布的欄位如實標示待發布。它在本機運行，設備離線／睡眠時無法保證觸發；GitHub Actions 仍為 14:30 交易日排程，因工作流寫入權限不足，尚未同步改成雲端 15:00 排程。每次資料同步遞增 `cache_version`，日報生成／公網驗證／郵件是否成功須分別核對。
 - **公開資料獨立同步（2026-10-19）**：`sync_public_content.py` 不依賴 Render 行情網關，分別抓 TWSE OpenAPI 月營收/季報、上市公司每日重大訊息、中央社財經/科技 RSS 和各公司 Google 新聞 RSS 標題。現有 GitHub Actions 僅在交易日 14:30 台北時間執行，透過 `cloud_daily_update.py` 入口順序嘗試行情及公開資料；行情失敗不阻斷其他資料。每欄分開保存來源發布日期、檢查時間與失敗狀態，來源失敗時保留最後成功值。預計的每兩小時排程尚未發布：本機 PAT 缺 `workflow` scope，GitHub App 亦無工作流寫入權限。法說重大訊息僅涵蓋當日 OpenAPI 及之後累積的已捕捉紀錄，不等於完整 MOPS 法說行事曆或簡報全文；研究策略和歷史週評仍需人工複核，前端顯示過期警告，不把它們當作已自動更新。
 - **分层同步方案 (2026-09-13)**: Dashboard 将行情、三大法人、基本面/事件与研究评分拆成独立新鲜度层。行情在收盘后由工作流更新，用户点击按钮时请求实时快照；不启用 30 秒自动轮询。周末行情基准自动回退到最近交易日收盘。基本面与事件在台北时间每日 15:00 由 TWSE OpenAPI 同步，研究评分维持每周快照。
 - **行情完整性契约 (2026-09-16)**: Render 行情网关仅在 10/10 标的均有有效报价时才返回成功，并同时写入 `quote_updated_at`、`market_as_of` 与 `quote_status`；每日发布器和前端按钮会拒绝不完整响应。这样不会再出现价格已经变化、页面却显示旧行情日期的假更新。
