@@ -201,8 +201,9 @@ def fetch_fundamental_snapshot(
         parent_net_income = _number(inc.get("淨利（淨損）歸屬於母公司業主"))
         parent_equity = _number(bs.get("歸屬於母公司業主之權益合計"))
         annualized_roe = None
-        if parent_net_income is not None and parent_equity:
-            annualized_roe = parent_net_income / parent_equity * 4 * 100
+        quarter_number = int(period[-1]) if period and period[-1] in "1234" else None
+        if parent_net_income is not None and parent_equity and quarter_number:
+            annualized_roe = parent_net_income / parent_equity * (4 / quarter_number) * 100
 
         current_quarter = None
         if period and any(value is not None for value in (revenue, operating_margin, net_income, eps)):
@@ -254,9 +255,9 @@ def fetch_fundamental_snapshot(
         if net_margin:
             values["net_margin"] = f"{net_margin} ({period})" if period else net_margin
         if annualized_roe is not None:
-            values["roe"] = f"{annualized_roe:.1f}% (單季年化, {period})"
-        if eps is not None:
-            values["eps_single"] = f"{eps:.2f} 元 ({period})" if period else f"{eps:.2f} 元"
+            values["roe"] = f"{annualized_roe:.1f}% (年初累計年化, {period})"
+        if eps is not None and isinstance(verified_quarter, dict) and verified_quarter.get("period") == period:
+            values["eps_single"] = f"{eps:.2f} 元 ({period})"
         if monthly_label:
             values["latest_monthly_revenue"] = monthly_label
         if current_quarter:

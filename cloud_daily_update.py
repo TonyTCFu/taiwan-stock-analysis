@@ -108,6 +108,9 @@ def main() -> int:
         for stock in previous_payload.get("stocks", [])
         if isinstance(stock, dict) and stock.get("code")
     }
+    for field in ("content_sources", "news_feeds", "content_checked_at"):
+        if field in previous_payload:
+            payload[field] = previous_payload[field]
     institutional_data, institutional_status = fetch_twse_institutional_flow(
         list(STOCKS_META)
     )
@@ -119,6 +122,9 @@ def main() -> int:
     for stock in stocks:
         code = str(stock.get("code", ""))
         previous_stock = previous_stocks.get(code, {})
+        for field in ("official_announcements", "company_news"):
+            if field in previous_stock:
+                stock[field] = previous_stock[field]
         if institutional_refresh_ok and code in STOCKS_META:
             institutional_flow, capital_inflow = compute_institutional_analysis(
                 code,

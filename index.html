@@ -92,6 +92,13 @@
 
         .section-badge { font-size: 12px; font-weight: 700; color: var(--accent-gold); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
         .info-panel { background: rgba(255, 255, 255, 0.02); border-radius: 8px; padding: 10px; font-size: 12px; margin-bottom: 12px; }
+        .source-item { padding: 9px 0; border-bottom: 1px solid var(--border-color); line-height: 1.55; overflow-wrap: anywhere; }
+        .source-item:last-child { border-bottom: 0; }
+        .source-item a { color: #8deee0; text-decoration: none; }
+        .source-item small { display: block; color: var(--text-muted); margin-top: 3px; }
+        .table-card.news-board { padding: 20px; max-height: none; }
+        .news-board h2 { margin: 0 0 10px; font-size: 18px; }
+        .news-board h3 { margin: 18px 0 8px; font-size: 14px; color: #79e8eb; }
 
         .metrics-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 12px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); margin-bottom: 16px; text-align: center; }
         .metric-item .label { font-size: 11px; color: var(--text-muted); margin-bottom: 2px; }
@@ -584,6 +591,7 @@
             <button class="tab-btn" onclick="switchTab('earnings')">🏢 财报公布日与预测</button>
             <button class="tab-btn" onclick="switchTab('table')">🎯 买卖策略与决策速查</button>
             <button class="tab-btn" onclick="switchTab('weekly-review')">📈 每周复盘｜名单与评分</button>
+            <button class="tab-btn" onclick="switchTab('news')">📰 公告與新聞</button>
         </div>
 
         <!-- TAB 1: CARDS -->
@@ -662,6 +670,7 @@
                 <div class="weekly-review-summary">每週復盤資料載入中...</div>
             </section>
         </div>
+        <div id="tab-news" class="table-card news-board" style="display: none;" aria-live="polite"></div>
     </main>
 
     <footer>
@@ -883,6 +892,11 @@
             }
         }
 
+        function renderSourceItems(items, emptyText = '此来源目前没有符合记录') {
+            if (!Array.isArray(items) || !items.length) return `<div class="source-item">${escapeResearchText(emptyText)}</div>`;
+            return items.map(item => `<div class="source-item"><a href="${escapeResearchText(safeResearchUrl(item.url))}" target="_blank" rel="noopener noreferrer">${escapeResearchText(item.title)}</a><small>${escapeResearchText(item.source)} · 发布 ${escapeResearchText(item.published_at)}</small></div>`).join('');
+        }
+
         function renderDashboard(data) {
             const sourceStatus = document.getElementById('quote-status');
             const sources = data.sources || {};
@@ -898,10 +912,19 @@
             document.getElementById('update-time').innerText = `行情更新: ${quoteUpdatedAt}`;
             const freshness = document.getElementById('freshness-meta');
             if (freshness) {
-                freshness.innerText = `行情基准 ${data.market_as_of || '-'} · 法人结算 ${data.institutional_as_of || '-'} · 基本面 ${data.fundamental_updated_at || '-'} · 研究内容核对 ${data.research_updated_at || '-'} · 下次自动同步 ${data.research_next_review_at || '-'}`;
+                const content = data.content_sources || {};
+                freshness.innerText = `行情 ${data.market_as_of || '-'} · 法人 ${data.institutional_as_of || '-'} · 財報/月營收核對 ${data.fundamental_checked_at || '-'} (${content.fundamentals?.status || '待同步'}) · 公告 ${content.announcements?.checked_at || '-'} (${content.announcements?.status || '待同步'}) · 新聞 ${data.content_checked_at || '-'} · 研究策略人工核對 ${data.research_updated_at || '-'}`;
             }
             const cacheVersion = data.cache_version || (data.updated_at ? data.updated_at.replace(/[- :]/g, '').slice(4, 12) : 'LIVE');
             document.getElementById('cache-ver').innerText = cacheVersion.startsWith('v') ? cacheVersion : 'v' + cacheVersion;
+            const newsBoard = document.getElementById('tab-news');
+            if (newsBoard) {
+                const feeds = data.news_feeds || {};
+                const status = data.content_sources || {};
+                newsBoard.innerHTML = `<h2>上市公司公告與市場／產業新聞</h2><div class="research-freshness">每兩小時排程檢查；發布時間由來源提供，檢查時間不代表有新消息。來源故障時保留最後成功資料。此區只列原始標題，非投資判斷。</div>
+                    <h3>市場新聞 · 中央社財經</h3><div class="research-freshness">檢查 ${escapeResearchText(status.market?.checked_at || '-')} · 狀態 ${escapeResearchText(status.market?.status || '待同步')}</div>${renderSourceItems(feeds.market)}
+                    <h3>產業新聞 · 中央社科技</h3><div class="research-freshness">檢查 ${escapeResearchText(status.industry?.checked_at || '-')} · 狀態 ${escapeResearchText(status.industry?.status || '待同步')}</div>${renderSourceItems(feeds.industry)}`;
+            }
             
             function formatNetTag(val) {
                 if (!val || val === '-') return `<span style="font-family: var(--font-mono); color: var(--text-muted);">-</span>`;
@@ -950,11 +973,15 @@
                     <div class="weekly-band"><strong>${escapeResearchText(item.range)}｜${escapeResearchText(item.label)}</strong><span>${escapeResearchText(item.rule)}</span></div>
                 `).join('');
                 const sourceLinks = Array.isArray(review.source_links) ? review.source_links.map(source => `<a href="${safeResearchUrl(source.url)}" target="_blank" rel="noopener noreferrer">${escapeResearchText(source.label)}</a>`).join('') : '';
+                const reviewAge = Date.now() - Date.parse(review.as_of || '');
+                const reviewWarning = Number.isFinite(reviewAge) && reviewAge > 14 * 86400000
+                    ? `<div class="research-freshness">⚠️ 此為 ${escapeResearchText(review.as_of)} 的歷史週評，分數與價位不是本週即時判斷；自動資料同步不會重算研究評分。</div>` : '';
                 container.innerHTML = `
                     <div class="weekly-review-header">
                         <div class="weekly-review-title">📈 ${escapeResearchText(review.title || '每週復盤｜名單與評分')}</div>
                         <div class="weekly-review-meta">${escapeResearchText(review.as_of || '-')} · ${escapeResearchText(review.period || '-')} · ${escapeResearchText(review.method_version || 'weekly')}</div>
                     </div>
+                    ${reviewWarning}
                     <div class="weekly-review-summary">${escapeResearchText(review.description || '')}<br>${escapeResearchText(review.summary || '')}</div>
                     <div class="weekly-review-context">${escapeResearchText(review.market_context || '')}</div>
                     <div class="weekly-criteria">${criteriaHtml}</div>
@@ -968,6 +995,8 @@
 
             function renderResearchBlock(stock) {
                 if (!stock.industry && !stock.earnings_trend && !stock.market_factors) return '';
+                const researchAge = Date.now() - Date.parse(stock.research_checked_at || data.research_updated_at || '');
+                const staleResearch = Number.isFinite(researchAge) && researchAge > 14 * 86400000;
                 const quarters = Array.isArray(stock.quarterly_earnings) ? stock.quarterly_earnings : [];
                 const risks = Array.isArray(stock.risk_factors) ? stock.risk_factors : [];
                 const sources = Array.isArray(stock.source_links) ? stock.source_links : [];
@@ -988,13 +1017,14 @@
                             <span class="research-panel-title">📚 基本面／產業研究</span>
                             <span class="research-badge">${escapeResearchText(stock.recommendation || '研究資料')}</span>
                         </div>
-                        <div class="research-freshness">资料基准：${escapeResearchText(stock.research_source_as_of || '-')}<br>研究内容核对：${escapeResearchText(stock.research_checked_at || data.research_updated_at || '-')} · 下次自动同步：${escapeResearchText(stock.research_next_review_at || data.research_next_review_at || '-')}</div>
+                        <div class="research-freshness">行情基準：${escapeResearchText(data.market_as_of || '-')} · 研究策略人工核對：${escapeResearchText(stock.research_checked_at || data.research_updated_at || '-')}。下列估值與策略文字不會因自動新聞同步而自動重評。</div>
+                        ${staleResearch ? '<div class="research-freshness">⚠️ 研究敘述已超過 14 天未重新核對，僅供歷史參考；請優先查看下方最新公告、財報期別與新聞。</div>' : ''}
                             <div class="research-grid">
                             <div class="research-item"><span class="research-label">所處行業</span><span class="research-value">${escapeResearchText(stock.industry)}</span></div>
-                            <div class="research-item"><span class="research-label">市場行情與估值</span><span class="research-value">${escapeResearchText(stock.market_snapshot)}<br>${escapeResearchText(stock.valuation)}</span></div>
+                            <div class="research-item"><span class="research-label">市場行情與估值</span><span class="research-value">${escapeResearchText(data.market_as_of || '-')} 股價 NT$ ${escapeResearchText(stock.last_price)}，漲跌 ${escapeResearchText(stock.change_pct)}%<br>研究估值基準：${escapeResearchText(stock.valuation)}</span></div>
                             <div class="research-item"><span class="research-label">最新月營收</span><span class="research-value">${escapeResearchText(stock.latest_monthly_revenue || '待同步')}</span></div>
-                            <div class="research-item"><span class="research-label">三季獲利趨勢</span><span class="research-value">${escapeResearchText(stock.earnings_trend)}</span></div>
-                            <div class="research-item"><span class="research-label">研究策略</span><span class="research-value">${escapeResearchText(stock.strategy_note)}</span></div>
+                            <div class="research-item"><span class="research-label">歷史獲利趨勢研究</span><span class="research-value">${escapeResearchText(stock.earnings_trend)}</span></div>
+                            <div class="research-item"><span class="research-label">研究策略（人工核對）</span><span class="research-value">${escapeResearchText(stock.strategy_note)}</span></div>
                         </div>
                         <div class="research-copy"><strong>投資邏輯：</strong>${escapeResearchText(stock.investment_case)}</div>
                         <div class="research-copy"><strong>市場因素：</strong>${escapeResearchText(stock.market_factors)}</div>
@@ -1026,6 +1056,10 @@
                     const highPx = s.high_price !== undefined ? s.high_price : (s.day_high !== undefined ? s.day_high : s.last_price);
                     const lowPx = s.low_price !== undefined ? s.low_price : (s.day_low !== undefined ? s.day_low : s.last_price);
                     const earnDate = s.earnings_date || '已发布';
+                    const weeklyAsOf = data.weekly_review?.as_of || '';
+                    const weeklyIsCurrent = weeklyAsOf && Date.now() - Date.parse(weeklyAsOf) <= 14 * 86400000;
+                    const eps = s.latest_quarter?.eps || s.eps_single || '待公告';
+                    const epsPeriod = s.latest_quarter?.period || '歷史研究';
                     
                     return `
                         <div class="stock-card">
@@ -1034,7 +1068,7 @@
                                     <h2>${s.name}</h2>
                                     <span class="stock-code">${s.code}</span>
                                 </div>
-                                <div class="score-pill">卡位 ${s.score}分${weeklyReview.score !== undefined ? `<br><span style="color:#72efbd;">周评 ${weeklyReview.score}分</span>` : ''}</div>
+                                <div class="score-pill">卡位 ${s.score}分${weeklyIsCurrent && weeklyReview.score !== undefined ? `<br><span style="color:#72efbd;">周评 ${weeklyReview.score}分</span>` : ''}<br><small>研究 ${escapeResearchText(data.research_updated_at || '-')}</small></div>
                             </div>
 
                             <div class="price-hero">
@@ -1057,9 +1091,13 @@
 
                             <div class="section-badge">🏢 财报公布日与表现</div>
                             <div class="info-panel">
-                                <strong>日期：</strong>${earnDate}<br>
-                                <span style="font-size:11px;color:var(--text-muted);">事件状态：${escapeResearchText(s.event_status || '待确认')} · 资料截至：${escapeResearchText(s.fundamental_as_of || data.fundamental_as_of || '-')}</span>
+                                <strong>原研究日程：</strong>${escapeResearchText(earnDate)}<br>
+                                <span style="font-size:11px;color:var(--text-muted);">此欄非自動法說日曆；最新公告見下方官方重大訊息。原日程狀態：${escapeResearchText(s.event_status || '待確認')} · TWSE 報表出表：${escapeResearchText(s.fundamental_as_of || data.fundamental_as_of || '-')}</span>
                             </div>
+                            <div class="section-badge">📢 官方重大訊息／法說公告</div>
+                            <div class="info-panel">${renderSourceItems((s.official_announcements || []).slice(0, 2), '尚未取得此公司近期重大訊息；法說日期請以公司正式公告為準')}</div>
+                            <div class="section-badge">📰 公司新聞標題</div>
+                            <div class="info-panel">${renderSourceItems((s.company_news || []).slice(0, 2), '目前監測的中央社財經／科技 RSS 無此公司標題')}</div>
 
                             <div class="section-badge">🏦 真实三大法人与主力资金</div>
                             <div class="info-panel">
@@ -1075,7 +1113,7 @@
                             <div class="metrics-row">
                                 <div class="metric-item"><div class="label">毛利率</div><div class="val">${s.gross_margin}</div></div>
                                 <div class="metric-item"><div class="label">ROE</div><div class="val">${s.roe}</div></div>
-                                <div class="metric-item"><div class="label">官方单季 EPS</div><div class="val">${s.eps_single}</div></div>
+                                <div class="metric-item"><div class="label">申報 EPS (${escapeResearchText(epsPeriod)}；可能累計)</div><div class="val">${escapeResearchText(eps)}</div></div>
                                 <div class="metric-item"><div class="label">今日张数</div><div class="val">${(s.volume || 0).toLocaleString()}</div></div>
                             </div>
 
@@ -1169,6 +1207,7 @@
             document.getElementById('tab-earnings').style.display = 'none';
             document.getElementById('tab-table').style.display = 'none';
             document.getElementById('tab-weekly-review').style.display = 'none';
+            document.getElementById('tab-news').style.display = 'none';
 
             if (tabName === 'cards') {
                 document.getElementById('tab-cards').style.display = 'grid';
@@ -1180,6 +1219,8 @@
                 document.getElementById('tab-table').style.display = 'block';
             } else if (tabName === 'weekly-review') {
                 document.getElementById('tab-weekly-review').style.display = 'block';
+            } else if (tabName === 'news') {
+                document.getElementById('tab-news').style.display = 'block';
             }
 
             if (event && event.target) {
