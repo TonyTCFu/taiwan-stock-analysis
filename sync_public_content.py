@@ -25,7 +25,7 @@ NEWS_FEEDS = {
     "market": ("中央社財經", "https://feeds.feedburner.com/rsscna/finance"),
     "industry": ("中央社科技", "https://feeds.feedburner.com/rsscna/technology"),
 }
-CACHE_VERSION = "20261019-auto-content-r1"
+CACHE_VERSION = "20261019-auto-content-r2"
 COMPANY_ALIASES = {"2330": "台積電", "2383": "台光電", "2317": "鴻海"}
 
 
@@ -172,9 +172,14 @@ def refresh_content(payload: dict[str, Any], checked_at: str | None = None) -> d
     return payload
 
 
-def main() -> int:
+def main(quote_result: int | None = None) -> int:
     try:
         payload = json.loads(OUTPUT_PATH.read_text(encoding="utf-8"))
+        if quote_result is not None:
+            payload["quote_sync_status"] = {
+                "status": "ok" if quote_result == 0 else "unavailable",
+                "checked_at": taipei_now(),
+            }
         updated = refresh_content(payload)
         OUTPUT_PATH.write_text(json.dumps(updated, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     except (OSError, ValueError, json.JSONDecodeError) as exc:

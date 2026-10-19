@@ -259,5 +259,13 @@ def main() -> int:
     return 0
 
 
+def run_daily_pipeline() -> int:
+    """Keep the public-content refresh running even when quotes fail."""
+    from sync_public_content import main as refresh_public_content
+
+    quote_result = main()
+    return refresh_public_content(quote_result)
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(run_daily_pipeline())

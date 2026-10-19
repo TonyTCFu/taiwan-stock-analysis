@@ -5,6 +5,7 @@ from unittest.mock import patch
 from fetch_shioaji_data import latest_market_date
 from fundamental_data import _refresh_event_label, _roc_date
 from sync_public_content import announcement_rows, parse_rss, refresh_content
+from cloud_daily_update import run_daily_pipeline
 
 
 class DataLayerTests(unittest.TestCase):
@@ -58,6 +59,12 @@ class DataLayerTests(unittest.TestCase):
         self.assertEqual(result["stocks"][0]["official_announcements"][0]["title"], "old")
         self.assertEqual(result["news_feeds"]["market"][0]["title"], "old")
         self.assertEqual(result["content_sources"]["announcements"]["status"], "unavailable")
+
+    @patch("sync_public_content.main", return_value=0)
+    @patch("cloud_daily_update.main", return_value=1)
+    def test_daily_pipeline_refreshes_content_after_quote_error(self, _quotes, content):
+        self.assertEqual(run_daily_pipeline(), 0)
+        content.assert_called_once_with(1)
 
 
 if __name__ == "__main__":

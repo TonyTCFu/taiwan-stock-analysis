@@ -921,7 +921,7 @@
             if (newsBoard) {
                 const feeds = data.news_feeds || {};
                 const status = data.content_sources || {};
-                newsBoard.innerHTML = `<h2>上市公司公告與市場／產業新聞</h2><div class="research-freshness">每兩小時排程檢查；發布時間由來源提供，檢查時間不代表有新消息。來源故障時保留最後成功資料。此區只列原始標題，非投資判斷。</div>
+                newsBoard.innerHTML = `<h2>上市公司公告與市場／產業新聞</h2><div class="research-freshness">目前於交易日盤後排程檢查；發布時間由來源提供，檢查時間不代表有新消息。來源故障時保留最後成功資料。此區只列原始標題，非投資判斷。</div>
                     <h3>市場新聞 · 中央社財經</h3><div class="research-freshness">檢查 ${escapeResearchText(status.market?.checked_at || '-')} · 狀態 ${escapeResearchText(status.market?.status || '待同步')}</div>${renderSourceItems(feeds.market)}
                     <h3>產業新聞 · 中央社科技</h3><div class="research-freshness">檢查 ${escapeResearchText(status.industry?.checked_at || '-')} · 狀態 ${escapeResearchText(status.industry?.status || '待同步')}</div>${renderSourceItems(feeds.industry)}`;
             }
