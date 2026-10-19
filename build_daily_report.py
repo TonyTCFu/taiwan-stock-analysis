@@ -81,7 +81,7 @@ def render_report(payload: dict, now: dt.datetime) -> str:
         else:
             lines.append("- 新聞：未取得可核對的個股新聞。")
         links = [item for item in stock.get("source_links") or [] if item.get("url")]
-        lines.append(f"- 研究核對日：{value(stock.get('research_checked_at'))}；研究資料來源：" + ("；".join(f"{value(item.get('label'))} {item['url']}" for item in links[:4]) if links else "未標註，需人工複核"))
+        lines.append(f"- 研究核對日：{value(stock.get('research_checked_at'))}；研究資料來源：" + ("；".join(f"{value(item.get('label'))} {item['url']}" for item in links) if links else "未標註，需人工複核"))
         lines.append("")
     lines += ["## 使用限制", "", "檢查時間只表示已嘗試抓取，不代表該來源當天有發布新資料。新聞標題為來源原文，未經事實核查；不得當成投資建議。來源抓取失敗時看板可能保留最後成功值，請以上方資料日期判斷新鮮度。", ""]
     return "\n".join(lines)
