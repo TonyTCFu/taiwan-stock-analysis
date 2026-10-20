@@ -579,6 +579,7 @@
                 <span class="version-tag" id="cache-ver">vLIVE</span>
                 <span class="update-time" id="update-time">定盘时间: 加载中...</span>
                 <span class="freshness-meta" id="freshness-meta">资料新鲜度：加载中...</span>
+                <span class="freshness-meta" id="auto-refresh-status">看板開啟且開盤時每 30 分鐘自動更新價格</span>
                 <a href="REPORTS/daily/" style="color:var(--accent-cyan);white-space:nowrap">📄 收盤日報與來源</a>
                 <button class="btn-refresh" onclick="loadStockData(true)">🔄 强制刷新行情</button>
             </div>
@@ -651,7 +652,7 @@
                         <th>开盘价</th>
                         <th>最高价</th>
                         <th>最低价</th>
-                        <th>最新收盘价</th>
+                        <th>最新價</th>
                         <th>涨跌幅</th>
                         <th>建议买入位 (试仓)</th>
                         <th>黄金重仓位</th>
@@ -706,6 +707,9 @@
         const PUBLIC_LIVE_QUOTES_API = 'https://futienchun-com-dashboard.onrender.com/api/live-quotes';
         const LOCAL_STORAGE_KEY = 'TAIWAN_STOCK_PERSISTED_DATA_V4';
         const EXPECTED_STOCK_CODES = ['2330', '2059', '2383', '3017', '3653', '2317', '2308', '2345', '2360', '3711', '2454'];
+        const INTRADAY_REFRESH_MS = 30 * 60 * 1000;
+        let lastLiveRefreshAttemptAt = 0;
+        let liveRefreshInFlight = false;
         const QUOTE_FIELDS = [
             'open_price', 'high_price', 'low_price', 'last_price', 'prev_close',
             'change', 'change_pct', 'volume', 'quote_source', 'quote_time'
@@ -720,6 +724,25 @@
                 && Boolean(payload.quote_updated_at)
                 && Boolean(payload.market_as_of)
                 && payload.stocks.every(stock => Number(stock.last_price) > 0);
+        }
+
+        function taipeiTradingSession(now = new Date()) {
+            const parts = Object.fromEntries(new Intl.DateTimeFormat('en-US', {
+                timeZone: 'Asia/Taipei', year: 'numeric', month: '2-digit', day: '2-digit',
+                weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+            }).formatToParts(now).map(part => [part.type, part.value]));
+            const minute = Number(parts.hour) * 60 + Number(parts.minute);
+            return {
+                date: `${parts.year}-${parts.month}-${parts.day}`,
+                open: !['Sat', 'Sun'].includes(parts.weekday) && minute >= 9 * 60 && minute < 13 * 60 + 30
+            };
+        }
+
+        async function maybeRefreshIntraday() {
+            const session = taipeiTradingSession();
+            if (!session.open || document.hidden || liveRefreshInFlight
+                || Date.now() - lastLiveRefreshAttemptAt < INTRADAY_REFRESH_MS) return;
+            await loadStockData(true, true);
         }
 
         function escapeResearchText(value) {
@@ -838,9 +861,14 @@
             return res.json();
         }
 
-        async function loadStockData(forceRefresh = false) {
+        async function loadStockData(forceRefresh = false, silent = false) {
+            if (forceRefresh && liveRefreshInFlight) return;
             const btn = document.querySelector('.btn-refresh');
-            if (forceRefresh && btn) {
+            if (forceRefresh) {
+                liveRefreshInFlight = true;
+                lastLiveRefreshAttemptAt = Date.now();
+            }
+            if (forceRefresh && !silent && btn) {
                 btn.innerHTML = '⏳ 正在重载...';
                 btn.style.opacity = '0.7';
             }
@@ -858,8 +886,12 @@
                             const receivedCount = Array.isArray(livePayload && livePayload.stocks) ? livePayload.stocks.length : 0;
                             throw new Error(`公网行情网关仅返回 ${receivedCount}/${EXPECTED_STOCK_CODES.length} 档，未完成全部标的刷新`);
                         }
+                        if (silent && (livePayload.market_as_of !== taipeiTradingSession().date
+                            || livePayload.stocks.some(stock => !String(stock.quote_time || '').startsWith(livePayload.market_as_of)))) {
+                            throw new Error('行情網關尚未提供今日完整成交日期');
+                        }
                         json = mergeAvailableLayers([published, persisted, livePayload]);
-                        refreshedByBridge = true;
+                        refreshedByBridge = json.quote_updated_at === livePayload.quote_updated_at;
                     } catch (err) {
                         console.warn("Bridge refresh error, fallback to published/persisted data:", err);
                     }
@@ -874,7 +906,13 @@
                     savePersistedData(json);
                     renderDashboard(json);
 
-                    if (forceRefresh) {
+                    if (forceRefresh && silent) {
+                        const status = document.getElementById('auto-refresh-status');
+                        if (status) status.innerText = refreshedByBridge
+                            ? `盤中自動行情已更新 ${json.quote_updated_at || '-'}；每 30 分鐘檢查`
+                            : '盤中自動更新未完成，保留最近有效價格；請檢查行情日期';
+                    }
+                    if (forceRefresh && !silent) {
                         if (refreshedByBridge) {
                             showToast(`✅ 行情已更新，基本面资料保持最新发布版本<br><span style="font-size:11px;color:#94a3b8">行情: ${json.quote_updated_at || json.updated_at} | 基本面: ${json.fundamental_updated_at || '待同步'}</span>`);
                         } else {
@@ -884,9 +922,14 @@
                 }
             } catch (e) {
                 console.error("加载实时数据失败:", e);
-                if (forceRefresh) showToast(`❌ 实时行情刷新失败<br><span style="font-size:11px;color:#fca5a5">${e.message || '请检查网络或服务设置'}</span>`);
+                if (forceRefresh && silent) {
+                    const status = document.getElementById('auto-refresh-status');
+                    if (status) status.innerText = '盤中自動更新失敗，保留最近有效價格';
+                }
+                if (forceRefresh && !silent) showToast(`❌ 实时行情刷新失败<br><span style="font-size:11px;color:#fca5a5">${e.message || '请检查网络或服务设置'}</span>`);
             } finally {
-                if (forceRefresh && btn) {
+                if (forceRefresh) liveRefreshInFlight = false;
+                if (forceRefresh && !silent && btn) {
                     btn.innerHTML = '🔄 强制刷新行情';
                     btn.style.opacity = '1';
                 }
@@ -1081,7 +1124,7 @@
                                 <div class="ohlc-item"><span class="lbl">开盘:</span> <span class="val">${openPx}</span></div>
                                 <div class="ohlc-item"><span class="lbl">最高:</span> <span class="val">${highPx}</span></div>
                                 <div class="ohlc-item"><span class="lbl">最低:</span> <span class="val">${lowPx}</span></div>
-                                <div class="ohlc-item"><span class="lbl">收盘:</span> <span class="val">${s.last_price}</span></div>
+                                <div class="ohlc-item"><span class="lbl">最新:</span> <span class="val">${s.last_price}</span></div>
                             </div>
 
                             <div class="chokepoint-box">
@@ -1229,8 +1272,14 @@
             }
         }
 
-        // Load the latest published/persisted layers once; manual refresh handles live quotes.
-        window.addEventListener('DOMContentLoaded', () => loadStockData(false), { once: true });
+        window.addEventListener('DOMContentLoaded', async () => {
+            await loadStockData(false);
+            await maybeRefreshIntraday();
+            setInterval(maybeRefreshIntraday, 60 * 1000);
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) maybeRefreshIntraday();
+            });
+        }, { once: true });
     </script>
 </body>
 </html>
