@@ -77,6 +77,26 @@ class DataLayerTests(unittest.TestCase):
         self.assertEqual(run_daily_pipeline(), 0)
         content.assert_called_once_with(1)
 
+    @patch("sync_public_content.fetch_news", return_value=[])
+    @patch("sync_public_content._fetch_json", return_value=[])
+    @patch("sync_public_content.fetch_fundamental_snapshot", return_value=({}, {"status": "partial"}))
+    @patch("sync_public_content.fetch_twse_institutional_flow", return_value=({}, {"status": "unavailable"}))
+    def test_quote_failure_still_checks_institutional_feed_and_preserves_flow(self, flow_fetch, *_mocks):
+        payload = {"stocks": [{"code": "2330", "institutional_flow": {"date": "2026-10-19"}}],
+                   "institutional_as_of": "2026-10-19", "quote_sync_status": {"status": "unavailable"}}
+        result = refresh_content(payload, "2026-10-20T15:00:00+08:00")
+        flow_fetch.assert_called_once()
+        self.assertEqual(result["institutional_as_of"], "2026-10-19")
+        self.assertEqual(result["stocks"][0]["institutional_flow"]["date"], "2026-10-19")
+        self.assertEqual(result["institutional_status"]["status"], "unavailable")
+
+    def test_report_marks_prior_day_institutions_as_pending(self):
+        payload = {"stocks": [], "market_as_of": "2026-10-20", "institutional_as_of": "2026-10-19",
+                   "institutional_status": {"status": "ok", "retrieved_at": "2026-10-20T15:00:00+08:00"}}
+        report = render_report(payload, dt.datetime(2026, 10, 20, 15, tzinfo=dt.timezone(dt.timedelta(hours=8))))
+        self.assertIn("當日待發布／尚未取得", report)
+        self.assertIn("資料日期 2026-10-19", report)
+
     def test_report_separates_check_time_from_source_date_and_marks_missing(self):
         payload = {
             "stocks": [{"code": "2330", "name": "台積電", "last_price": 100,

@@ -157,6 +157,10 @@ def fetch_fundamental_snapshot(
                 "status": "ok",
                 "endpoint": f"{TWSE_OPENAPI_BASE}/{endpoint}",
                 "row_count": len(rows),
+                "matched_stocks": len(rows_by_source[source]),
+                "expected_stocks": len(codes),
+                "checked_at": dt.datetime.now().astimezone().isoformat(timespec="seconds"),
+                "published_at": max((date for date in source_dates if date), default=None),
             }
         except Exception as exc:
             rows_by_source[source] = {}
@@ -164,6 +168,7 @@ def fetch_fundamental_snapshot(
                 "status": "unavailable",
                 "endpoint": f"{TWSE_OPENAPI_BASE}/{endpoint}",
                 "detail": f"{type(exc).__name__}: {exc}",
+                "checked_at": dt.datetime.now().astimezone().isoformat(timespec="seconds"),
             }
 
     monthly = rows_by_source.get("monthly_revenue", {})

@@ -12,7 +12,7 @@ from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parent
 DATA_PATH = ROOT / "data" / "stock_data.json"
-REPORT_DIR = ROOT / "reports" / "daily"
+REPORT_DIR = ROOT / "REPORTS" / "daily"
 TIMEZONE = ZoneInfo("Asia/Taipei")
 
 
@@ -31,26 +31,49 @@ def render_report(payload: dict, now: dt.datetime) -> str:
     sources = payload.get("content_sources") or {}
     fundamental = payload.get("fundamental_status") or {}
     fundamental_sources = fundamental.get("sources") or {}
+    quote_sync = payload.get("quote_sync_status") or payload.get("quote_status") or {}
+    institutional = payload.get("institutional_status") or {}
+    institutional_label = institutional.get("status")
+    if institutional_label == "ok" and payload.get("institutional_as_of", "") < str(payload.get("market_as_of") or ""):
+        institutional_label = "當日待發布／尚未取得，保留最近成功結算值"
     lines = [
         f"# 台股龍頭股收盤日報｜{now.date().isoformat()}",
         "",
         f"生成時間：{now.isoformat(timespec='minutes')}（台北）",
         f"涵蓋標的：{len(payload.get('stocks') or [])} 檔",
+        f"資料版本：{value(payload.get('cache_version'))}",
         "",
         "## 更新狀態與來源",
         "",
-        source_line("行情（Shioaji Snapshot／TWSE MIS 網關）", "https://futienchun-com-dashboard.onrender.com/api/live-quotes", (payload.get("quote_sync_status") or payload.get("quote_status") or {}).get("status"), payload.get("quote_updated_at"), payload.get("market_as_of")),
-        source_line("三大法人（TWSE T86）", "https://www.twse.com.tw/rwd/zh/fund/T86", (payload.get("institutional_status") or {}).get("status"), (payload.get("institutional_status") or {}).get("retrieved_at"), payload.get("institutional_as_of")),
+        source_line("行情（Shioaji Snapshot／TWSE MIS 網關）", "https://futienchun-com-dashboard.onrender.com/api/live-quotes", quote_sync.get("status"), quote_sync.get("checked_at") or payload.get("quote_updated_at"), payload.get("market_as_of")),
+        source_line("三大法人（TWSE T86）", "https://www.twse.com.tw/rwd/zh/fund/T86", institutional_label, institutional.get("retrieved_at"), payload.get("institutional_as_of")),
     ]
     for key, label in (("monthly_revenue", "月營收"), ("operating_analysis", "營益分析"), ("income_statement", "損益表"), ("balance_sheet", "資產負債表")):
         item = fundamental_sources.get(key) or {}
-        lines.append(source_line(label, item.get("endpoint") or "來源網址未提供", item.get("status"), payload.get("fundamental_checked_at"), "依各股票月份／季度"))
+        lines.append(source_line(label, item.get("endpoint") or "來源網址未提供", item.get("status"), item.get("checked_at") or payload.get("fundamental_checked_at"), item.get("published_at") or "來源發布日未取得；資料期間見逐檔月份／季度"))
+        if item.get("detail"):
+            lines.append(f"  - 失敗原因：{item['detail']}")
     for key, label in (("announcements", "上市公司重大訊息"), ("market", "市場新聞"), ("industry", "產業新聞")):
         item = sources.get(key) or {}
-        lines.append(source_line(label, item.get("source") or "來源網址未提供", item.get("status"), item.get("checked_at"), item.get("latest_published_at") or item.get("latest_matched_at")))
+        source_status = item.get("status")
+        published = item.get("latest_published_at") or item.get("latest_matched_at")
+        if key == "announcements" and source_status == "ok" and published and published < str(payload.get("market_as_of") or ""):
+            source_status = "當日資料待發布／尚未取得，來源仍為上一發布日"
+        lines.append(source_line(label, item.get("source") or "來源網址未提供", source_status, item.get("checked_at"), published))
+        if item.get("detail"):
+            lines.append(f"  - 失敗原因：{item['detail']}")
     company_status = sources.get("company_news") or {}
     lines.append(f"- 個股新聞：{value(company_status.get('status'))}；成功標的 {value(company_status.get('successful_stocks'))}/{len(payload.get('stocks') or [])}；檢查時間 {value(company_status.get('checked_at'))}；來源 Google 新聞 RSS／原始媒體（逐則附連結）")
+    for key, label in (("market", "市場新聞"), ("industry", "產業新聞")):
+        lines += ["", f"## {label}", ""]
+        for item in (payload.get("news_feeds") or {}).get(key, [])[:5]:
+            lines.append(f"- {value(item.get('published_at'))} {value(item.get('title'))}；來源 {value(item.get('source'))} {value(item.get('url'))}")
     lines += [
+        "",
+        "## 資料邊界",
+        "",
+        "- TWSE 財務出表日期是資料快照日期，不等於公司當天發布新財報；公司原始公告日未提供時不推定，實際資料期間見各股票月份／季度。",
+        "- 產業新聞沿用中央社科技 RSS 原始分類，未做相關性排序；來源可能夾帶非產業新聞。",
         "- 法說行事曆與簡報全文：未接入可核驗的完整來源；僅收錄已擷取之重大訊息，不代表所有法說。核對入口 https://mops.twse.com.tw/mops/web/t100sb02_1",
         "- 研究評分／投資策略：本專案人工研究快照，不是每日自動核實的官方資料；請見各股票研究核對日與來源連結。",
         "",
@@ -66,7 +89,7 @@ def render_report(payload: dict, now: dt.datetime) -> str:
             f"- 行情：NT$ {value(stock.get('last_price'))}；漲跌 {value(stock.get('change_pct'))}%；行情日期 {value(payload.get('market_as_of'))}；來源 {value(stock.get('quote_source') or payload.get('data_source'))}。",
             f"- 法人：合計 {value(flow.get('total_net'))}；結算日 {value(flow.get('date'))}；來源 TWSE T86。",
             f"- 月營收：{value(stock.get('latest_monthly_revenue'))}；來源 TWSE OpenAPI t187ap05_L。",
-            f"- 季報：{value(quarter.get('period'))}；EPS {value(quarter.get('eps'))}；營益率 {value(quarter.get('operating_margin'))}；來源 TWSE OpenAPI t187ap17_L／t187ap06_L_ci。",
+            f"- 季報：{value(quarter.get('period'))}；EPS {value(quarter.get('eps'))}（官方年初累計口徑；已核驗單季例外依原始資料）；營益率 {value(quarter.get('operating_margin'))}；來源 TWSE OpenAPI t187ap17_L／t187ap06_L_ci。",
         ]
         announcements = stock.get("official_announcements") or []
         if announcements:

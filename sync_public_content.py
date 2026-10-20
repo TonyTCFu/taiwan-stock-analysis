@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
 
-from fetch_shioaji_data import STOCKS_META
+from fetch_shioaji_data import STOCKS_META, compute_institutional_analysis, fetch_twse_institutional_flow
 from fundamental_data import TWSE_OPENAPI_BASE, _fetch_json, _roc_date, fetch_fundamental_snapshot
 
 OUTPUT_PATH = Path(__file__).resolve().parent / "data" / "stock_data.json"
@@ -90,6 +90,18 @@ def refresh_content(payload: dict[str, Any], checked_at: str | None = None) -> d
     by_code = {str(stock.get("code")): stock for stock in stocks if isinstance(stock, dict)}
     status = payload.setdefault("content_sources", {})
 
+    # Quotes must not gate the independent official institutional feed.
+    if (payload.get("quote_sync_status") or {}).get("status") == "unavailable":
+        flows, flow_status = fetch_twse_institutional_flow(list(STOCKS_META))
+        if flow_status.get("status") == "ok" and set(STOCKS_META).issubset(flows):
+            for code, stock in by_code.items():
+                if code in STOCKS_META:
+                    stock["institutional_flow"], stock["capital_inflow"] = compute_institutional_analysis(code, STOCKS_META[code]["name"], flows, stock.get("volume"))
+            payload["institutional_as_of"] = flow_status["date"]
+        else:
+            flow_status["status"] = "unavailable"
+        payload["institutional_status"] = {**flow_status, "retrieved_at": taipei_now(), "flow_count": len(flows), "as_of": payload.get("institutional_as_of")}
+
     try:
         updates, source_status = fetch_fundamental_snapshot(STOCKS_META)
         for code, update in updates.items():
@@ -114,7 +126,8 @@ def refresh_content(payload: dict[str, Any], checked_at: str | None = None) -> d
         status["fundamentals"] = {"status": "unavailable", "checked_at": now, "detail": type(exc).__name__}
 
     try:
-        filings = announcement_rows(_fetch_json("t187ap04_L"), set(by_code))
+        raw_filings = _fetch_json("t187ap04_L")
+        filings = announcement_rows(raw_filings, set(by_code))
         for code, current in filings.items():
             if current:
                 existing = by_code[code].get("official_announcements", [])
@@ -122,7 +135,8 @@ def refresh_content(payload: dict[str, Any], checked_at: str | None = None) -> d
                 merged.update({(item["title"], item["published_at"]): item for item in current})
                 by_code[code]["official_announcements"] = sorted(merged.values(), key=lambda item: item["published_at"], reverse=True)[:5]
         latest = max((item["published_at"] for rows in filings.values() for item in rows), default=None)
-        status["announcements"] = {"status": "ok", "checked_at": now, "latest_matched_at": latest, "source": ANNOUNCEMENTS_URL}
+        feed_dates = [_roc_date(row.get("發言日期")) for row in raw_filings]
+        status["announcements"] = {"status": "ok", "checked_at": now, "latest_matched_at": latest, "latest_published_at": max((date for date in feed_dates if date), default=None), "row_count": len(raw_filings), "matched_count": sum(len(items) for items in filings.values()), "source": ANNOUNCEMENTS_URL}
     except Exception as exc:
         status["announcements"] = {"status": "unavailable", "checked_at": now, "detail": type(exc).__name__}
 
@@ -166,7 +180,7 @@ def refresh_content(payload: dict[str, Any], checked_at: str | None = None) -> d
             )[:5]
             if company_results.get(code) or fallback:
                 stock["company_news"] = company_results.get(code) or fallback
-    status["company_news"] = {"status": "ok" if company_results else "partial", "checked_at": now, "successful_stocks": len(company_results), "expected_stocks": len(STOCKS_META)}
+    status["company_news"] = {"status": "ok" if len(company_results) == len(STOCKS_META) else "partial", "checked_at": now, "successful_stocks": len(company_results), "expected_stocks": len(STOCKS_META), "missing_codes": sorted(set(STOCKS_META) - set(company_results))}
     payload["cache_version"] = f"{now[:16].replace('-', '').replace(':', '').replace('T', '-')}-{CACHE_VERSION}"
     payload["content_checked_at"] = now
     return payload
@@ -182,6 +196,14 @@ def main(quote_result: int | None = None) -> int:
             }
         updated = refresh_content(payload)
         OUTPUT_PATH.write_text(json.dumps(updated, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        dashboard_path = OUTPUT_PATH.parent.parent / "index.html"
+        dashboard = dashboard_path.read_text(encoding="utf-8")
+        version_tag = f'<meta name="dashboard-cache-version" content="{updated["cache_version"]}">'
+        if re.search(r'<meta name="dashboard-cache-version"[^>]*>', dashboard):
+            dashboard = re.sub(r'<meta name="dashboard-cache-version"[^>]*>', version_tag, dashboard)
+        else:
+            dashboard = dashboard.replace("</head>", f"    {version_tag}\n</head>", 1)
+        dashboard_path.write_text(dashboard, encoding="utf-8")
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         print(f"ERROR: content sync could not save valid stock data: {type(exc).__name__}", file=sys.stderr)
         return 1
