@@ -841,17 +841,27 @@
 
         async function refreshWithLiveBridge() {
             const endpoint = isLocalRefreshBridge() ? '/api/refresh' : PUBLIC_LIVE_QUOTES_API;
-
-            const res = await fetch(endpoint, {
-                method: 'POST',
-                cache: 'no-store',
-                headers: { 'Content-Type': 'application/json' }
-            });
-            if (!res.ok) {
-                const error = await res.json().catch(() => ({}));
-                throw new Error(error.error || `refresh endpoint returned ${res.status}`);
+            for (let attempt = 0; attempt < 2; attempt++) {
+                const res = await fetch(endpoint, {
+                    method: 'POST',
+                    cache: 'no-store',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                if (res.status === 429 && attempt === 0) {
+                    const retryAfter = Number(res.headers.get('Retry-After'));
+                    const delay = Number.isFinite(retryAfter) && retryAfter > 0
+                        ? Math.min(45000, retryAfter * 1000 + 1000) : 35000;
+                    const status = document.getElementById('auto-refresh-status');
+                    if (status) status.innerText = '行情網關冷卻中，稍後自動重試';
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    continue;
+                }
+                if (!res.ok) {
+                    const error = await res.json().catch(() => ({}));
+                    throw new Error(error.error || `refresh endpoint returned ${res.status}`);
+                }
+                return res.json();
             }
-            return res.json();
         }
 
         async function fetchPublishedData() {

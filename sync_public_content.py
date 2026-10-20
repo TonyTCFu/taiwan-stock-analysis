@@ -25,7 +25,7 @@ NEWS_FEEDS = {
     "market": ("中央社財經", "https://feeds.feedburner.com/rsscna/finance"),
     "industry": ("中央社科技", "https://feeds.feedburner.com/rsscna/technology"),
 }
-CACHE_VERSION = "after-close-report-r3"
+CACHE_VERSION = "dashboard-r4"
 COMPANY_ALIASES = {"2330": "台積電", "2383": "台光電", "2317": "鴻海"}
 
 
