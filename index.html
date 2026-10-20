@@ -315,9 +315,11 @@
             color: #93e6e9;
             padding: 5px 9px;
         }
-        .price-hero { gap: 14px; margin-bottom: 16px; }
+        .price-hero { gap: 14px; margin-bottom: 4px; }
         .current-price { font-size: 34px; letter-spacing: -0.045em; }
         .price-change { font-size: 15px; }
+        .quote-timestamp { display: block; color: #93a1aa; font-size: 11px; font-weight: 500; line-height: 1.5; margin-bottom: 12px; }
+        td .quote-timestamp { margin: 3px 0 0; white-space: nowrap; }
         .ohlc-grid {
             gap: 6px;
             padding: 11px 8px;
@@ -758,6 +760,16 @@
             return /^https?:\/\//i.test(url) ? url.replace(/"/g, '%22') : '#';
         }
 
+        function formatQuoteTimestamp(value) {
+            if (!value || !/(Z|[+-]\d{2}:\d{2})$/i.test(String(value))) return '時間未提供';
+            const timestamp = new Date(value);
+            if (Number.isNaN(timestamp.getTime())) return '時間未提供';
+            return new Intl.DateTimeFormat('sv-SE', {
+                timeZone: 'Asia/Taipei', year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23'
+            }).format(timestamp);
+        }
+
         function getPersistedData() {
             try {
                 const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -1142,6 +1154,7 @@
                                 <span class="current-price" style="color: ${isUp ? '#ef4444' : '#10b981'}">NT$ ${s.last_price}</span>
                                 <span class="price-change ${changeClass}">${changeSign}${s.change} (${changeSign}${s.change_pct}%)</span>
                             </div>
+                            <div class="quote-timestamp">報價快照時間（台北）：${formatQuoteTimestamp(s.quote_time)}</div>
 
                             <div class="ohlc-grid">
                                 <div class="ohlc-item"><span class="lbl">开盘:</span> <span class="val">${openPx}</span></div>
@@ -1255,7 +1268,7 @@
                             <td style="font-family: var(--font-mono);">${openPx}</td>
                             <td style="font-family: var(--font-mono);">${highPx}</td>
                             <td style="font-family: var(--font-mono);">${lowPx}</td>
-                            <td style="font-family: var(--font-mono); font-weight:800; color: ${isUp ? '#ef4444' : '#10b981'};">NT$ ${s.last_price}</td>
+                            <td style="font-family: var(--font-mono); font-weight:800; color: ${isUp ? '#ef4444' : '#10b981'};">NT$ ${s.last_price}<small class="quote-timestamp">報價快照（台北）<br>${formatQuoteTimestamp(s.quote_time)}</small></td>
                             <td style="font-family: var(--font-mono); font-weight:700;" class="${isUp ? 'up' : 'down'}">${s.change >= 0 ? '+' : ''}${s.change_pct}%</td>
                             <td style="color: #93c5fd; font-weight:600;">${s.buy_zone_sub}</td>
                             <td style="color: #fca5a5; font-weight:700;">${s.buy_zone_heavy}</td>
