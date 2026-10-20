@@ -564,7 +564,7 @@
             footer { margin-top: 40px; padding: 18px 20px; }
         }
     </style>
-    <meta name="dashboard-cache-version" content="20261020-151124-dashboard-r6">
+    <meta name="dashboard-cache-version" content="20261020-151334-dashboard-r6">
 </head>
 <body>
 
@@ -993,7 +993,7 @@
             const freshness = document.getElementById('freshness-meta');
             if (freshness) {
                 const content = data.content_sources || {};
-                freshness.innerText = `行情 ${data.market_as_of || '-'} · 法人 ${data.institutional_as_of || '-'} · 財報/月營收核對 ${data.fundamental_checked_at || '-'} (${content.fundamentals?.status || '待同步'}) · 公告 ${content.announcements?.checked_at || '-'} (${content.announcements?.status || '待同步'}) · 新聞 ${data.content_checked_at || '-'} · 研究策略人工核對 ${data.research_updated_at || '-'}`;
+                freshness.innerText = `行情 ${data.market_as_of || '-'} · 法人 ${data.institutional_as_of || '-'} · 財報/月營收核對 ${data.fundamental_checked_at || '-'} (${content.fundamentals?.status || '待同步'}) · 公告發布 ${content.announcements?.latest_published_at || '未取得'}（檢查 ${content.announcements?.checked_at || '-'}，${content.announcements?.status || '待同步'}） · 新聞核對 ${data.content_checked_at || '-'} · 研究策略人工核對 ${data.research_updated_at || '-'}`;
             }
             const cacheVersion = data.cache_version || (data.updated_at ? data.updated_at.replace(/[- :]/g, '').slice(4, 12) : 'LIVE');
             document.getElementById('cache-ver').innerText = cacheVersion.startsWith('v') ? cacheVersion : 'v' + cacheVersion;
