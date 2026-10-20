@@ -708,7 +708,9 @@
         const LOCAL_STORAGE_KEY = 'TAIWAN_STOCK_PERSISTED_DATA_V4';
         const EXPECTED_STOCK_CODES = ['2330', '2059', '2383', '3017', '3653', '2317', '2308', '2345', '2360', '3711', '2454'];
         const INTRADAY_REFRESH_MS = 30 * 60 * 1000;
-        let lastLiveRefreshAttemptAt = 0;
+        const INTRADAY_RETRY_MS = 2 * 60 * 1000;
+        let nextLiveRefreshAt = 0;
+        let liveRefreshFailures = 0;
         let liveRefreshInFlight = false;
         const QUOTE_FIELDS = [
             'open_price', 'high_price', 'low_price', 'last_price', 'prev_close',
@@ -741,7 +743,7 @@
         async function maybeRefreshIntraday() {
             const session = taipeiTradingSession();
             if (!session.open || document.hidden || liveRefreshInFlight
-                || Date.now() - lastLiveRefreshAttemptAt < INTRADAY_REFRESH_MS) return;
+                || Date.now() < nextLiveRefreshAt) return;
             await loadStockData(true, true);
         }
 
@@ -876,7 +878,6 @@
             const btn = document.querySelector('.btn-refresh');
             if (forceRefresh) {
                 liveRefreshInFlight = true;
-                lastLiveRefreshAttemptAt = Date.now();
             }
             if (forceRefresh && !silent && btn) {
                 btn.innerHTML = '⏳ 正在重载...';
@@ -885,6 +886,7 @@
             try {
                 let json = null;
                 let refreshedByBridge = false;
+                let refreshFailureReason = '';
 
                 const published = await fetchPublishedData().catch(() => null);
                 const persisted = getPersistedData();
@@ -896,15 +898,24 @@
                             const receivedCount = Array.isArray(livePayload && livePayload.stocks) ? livePayload.stocks.length : 0;
                             throw new Error(`公网行情网关仅返回 ${receivedCount}/${EXPECTED_STOCK_CODES.length} 档，未完成全部标的刷新`);
                         }
-                        if (silent && (livePayload.market_as_of !== taipeiTradingSession().date
+                        if (taipeiTradingSession().open && (livePayload.market_as_of !== taipeiTradingSession().date
                             || livePayload.stocks.some(stock => !String(stock.quote_time || '').startsWith(livePayload.market_as_of)))) {
                             throw new Error('行情網關尚未提供今日完整成交日期');
                         }
                         json = mergeAvailableLayers([published, persisted, livePayload]);
                         refreshedByBridge = json.quote_updated_at === livePayload.quote_updated_at;
+                        if (!refreshedByBridge) throw new Error('行情網關報價未比已保存資料更新');
                     } catch (err) {
+                        refreshFailureReason = err.message || '行情來源暫不可用';
                         console.warn("Bridge refresh error, fallback to published/persisted data:", err);
                     }
+                }
+
+                if (forceRefresh) {
+                    liveRefreshFailures = refreshedByBridge ? 0 : liveRefreshFailures + 1;
+                    nextLiveRefreshAt = Date.now() + (refreshedByBridge
+                        ? INTRADAY_REFRESH_MS
+                        : Math.min(10 * 60 * 1000, INTRADAY_RETRY_MS * 2 ** (liveRefreshFailures - 1)));
                 }
 
                 if (!json) {
@@ -920,21 +931,23 @@
                         const status = document.getElementById('auto-refresh-status');
                         if (status) status.innerText = refreshedByBridge
                             ? `盤中自動行情已更新 ${json.quote_updated_at || '-'}；每 30 分鐘檢查`
-                            : '盤中自動更新未完成，保留最近有效價格；請檢查行情日期';
+                            : `行情來源暫未更新（${refreshFailureReason || '網路或資料不完整'}）；目前顯示 ${json.market_as_of || '未知日期'} 行情，${Math.round((nextLiveRefreshAt - Date.now()) / 60000)} 分鐘後自動重試`;
                     }
                     if (forceRefresh && !silent) {
                         if (refreshedByBridge) {
                             showToast(`✅ 行情已更新，基本面资料保持最新发布版本<br><span style="font-size:11px;color:#94a3b8">行情: ${json.quote_updated_at || json.updated_at} | 基本面: ${json.fundamental_updated_at || '待同步'}</span>`);
                         } else {
-                            showToast(`⚠️ 公网行情网关未完成 ${EXPECTED_STOCK_CODES.length} 檔刷新<br><span style="font-size:11px;color:#fca5a5">当前显示已发布数据；请稍后重试强制刷新</span>`);
+                            showToast(`⚠️ 行情刷新未完成<br><span style="font-size:11px;color:#fca5a5">目前顯示 ${json.market_as_of || '未知日期'} 行情；${escapeResearchText(refreshFailureReason || '來源暫不可用')}。開盤時將自動重試。</span>`);
                         }
                     }
                 }
             } catch (e) {
                 console.error("加载实时数据失败:", e);
                 if (forceRefresh && silent) {
+                    liveRefreshFailures += 1;
+                    nextLiveRefreshAt = Date.now() + Math.min(10 * 60 * 1000, INTRADAY_RETRY_MS * 2 ** (liveRefreshFailures - 1));
                     const status = document.getElementById('auto-refresh-status');
-                    if (status) status.innerText = '盤中自動更新失敗，保留最近有效價格';
+                    if (status) status.innerText = `行情來源暫不可用，${Math.round((nextLiveRefreshAt - Date.now()) / 60000)} 分鐘後自動重試；目前資料日期請見行情欄位`;
                 }
                 if (forceRefresh && !silent) showToast(`❌ 实时行情刷新失败<br><span style="font-size:11px;color:#fca5a5">${e.message || '请检查网络或服务设置'}</span>`);
             } finally {
