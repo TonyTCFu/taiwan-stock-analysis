@@ -16,19 +16,28 @@
         "status": "unavailable",
         "endpoint": "https://openapi.twse.com.tw/v1/opendata/t187ap05_L",
         "detail": "URLError: <urlopen error [Errno 54] Connection reset by peer>",
-        "checked_at": "2026-10-24T15:04:26+08:00"
+        "checked_at": "2026-10-24T15:04:26+08:00",
+        "last_successful_check_at": "2026-10-24T15:04:03+08:00",
+        "last_successful_published_at": "2026-10-17",
+        "last_successful_matched_stocks": 11
       },
       "operating_analysis": {
         "status": "unavailable",
         "endpoint": "https://openapi.twse.com.tw/v1/opendata/t187ap17_L",
         "detail": "URLError: <urlopen error [Errno 54] Connection reset by peer>",
-        "checked_at": "2026-10-24T15:04:45+08:00"
+        "checked_at": "2026-10-24T15:04:45+08:00",
+        "last_successful_check_at": "2026-10-24T15:04:04+08:00",
+        "last_successful_published_at": "2026-10-24",
+        "last_successful_matched_stocks": 11
       },
       "income_statement": {
         "status": "unavailable",
         "endpoint": "https://openapi.twse.com.tw/v1/opendata/t187ap06_L_ci",
         "detail": "URLError: <urlopen error [Errno 54] Connection reset by peer>",
-        "checked_at": "2026-10-24T15:05:04+08:00"
+        "checked_at": "2026-10-24T15:05:04+08:00",
+        "last_successful_check_at": "2026-10-24T15:04:05+08:00",
+        "last_successful_published_at": "2026-10-24",
+        "last_successful_matched_stocks": 11
       },
       "balance_sheet": {
         "status": "ok",
