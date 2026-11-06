@@ -1,15 +1,15 @@
 {
-  "updated_at": "2026-11-05 22:51:23",
-  "quote_updated_at": "2026-11-05 22:51:23",
-  "market_as_of": "2026-11-05",
-  "fundamental_updated_at": "2026-11-05T22:51:29+08:00",
-  "fundamental_checked_at": "2026-11-05T22:51:29+08:00",
-  "fundamental_as_of": "2026-11-05",
+  "updated_at": "2026-11-06 22:28:57",
+  "quote_updated_at": "2026-11-06 22:28:57",
+  "market_as_of": "2026-11-06",
+  "fundamental_updated_at": "2026-11-06T22:29:05+08:00",
+  "fundamental_checked_at": "2026-11-06T22:29:05+08:00",
+  "fundamental_as_of": "2026-11-06",
   "fundamental_source": "TWSE OpenAPI fundamentals + MOPS event-calendar reference",
   "fundamental_status": {
     "status": "ok",
-    "updated_at": "2026-11-05 14:51:29",
-    "as_of": "2026-11-05",
+    "updated_at": "2026-11-06 14:29:05",
+    "as_of": "2026-11-06",
     "source": "TWSE OpenAPI fundamentals + MOPS event-calendar reference",
     "sources": {
       "monthly_revenue": {
@@ -18,42 +18,42 @@
         "row_count": 1088,
         "matched_stocks": 11,
         "expected_stocks": 11,
-        "checked_at": "2026-11-05T14:51:30+00:00",
+        "checked_at": "2026-11-06T14:29:06+00:00",
         "published_at": "2026-10-17"
       },
       "operating_analysis": {
         "status": "ok",
         "endpoint": "https://openapi.twse.com.tw/v1/opendata/t187ap17_L",
-        "row_count": 108,
+        "row_count": 158,
         "matched_stocks": 2,
         "expected_stocks": 11,
-        "checked_at": "2026-11-05T14:51:31+00:00",
-        "published_at": "2026-11-05"
+        "checked_at": "2026-11-06T14:29:08+00:00",
+        "published_at": "2026-11-06"
       },
       "income_statement": {
         "status": "ok",
         "endpoint": "https://openapi.twse.com.tw/v1/opendata/t187ap06_L_ci",
-        "row_count": 108,
+        "row_count": 158,
         "matched_stocks": 2,
         "expected_stocks": 11,
-        "checked_at": "2026-11-05T14:51:31+00:00",
-        "published_at": "2026-11-05"
+        "checked_at": "2026-11-06T14:29:09+00:00",
+        "published_at": "2026-11-06"
       },
       "balance_sheet": {
         "status": "ok",
         "endpoint": "https://openapi.twse.com.tw/v1/opendata/t187ap07_L_ci",
-        "row_count": 108,
+        "row_count": 158,
         "matched_stocks": 2,
         "expected_stocks": 11,
-        "checked_at": "2026-11-05T14:51:33+00:00",
-        "published_at": "2026-11-05"
+        "checked_at": "2026-11-06T14:29:10+00:00",
+        "published_at": "2026-11-06"
       }
     }
   },
-  "institutional_as_of": "2026-11-05",
+  "institutional_as_of": "2026-11-06",
   "research_updated_at": "2026-09-23",
-  "cache_version": "20261105-2251-dashboard-r6",
-  "data_source": "Shioaji Snapshot (primary) + TWSE MIS cross-check",
+  "cache_version": "20261106-2229-dashboard-r6",
+  "data_source": "Shioaji Snapshot",
   "market": "台湾股票市场 (TWSE)",
   "trading_hours": "09:00 - 13:30 (TPE time)",
   "weekly_review": {
@@ -340,22 +340,20 @@
     "shioaji": {
       "status": "ok",
       "quote_count": 11,
-      "retrieved_at": "2026-11-05T22:51:20+08:00",
+      "retrieved_at": "2026-11-06T22:28:48+08:00",
       "quote_mode": "snapshot"
     },
     "twse_mis": {
-      "status": "ok",
-      "quote_count": 11,
-      "retrieved_at": "2026-11-05T22:51:22+08:00",
-      "market_time": "13:30:00"
+      "status": "unavailable",
+      "detail": "TimeoutError: The read operation timed out"
     },
-    "selected_quote_source": "Shioaji Snapshot (primary) + TWSE MIS cross-check",
+    "selected_quote_source": "Shioaji Snapshot",
     "twse_t86_flow": {
       "status": "ok",
-      "date": "2026-11-05",
-      "retrieved_at": "2026-11-05T14:51:24",
+      "date": "2026-11-06",
+      "retrieved_at": "2026-11-06T14:28:59",
       "flow_count": 11,
-      "as_of": "2026-11-05"
+      "as_of": "2026-11-06"
     }
   },
   "stocks": [
@@ -386,23 +384,23 @@
         "reason": "獲利與先進製程卡位仍是名單最強，但本週 20 日報酬接近零、估值仍有溢價，因此綜合分低於長期卡位分，定位為核心持有而非追價。",
         "next_week_watch": "Q2 法說展望、先進封裝／2nm 需求與外資買超是否延續。"
       },
-      "open_price": 2250.0,
-      "high_price": 2285.0,
-      "low_price": 2235.0,
-      "last_price": 2240.0,
-      "prev_close": 2260.0,
-      "change": -20.0,
-      "change_pct": -0.88,
-      "volume": 36585,
+      "open_price": 2020.0,
+      "high_price": 2195.0,
+      "low_price": 2020.0,
+      "last_price": 2135.0,
+      "prev_close": 2135.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 97065,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-11-05T22:51:20+08:00",
+      "quote_time": "2026-11-06T22:28:48+08:00",
       "gross_margin": "67.03% (2026Q2)",
       "net_margin": "53.22% (2026Q2)",
       "roe": "39.8% (年初累計年化, 2026Q2)",
       "eps_single": "27.25 元 (2026Q2 單季；TSMC 官方財報)",
       "earnings_date": "2026-10-15 (26Q3 法說會已舉行)；下一次財報/法說會日期待公司公告 | 每月 10 日发布营收",
       "event_status": "historical",
-      "event_checked_at": "2026-11-05T14:51:24",
+      "event_checked_at": "2026-11-06T14:28:59",
       "fundamental_as_of": "2026-10-17",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-09 營收 511,857 百萬元；月增 -0.57%；年增 +54.65%",
@@ -426,7 +424,7 @@
           "eps": "49.33 元"
         }
       ],
-      "market_snapshot": "2026-11-05 收盤/最新 NT$2,240.00，日變動 -0.88%；行情時間 2026-11-05T22:51:20+08:00。",
+      "market_snapshot": "2026-11-06 收盤/最新 NT$2,135.00，日變動 +0.00%；行情時間 2026-11-06T22:28:48+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：AI/HPC 晶片需求、先進製程與先進封裝滲透。反向：半導體景氣與客戶資本支出週期、海外廠成本與毛利稀釋、匯率及高資本支出。",
       "risk_factors": [
@@ -464,17 +462,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-10253 张",
-        "trust_net": "+2739 张",
-        "dealer_net": "+5295 张",
-        "total_net": "-2217 张",
-        "date": "2026-11-05",
-        "summary": "[2026-11-05 官方结算] 投信内资买超 (+2,739 张) 逢低承接，外资高档调节 (-10,253 张)。"
+        "foreign_net": "-22845 张",
+        "trust_net": "+4669 张",
+        "dealer_net": "+8701 张",
+        "total_net": "-9474 张",
+        "date": "2026-11-06",
+        "summary": "[2026-11-06 官方结算] 投信内资买超 (+4,669 张) 逢低承接，外资高档调节 (-22,845 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 2,217 张 (占量 6.1%)",
+        "large_order_ratio": "法人净卖超 9,474 张 (占量 9.8%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-11-05 筹码] 主力机构呈净卖出 (-2,217 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-11-06 筹码] 主力机构呈净卖出 (-9,474 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "+1.8% (处于健康均线排列)",
@@ -486,39 +484,39 @@
       "take_profit": "2,750 - 2,900 元",
       "target_price": "3,200 - 3,500 元",
       "stop_loss": "1,980 元",
-      "research_source_as_of": "行情 2026-11-05；月營收 2026-09；財報 2026Q2",
+      "research_source_as_of": "行情 2026-11-06；月營收 2026-09；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-11-05 15:00 Asia/Taipei",
+      "research_next_review_at": "2026-11-06 15:00 Asia/Taipei",
       "company_news": [
         {
-          "title": "姚淳耀擁10張台積電股票！台股震盪坦言「資產蒸發300萬」 曝理財心法：一定要留現金 - 蕃新聞",
-          "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5ad2N2RzV2RVEzQ0FXcWdienNjUUQxT1dWVXBENngxR3dwZjlCOTA4Wjd1eTZXa19tMXdSWUpLMUdubkx6Yk9Ib0p5S3BleDg4a2c?oc=5",
-          "published_at": "2026-11-05T20:13+08:00",
-          "source": "Google 新聞 / 蕃新聞"
+          "title": "台積電跌到2020元「神人砸42億進場」刷一排87 成交24筆 - ETtoday財經雲",
+          "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBYLU1PdE5oXzF4eXhyTG1XMDZ3c1NnYVZiLVlJb3NadHViZ3pnVzhLMERyOU52bmVNejlqNm9JMzVxZ3FNb1NjZjBIaWtKb2xnR0HSAVBBVV95cUxPanJZUVJTYmIwRTVRbGlxclU1djRTYXM3WGoxeDRoalNzUGRkRC04OW5VX1pmU1M0cmJpSURhSFd1V3QwY0VjNy1lU0FnWHMyMg?oc=5",
+          "published_at": "2026-11-06T15:33+08:00",
+          "source": "Google 新聞 / ETtoday財經雲"
         },
         {
-          "title": "比台積電更威？外媒點名「這1檔」：股價再翻漲4倍 - Yahoo股市",
-          "url": "https://news.google.com/rss/articles/CBMiugJBVV95cUxQcUFRM1RPY0RtWGJwS0NxUU5LalBVVjNHeWdMSmEyN2pIOGpiTEJ5Q3JCOGR1NzhVeXVyXzNULWxmelgzWFJkRXpxOC1jTnpocFp5YzdhcjFBSlNUQkJNSjMzc0d1dFBWeHNlT0hla1lUZElTYk5JaXF3Q016N3VjREotZWN6dW1xZUl1Qm1iVWZrYVJLTUoySFlyUXUtdDBFc2NrOTAwck9Kd2RQN0RqSzF0VHRrRHRqX0t2V3hyR0U2aGY2Q3FqVkxQUnZ2V3lMSDNlZE9OejdrSzlsWFpaUU90c3M4bnEzMXBoR0RBSXVtb3UyVXZSc1ZzOHRsTmVnSHVUSjdXYVhDdnZfSENCTXhjS1p1SE1HT2RfQ2J1Ti1zNlBxZzU1YnZMeXRHa3ZXMHdlS2RRVzRTUQ?oc=5",
-          "published_at": "2026-11-05T19:43+08:00",
+          "title": "台積電陷跌停！ 他連敲「22筆87買單」助脫困 網嘆：有錢就是任性 - Yahoo股市",
+          "url": "https://news.google.com/rss/articles/CBMisgJBVV95cUxQMmI5OEZuSlpvSjF3NEZmS3lOc1VJYTZ1OThlVlNqbEc4U1hUdzduby0yWGR5Ym1MMjVUZjMySjdZNTc1ZmlQSUNLbkVtWlBrM3FTTG5TRTRrczhpRVRqV29RRkRwd3RZam5tV3RCcUNqZzRzWl9YNm11REJLMnpxMDR5NlhrZzF6VHo5SGI4LVN0anZkb1ZieDBjNjFXU09xdGxZNlVUUnJMVXRKaEJlbU1RemVOZzBPbFZGekZLMmhvTE05T2h0LV9uem9fUWs5Yy1nb3BzQkNNVkhHRXBFRXYtZlYxdmFCMGJQQ3Rid1hvck1VTl9DMTFqZkhGcDZHMGNqOWhuVEhyMXI4ZmlKOUdBbmZVd3lVR1UzTmJUR0d3LVFnMmhMSjJLa3ZjZWFJb2c?oc=5",
+          "published_at": "2026-11-06T14:46+08:00",
           "source": "Google 新聞 / Yahoo股市"
         },
         {
-          "title": "比台積電更威？外媒點名「這1檔」今年狂飆220％：2027年股價再翻漲4倍 - 民視新聞網",
-          "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1MX0dlTjdPOUFnM2hoQWMyWkVYQnNYaFhmM09qb1JIanR3Y0NQWmdVN2phYzhrWlVfSFRnUWFQN3c2TklCbWZmN3FOam4wY3RfaVhvRGVsdWUyYUowRENlOA?oc=5",
-          "published_at": "2026-11-05T19:43+08:00",
-          "source": "Google 新聞 / 民視新聞網"
+          "title": "個股：映泰(2399)1/6～11/6處分台積電股票200張，均價1771.50元，獲利818萬 - 富聯網",
+          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQY1FNckJob2tiUVA4LUtzQXVxM2loU2NiTkQ4MGx3eTBVMVdXb1BiYWRkREZiRHViNGtxUmRySGtDWVpZOXF3WWdpdkJqSkdlSk41UElmQ2w3V25hanhBa2FwV2pUQXYyMnVXSDl6U0ViTXBqMEdaWWtwaXpBTDFINUh1ZjYyaXZS?oc=5",
+          "published_at": "2026-11-06T14:45+08:00",
+          "source": "Google 新聞 / 富聯網"
         },
         {
-          "title": "台股血流成河！姚淳耀擁10張台積電「蒸發300萬」認：有受影響 - Yahoo新聞",
-          "url": "https://news.google.com/rss/articles/CBMi5wJBVV95cUxPajdoa1BienVfT2F6d1BGbHhCTW5nODRVc0ROLUxERUN5Qmh2NDhrVjhXZnFtaDZhcnhyZ0Jka3E0RXU1Vm5CdnRSYWhtZEF3RElvVG9BSUJvY2xYMXNZN2hPZUdUSldHdDg2aURhNHlzTzRPd3ByMUZsU05BTGtSLXl0a2kxVWJJT0RTUUpCdzhuWTRocms3SXl2eXk2S3l6U1RzbFhwZENEeFJyQU9OUGpWVHdpaDFxeXhoQ0N3Q0hwSThBQThJRTJxQkYwNHNSRXh6RkdnZWJtMUk2NzVYTE9UVjJSbENvdDZBbE1qdjlYbFBjcTdRZ1BYMHdRTFowZnR2NFJMQWFlZ0RWd0dHTXN0TzU1YTN3aHJvdVI2X3lxVXdzbU13ellwdkRDZTN3RDNycTkwOVJuUEJNWFU5Y3BjTHhGUVk5WkVBYWZTbWVJS0YzVUthczV2MFlLcnBKeWNEOFQ5TQ?oc=5",
-          "published_at": "2026-11-05T18:45+08:00",
-          "source": "Google 新聞 / Yahoo新聞"
+          "title": "台股大跌原因？殺3700點摜破年線見37K！融資多殺多撿便宜？不只台積電聯發科…杜金龍給10檔理由曝光 - 今周刊",
+          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQNjg5UXhEcmVDeGZpMjZPekxqeGVEQ0N0dkdFVHBWRjFKcUIyaW9sTUVRVXU1RzJZZ0lyNUppTVY4eWctUHMyNXliWmtPcUpZSUVxZ3ZfdGMyR1JOQU1LVm9EdjdUUmRnVGtIT2JLNHlxbkNfR3VoWWx4WGUxX1BaOA?oc=5",
+          "published_at": "2026-11-06T14:38+08:00",
+          "source": "Google 新聞 / 今周刊"
         },
         {
-          "title": "不是台積電！外媒點名「這檔股票」潛力驚人 明年直接翻4倍 - TVBS新聞網",
-          "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFA3NDRINnNCVnljcklIZGNqOFJ5czA5U3k1X0lpU1JiR1ZYUWRHNkRKa3dGMUVmN29hYWJhblRRTmR5UHZqZG9rVlRnM0ljWXM?oc=5",
-          "published_at": "2026-11-05T17:46+08:00",
-          "source": "Google 新聞 / TVBS新聞網"
+          "title": "台積電跌停！魏哲家身價蒸發47億 外資慘吞10兆是他的2100倍 - TVBS",
+          "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1VX2pscTNhSW5DN0Qxam9FclJzWmZISHpZNnA4VGlSVUlOSW85ZDZoOVRJY01mZjhpaDNsUnR3ajRZYTVETDc0T0pQMmV6VEk?oc=5",
+          "published_at": "2026-11-06T14:16+08:00",
+          "source": "Google 新聞 / TVBS"
         }
       ],
       "official_announcements": [
@@ -565,23 +563,23 @@
         "reason": "獲利、伺服器導軌卡位與行情都強，但 20 日及 60 日漲幅過大、股價遠離均線，估值與回撤風險抵銷部分優勢。",
         "next_week_watch": "量價是否背離、法人成交是否轉為連續賣超，以及新產能對 EPS 的實際貢獻。"
       },
-      "open_price": 8330.0,
-      "high_price": 8490.0,
-      "low_price": 7825.0,
-      "last_price": 7995.0,
-      "prev_close": 8600.0,
-      "change": -605.0,
-      "change_pct": -7.03,
-      "volume": 772,
+      "open_price": 7200.0,
+      "high_price": 7700.0,
+      "low_price": 7200.0,
+      "last_price": 7565.0,
+      "prev_close": 7565.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 988,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-11-05T22:51:20+08:00",
+      "quote_time": "2026-11-06T22:28:48+08:00",
       "gross_margin": "84.18% (2026Q2)",
       "net_margin": "64.95% (2026Q2)",
       "roe": "62.7% (年初累計年化, 2026Q2)",
       "eps_single": "74.38 元 (2026Q2 單季；公司法說資料)",
       "earnings_date": "2026-11-06 (26Q3 财报) | 每月 10 日发布营收",
       "event_status": "scheduled",
-      "event_checked_at": "2026-11-05T14:51:24",
+      "event_checked_at": "2026-11-06T14:28:59",
       "fundamental_as_of": "2026-10-17",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-09 營收 4,464 百萬元；月增 -30.96%；年增 +196.22%",
@@ -605,7 +603,7 @@
           "eps": "110.96 元"
         }
       ],
-      "market_snapshot": "2026-11-05 收盤/最新 NT$7,995.00，日變動 -7.03%；行情時間 2026-11-05T22:51:20+08:00。",
+      "market_snapshot": "2026-11-06 收盤/最新 NT$7,565.00，日變動 +0.00%；行情時間 2026-11-06T22:28:48+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：AI 伺服器及資料中心機櫃擴建、機櫃設計複雜度提高。反向：大型客戶集中、客戶平台切換、擴產與新廠爬坡、伺服器資本支出週期及家具五金景氣。",
       "risk_factors": [
@@ -643,17 +641,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "+121 张",
-        "trust_net": "+66 张",
-        "dealer_net": "+19 张",
-        "total_net": "+206 张",
-        "date": "2026-11-05",
-        "summary": "[2026-11-05 官方结算] 三大法人全线买超 (+206 张)，外资与投信合力加仓。"
+        "foreign_net": "-34 张",
+        "trust_net": "+95 张",
+        "dealer_net": "+10 张",
+        "total_net": "+72 张",
+        "date": "2026-11-06",
+        "summary": "[2026-11-06 官方结算] 投信内资买超 (+95 张) 逢低承接，外资高档调节 (-34 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净买超 206 张 (占量 26.7%)",
+        "large_order_ratio": "法人净买超 72 张 (占量 7.3%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-11-05 筹码] 主力机构呈净买入 (+206 张)，筹码向法人端汇聚沉淀。"
+        "capital_status": "[2026-11-06 筹码] 主力机构呈净买入 (+72 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "+3.2%",
@@ -665,10 +663,16 @@
       "take_profit": "14,500 - 15,500 元",
       "target_price": "17,000 - 17,500 元",
       "stop_loss": "9,200 元",
-      "research_source_as_of": "行情 2026-11-05；月營收 2026-09；財報 2026Q2",
+      "research_source_as_of": "行情 2026-11-06；月營收 2026-09；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-11-05 15:00 Asia/Taipei",
+      "research_next_review_at": "2026-11-06 15:00 Asia/Taipei",
       "company_news": [
+        {
+          "title": "台股重挫！股王信驊、股后川湖也撐不住 - Yahoo新聞",
+          "url": "https://news.google.com/rss/articles/CBMilgJBVV95cUxPTVk1UlJ6cmxVc1pPTm9RbHdxbVBmcXZkY0VUT2RhbElnU1pOMHd1a2h0THhMaktmcW55S2Nqb3ZGRURJck9TdUJTemg2dnVIbVphZGJFWFlsd3lvZDhBcWFpVXZrVXdYZTM4djRhWTNHeGdLeWtGNjF0UnMydTdSblJZaE8wQVRfS2p4NHhfMktEVW1Ka0N1WDZWOEJiVUlrMHZodXE2SHRmSnBiQVZiWkU2bjVyVXQ0NEJjclRENUd2cC1HajMwNnhyT3RVMG02X1BKWjhFYmxJVHlwaXVoRVNyTnk4cXZJZVRwcHlnU2lGc0ZjNlRVQ3VyTFZPVHI1YnVFNzJqSVVsdzB6T1VfenprU0VnUQ?oc=5",
+          "published_at": "2026-11-06T11:42+08:00",
+          "source": "Google 新聞 / Yahoo新聞"
+        },
         {
           "title": "《台北股市》注意股：5日48檔信驊.台達電.川湖.智邦.漢測等- 上市櫃 - 旺得富理財網",
           "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFA1WXdUbTYxQlN0bzdkSUVIbTdUT0paOERtOGljbUlyM2xQMjRLSEhTR0FmRGdfYUVXU0FvcnFURllNRHVXczR3SkZhYUN6bG9VWF96UXI0MWdKd2x5RXhZM2JTS0NXQVhjWnc?oc=5",
@@ -692,12 +696,6 @@
           "url": "https://news.google.com/rss/articles/CBMilAJBVV95cUxPRlp5WkdsTGpxRWhRQ3JvbF85Q0RLQlVzY1paeGZ6NDgyX3RrLVMtS1FVaS1jZ1FrN2ZnakNRVXJkcmJUOS1oN25JdGVYQ2dGTEhFNDFKbDJDSWVKQnZXbFBnMFF1b1M4QnZ1QTg3S01DR1ZtcFlfQy15VmY0X1hQY0JmRTRpR25vVnZiWTNMNGVNNUZkVlJGbzZtVzBJd0NHaTV2ZWx5VXp3NjdsWmZmeG0wQTVETlBYbW5vYzlFLXJmaTNrY2tIRE10empfNVAyR2F1RjQ4WUZwanVBUUtYSXdpQ21Gc1BpRVpqTlVfUWZjY3huZU9wNHlndi1Nb0ZmQ1lZUDd2bFA0ZDVuS2NTR19KQ2c?oc=5",
           "published_at": "2026-11-03T11:37+08:00",
           "source": "Google 新聞 / Yahoo股市"
-        },
-        {
-          "title": "台股失守4萬5，更大崩跌在後頭？該砍光持股換現金？台積電、鴻海、川湖…老手揭落底訊號：這5檔搶先撿 - 今周刊",
-          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQY3JQSzRpVFhrZW5VdXpoaEIweF9ZLXJMOEFhOGt3NC1DblJFSTlDZWdDNG1oVTA3bk5oTlV5ekJ2TTdxUE0xSVpjREVmQ3lMTWl0dm1PaktTd1BwX3RILTNJUlo0NmJuUVhmOGVxTWhGOXZodkNRR2w3T201MkMzUw?oc=5",
-          "published_at": "2026-11-02T12:11+08:00",
-          "source": "Google 新聞 / 今周刊"
         }
       ],
       "official_announcements": []
@@ -729,24 +727,24 @@
         "reason": "高階 CCL 卡位與中期報酬仍正面，但本週回落且法人單日淨賣超，短線籌碼不支持追價，維持回檔研究。",
         "next_week_watch": "M8／M9 訂單、毛利率是否維持，以及法人賣超是否收斂。"
       },
-      "open_price": 4335.0,
-      "high_price": 4335.0,
-      "low_price": 4100.0,
-      "last_price": 4100.0,
-      "prev_close": 4555.0,
-      "change": -455.0,
-      "change_pct": -9.99,
-      "volume": 4279,
+      "open_price": 3690.0,
+      "high_price": 3920.0,
+      "low_price": 3690.0,
+      "last_price": 3820.0,
+      "prev_close": 3820.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 5812,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-11-05T22:51:20+08:00",
+      "quote_time": "2026-11-06T22:28:48+08:00",
       "gross_margin": "34.47% (2026Q3)",
       "net_margin": "21.04% (2026Q3)",
       "roe": "53.9% (年初累計年化, 2026Q3)",
       "eps_single": "27.55 元 (2026Q2 單季；公司季度財報)",
       "earnings_date": "2026-10-29 (26Q3 財報已舉行)；下一次財報/法說會日期待公司公告 | 每月 10 日发布营收",
       "event_status": "historical",
-      "event_checked_at": "2026-11-05T14:51:24",
-      "fundamental_as_of": "2026-11-05",
+      "event_checked_at": "2026-11-06T14:28:59",
+      "fundamental_as_of": "2026-11-06",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-09 營收 21,532 百萬元；月增 +6.88%；年增 +168.87%",
       "latest_quarter": {
@@ -776,7 +774,7 @@
           "eps": "82.92 元"
         }
       ],
-      "market_snapshot": "2026-11-05 收盤/最新 NT$4,100.00，日變動 -9.99%；行情時間 2026-11-05T22:51:20+08:00。",
+      "market_snapshot": "2026-11-06 收盤/最新 NT$3,820.00，日變動 +0.00%；行情時間 2026-11-06T22:28:48+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：AI 伺服器、交換器速率升級及高速材料規格提升。反向：銅箔、樹脂等原料成本、客戶認證週期、擴產折舊、匯率及 PCB/網通景氣回落。",
       "risk_factors": [
@@ -814,17 +812,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-711 张",
-        "trust_net": "-14 张",
-        "dealer_net": "+54 张",
-        "total_net": "-670 张",
-        "date": "2026-11-05",
-        "summary": "[2026-11-05 官方结算] 外资与投信偏空调节 (-670 张)，机构筹码阶段获利了结。"
+        "foreign_net": "-869 张",
+        "trust_net": "+483 张",
+        "dealer_net": "+28 张",
+        "total_net": "-357 张",
+        "date": "2026-11-06",
+        "summary": "[2026-11-06 官方结算] 投信内资买超 (+483 张) 逢低承接，外资高档调节 (-869 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 670 张 (占量 15.7%)",
+        "large_order_ratio": "法人净卖超 357 张 (占量 6.1%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-11-05 筹码] 主力机构呈净卖出 (-670 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-11-06 筹码] 主力机构呈净卖出 (-357 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "+4.5% (多头强劲攻势)",
@@ -836,27 +834,27 @@
       "take_profit": "4,900 - 5,200 元",
       "target_price": "5,600 - 5,900 元",
       "stop_loss": "3,450 元",
-      "research_source_as_of": "行情 2026-11-05；月營收 2026-09；財報 2026Q3",
+      "research_source_as_of": "行情 2026-11-06；月營收 2026-09；財報 2026Q3",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-11-05 15:00 Asia/Taipei",
+      "research_next_review_at": "2026-11-06 15:00 Asia/Taipei",
       "company_news": [
         {
-          "title": "松下爆炸反利多出盡？台光電、台燿4檔CCL同步亮燈跌停 南亞也亮綠燈摔至249元 - Yahoo股市",
-          "url": "https://news.google.com/rss/articles/CBMi0ANBVV95cUxNSjhOcThWc0d3eXJhWHdTU2pBM2wzN0JlOEtlUjk0Q3FWRDZKa1VnZVlEODlISVdVMU00bzcwcnNOSm9DRjA2TFNHSnJCQnA5UmhnZVZaQ2s3V3lPanExUUhpQWdaYkFKRWNRNjdUNndtYnJvUWdITU9DUnc4dFpzM0R1Um15STN3eDhxN0NXX1Nod19KRWU1cDJhWm1xT3BxQjFKYTVURzFPZ19RdUYtbm1MMlJRTWtQYnhTU0lRaXZ2R0l4UWRPOTFENmE5enVDeU9JVmo5cE92RmpBZWJreHF0X3BUR2Rsd3JNU3pCSXJCZ1JRb25iZFNLRkJ0ZUo4N21URGxFVTRURXVYVlJFNll0ZU1MSmtiS3FVckpVbnp3VlVGbVRxbGI4MDRyd3gtZ2d6RG1vMV91SDdWSDk4RVctbkdEOXBYczJuRktEU1QxcUVLcVpOZno0UE1BdW9qQUpObkZrR0QyX2xxMC1GN0c4WTRHVHJUNVl4ZTJmUmxhSWMwNERZbHhCa0FXc3NwYm9ncTdDVjZYWUFvWFdPc0M5M3lQVUx3S2pMci1wS0lUUnRrRndiMDVCNkhTTVZnTW44MVEyWXoyd2xiWmhicQ?oc=5",
-          "published_at": "2026-11-05T13:34+08:00",
-          "source": "Google 新聞 / Yahoo股市"
+          "title": "《台北股市》注意股：6日47檔台光電、富世達、群聯、創意、玉晶光等- 上市櫃 - 旺得富理財網",
+          "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1WV3JPV1N6LURkRUxHeTJFWnh2VFpGRjJrMnRuUTJiWXJEZWNuRVNqdWh0eGN0SnRVdjV0MGg0aDhhQXNKTlAwNFdldGpjQm1GcVhEZUxHLTV3OWdNMEZUVzM0TVREdXVWR1E?oc=5",
+          "published_at": "2026-11-06T07:53+08:00",
+          "source": "Google 新聞 / 旺得富理財網"
         },
         {
-          "title": "目標價喊到千元也沒用！「這檔CCL」EPS衝刺64.9元依然慘陷跌停 台光電跌8%綠燈生死戰 - Yahoo股市",
-          "url": "https://news.google.com/rss/articles/CBMimgNBVV95cUxOU0RwWWFOeG93SWtoWGZJeXItVXYyLWJ4bzlDYV9wVUxUaUdza0laWTdXX3NIb3QyRWRndVNteFR1eDVoWlk0U0M0RVRHbnFoSFpsZlFVQXM3ZG5jcjE3VjJfNU15Q1IxS2ZkbmwxS2ZmNXFHNDZ0MUhhZ01jZnVmY0tEZTVRaTdBMERhNjNiOFVNdnJhUFl6ald0UUZvcTB1NWduNDROLWV2RjFQUU1pcmtUbUNjNDFseUQ0c3V5SnBYVkZ2S1FYWW1jXzRRWnpfc3V5ekNHNGMwNUplM2k5aGJYMUhmT2lXNFlpNkJaazRVMGtHcnp2Q2RRVXBOWFhZVEgyTW5oX2lwZktweTZVZGd4MzU5SFlMODl3Zi1QMDNORWJLVEdHVVV2Y1lLVHRKU3dhR3JWRHMwMTZKMHJIempWM0hxYm5BRHY5Z3RGYXFZRVpXbHdRbDVJck1XUGxuT2xuQzRLMnRkYlBTampPWktGOXJEVDFEODRtV0FqbWF3cUg4NTlady1BVXJuNFRzQm5vQ0N6MGowdw?oc=5",
-          "published_at": "2026-11-05T11:15+08:00",
-          "source": "Google 新聞 / Yahoo股市"
+          "title": "台光電股價又跌停發生什麼事、台燿也撐不住…松下湖口廠爆炸CCL轉單落空？外資挑它狂砍連8天賣超 - 今周刊",
+          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNbHNQMmdibDEzVnpDak54WGtBQnlBbE4tSElFb2VjYjBxUG1IRjZjQzExSjlfLVBUWDRhcVhPeGtjYmRURmtWYklxbGVVZ0p4ejhTUW1rQUlJVnFGeDN4T1NnZkhVeG5jellxZVFQQ3BYbGhwcXhOcWhyOTV3ajRPaA?oc=5",
+          "published_at": "2026-11-05T12:10+08:00",
+          "source": "Google 新聞 / 今周刊"
         },
         {
-          "title": "台光電重摔8%！股價單月慘崩35%、市值蒸發近8千億 - TVBS新聞網",
+          "title": "台光電重摔8%！股價單月慘崩35%、市值蒸發近8千億 - TVBS",
           "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1FWGs3NVBKWk1wbWY4bXh3dWZNcC0zenc5aDZVRjVhSC1LVm1ZQUZfWHJrTU9XeVdhWEJaVmRnZFV2SkRWc01BQUJCdEE3N1U?oc=5",
           "published_at": "2026-11-05T10:57+08:00",
-          "source": "Google 新聞 / TVBS新聞網"
+          "source": "Google 新聞 / TVBS"
         },
         {
           "title": "銅箔基板倒一片！台光電聯茂台燿一度全綠燈 分析師：等反彈適度調節 - Yahoo股市",
@@ -867,7 +865,7 @@
         {
           "title": "台燿跌停可以買？台光電下跌原因？臻鼎-KY金居…CCL族群集體崩潰，股市老手揭卡位時機怎麼看 - 今周刊",
           "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPeXNsYWZXZ3cyV3JWcmpxbXg4elRhNWJFQTFBekVlSTQySk1TUG1FdnVOclNNZUs5dUNwYnl4UE9fUlZrZ01EYWpKZFV4QWxaWTFXc0paRFhMNDByRHBoQ3RQQV8yQ2R1Y2FtUkdQTTNSQzRTTXc2dThkVFpHSV9YWg?oc=5",
-          "published_at": "2026-10-27T16:30+08:00",
+          "published_at": "2026-10-27T15:00+08:00",
           "source": "Google 新聞 / 今周刊"
         }
       ],
@@ -936,23 +934,23 @@
         "reason": "液冷瓶頸與獲利趨勢支持保留，投信也有承接；但短線漲幅與均線乖離偏高，評分保留強度、不把動能當成安全邊際。",
         "next_week_watch": "水冷板與快換接頭出貨、毛利率，以及高檔成交量是否失控。"
       },
-      "open_price": 2740.0,
-      "high_price": 2760.0,
-      "low_price": 2545.0,
-      "last_price": 2565.0,
-      "prev_close": 2820.0,
-      "change": -255.0,
-      "change_pct": -9.04,
-      "volume": 4177,
+      "open_price": 2310.0,
+      "high_price": 2310.0,
+      "low_price": 2310.0,
+      "last_price": 2310.0,
+      "prev_close": 2310.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 1921,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-11-05T22:51:20+08:00",
+      "quote_time": "2026-11-06T22:28:48+08:00",
       "gross_margin": "31.17% (2026Q2)",
       "net_margin": "19.31% (2026Q2)",
       "roe": "63.3% (年初累計年化, 2026Q2)",
       "eps_single": "24.37 元 (2026Q2 單季；公司季度財報)",
       "earnings_date": "2026-11-10 (26Q3 法说会) | 每月 10 日发布营收",
       "event_status": "scheduled",
-      "event_checked_at": "2026-11-05T14:51:24",
+      "event_checked_at": "2026-11-06T14:28:59",
       "fundamental_as_of": "2026-10-17",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-09 營收 21,018 百萬元；月增 +7.89%；年增 +44.92%",
@@ -976,7 +974,7 @@
           "eps": "44.54 元"
         }
       ],
-      "market_snapshot": "2026-11-05 收盤/最新 NT$2,565.00，日變動 -9.04%；行情時間 2026-11-05T22:51:20+08:00。",
+      "market_snapshot": "2026-11-06 收盤/最新 NT$2,310.00，日變動 +0.00%；行情時間 2026-11-06T22:28:48+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：AI/HPC 功耗密度提升、氣冷升級與液冷導入。反向：主要客戶/平台集中、量產時程延誤、競品價格、擴產折舊及伺服器資本支出反轉。",
       "risk_factors": [
@@ -1014,17 +1012,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "+17 张",
-        "trust_net": "+244 张",
-        "dealer_net": "+14 张",
-        "total_net": "+276 张",
-        "date": "2026-11-05",
-        "summary": "[2026-11-05 官方结算] 三大法人全线买超 (+276 张)，外资与投信合力加仓。"
+        "foreign_net": "-763 张",
+        "trust_net": "+405 张",
+        "dealer_net": "+218 张",
+        "total_net": "-140 张",
+        "date": "2026-11-06",
+        "summary": "[2026-11-06 官方结算] 投信内资买超 (+405 张) 逢低承接，外资高档调节 (-763 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净买超 276 张 (占量 6.6%)",
+        "large_order_ratio": "法人净卖超 140 张 (占量 7.3%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-11-05 筹码] 主力机构呈净买入 (+276 张)，筹码向法人端汇聚沉淀。"
+        "capital_status": "[2026-11-06 筹码] 主力机构呈净卖出 (-140 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "+3.8%",
@@ -1036,10 +1034,22 @@
       "take_profit": "3,100 - 3,300 元",
       "target_price": "3,700 - 4,000 元",
       "stop_loss": "2,100 元",
-      "research_source_as_of": "行情 2026-11-05；月營收 2026-09；財報 2026Q2",
+      "research_source_as_of": "行情 2026-11-06；月營收 2026-09；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-11-05 15:00 Asia/Taipei",
+      "research_next_review_at": "2026-11-06 15:00 Asia/Taipei",
       "company_news": [
+        {
+          "title": "低軌衛星股空中慘墜！「這2檔」竟逆風飆漲停、穩懋4天吞3跌停奇鋐、啟碁同亮綠燈、CCL廠續跌 - Yahoo股市",
+          "url": "https://news.google.com/rss/articles/CBMikANBVV95cUxOQmJUTEdGVVdiODV2eGlYb3Q0UWJUVmx2bnQ0dVdXZFc0MlhTMWdCdXpSQ2o4MlM2Sk4xNkM3bnNyTVdZV0dxaThiRGRHVHNXbFhuT0c3bDRWVzFsS2ZzOXJXOV9pUHZEbWNRQVNSNFlXbHpRa1ZzYWRaRGp3TjQ2Qk81WU1ZSVhwWVZsdFZ6bmF5aVBoYmwzMHRlb2xkaGF1RjZBbjU0UFRMeEJhRnYzaXI5cUJlM3pCekx2aDNfVXlRY3ZfWkVNOGRKQnNpdVRMSFl6MWd2N0lwSUZ1NWNKSGxlTVhrelBUc0ZpSm5pYTFjOThJNEEtYVUxMmUzRE1EMDcxRVNZd2d2ZHlQVG5tTWN6akphV2FVOEdhSmdPemZIVEZ0ZHMtYUJ4bjREZTNicjdXRzNvVTRyUUFEOEZ4TFJnMU45TzBFNnpIbHV6THhLNmFvV2ZzSjRRcXMwY1AwZlBQbDBhbjlVTlBJTDZjQ0ZGal9YQnhkSFpIX0U2ZnROVlNiMTFMcHUzVXNTRkdM?oc=5",
+          "published_at": "2026-11-06T16:35+08:00",
+          "source": "Google 新聞 / Yahoo股市"
+        },
+        {
+          "title": "【11/06 產業即時新聞】電子中游-NB與手機零組件重挫跌逾9% 奇鋐遭空方狙擊族群面臨籌碼鬆動 - CMoney",
+          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBVWEdwMzAzbXFHTFNEVnVwcVlOVmtnaHNQOHlCcnhEejk3NFc2RG5Ha21ENC16dUoxZl9TR3YxRElQNXF4akNqcnRMOEdtOWlWUUQ5X0tvNmw?oc=5",
+          "published_at": "2026-11-06T10:00+08:00",
+          "source": "Google 新聞 / CMoney"
+        },
         {
           "title": "1圖懂》美期中大選變天...台股利空出盡？大咖法人全剖析川普跛腳哪些股票吃飽？台達電、鴻海、緯穎、奇鋐...受惠受害股完整看- 上市櫃 - 旺得富理財網",
           "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBtTW9kMmRTX1N1SGcwbkRjVV9UUzlKWVdyX1hSbThBWmpKWjNPazczUHZUSzZZYzQ3S0lYSFNjVkIzZE5oVGtRUnZtWWZpamJ0VXdWT3NvTVpWMmh6NWhxd2VsWkJEMGFRZnc?oc=5",
@@ -1047,28 +1057,16 @@
           "source": "Google 新聞 / 旺得富理財網"
         },
         {
+          "title": "奇鋐(3017) 個股概覽 | 個股 - 股市 - CMoney",
+          "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5RSlhXSVE3N250NW1kSVFqUkQtU2FodlF1WEhxcUgwQm1nc2txUHFXSU1IRXFYOXJmY1BPdzgydTBJVkVCdGlZQ1FCckhxTnE3OVgw?oc=5",
+          "published_at": "2026-11-05T07:34+08:00",
+          "source": "Google 新聞 / CMoney"
+        },
+        {
           "title": "3017 奇鋐 - 三大法人：-1073、489、67 - 股市爆料同學會 - CMoney",
           "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5ZTS1tMEp3T1MzRXk1dExORFQyVkhvRUtuVHdRNDl5LU9aVTlWVW5BWnB6TWk0VlFydm9yeXNjbndHb3NyUDc3M05yYzl6OElpYUZWOVNhcVI?oc=5",
           "published_at": "2026-11-04T16:18+08:00",
           "source": "Google 新聞 / CMoney"
-        },
-        {
-          "title": "79萬股民哭了！ 00403A首次配息驚見0元！重壓台積電、奇鋐卻跌破10元發行價 - 理財周刊",
-          "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9SNGd5THlnQV94R0FOVlZScmNudzNnUXlzeURKbzBUOEN3M0Y3UHVHZTBNbFZHcFN5RDZvRFpSTWt0SWNMMnJ5SF92dUkwOWpEQ2F2eE9telVYUy1WU0xYTzZzb0VHNVBXQVBJU0FKcw?oc=5",
-          "published_at": "2026-11-02T16:51+08:00",
-          "source": "Google 新聞 / 理財周刊"
-        },
-        {
-          "title": "奇鋐、創意 押逾三個月 - UDN",
-          "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9GVE1fQkd2dnFfcFhvMTF6NGw2TjREOEJHcGx6S2NJbWtPYm1pSW5RYTJ3QTZLTFBfNGZUWXVVRWJlMjRIdTNhMW5vbVRVcG9t0gFWQVVfeXFMTlZTOTdXOVhlOU1FNEFXMnB6V2F5NWRjUl9OcGFzVXROa291ZUpoR1RxRXNjZHp4Zm1mRzN6QUF1cDRVMFdoaHEzU0hDQXRsNUZOVl9vWmc?oc=5",
-          "published_at": "2026-11-02T00:26+08:00",
-          "source": "Google 新聞 / UDN"
-        },
-        {
-          "title": "奇鋐、富世達突公告「新莊廠遭搜索」！特定員工被調查局鎖定 - Yahoo股市",
-          "url": "https://news.google.com/rss/articles/CBMi_wJBVV95cUxORVFxN3ZteVU4V0EzU2pWS19YYjNhOXJtRkI0MnlSUEx1TkhNTEF3RFZuN0NEcENFYW9tTnR0ZkJRc00tQmc0bklNbHBXU0ZKNHN1eUw0VFVEdlU2aEZFd1BUY3N5YWo0NE1jU2prRFFtMzBJRm8ydkxya0R6NTZ4NHlxZm15MmlZSEZRUU1VdTdhUkNBZjFETENmVmJjZjdsQ25YRFNzRG01b1hHOWFwQjlNelQwNmZONzc5Z3g5cWpGVm90dk8zR2lkVzR1a1dVcU5NNWxKLWFQdUFoOTNZdFlkZFdZNFNFejZNQldXSUdsLXRqQjZZdUYzV0x6d1NhVW1LOGpibEx6UUt5ZzVuZ2tSSmk0T29pa3d2UVpkNWhBcE5kLTc3aWZiUFl0SmUtd0NmWTBUYU94cUNlTk9BTDVISXV3bzNnWUEtUVpEWjlKNzE2RUpRMjdOZDQzR1ZDRFFHOU1aZ1BIdUJvWFNqZDBhUS1pWTRwUFFSZ3dtSQ?oc=5",
-          "published_at": "2026-10-07T15:00+08:00",
-          "source": "Google 新聞 / Yahoo股市"
         }
       ],
       "official_announcements": [
@@ -1122,23 +1120,23 @@
         "reason": "Q2 營收、營業利益與淨利創同期高，法人也偏買超；但近 60 日仍為負、毛利率低於高毛利技術股，定位為穩健觀察而非高彈性首選。",
         "next_week_watch": "AI 伺服器／雲端網路出貨、營益率改善能否延續，以及匯率與關稅影響。"
       },
-      "open_price": 239.0,
-      "high_price": 241.5,
-      "low_price": 234.0,
-      "last_price": 235.0,
-      "prev_close": 240.0,
-      "change": -5.0,
-      "change_pct": -2.08,
-      "volume": 48108,
+      "open_price": 213.0,
+      "high_price": 227.5,
+      "low_price": 212.5,
+      "last_price": 224.5,
+      "prev_close": 224.5,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 87130,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-11-05T22:51:20+08:00",
+      "quote_time": "2026-11-06T22:28:48+08:00",
       "gross_margin": "6.15% (2026Q2)",
       "net_margin": "2.73% (2026Q2)",
       "roe": "11.5% (年初累計年化, 2026Q2)",
       "eps_single": "4.27 元 (2026Q2 單季；鴻海官方公告)",
       "earnings_date": "2026-08-14 (26Q2 法說會已舉行)；下一次財報/法說會日期待公司公告 | 每月 5 日发布营收",
       "event_status": "historical",
-      "event_checked_at": "2026-11-05T14:51:24",
+      "event_checked_at": "2026-11-06T14:28:59",
       "fundamental_as_of": "2026-10-17",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-09 營收 1,158,633 百萬元；月增 +25.70%；年增 +38.42%",
@@ -1162,7 +1160,7 @@
           "eps": "7.84 元"
         }
       ],
-      "market_snapshot": "2026-11-05 收盤/最新 NT$235.00，日變動 -2.08%；行情時間 2026-11-05T22:51:20+08:00。",
+      "market_snapshot": "2026-11-06 收盤/最新 NT$224.50，日變動 +0.00%；行情時間 2026-11-06T22:28:48+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：AI 伺服器與雲端網路需求、客戶平台擴產。反向：低毛利與營運槓桿、客戶集中、產品組合變動、全球供應鏈/關稅、資本支出及消費電子週期。",
       "risk_factors": [
@@ -1200,17 +1198,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-11174 张",
-        "trust_net": "+2349 张",
-        "dealer_net": "+3122 张",
-        "total_net": "-5701 张",
-        "date": "2026-11-05",
-        "summary": "[2026-11-05 官方结算] 投信内资买超 (+2,349 张) 逢低承接，外资高档调节 (-11,174 张)。"
+        "foreign_net": "-14083 张",
+        "trust_net": "+2101 张",
+        "dealer_net": "+4266 张",
+        "total_net": "-7715 张",
+        "date": "2026-11-06",
+        "summary": "[2026-11-06 官方结算] 投信内资买超 (+2,101 张) 逢低承接，外资高档调节 (-14,083 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 5,701 张 (占量 11.9%)",
+        "large_order_ratio": "法人净卖超 7,715 张 (占量 8.9%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-11-05 筹码] 主力机构呈净卖出 (-5,701 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-11-06 筹码] 主力机构呈净卖出 (-7,715 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "+2.1%",
@@ -1222,16 +1220,10 @@
       "take_profit": "315 - 335 元",
       "target_price": "360 - 380 元",
       "stop_loss": "225 元",
-      "research_source_as_of": "行情 2026-11-05；月營收 2026-09；財報 2026Q2",
+      "research_source_as_of": "行情 2026-11-06；月營收 2026-09；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-11-05 15:00 Asia/Taipei",
+      "research_next_review_at": "2026-11-06 15:00 Asia/Taipei",
       "company_news": [
-        {
-          "title": "鴻海10月營收成長46% 得益於人工智能需求 - Yahoo 財經",
-          "url": "https://news.google.com/rss/articles/CBMipAJBVV95cUxQTkl1VDl0c1h5dGFxbENaWFRJbDNfV2VlUlNBMVRsSkxIdVZNeXRwSWlRTmVzcGpUOXh5UG93WjJuQlRhVlhYWV9ZY0x4QVZkVlVGWmd4aTRsWnBBTHFHMG9yYk9vdFdEak1Ha1NOMzUxUXJzc2R5N1FqYXRnTTIySVJVVUJGNDVzYXphZnlVWDBxYTdTTjMxZlRNWG1NOW9RWW5GRXFNZE11a3l2Q282cUgxcEp6UmpkcHZfVmFDaWlvYW9adXNlM1JvTS1jSjZtQVpRUm5wTmRBc0ZOYWprUlp6bnBkalVhNTRfejROTW9WaW9lVmk4ZHFrdlA4M2lRYUFDekxaZ1lPSlZoa2U4YnhVTFhVYXViRlJIRzEwOTZDcHA1?oc=5",
-          "published_at": "2026-11-05T16:23+08:00",
-          "source": "Google 新聞 / Yahoo 財經"
-        },
         {
           "title": "1圖懂》美期中大選變天...台股利空出盡？大咖法人全剖析川普跛腳哪些股票吃飽？台達電、鴻海、緯穎、奇鋐...受惠受害股完整看- 上市櫃 - 旺得富理財網",
           "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBtTW9kMmRTX1N1SGcwbkRjVV9UUzlKWVdyX1hSbThBWmpKWjNPazczUHZUSzZZYzQ3S0lYSFNjVkIzZE5oVGtRUnZtWWZpamJ0VXdWT3NvTVpWMmh6NWhxd2VsWkJEMGFRZnc?oc=5",
@@ -1239,22 +1231,28 @@
           "source": "Google 新聞 / 旺得富理財網"
         },
         {
-          "title": "2317 鴻海 - 今天開盤買股票的都賺錢- 股市爆料同學會 - CMoney",
-          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9XYk11THAzYVNJWm1iU25tWkxCdGg4MkxqWHdoQ1FPWWhPQ2czcVRWQVBnSXlWRk1XN1FJcHdoQnd6cjB1SGthZnhsR1VRMWxiVkdONk12QzI?oc=5",
-          "published_at": "2026-11-02T17:10+08:00",
-          "source": "Google 新聞 / CMoney"
+          "title": "台達電「比腰斬還慘」股價創8個月新低！市值遭鴻海超車 董座：訂單能見度仍高 - Yahoo股市",
+          "url": "https://news.google.com/rss/articles/CBMiggNBVV95cUxQcHU1eXR4VkxUTDY0bVVoQW9oZV8wb3ItNmducnBkcmNXRURuU0YzVkxBbFI2WnVHYzVSSzMzZEQtSllIRldmU2xSRktHRmVFVlBNQ1VfRFFoR2JDeEpRRnVEM0NZSE1GTTMyYVI0cXhNd1NjWUZVTFZSZ2QzZ2Q4TmpKajJ4TG15aDBmMU4zdmh1WEluLWdObU1WelZ1MXRZUGhCdU9yTWJqVzZYRGVhbDA1WFNRWl9qNXNwcmdHMFFyYXRaSE9MOTdYSlNHSG9NVThPRUpkUlF0Nm04ZlVJdFRNcTFEYnMzQmQ4NlRfdEFvN050TlF4TGl0QVV0NzJJcEt4LVVYSjZrN1pXczVFWWtmcDBMNUZ5TnVhampWWUV0bE1SSExXMjlENFE1bnFVd2Q1dmhTT0JCZmZSTWJpak12ZTF3Z1BQSUlwTVpCR0tPZFRtMWZCTTBpZFlHYldZX1FxRlpEYUxIMnY1VGd4QVZsOHpPdjVQQWMyb0RvUE5JQQ?oc=5",
+          "published_at": "2026-11-04T07:30+08:00",
+          "source": "Google 新聞 / Yahoo股市"
         },
         {
-          "title": "焦點股》鴻海：穩定AI族群軍心 帶量上攻 - 自由財經",
-          "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1PQVNDUnZIX2RRYWpoclJaTXd5a3FjNUFwbVdfXzFjYTN5WXd1V09kMDJWTGRnaFFPX05fZmZ2Q1VyVEhyWTlKVW13Y1hIcTAtR1B0WGVRcmFIZ3V0am9Z0gFkQVVfeXFMT1VDelJWT3pSbU0tanNwTmlmN3JUSkZMaDl4ekFreEZzSng5TDhsdlMxamF2QUY2anZ6SnQ5dElrdk5hUG9yREY5cHE2X2RJZTBWSGR5TU54bjVJQnR5b1otXzN5WQ?oc=5",
-          "published_at": "2026-11-02T11:55+08:00",
+          "title": "鴻海(2317)股價卡250元被嫌「真的廢」？孫慶龍卻砸880萬大買50張...比買台積電CP值高！最新目標價曝光 - 今周刊",
+          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOOFZoUDlLdUlubXhDd1BsU3Y3U2VORTNfSDZZSGtKNS1lNmRpLU92MGFBRXQxZGxHN1ZjUnY0N0RUM055NkM5WVpkeWNSeENwMEtuN2QxZTRnRHRMMUtDRXBONTEwX3RVZDVYMXZvYzFzLTl3eEZNa2xzUHRYY0stWQ?oc=5",
+          "published_at": "2026-10-13T15:00+08:00",
+          "source": "Google 新聞 / 今周刊"
+        },
+        {
+          "title": "買哪檔股票最後悔？網友點名中鋼、鴻海 有人一套就是10年 - 自由財經",
+          "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5xU1VnTmdWMU9uVHJKXzJPQVluZ21IaWEwZkU4YTNNS3hZbEdQZWtVYTV5NFlyQlZUSTZ4bXRtNm5wQVczTEhCRVRNaGxlUFZWM2RYM0pBRWc4cEZndlYw0gFkQVVfeXFMTVNJczNUSHFXRzZ0MmpFaEFVZllLZ2lKaFBOeFZrdG9YWElJUnNsaUlwWG1razFjQWFjbG1weFZYVzBSU19TclZGcDkxYVV6eXctc204bWREYUh2dWlfNVlncGN1Vg?oc=5",
+          "published_at": "2026-10-11T15:00+08:00",
           "source": "Google 新聞 / 自由財經"
         },
         {
-          "title": "鴻海科技日利多發酵！股價逆勢衝上250元，劉揚偉喊明年營收雙位數成長、AI伺服器產能翻倍| 下班經濟學| 財經 - 風傳媒",
-          "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE9LeTBfVVUzdmFrT3pXMXdvWWc5d1pmNXFhRUcxTl9uMnp6c3Nia0F0bjhBdUYzaUdiRDkxRVJTV1BpYW9NMV9LcGprUXhqQQ?oc=5",
-          "published_at": "2026-11-02T11:16+08:00",
-          "source": "Google 新聞 / 風傳媒"
+          "title": "鴻海遇「美國337調查」走跌2%...分析師勸：觀望別躁進 - Yahoo股市",
+          "url": "https://news.google.com/rss/articles/CBMi3AJBVV95cUxOVHJNWFpsZ1RoMEhGS3gwU3o5dGttRW52elpiWWZydmdEZVlhZFdhdTBjRmZWMkF4SFNfZE9lQzJZQXl6YnEwaWFUZ3RUZmJyUmlFQ25vMW5RRkxRd0FvTUJLNld1OFhqcDQ0OGtod1B1ZUhEYTd3Umo5R3l4aUlNUTBxWS04azdoOThqeWFHMklPSzExazd6Q1NEQXZXd1h5UWpBQmpVam5BcFNCbmx3ZkJtOWNrRG5WVkVYT1hueURFdFd5T01oRmVWXy1wcTRTQ3pwSmQ4WHRFbF9TM3pOaThRVnVKY2lYTVdVRjQxeENaNWgxOG1kWGZzc0wyVTMzcDk3dDgzQkdFY0dRMGFQQ1VFVnVNdHMzR0gwSElDa2MzOC1aam9kaEFQal9fN3BmNWljcThKekFDTEExWkJlMjk5bGUweGt1dDBPVG8tcjBKMzZ2dmt4N2lSU3o?oc=5",
+          "published_at": "2026-10-11T15:00+08:00",
+          "source": "Google 新聞 / Yahoo股市"
         }
       ],
       "official_announcements": [
@@ -1322,24 +1320,24 @@
         "reason": "電源與熱管理屬資料中心必要環節，獲利連兩季走高且本週動能回升；但 60 日仍弱、PER 偏高，先列核心追蹤，不追高。",
         "next_week_watch": "資料中心電源與熱管理訂單、營益率再上修，以及 60 日均線能否收復。"
       },
-      "open_price": 1160.0,
-      "high_price": 1190.0,
-      "low_price": 1120.0,
-      "last_price": 1130.0,
-      "prev_close": 1220.0,
-      "change": -90.0,
-      "change_pct": -7.38,
-      "volume": 18537,
+      "open_price": 1020.0,
+      "high_price": 1070.0,
+      "low_price": 1020.0,
+      "last_price": 1055.0,
+      "prev_close": 1055.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 31345,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-11-05T22:51:20+08:00",
+      "quote_time": "2026-11-06T22:28:48+08:00",
       "gross_margin": "35.47% (2026Q3)",
       "net_margin": "14.28% (2026Q3)",
       "roe": "29.0% (年初累計年化, 2026Q3)",
       "eps_single": "9.68 元 (26Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
       "event_status": "unknown",
-      "event_checked_at": "2026-11-05T14:51:24",
-      "fundamental_as_of": "2026-11-05",
+      "event_checked_at": "2026-11-06T14:28:59",
+      "fundamental_as_of": "2026-11-06",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-09 營收 65,400 百萬元；月增 +1.26%；年增 +14.61%",
       "latest_quarter": {
@@ -1383,7 +1381,7 @@
           "eps": "26.64 元"
         }
       ],
-      "market_snapshot": "2026-11-05 收盤/最新 NT$1,130.00，日變動 -7.38%；行情時間 2026-11-05T22:51:20+08:00。",
+      "market_snapshot": "2026-11-06 收盤/最新 NT$1,055.00，日變動 +0.00%；行情時間 2026-11-06T22:28:48+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：AI 資料中心擴建、電力轉換效率、液冷與電網投資。反向：雲端業者資本支出週期、材料/匯率、海外擴張成本、電動車需求與高估值對利率敏感。",
       "risk_factors": [
@@ -1420,17 +1418,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-2026 张",
-        "trust_net": "+22 张",
-        "dealer_net": "+388 张",
-        "total_net": "-1614 张",
-        "date": "2026-11-05",
-        "summary": "[2026-11-05 官方结算] 投信内资买超 (+22 张) 逢低承接，外资高档调节 (-2,026 张)。"
+        "foreign_net": "-3652 张",
+        "trust_net": "+59 张",
+        "dealer_net": "+832 张",
+        "total_net": "-2760 张",
+        "date": "2026-11-06",
+        "summary": "[2026-11-06 官方结算] 投信内资买超 (+59 张) 逢低承接，外资高档调节 (-3,652 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 1,614 张 (占量 8.7%)",
+        "large_order_ratio": "法人净卖超 2,760 张 (占量 8.8%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-11-05 筹码] 主力机构呈净卖出 (-1,614 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-11-06 筹码] 主力机构呈净卖出 (-2,760 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月回落約 25.9%",
@@ -1442,14 +1440,26 @@
       "take_profit": "依獲利與趨勢再評估",
       "target_price": "不預設固定目標",
       "stop_loss": "跌破基本面假設即檢視",
-      "research_source_as_of": "行情 2026-11-05；月營收 2026-09；財報 2026Q3",
+      "research_source_as_of": "行情 2026-11-06；月營收 2026-09；財報 2026Q3",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-11-05 15:00 Asia/Taipei",
+      "research_next_review_at": "2026-11-06 15:00 Asia/Taipei",
       "company_news": [
         {
-          "title": "台股再遭血洗失守4萬2千點！終場慘跌1374點、台積電跌20元台達電挫逾7%、日月光重摔8.77% - Yahoo股市",
-          "url": "https://news.google.com/rss/articles/CBMi4gNBVV95cUxQSjhha2FOOXhmd19wRXYwNk5jN3VvN00tU3RCZUhqZDVDQmtNekN5TzgyS3o1V2NEWDZ2bDFuM2pNcDI0cklBc3MtOUNGbVdmQ0NWazdhY0IwbDhxcjVTQjEyUGdIcDRxU1kwX0ZKVmItaWw0NV9lYlB5NnBDbjFpS1cwbUFKTDJmTjlIUS1XQnhIb1NXWjMyMUhobE5rcnBwa19DVnoxeUtHc094UE1QUDY5UFF0Wlo0alpwczFHWlc4bzhQZU8yYVAxYU9mb3BKcktLWnJtX3lOUmVJcERBQ09HQkhmWGJTLXV3N1JFaW5tSGpORm92eVVrWnUwQzZOcGE1UWluWnFVT01hbl90SS1YNkgxMlFKbTMtZ1YtU1J3T1RfSTJLMkRaNjNKbHYya3FkUE5qdnVJcGRLa0piUGJoWHZ6eUdNcXhnaE9qQ202elVrNG5BUng3bHQwNzJSVk83SVEyOERqbE93bWNsWi01ZEJYbVRKa0JzLWhiODNVZE9HRkh0Ukw3dVZ3MGY2NlFrTDkyVmV0dklyemdTWlFCYkZ6U2NYQ1VLM3ZsMWNHRTlqSkdVTkJXNjdOdXp4b0FxZlliby1ZdG14MVhpck9vSm40bERIZ3FGTHlPNmJWQQ?oc=5",
-          "published_at": "2026-11-05T14:06+08:00",
+          "title": "台達電賠3成他問「該停損」？ 意外釣出苦主：想抄底反被抄家 - Yahoo股市",
+          "url": "https://news.google.com/rss/articles/CBMi9AJBVV95cUxNMjFUcy12RUVBYVllZGlvQnpFUUpkNjd3MDE1Tlduc3RqZG1ST1RfUzlmVUdzeGIyTTZqbDBDc0pVVzExcERtMVVGOVJheWZ3VlNicDZQLUZfMVlHaXFLZHlJZ0xIRm4tNFB4d2F3SDRMVG85V2gxUi1rcmUtUHN2Zk5uLTM2ZjEtYnBHdTZzTXZJVUlGMlBDV1hfbTA3elVvUjNLMkZiTUZud2dFRFZvM1BvdTZTcTk1M0l5X1ZnckxSdE9yNUFDZ2lJZm5nUWRBbU1JaEp0czN0TmxWdV9iamNDY0EwVTU3T09LQWtDUXhzMGpJandzaGRaTkMzeG5ZNEFzSzhORy1Qd2pZM1JVTXduZ21KZE90UnVwSzZHZnBVYm1DWkFwaHZlbnZ4SFRmelNrQXc1X0daS2YwOThwTWs3X2dnbUkyd3BpdlJ5MllQVUxDZ0FCa3pZclZLMGJsQWtBSTFydlY5UHBMWGRGRXg0Vjc?oc=5",
+          "published_at": "2026-11-06T18:49+08:00",
+          "source": "Google 新聞 / Yahoo股市"
+        },
+        {
+          "title": "慘！台股一個月暴跌逾1.2萬點 台積聯發科台達電超過千家上市櫃跌停 - Yahoo新聞",
+          "url": "https://news.google.com/rss/articles/CBMinwNBVV95cUxPREF0U1NybkZCY1lhSnY0MWM5WnN3SlpqN0JpbkNkeU9tS21ETzZWZVpRdVVRQThpd0h2anVSN05FckIwQVRGLUs0dV94QjN4WDhBbEg4YnhxS1BNQXVhM3BNYWp3V0wwaU45UlpzYjhMX3hTOTM3YnBncGdNTEdDQ19OeW1YQWR3Z1Brd214NmhFYWtCX0owVlBSa3J5a083LUdNTXA2VXNvd2J3Y3I2b3YwdkVIODF4d3hrbExoNlFtUE5IVjJmaU53dnVUNGFMdkxJNHNxYzVZeFR4TVBKSnZnUG5jVmVqa3I5N0szQV9DUlpCdFpOaE9KYzdTRFptZENPR1A5UWNrOFZlRktxMm5KVEtJdkl5cWZ5b3hDT1U3MXRuQXBZNzh1cTlzTDAwTmZkbHpPWkFhMHJUTzBiakRYQjlEOFhUQVpUTVR4cE9veWZxRDFPWURGY0xiZFk2S20xZmpBMVVvN28zcVZGRXo2ME1FUjZsZjlBdkppOHJqWmJlQTFEYVFsYmhCYWtkbU5IWTdJQkdLeE8xTnVF?oc=5",
+          "published_at": "2026-11-06T10:10+08:00",
+          "source": "Google 新聞 / Yahoo新聞"
+        },
+        {
+          "title": "台達電開盤鎖綠燈...「最大苦主」鄭崇華家族父子3人身家一秒蒸發206億元 - Yahoo股市",
+          "url": "https://news.google.com/rss/articles/CBMiyANBVV95cUxOdlZxd2dZcVhjbmIwWklNQndxRFJnME9FMnB3aEZpQjVpdmZNa3FQNUtXODlNZmJXMDVITXk2SG5oNXVySEU5VGxwVkRxMXpqdEpNOU5nMXhJT2hjMm9XZWpCcmZUU0xBQ19UMWlUaGVYMTM4dThTeDVxREo4YjRNUE5tQkhObjBGRWFhTThMYTZOTGt6cG9zc2RZdVdnaTZNSkVFM18yZ1otbkVzb3dUSEx2ODZtT1Bka1R1bHR3TEZaVGg3OUwyYW9LbUE0VTNCOFBFbVcwNlpiYm9Ia1pQOElCNnpITVlRYU5aTEdEaVBmSjlPeFRJVHlSb1FIM3JLSlZMa0tVbHUycUk4R3duaWZha0NOMFRSQ3NJVU9USDhBOGc4dW9GQVhXMk9aaTQ1aFRDRjJjUjJnWmNjTVV0bVA3ODdqdHZ4S3FQV2k1Mkxyb3dXbEhnWG1ZdHRtdVgtTmx2em54ZkNFLUJuYjh3LS04c29qbjE5dUhQTEFuQW9ULXloU2JhM1N1TWlMOXBWWW5CczNLd2oxdWl6V25NdHZxa1JiNmdzWHpCaW9CV0hkWGV1b1RUMkFOaElZN2F2M0c4NmV0T08?oc=5",
+          "published_at": "2026-11-06T10:03+08:00",
           "source": "Google 新聞 / Yahoo股市"
         },
         {
@@ -1459,25 +1469,20 @@
           "source": "Google 新聞 / 旺得富理財網"
         },
         {
-          "title": "AI緩建風暴襲台 台達電又破底健策跌停 老AI股僅廣達獨活 - Yahoo新聞",
-          "url": "https://news.google.com/rss/articles/CBMi7wJBVV95cUxNckRZd1g3QlYxV2NyZ2hpQmQyY3Q4QUxudlJKaURJdWRuV2p3Sng5eENERUlOQWExYmVmSllfQWhsOVBEYS1FTDA3VklTMEs0YlJ0eC11SFVfWXBqUnZoUW1US2xpcDlWb1hjb1gxNElKNkRGMEVFWWc1NTJleU0yalpoMkEzamZDSTV3cU04X3gyN3VXT0wxU1lNUmI4ZG5JeFdFdnlwR0h1Z0RmNlpPeE01OU9KaEtfVlpHb2hOdnJ0aEVnMEF4VHhCN0lRbGpEU04wZW5BVjd4R1duVDNqT0hvTmFFdVpUeGVnYmQ5ZTVyenFidUg2S2Z4WVFnU3VZSEd1WnJ0dEdZd01kdVV0aUxOYWpIY2RDeW9DQk9CZy1EU1NFQmtORWFqcnVZbjRnNXF0UXdqS2h1U1ljeFlObVh2bTNUcXFQY185S3BNZUVJWGdnQkZVZGN1U3NOSThfa09NUEtOS3FWc3NKdWpj?oc=5",
-          "published_at": "2026-11-05T12:06+08:00",
-          "source": "Google 新聞 / Yahoo新聞"
-        },
-        {
-          "title": "台股盤中重挫逾千點！最低下探41866點 台達電、國巨遭血洗 - Yahoo新聞",
-          "url": "https://news.google.com/rss/articles/CBMi5gJBVV95cUxOVUZsUmlZcm54ajVSaXJteXFmWG5aUFlsQmlDRmM4NlhDZzdPUk1pNHdoN2F5LXZGaVJiSHJUS0cxbXVBOEs0N3hHWXBwbmx3SGd3REY1Sjh1YlRwTkxqWDBuWldDeE5GVzZiRjNubUlzRGI5NENPNWZHb09GTzlOVzFnYzctUnpxRHd6UE81el9OQnF4RXVJcmhvQ0hOZFh1TGdiYUdDQ1IwTFZlWGQweXNJTUxoOW5MVjJhdklXbHp0SUE5eGdsb0xXb2NjS0dIZkVhRnVIUVdmZ0R3amFyQjFsUV9LZWdtZzRPempHRnY1ZVl3OVczbm5oM0pIQkxZdGtRa2xwOHVUMGo5aHZySDFKS0daalhyUExKMmtPTm5fMklPS1VLaDVmZHVBbXlEWGpZS2llbnlyZWhEWHVRc25sOUtuOFRMQUd3T1BWR0VVaW51VHA0V0d5eGp2TkFacUVOUXF3?oc=5",
-          "published_at": "2026-11-05T10:00+08:00",
-          "source": "Google 新聞 / Yahoo新聞"
-        },
-        {
-          "title": "日月光崩5%、台達電挫4%！台積電強漲25元獨撐盤 台股開低跌730點跌破42400點大關 - Yahoo股市",
-          "url": "https://news.google.com/rss/articles/CBMivwNBVV95cUxQUU5ESzlUZVROUkgtTURNcGpfNFFnUUtDLXRlM1FqNE4xZG5RVE5XQXA0dW1URlF3RTZVMDdGUk9aSkRvV21rbE16SmRxWGF3XzMtQnd0WEVuc0RXS3pzcVJaU290b2VjNDhfOTRiQUpFZ3FrOVVtbnBnWGJJeHlFdkxjMUNkYVM3RTgxRTZfSXVBdHJtRVpFT282T3g5X2I0ZldnMzVYT0xjMHY5bVNYTXJkY0dNY3VqTFlBX1BPeXNIZUh2V3MzMEVOZURIbkw3RGhXLUtuMzhDRUM0OEs4ZzFLeWp4cmlWMmVyTG1ZYzdmQWJtSjVRdFRNSzIweFpueThFU1IwYWRZT0F6VXBuS1pZV3ZBN2g0bmNHRDNaSWpTTUc4Q2FLcXhvN1YySXg0YjczRXFTckE0cHBDLXJabHN0MzNFcTlqblhSNW85QUpuenl4TUxMY01NTUNCRnh0bEFaNi1PU3JfRG1GcExVdE4zUERmdXphTkNacXY2QkdRWGtxT2tzQjRKb2FwUEZGai1YUnhBcUF2aHBsNUplNEtBclBHN3FOSjM3T3QzVkVTTVhIdkV3cTNOcEhEWW8?oc=5",
-          "published_at": "2026-11-05T09:23+08:00",
-          "source": "Google 新聞 / Yahoo股市"
+          "title": "《台北股市》注意股：5日48檔信驊.台達電.川湖.智邦.漢測等- 上市櫃 - 旺得富理財網",
+          "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFA1WXdUbTYxQlN0bzdkSUVIbTdUT0paOERtOGljbUlyM2xQMjRLSEhTR0FmRGdfYUVXU0FvcnFURllNRHVXczR3SkZhYUN6bG9VWF96UXI0MWdKd2x5RXhZM2JTS0NXQVhjWnc?oc=5",
+          "published_at": "2026-11-05T07:56+08:00",
+          "source": "Google 新聞 / 旺得富理財網"
         }
       ],
       "official_announcements": [
+        {
+          "title": "本公司代子公司Delta Electronics (Thailand) Public Company Limited公告向非關係 人取得供營業使用之設備",
+          "published_at": "2026-11-05",
+          "source": "TWSE 上市公司每日重大訊息",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap04_L",
+          "category": "company_disclosure"
+        },
         {
           "title": "本公司代子公司DIH及TB&C GmbH公告取得及處分TB&C Outsert International B.V. 股權案",
           "published_at": "2026-11-03",
@@ -1501,13 +1506,6 @@
         },
         {
           "title": "本公司代子公司Delta Electronics (Netherlands) B.V.公告董事會決議擬增資DHK",
-          "published_at": "2026-10-28",
-          "source": "TWSE 上市公司每日重大訊息",
-          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap04_L",
-          "category": "company_disclosure"
-        },
-        {
-          "title": "本公司及子公司晶睿公告擬取得及處分不動產",
           "published_at": "2026-10-28",
           "source": "TWSE 上市公司每日重大訊息",
           "url": "https://openapi.twse.com.tw/v1/opendata/t187ap04_L",
@@ -1542,23 +1540,23 @@
         "reason": "Q2 EPS 與營益率改善、800G／1.6T 卡位明確，基本面維持首選；但股價仍低於 20／60 日均線，且本週三大法人同步賣超，暫不把核心追蹤等同於立即買進。",
         "next_week_watch": "7 月營收、800G／1.6T 訂單能見度、法人賣超是否停止，以及股價能否站回 20 日線。"
       },
-      "open_price": 1455.0,
-      "high_price": 1470.0,
-      "low_price": 1370.0,
-      "last_price": 1380.0,
-      "prev_close": 1480.0,
-      "change": -100.0,
-      "change_pct": -6.76,
-      "volume": 3986,
+      "open_price": 1245.0,
+      "high_price": 1300.0,
+      "low_price": 1245.0,
+      "last_price": 1280.0,
+      "prev_close": 1280.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 5706,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-11-05T22:51:20+08:00",
+      "quote_time": "2026-11-06T22:28:48+08:00",
       "gross_margin": "19.63% (2026Q2)",
       "net_margin": "11.70% (2026Q2)",
       "roe": "56.2% (年初累計年化, 2026Q2)",
       "eps_single": "19.78 元 (26Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
       "event_status": "unknown",
-      "event_checked_at": "2026-11-05T14:51:24",
+      "event_checked_at": "2026-11-06T14:28:59",
       "fundamental_as_of": "2026-10-17",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-09 營收 40,399 百萬元；月增 -1.16%；年增 +66.13%",
@@ -1596,7 +1594,7 @@
           "eps": "34.70 元"
         }
       ],
-      "market_snapshot": "2026-11-05 收盤/最新 NT$1,380.00，日變動 -6.76%；行情時間 2026-11-05T22:51:20+08:00。",
+      "market_snapshot": "2026-11-06 收盤/最新 NT$1,280.00，日變動 +0.00%；行情時間 2026-11-06T22:28:48+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：超大規模雲端業者 AI 投資、800G/更高速交換器迭代、開放網路。反向：大客戶集中、交換器世代轉換、供應鏈瓶頸、競爭與資本支出週期。",
       "risk_factors": [
@@ -1633,17 +1631,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-74 张",
-        "trust_net": "-31 张",
-        "dealer_net": "+82 张",
-        "total_net": "-21 张",
-        "date": "2026-11-05",
-        "summary": "[2026-11-05 官方结算] 外资与投信偏空调节 (-21 张)，机构筹码阶段获利了结。"
+        "foreign_net": "-508 张",
+        "trust_net": "+391 张",
+        "dealer_net": "+182 张",
+        "total_net": "+66 张",
+        "date": "2026-11-06",
+        "summary": "[2026-11-06 官方结算] 投信内资买超 (+391 张) 逢低承接，外资高档调节 (-508 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 21 张 (占量 0.5%)",
+        "large_order_ratio": "法人净买超 66 张 (占量 1.2%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-11-05 筹码] 主力机构呈净卖出 (-21 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-11-06 筹码] 主力机构呈净买入 (+66 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月約 -7.2%，相對大幅上漲後整理",
@@ -1655,14 +1653,20 @@
       "take_profit": "依訂單與 EPS 趨勢再評估",
       "target_price": "不預設固定目標",
       "stop_loss": "營益率與訂單能見度轉弱即檢視",
-      "research_source_as_of": "行情 2026-11-05；月營收 2026-09；財報 2026Q2",
+      "research_source_as_of": "行情 2026-11-06；月營收 2026-09；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-11-05 15:00 Asia/Taipei",
+      "research_next_review_at": "2026-11-06 15:00 Asia/Taipei",
       "company_news": [
         {
-          "title": "台達電、智邦都被盯上！「這檔千金股」6天價差1550元、鴻勁1200元 27檔注意股一次看 - Yahoo股市",
-          "url": "https://news.google.com/rss/articles/CBMi6AJBVV95cUxNN0hjOTNjeVFhdjFWRnlmcG9TOC14dmc5clBvaW5VRHVOVmc4TThMTDlCQVRKN3RwbUZDX1dIRWQ4eTVDTE80ZkNkazRvYTFnYXBHTmFCbmxTWmhnRVk2NURUR0llOUtKRGwwYzVLZUFMZm9ydlB3VXl4YzZOU1dRWTYzcE02MFo5RWdEd29rTF9jbXhVdzZ6aGkwdXZXVk1CZ2F3ZjUxVjRZaXJtNEF4YWE1Y3ZWbEQxQklvNEw1amd0RkZNQ3dPQmduRjN5QkNEa01pb3djYnBRSURmZGRtSWFjQ3hCZE84d1JxRG5oa0xoMGdzU2tLeUU2NFlKTTk2ZGJZMWRoaVFqWlhWSGhUMzJrM2tqSzBpTEd5WWwzcFh4dS03VWVNR1ZFNkVEckkxbHcyYjg2M0VULUVNekpfMF9WR3pfWGNfMVBzRXE3dTJfWVBrQVVDbnJma0pPYlVDZlFBd0h2X0c?oc=5",
-          "published_at": "2026-11-05T08:50+08:00",
+          "title": "智邦(2345) 個股概覽 | 個股 - 股市 - CMoney",
+          "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1WR0tpaHR2SktERndtbld5dGYtei1mRDEwMFk3UFRfTG1DZERZMG5ScEdMblFGQWV4UXBRUjVtNjRhS3Z2Y3FLT21yWGhrT1dmbk9V?oc=5",
+          "published_at": "2026-11-06T17:35+08:00",
+          "source": "Google 新聞 / CMoney"
+        },
+        {
+          "title": "智邦10月營收446.6億元月年雙增 再創歷史新高 - Yahoo股市",
+          "url": "https://news.google.com/rss/articles/CBMisgJBVV95cUxPa0lCTVhnQkNKU05PZ0xHZHlDUmI5QzB4Wno5eDVuVlNIVXFDaGpOZkRUU0gtNXZGMzFlUEZ2bktraTUyNm1HQW9qcG1EOEhxSjU3d01hVWM2V2R0TnJoRXM4ZkM2Vllsa3I3OVZCOGdiUllCWUJZaUJJQUhpai1aT1VDbnpfYXFianlkWmEzaHF6Vy1ST2R4ZFJKVGdGaTVaeEpqbHpZV25tVUJvUk0zUk40c0J5S2xQaFVVTklrLWdUM3l5NXptalYwNElyVThzY3FlTHlmZ2pMaXVjcGI2a1ZaNEFWcVQ4dkNWNlZ5VlFqdms1bVdDOVVSaHZKNDFYc0xwOUE5WnZWYWhpY0xLcTgwa3QtdWNUWWJUQ210bzhXOHZlMUM5LUJyY0szbWZkd0E?oc=5",
+          "published_at": "2026-11-06T16:10+08:00",
           "source": "Google 新聞 / Yahoo股市"
         },
         {
@@ -1682,12 +1686,6 @@
           "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5kZWlwZWpPVEk0MTRjc3U1OXJRMFV0bUZHNnR0MzIxcXVLSWwxTi1qVDZwUWZzZkRCb3lYcm13djFoMFBnVXNtUzhlaU1vLVJrNjVxZjRDakpDbGtaaDdn0gFkQVVfeXFMT3VOVzBWOVdaZlcwcXFDdEZRclBwQlRjMGhjdVpJMTFtQVljNllXTTJSbnJWRlFJZmZFVE05djhXTXc5TEFSNmJhSVFOQkg0VXdKelJSX0ZVc1VFMmp2cXVsQjBpVw?oc=5",
           "published_at": "2026-09-30T15:00+08:00",
           "source": "Google 新聞 / 自由財經"
-        },
-        {
-          "title": "股價還噴一倍？智邦高點拉回，800G交換器、Trainium 3雙引擎點火：最新目標價曝光| 下班經濟學| 財經 - 風傳媒",
-          "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE0tS1h2OFBtdGo0ekpKN3N1M2dvVjZpcGMyeEppbG04QW02MEVmcWsydHlhWDJTd1JHenJZN2tyNlBIbmZtYTI2WlowMG9zZw?oc=5",
-          "published_at": "2026-09-23T15:00+08:00",
-          "source": "Google 新聞 / 風傳媒"
         }
       ],
       "official_announcements": [
@@ -1748,23 +1746,23 @@
         "reason": "連續三季 EPS 創高且測試設備技術門檻高，獲利分數最高；但近期價格走弱、PER 與一年漲幅偏高，採回檔觀察而非追價。",
         "next_week_watch": "先進封裝／光通訊測試訂單、毛利率與自由現金流，並觀察跌勢是否止穩。"
       },
-      "open_price": 1455.0,
-      "high_price": 1465.0,
-      "low_price": 1325.0,
-      "last_price": 1335.0,
-      "prev_close": 1470.0,
-      "change": -135.0,
-      "change_pct": -9.18,
-      "volume": 5382,
+      "open_price": 1205.0,
+      "high_price": 1205.0,
+      "low_price": 1205.0,
+      "last_price": 1205.0,
+      "prev_close": 1205.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 1555,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-11-05T22:51:20+08:00",
+      "quote_time": "2026-11-06T22:28:48+08:00",
       "gross_margin": "61.48% (2026Q2)",
       "net_margin": "36.15% (2026Q2)",
       "roe": "54.5% (年初累計年化, 2026Q2)",
       "eps_single": "約 12.15 元 (26Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
       "event_status": "unknown",
-      "event_checked_at": "2026-11-05T14:51:24",
+      "event_checked_at": "2026-11-06T14:28:59",
       "fundamental_as_of": "2026-10-17",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-09 營收 6,860 百萬元；月增 +21.79%；年增 +206.47%",
@@ -1802,7 +1800,7 @@
           "eps": "21.27 元"
         }
       ],
-      "market_snapshot": "2026-11-05 收盤/最新 NT$1,335.00，日變動 -9.18%；行情時間 2026-11-05T22:51:20+08:00。",
+      "market_snapshot": "2026-11-06 收盤/最新 NT$1,205.00，日變動 +0.00%；行情時間 2026-11-06T22:28:48+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：AI/HPC、先進封裝、光通訊及高功率電源測試。反向：半導體設備景氣循環、客戶驗證遞延、接單認列時點、研發投入及高估值波動。",
       "risk_factors": [
@@ -1839,17 +1837,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "+732 张",
-        "trust_net": "-83 张",
-        "dealer_net": "+167 张",
-        "total_net": "+817 张",
-        "date": "2026-11-05",
-        "summary": "[2026-11-05 官方结算] 外资主力大幅回流 (+732 张)，投信阶段获利减仓 (-83 张)。"
+        "foreign_net": "+38 张",
+        "trust_net": "+15 张",
+        "dealer_net": "+120 张",
+        "total_net": "+174 张",
+        "date": "2026-11-06",
+        "summary": "[2026-11-06 官方结算] 三大法人全线买超 (+174 张)，外资与投信合力加仓。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净买超 817 张 (占量 15.2%)",
+        "large_order_ratio": "法人净买超 174 张 (占量 11.2%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-11-05 筹码] 主力机构呈净买入 (+817 张)，筹码向法人端汇聚沉淀。"
+        "capital_status": "[2026-11-06 筹码] 主力机构呈净买入 (+174 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月約 -22.6%，高檔修正",
@@ -1861,9 +1859,9 @@
       "take_profit": "依 EPS 與毛利率再評估",
       "target_price": "不預設固定目標",
       "stop_loss": "獲利趨勢反轉即檢視",
-      "research_source_as_of": "行情 2026-11-05；月營收 2026-09；財報 2026Q2",
+      "research_source_as_of": "行情 2026-11-06；月營收 2026-09；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-11-05 15:00 Asia/Taipei",
+      "research_next_review_at": "2026-11-06 15:00 Asia/Taipei",
       "company_news": [
         {
           "title": "股價衝2560元卻出事！致茂爆5859萬違約交割 當沖占比逾4成惹禍？ - Yahoo股市",
@@ -1884,10 +1882,10 @@
           "source": "Google 新聞 / CMoney投資網誌"
         },
         {
-          "title": "致茂股東會擬討論現增 GDR 法人估籌資上看267億元 - 經濟日報",
-          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1LdEdialR6UURFaHRwMkNxSk9UejZPZU9MWFJEX0gwRUdiakR0SURVMFBNZ3hycmNiSjJfek9LRmVydGM2WTVaLU4waXR5ME54MmUwM3c2WlNuUdIBX0FVX3lxTE5yTks5M21laGZWd1J5RFR3X1JLUVBYa0dtNWFfT2tEcjBYbTZrTUlBSUJhbDBQOThHXzZUeUNUWEFlUWUtRnhMN29UWC1FYXJNaHJTMTBubndBX3JIZHJn?oc=5",
-          "published_at": "2026-08-26T15:00+08:00",
-          "source": "Google 新聞 / 經濟日報"
+          "title": "信驊、鴻勁、致茂…高價股爆發領台股衝破47000！大立光為何跌停？台達電也傳雜音，現在能買嗎？ - 今周刊",
+          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOMmhiTFJyM1NtR3VSbjdRSk04QXNzQkV1NTR2UFlSTEd6ZktrQWY2UndEb1cwMkRFZmhsazVuaFRsQmZMNmlGWGlXRGNuVXhMMGxka0FhT05QMGpxSDBNUlA1Q3k1RF9XaFN6YmFzMU9PbThFY0xXakdoajdjbzZhaA?oc=5",
+          "published_at": "2026-09-07T15:00+08:00",
+          "source": "Google 新聞 / 今周刊"
         },
         {
           "title": "妖股又來了！「這檔」6天狂飆42%遭盯上 致茂、高力也入列12檔注意股 - Yahoo股市",
@@ -1897,6 +1895,13 @@
         }
       ],
       "official_announcements": [
+        {
+          "title": "係因本公司有價證券於集中交易市場達公布注意交易資訊 標準，故公布相關財務業務等重大訊息，以利投資人區別瞭解。",
+          "published_at": "2026-11-05",
+          "source": "TWSE 上市公司每日重大訊息",
+          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap04_L",
+          "category": "company_disclosure"
+        },
         {
           "title": "公告本公司董事會通過115年第三季合併財務報告",
           "published_at": "2026-10-29",
@@ -1924,13 +1929,6 @@
           "source": "TWSE 上市公司每日重大訊息",
           "url": "https://openapi.twse.com.tw/v1/opendata/t187ap04_L",
           "category": "investor_conference"
-        },
-        {
-          "title": "公告本公司115年第一次股東臨時會重要決議事項",
-          "published_at": "2026-10-20",
-          "source": "TWSE 上市公司每日重大訊息",
-          "url": "https://openapi.twse.com.tw/v1/opendata/t187ap04_L",
-          "category": "company_disclosure"
         }
       ]
     },
@@ -1961,23 +1959,23 @@
         "reason": "Q2 EPS 反彈、先進封裝技術與產能具卡位價值，行情也轉強；但營益率改善尚需連續驗證，且擴產折舊會壓縮彈性。",
         "next_week_watch": "先進封裝稼動率、營益率連續性、資本支出與折舊負擔。"
       },
-      "open_price": 600.0,
-      "high_price": 606.0,
-      "low_price": 568.0,
-      "last_price": 572.0,
-      "prev_close": 627.0,
-      "change": -55.0,
-      "change_pct": -8.77,
-      "volume": 29257,
+      "open_price": 515.0,
+      "high_price": 551.0,
+      "low_price": 515.0,
+      "last_price": 527.0,
+      "prev_close": 527.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 41270,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-11-05T22:51:20+08:00",
+      "quote_time": "2026-11-06T22:28:48+08:00",
       "gross_margin": "20.55% (2026Q2)",
       "net_margin": "9.89% (2026Q2)",
       "roe": "18.1% (年初累計年化, 2026Q2)",
       "eps_single": "4.80 元 (26Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
       "event_status": "unknown",
-      "event_checked_at": "2026-11-05T14:51:24",
+      "event_checked_at": "2026-11-06T14:28:59",
       "fundamental_as_of": "2026-10-17",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-09 營收 88,130 百萬元；月增 +7.15%；年增 +45.52%",
@@ -2015,7 +2013,7 @@
           "eps": "8.04 元"
         }
       ],
-      "market_snapshot": "2026-11-05 收盤/最新 NT$572.00，日變動 -8.77%；行情時間 2026-11-05T22:51:20+08:00。",
+      "market_snapshot": "2026-11-06 收盤/最新 NT$527.00，日變動 +0.00%；行情時間 2026-11-06T22:28:48+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：AI 加速器、HBM/Chiplet 與先進封裝產能需求。反向：高資本支出與折舊、稼動率、客戶集中、封測景氣循環及不同業務的利潤率差異。",
       "risk_factors": [
@@ -2052,17 +2050,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-10593 张",
-        "trust_net": "+2222 张",
-        "dealer_net": "+597 张",
-        "total_net": "-7773 张",
-        "date": "2026-11-05",
-        "summary": "[2026-11-05 官方结算] 投信内资买超 (+2,222 张) 逢低承接，外资高档调节 (-10,593 张)。"
+        "foreign_net": "-11303 张",
+        "trust_net": "+1937 张",
+        "dealer_net": "+1653 张",
+        "total_net": "-7711 张",
+        "date": "2026-11-06",
+        "summary": "[2026-11-06 官方结算] 投信内资买超 (+1,937 张) 逢低承接，外资高档调节 (-11,303 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 7,773 张 (占量 26.6%)",
+        "large_order_ratio": "法人净卖超 7,711 张 (占量 18.7%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-11-05 筹码] 主力机构呈净卖出 (-7,773 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-11-06 筹码] 主力机构呈净卖出 (-7,711 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月約 -2.4%，相對穩定",
@@ -2074,14 +2072,14 @@
       "take_profit": "依封裝稼動率再評估",
       "target_price": "不預設固定目標",
       "stop_loss": "資本支出與折舊失控即檢視",
-      "research_source_as_of": "行情 2026-11-05；月營收 2026-09；財報 2026Q2",
+      "research_source_as_of": "行情 2026-11-06；月營收 2026-09；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-11-05 15:00 Asia/Taipei",
+      "research_next_review_at": "2026-11-06 15:00 Asia/Taipei",
       "company_news": [
         {
-          "title": "3711 日月光投控- 600破不了信我- 股市爆料同學會 - CMoney",
-          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5INk9xbEJmSU9HQVRKd0NmVmdKcDctWjZzRWRVcW9GLV9KSUxUd1J5cUpzY1k0WE5wTDZrbHBERVVWZmZ1c2c0c011TzkydW9TWERZcnpjRDY?oc=5",
-          "published_at": "2026-11-04T11:35+08:00",
+          "title": "日月光投控(3711) 個股概覽 | 個股 - 股市 - CMoney",
+          "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBSdEl5ZzRfRlFXd0w4Zks2MmRNX0U5bEVQWEZycWhVLUc4VWRGOU1mX196ODh1Xy1HN2w3aFFxRWR4RjNNa2V2dzJyLTRhRnVMOFZz?oc=5",
+          "published_at": "2026-11-06T08:30+08:00",
           "source": "Google 新聞 / CMoney"
         },
         {
@@ -2091,10 +2089,10 @@
           "source": "Google 新聞 / CMoney"
         },
         {
-          "title": "【00403A】11/02 操作日報｜經理人重手加碼日月光投控與金像電 - CMoney投資網誌",
-          "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9NYW4zbzQ5Znc0MXNvVmQ0bnNycGgwYWk2MHgyTng4eDYzSTNFWGJUTlh0TFlEekJSaDJ3NGpBc25SWG8wN24tRTJhVkExajVmUGpOVmFBUDhLZUV6RjRSX21IZkRqcm5jd3QtV01ZQm5SUkxZMVNXbzRnSmFQZw?oc=5",
-          "published_at": "2026-11-02T19:02+08:00",
-          "source": "Google 新聞 / CMoney投資網誌"
+          "title": "聯電、日月光投控、國巨都被賣了…00981A連砍30檔，重災區有誰？瑤池金母看空台股？他揭先觀察這件事 - 今周刊",
+          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOcVFVenI3dkRvbldpVTRwYVlwSlJaam9tZ2FpWGZQTXJ0MHA1WU5ESTFfLXAweHBXdHZIQUhIdTYtcVhxMzFrazBGV1FsTEpTTVpORmhHMnU3YjBaSWxOSUFETW1QaVhPcUVhOU1jV0dMbWtOUjVaZDE2MU81Zy14cQ?oc=5",
+          "published_at": "2026-09-27T15:00+08:00",
+          "source": "Google 新聞 / 今周刊"
         },
         {
           "title": "三大法人買賣超 – 外資買超(3711)日月光投控、(2382)廣達，投信買超(2360)致茂、(1815)富喬，法人合計買超220.81億元 - 永豐金證券",
@@ -2103,43 +2101,43 @@
           "source": "Google 新聞 / 永豐金證券"
         },
         {
-          "title": "AI先進封測需求旺！日月光投控砸105億美元擴產、2027新產能接棒 八大公股卻倒貨12億元 - Yahoo股市",
-          "url": "https://news.google.com/rss/articles/CBMi7gNBVV95cUxQeU9KRHB5a0tLY0RxNUVHc3ljOHZtMFRMcWttaHM3VlhQd2UwUHN1dGV3UlN6V2ttQjJzWEtTaGpBTDNpRUR0enc5VXBZS3ZMZnA3dmExVEk3UEJjeEdDYUZpSVotNG5xZTYySTBhSGRjdk1fMXgxQmRPeE0wT1NwdmF3Y1VYZWZRUFhkNGtpSWt3UzdHeXhKQmdRcm9BNHd2X2hTMmU0Z0NFRHNTeGNrQ09EZDlXSFBrV0RYb0JxMksyQS1aTkxJNFJSTDZUUkRQNHZQaVRGbFFjM3E3T2k1U0NOcXBLcVY3dmZXV2RSUlNlY1dOcEc3WEt0SWtoTFVPWG9HQ3IxZmEwNVJYTDNLbHJJdjZkd0xLZ0dRNVhwRmx2QlZFcTU4OHNwT0VtenV3ZTNzMG5SM0dnMVZtd2JpcFJuazlXOE5BYWdib2JZcTFiQlVDb3JQNjdiN2dkTnhOaHdoVW9Yd3VrbzBOVFJUblpaNUd1aDBSVmFmZGpxX2M1WmJtQl9RUWVKTTJCZWx5eDNWd3ZhSG1UUGdxRVB5eHNpb1hxSUZ0SDVmd2J0akF6ZEZiS05TaFBqWHlBRVVFY3BUdHZlbHpHVkdUdlJ5Tm1RRDBNWUxSRVIwUU5POU9Ranp0RXZSa0lXWHdMUQ?oc=5",
+          "title": "【09/07 申報轉讓】日月光投控(3711)法人董事代表人陳昌益於07日申報轉讓日月光投控股票600張-CMoney 小編 - CMoney投資網誌",
+          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOYjJyQUNYaWd2S0FlUmViMlNHRWIyeDRETU9PWHktWXJjbFg5NHhtV0hoRURGbTV3WjhNN0FQNHJKRVNJMlFxZml3R3FRY25TMll3SUprMlhGZW5qeW9PcVVJVDUwNnR5ZEtJcGhpbENLM0Jkd3BRYTZFV0VWZ19NYmZ4ZV9hNHdZLUE?oc=5",
           "published_at": "2026-09-07T15:00+08:00",
-          "source": "Google 新聞 / Yahoo股市"
+          "source": "Google 新聞 / CMoney投資網誌"
         }
       ],
       "official_announcements": [
         {
           "title": "代子公司矽品精密工業(股)公司公告取得廠務工程",
-          "published_at": "2026-11-04",
+          "published_at": "2026-11-05",
           "source": "TWSE 上市公司每日重大訊息",
           "url": "https://openapi.twse.com.tw/v1/opendata/t187ap04_L",
           "category": "company_disclosure"
         },
         {
-          "title": "代子公司日月光半導體製造(股)公司公告 向均華精密工業股份有限公司取得供營業用之機器設備",
-          "published_at": "2026-11-04",
+          "title": "代子公司矽品精密工業(股)公司公告取得營業用機器設備達十億元",
+          "published_at": "2026-11-05",
           "source": "TWSE 上市公司每日重大訊息",
           "url": "https://openapi.twse.com.tw/v1/opendata/t187ap04_L",
           "category": "company_disclosure"
         },
         {
-          "title": "代子公司台灣福雷電子(股)公司公告 向鴻勁精密股份有限公司取得供營業用之機器設備",
-          "published_at": "2026-11-04",
+          "title": "代子公司ASE Singapore Pte. Ltd.公告取得Advantest Taiwan Inc.供營業用之機器設備",
+          "published_at": "2026-11-05",
           "source": "TWSE 上市公司每日重大訊息",
           "url": "https://openapi.twse.com.tw/v1/opendata/t187ap04_L",
           "category": "company_disclosure"
         },
         {
-          "title": "代子公司台灣福雷電子(股)公司公告 向愛德萬測試股份有限公司取得供營業用之機器設備",
-          "published_at": "2026-11-04",
+          "title": "代子公司台灣福雷電子(股)公司公告 向Onto Innovation, Inc.取得供營業用之機器設備",
+          "published_at": "2026-11-05",
           "source": "TWSE 上市公司每日重大訊息",
           "url": "https://openapi.twse.com.tw/v1/opendata/t187ap04_L",
           "category": "company_disclosure"
         },
         {
-          "title": "代子公司台灣福雷電子(股)公司公告 向愛德萬測試股份有限公司取得供營業用之軟體資產",
+          "title": "代子公司矽品精密工業(股)公司公告取得廠務工程",
           "published_at": "2026-11-04",
           "source": "TWSE 上市公司每日重大訊息",
           "url": "https://openapi.twse.com.tw/v1/opendata/t187ap04_L",
@@ -2174,23 +2172,23 @@
         "reason": "高階 SoC 與 AI ASIC 設計能力維持技術門檻，短線行情轉強；但 PER 偏高、近 60 日仍弱，且 AI ASIC 尚未完成規模化獲利驗證。",
         "next_week_watch": "AI ASIC 實際營收／毛利貢獻、手機需求與客戶自研競爭。"
       },
-      "open_price": 3600.0,
-      "high_price": 3715.0,
-      "low_price": 3450.0,
-      "last_price": 3460.0,
-      "prev_close": 3715.0,
-      "change": -255.0,
-      "change_pct": -6.86,
-      "volume": 11856,
+      "open_price": 3115.0,
+      "high_price": 3480.0,
+      "low_price": 3115.0,
+      "last_price": 3390.0,
+      "prev_close": 3390.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 21301,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-11-05T22:51:20+08:00",
+      "quote_time": "2026-11-06T22:28:48+08:00",
       "gross_margin": "46.25% (2026Q2)",
       "net_margin": "16.25% (2026Q2)",
       "roe": "22.9% (年初累計年化, 2026Q2)",
       "eps_single": "15.28 元 (26Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
       "event_status": "unknown",
-      "event_checked_at": "2026-11-05T14:51:24",
+      "event_checked_at": "2026-11-06T14:28:59",
       "fundamental_as_of": "2026-10-17",
       "fundamental_updated_at": "2026-09-13 16:52:44",
       "latest_monthly_revenue": "2026-09 營收 55,399 百萬元；月增 -13.69%；年增 +1.97%",
@@ -2228,7 +2226,7 @@
           "eps": "30.44 元"
         }
       ],
-      "market_snapshot": "2026-11-05 收盤/最新 NT$3,460.00，日變動 -6.86%；行情時間 2026-11-05T22:51:20+08:00。",
+      "market_snapshot": "2026-11-06 收盤/最新 NT$3,390.00，日變動 +0.00%；行情時間 2026-11-06T22:28:48+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：手機平台升級、邊緣 AI、Wi-Fi/連網、車用及 ASIC 專案。反向：手機需求與季節性、客戶自研晶片、晶圓代工成本、產品組合及 ASIC 專案驗證時程。",
       "risk_factors": [
@@ -2265,17 +2263,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-2876 张",
-        "trust_net": "+916 张",
-        "dealer_net": "+138 张",
-        "total_net": "-1820 张",
-        "date": "2026-11-05",
-        "summary": "[2026-11-05 官方结算] 投信内资买超 (+916 张) 逢低承接，外资高档调节 (-2,876 张)。"
+        "foreign_net": "-4536 张",
+        "trust_net": "+556 张",
+        "dealer_net": "+798 张",
+        "total_net": "-3182 张",
+        "date": "2026-11-06",
+        "summary": "[2026-11-06 官方结算] 投信内资买超 (+556 张) 逢低承接，外资高档调节 (-4,536 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 1,820 张 (占量 15.4%)",
+        "large_order_ratio": "法人净卖超 3,182 张 (占量 14.9%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-11-05 筹码] 主力机构呈净卖出 (-1,820 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-11-06 筹码] 主力机构呈净卖出 (-3,182 张)，散户承接，筹码短期发散。"
       },
       "price_analytics": {
         "ma20_bias": "近 3 個月約 -15%，高檔整理",
@@ -2287,39 +2285,39 @@
       "take_profit": "依 ASIC 營收再評估",
       "target_price": "不預設固定目標",
       "stop_loss": "獲利與 ASIC 時程轉弱即檢視",
-      "research_source_as_of": "行情 2026-11-05；月營收 2026-09；財報 2026Q2",
+      "research_source_as_of": "行情 2026-11-06；月營收 2026-09；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-11-05 15:00 Asia/Taipei",
+      "research_next_review_at": "2026-11-06 15:00 Asia/Taipei",
       "company_news": [
         {
-          "title": "台股崩跌1374點失守4萬2！台積電跌20元 聯發科重挫近7% - Yahoo新聞",
-          "url": "https://news.google.com/rss/articles/CBMixgJBVV95cUxOWHN5d0VzYnN2QVVSbTREMUpJQUpwUzMzc3J3TUlXSVpzS1V5c1BWYXRacU5RcWcyNk5hdEQtQ0MwUmFzeDE4VFZPbU9lbnkzbE1MUDNyc0R0VGROR3dXcFZ3RUVZM21RdFF2anlDQ0ZzQlBvR2RDRHhyZFFJUVJQZzZ3cGk5ZFBQYU9qb2RydU5ZN25Id2dmZTRXQkVBclIzdmpIV1lEbUVidlNxZjlHckJQMEJEZkpfT2ViNmRsQi14UHBTbzRFNFBBeG5rUTBKRE9MYUtZQ3lDNE4zZUViYkpzWGlEd3ppd1BVbU5vRUh0N3RGbm9seGMwaWpCbmhyUTc2U09SWlU0aVZ5X05TamRyQ3BLb2g5TF93c2ttY0F0SVNiQUg5WEFfN0lXcm12cUhDTEN6SVViZDV0MGgzeVp4THJCQQ?oc=5",
-          "published_at": "2026-11-05T18:33+08:00",
-          "source": "Google 新聞 / Yahoo新聞"
+          "title": "台股暴跌史上第4大！6兆元市值秒蒸發 等於憑空消失1家聯發科 - Yahoo股市",
+          "url": "https://news.google.com/rss/articles/CBMimANBVV95cUxQb3dDaldhZXVqNXRiNzVoVGJVZGVrcExuSG9xUkNMN2hBdUZVM3EyZkVtSmVJOEEzeXlZSm5PT1hHRF90SnF4X3Q3TkoxLUlUUTJIVloyaXg4SVJwUkdwazVVMldKdHdkWjI3cUplYVYwNWtuRkZvUHJwekQ2U3daYmlDTUFjQ2pxWDE4Z2sxSmpVOVp2cDVRZ3JLeVBkUVVrc1hUN3h6WVhBM3B6U2NsbzZSSWFoNkZNLVNwWmswM1RnREVjUzBWeVdwMWotTTlXMUlzRXFLNTd3WmxFM1M3TmptVnlnMnR0UURjSHVOeVFmektTZDNFcTNQNVNKZ0tZbjQ2b0dzWmRfZ1N2VkNNSEp5MlFsc0M1U0Y5dXR3VmxrVHNvMWs1M2oxQXB1YkRMY0V1cURRMlhzTWxiTUltZ3B5RWlYUmtjNG1UN29ITnFhYUxWa3l1UjlyLWN3UzZwVjVlZVJZVWQ4bzIwSXZhemFWQ1k5VG1mc1VmTTFJNDJoa2Z2Q2VhOW52d1NKdWlLN2ZEY3JOUmw?oc=5",
+          "published_at": "2026-11-06T14:35+08:00",
+          "source": "Google 新聞 / Yahoo股市"
         },
         {
-          "title": "台股會跌破4萬點？台積電、聯發科...杜金龍持股拉到75％，逆勢加碼這3檔，進場價曝光：連太太都出手了 - 今周刊",
+          "title": "AI砸錢愈多，何時才能回本？聯發科蔡力行揭AI投資真相：客戶融資、ASIC獲利與供應鏈挑戰 - Yahoo股市",
+          "url": "https://news.google.com/rss/articles/CBMiogRBVV95cUxNSnE1ajdnZFJCUjZseXI5Vk8yVnJvYTRldzhoNjJyRDdBOHhmMnBwSUtxVDFINXd3a0hOZWl1M3pWOVEyMU8yQUpQMFNlMlV5ZlNELVJUQjNKQ0E4QTFIUU1KUVlwOVBZMFd2WGJJSDBCcXpmTC02Mkw0Q2U5OXNBRXgxMzZ4VVVqTXdoNHlNUm5sbnBLQktHTk55QTBkUnBTVVBYclZFa1VqTDBfejZjN3pKbFFqMUtTX2ZReFhxekxJQVExYUd1ektJV0VjbUM1ZTRXYU1sWVItLU11TjR4QkFjT05saFB4YkNNMm9rRnVjVUZ0NVJtZldweXpzdUtIZEs5TElrVmliTGZLZHF3SjlmcFJCRTAzSUZHMTFLZGlEZnctcFpoYl9GWFRrei1PZU1lLU9OSVhIVzVBTVF2c0VsNUNhbm1RZGh3enhkc1RYTFlkdEZLaWw2UHBWWHpIdld0RUJSMExmcENSVXVicTJKdWUwX3o2RlAzVDZPTDZVZzFkeGUtV004LUZoQ2hPeFRrenBJd3N5eElwNUl5LUVGSDZaV0VfbURUc1BlSUJrbVJsYzNReUg5Ri1oVmZnS0NtN09kMFcxZEFmZ2Qzb29tdkJBN1hMSkhNWWd6ajNvVVcxTThucjhya0ZCbm52dWZxNUw2QUhLMXRSUkNWRUl3VWd0MEhEY3RWUWJYcDREc25jTF9RZHhhT0lpMXp5TFE?oc=5",
+          "published_at": "2026-11-06T11:22+08:00",
+          "source": "Google 新聞 / Yahoo股市"
+        },
+        {
+          "title": "台股跌破年線怎麼辦？台積電、聯發科...杜金龍持股拉到75％，逆勢加碼這3檔，進場價曝光：連太太都出手了 - 今周刊",
           "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNWS1BUmlSMm9tX3NNdUpiTGlGMFVidGJ4SFR2cDBVblRZVmE0V0c5YUxFNVJmOTlIQUVmQUhiaG9zZVl5bWdMNm5XR19DSWpYV0FzTGoxT01YRGZfSHAtTVQ1cG5jNzgyTjhCa1FBOVdhRWZtWVRqTE5hWU9waHg3Mw?oc=5",
-          "published_at": "2026-11-05T18:14+08:00",
+          "published_at": "2026-11-06T10:27+08:00",
           "source": "Google 新聞 / 今周刊"
         },
         {
-          "title": "媽媽留下900萬聯發科，辦理繼承時市值蒸發120萬...當股票繼承遇到股價大跌，遺產稅有解嗎？｜投資診聊室 - Yahoo股市",
-          "url": "https://news.google.com/rss/articles/CBMi8wRBVV95cUxNM1VWdFZWbXNoNnJmNllNODNUZDd2b2ZJaG1JNExmN0lXOXV1NS1UMVRZd3JvbExEVXBVNnZHZmotN1ZGa1c4Rkc0Mjlral9qbmZzNFpOQ3hGa2VRSzU5dW1RVG5FZ1NQOXhWYnd1VE4tRU1IT2JCaE9pWkYyUTRRelpMUFhjNWotVHhxVHdNNGZ2RHJiMjRpdWtKRTJabWN0cU0wQkx2ZkpINlc1OFRybi1yQnpia2sxYUF0NW5WYl9IZHNZQ0dwY19TaENkQVAzeHBYc1FnazZvZC1NT3M2ekJtbGdYeGdVSG5mOHIybGZLUl9HRE1NaDZqSVZLLU1pYTlvNjR4aFUyTmFtbzZBbE82SWJESTJsOHVzMDZzWnN4X2VjUl9jZVVaQnkzQXhOMDhBMTZLQ0Nmc3gxUWdrLWpRbjdpQjlDU0RzZlNJT1NDd2ppaGNjdzdabTlseFhRN0JQX2g3b09hYm1zNmtwWVZRRFh0QmJZSkxVc2hGR3FobkxnT2t2LTNSa21MOUg2VEs1RlJNTVQ4bjlDcGdnelZ4UmRsZ2FwT3JzdjdSZV9qQXNtNkNiaUw1N2JJMVl6MTdiTUlMZ3c2SVVCV0t6T1RjemYtM1MwcUlCNVJfZUVYVTZHR0Y5Q2JJc21lZDc2NFdJOFR5RDZxaFNacnlLbjBtaUpLNldCN2RPSUxNdjJvYWpNSlJGZmt0Z0d2dmhHbXJhclZLQjFmdE9ZZ3lMeVlSeE5xRmppbzJpM0w3NU4yREs3LVYyWGxxVjdDRlZLck9PMUdUU1FteHBUVGx4TEZVdzBqLXM5eGtYTFJJaVVYMTg?oc=5",
-          "published_at": "2026-11-05T18:00+08:00",
-          "source": "Google 新聞 / Yahoo股市"
+          "title": "焦點股》聯發科：開盤跌停！ 連黃仁勳也嚴重套牢 - Yahoo新聞",
+          "url": "https://news.google.com/rss/articles/CBMiuwJBVV95cUxNb05lZE54bDNXaGxhOEdYVDVVZnhPc3BLSlJ5ZnNVbXFaWHhKNTVEUG9panNzM2hxZGNtWWw3dlM0SnVmUDJvdG1qMjlva3VENG9nUDRtNkhxR0lTNGVPOExJcENGR0NfdThZMmJzaVJPMWlsTHhseHdYclV4WVV2YVVMU05GUjZGX2diUGpFTU5Xc3V0RDk2RWN1d1hlQ01qX2xtSWY5cFZHV2VIX2pVazBZZHY0anZfaUZYYTU2eTlQekVtdHc5ZjFoMzI3WnRiMGxrLUhueG5FdkFfZWI5YXdvejEtUmRxbm1tMDhPNGR3OEs1U1NXTkRFWU5wQTFDWjhiYWtQY3QtZ0ZVS1pjNU5Cc3pPTDk5Sm44ZjZWZURfZTFQUi04ZFJmWTlNNkVGbUd1MW55MjdGSFk?oc=5",
+          "published_at": "2026-11-06T10:23+08:00",
+          "source": "Google 新聞 / Yahoo新聞"
         },
         {
-          "title": "擁聯發科、台光電、欣興！00400A年化配息率衝11%今最後買進日 單月狂增近萬人搶息 - Yahoo股市",
-          "url": "https://news.google.com/rss/articles/CBMi5wJBVV95cUxNdkhWemlnOFBlX0R1YmJ6ODR2bk15R1lZeHNHVjNvSmM2a2pjNVlDdWhPWUxueTBPZ3p3TllsbjFWZmIwRG1uT2IyQmNLMVJpMkc4RDIxM3FmNVZVdE9WTUdtRDZ5V29DZHl5eEJBRmxPR3lhRUZ2VXRHeUI1cFVXRVJPUGgyVk9CZVA0YjlxYXRvdUZ4QnQwSWozTGhZT1I0SXQtNkdFeExzcm5NN0JCQVNlY2hTRUVsUG9KQXNoR0llcEdILVZZdlNDSWo3SHFPYmo1OEZ5dzVIdnpwRHJOWlJDLU5PcG1ET1Z3MEJ1YWJncXFRSHpwREEzZnVtRlVnT2hRZXlCNUdfWHRkQnlUR0dER0I2NDNMTjlJdHcwMGROYk5EUms3QUJCdG5tNm9NeXV4S1JTcmJCOFYwSVpfOXZBWVB0OVpNUkM3RXRQRW5GN19SSm80T3VGQk8waDJka2syeFVxWQ?oc=5",
-          "published_at": "2026-11-05T08:38+08:00",
-          "source": "Google 新聞 / Yahoo股市"
-        },
-        {
-          "title": "蔡力行喊買聯發科股票 過去25年 股東總報酬153倍 - UDN",
-          "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5vMkJtZTBmbGh1N0ZrWHlMODQtcEFzTTZ3ZTkxLWtWXzhxOFk5SDVtaFphVGFBSTJJUkh3YW5NRlo0b09kaUYtcmVBcEFTU1Jf0gFWQVVfeXFMTlBOdThOWkFxYmZiREJhRzF5bFZOZ2l0U09qWkJzUlpMXzZJbldHRnFqQzI5RTE5VzlVUFdCWEVnOUkxVldlMHcyMklMUVFzOTRqbkh4R3c?oc=5",
-          "published_at": "2026-11-05T04:46+08:00",
-          "source": "Google 新聞 / UDN"
+          "title": "慘！台股一個月暴跌逾1.2萬點 台積聯發科台達電超過千家上市櫃跌停 - Yahoo新聞",
+          "url": "https://news.google.com/rss/articles/CBMinwNBVV95cUxPREF0U1NybkZCY1lhSnY0MWM5WnN3SlpqN0JpbkNkeU9tS21ETzZWZVpRdVVRQThpd0h2anVSN05FckIwQVRGLUs0dV94QjN4WDhBbEg4YnhxS1BNQXVhM3BNYWp3V0wwaU45UlpzYjhMX3hTOTM3YnBncGdNTEdDQ19OeW1YQWR3Z1Brd214NmhFYWtCX0owVlBSa3J5a083LUdNTXA2VXNvd2J3Y3I2b3YwdkVIODF4d3hrbExoNlFtUE5IVjJmaU53dnVUNGFMdkxJNHNxYzVZeFR4TVBKSnZnUG5jVmVqa3I5N0szQV9DUlpCdFpOaE9KYzdTRFptZENPR1A5UWNrOFZlRktxMm5KVEtJdkl5cWZ5b3hDT1U3MXRuQXBZNzh1cTlzTDAwTmZkbHpPWkFhMHJUTzBiakRYQjlEOFhUQVpUTVR4cE9veWZxRDFPWURGY0xiZFk2S20xZmpBMVVvN28zcVZGRXo2ME1FUjZsZjlBdkppOHJqWmJlQTFEYVFsYmhCYWtkbU5IWTdJQkdLeE8xTnVF?oc=5",
+          "published_at": "2026-11-06T10:10+08:00",
+          "source": "Google 新聞 / Yahoo新聞"
         }
       ],
       "official_announcements": [
@@ -2347,23 +2345,23 @@
         "reason": "本次新增研究名單；雖已有官方季度獲利與產品定位資料，估值、行情動能及風險分項尚未按週評方法完整核實，因此不填推測分數。",
         "next_week_watch": "核實前瞻估值、近 5／20／60 日動能、法人趨勢及液冷產品出貨。"
       },
-      "open_price": 6050.0,
-      "high_price": 6180.0,
-      "low_price": 5805.0,
-      "last_price": 5805.0,
-      "prev_close": 6450.0,
-      "change": -645.0,
-      "change_pct": -10.0,
-      "volume": 2374,
+      "open_price": 5225.0,
+      "high_price": 5400.0,
+      "low_price": 5225.0,
+      "last_price": 5225.0,
+      "prev_close": 5225.0,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 1564,
       "quote_source": "Shioaji Snapshot",
-      "quote_time": "2026-11-05T22:51:20+08:00",
+      "quote_time": "2026-11-06T22:28:48+08:00",
       "gross_margin": "46.81% (2026Q2)",
       "net_margin": "32.01% (2026Q2)",
       "roe": "63.1% (單季年化, 2026Q2)",
       "eps_single": "15.80 元 (2026Q2)",
       "earnings_date": "2026Q2 已公告；下一次財報/法說日待公司公告",
       "event_status": "unknown",
-      "event_checked_at": "2026-11-05T14:51:24",
+      "event_checked_at": "2026-11-06T14:28:59",
       "fundamental_as_of": "2026-10-17",
       "fundamental_updated_at": "2026-09-07 14:04:00",
       "latest_monthly_revenue": "2026-09 營收 3,054 百萬元；月增 -5.32%；年增 +79.97%",
@@ -2394,7 +2392,7 @@
           "eps": "15.80 元"
         }
       ],
-      "market_snapshot": "2026-11-05 收盤/最新 NT$5,805.00，日變動 -10.00%；行情時間 2026-11-05T22:51:20+08:00。",
+      "market_snapshot": "2026-11-06 收盤/最新 NT$5,225.00，日變動 +0.00%；行情時間 2026-11-06T22:28:48+08:00。",
       "valuation": "TTM 本益比暫不計算：目前資料未提供四季均可比、已核實的單季 EPS；不以單季或年初累計 EPS 年化/代替。待四季口徑補齊後自動重算。",
       "market_factors": "正向：AI/HPC 功耗密度、液冷滲透與高階封裝熱管理需求。反向：客戶/平台集中、驗證和量產時程、金屬原料價格、擴產折舊及短期成長率回落。",
       "risk_factors": [
@@ -2432,17 +2430,17 @@
         }
       ],
       "institutional_flow": {
-        "foreign_net": "-579 张",
-        "trust_net": "+153 张",
-        "dealer_net": "+48 张",
-        "total_net": "-378 张",
-        "date": "2026-11-05",
-        "summary": "[2026-11-05 官方结算] 投信内资买超 (+153 张) 逢低承接，外资高档调节 (-579 张)。"
+        "foreign_net": "-105 张",
+        "trust_net": "+224 张",
+        "dealer_net": "+58 张",
+        "total_net": "+178 张",
+        "date": "2026-11-06",
+        "summary": "[2026-11-06 官方结算] 投信内资买超 (+224 张) 逢低承接，外资高档调节 (-105 张)。"
       },
       "capital_inflow": {
-        "large_order_ratio": "法人净卖超 378 张 (占量 15.9%)",
+        "large_order_ratio": "法人净买超 178 张 (占量 11.4%)",
         "margin_balance": "融券低位、融资稳定 (交易所官方结算)",
-        "capital_status": "[2026-11-05 筹码] 主力机构呈净卖出 (-378 张)，散户承接，筹码短期发散。"
+        "capital_status": "[2026-11-06 筹码] 主力机构呈净买入 (+178 张)，筹码向法人端汇聚沉淀。"
       },
       "price_analytics": {
         "ma20_bias": "待計算；本次未完成歷史行情複核",
@@ -2454,9 +2452,9 @@
       "take_profit": "依獲利與估值重新評估",
       "target_price": "不預設固定目標",
       "stop_loss": "依獲利趨勢與個人風險承受度管理",
-      "research_source_as_of": "行情 2026-11-05；月營收 2026-09；財報 2026Q2",
+      "research_source_as_of": "行情 2026-11-06；月營收 2026-09；財報 2026Q2",
       "research_checked_at": "2026-09-23",
-      "research_next_review_at": "2026-11-05 15:00 Asia/Taipei",
+      "research_next_review_at": "2026-11-06 15:00 Asia/Taipei",
       "company_news": [
         {
           "title": "【12:54 即時新聞】健策(3653)股價走強，AI伺服器散熱題材續成盤中焦點 - CMoney投資網誌",
@@ -2465,28 +2463,28 @@
           "source": "Google 新聞 / CMoney投資網誌"
         },
         {
-          "title": "【11:39 即時新聞】健策(3653)盤中小漲，AI伺服器散熱題材續受關注 - CMoney投資網誌",
-          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPbXNoOGVmbi1HUHU3d1kyVHlrVTNBeDBUM3pKQjF6UU1odFFscTdaeWZ1TWVfdTZNOEpYRnhqSWdoR0t0aTlaRElURENoS0ZDSzZ0NlpYUXY0RHdKVzJCMkN5VEw0dGY0VzNYbzJrTkJKeVVjR0k3MGVNSDdubEhkeXJpbzZUd0lfcndRWExB?oc=5",
-          "published_at": "2026-10-30T11:39+08:00",
-          "source": "Google 新聞 / CMoney投資網誌"
-        },
-        {
           "title": "台股閃現「56千金」盛況！股后川湖8檔飆漲停 創意健策欣興8檔刷新天價 - Yahoo股市",
           "url": "https://news.google.com/rss/articles/CBMiygNBVV95cUxOQms1bEI4cVlKZm5VLWdvRG1PVkY2elQyWUdMbnZ0LVQ2Z2NNd3JfUkdTa2JuT3NRNWxRc0xqV1pIMUJSQTJsMWRHMXcxM3NZQUxQdmZBSHFrdTdZTk11aTgwZHJJLVBEQ0Z0RFVzcDZhS1V4MGJmdTk3WkZMd1hBSXR5QXNjWWV5dWp6Uk9lcWtVMFhIOEs1dlZLOWJYSEVBWVpFV0RlM016Z0dhRjZFNGlvVjBmRS1SNFAxUnJuVkhUTUp4aUtTaGdqbmVOZXhEUTB1M2pvY0VmUEwtMDIzdkRXcGNLWVA0OG1mOFU5eE1INGt6UmFieFpJX2ZadkRzeE9xbXMtNkprdWFTYjBfS0czWXMwcGtkOUt6UlFPa0ZNNk4yOFFIcU5jUkV4VU9FcjBFSVUwbFpaX3V6T0puM0RKakJSYncxajQ5UnFNSXZuLUplRGRfUzE5aENRb0UwNlJXVlQtMkRaM1NBeFdKWG5SalU5c0F4TVpJbkxNaGhCVmUtUE5iTG9SVnFaaHQ2bG1vQjRmMDA2Z2c4ZHFwNlRXVThvYWZac2VFNFlqcmVyenFmUF9sYzRtaGR5ckN2RDMzMzc2NlRVQQ?oc=5",
-          "published_at": "2026-10-05T15:00+08:00",
+          "published_at": "2026-10-04T15:00+08:00",
           "source": "Google 新聞 / Yahoo股市"
-        },
-        {
-          "title": "健策目標價 大和喊上萬元 - UDN",
-          "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5neUQzM0VQeld2MmR2SWJLZkM3bkRLQXJGY1hkTTA1aGd1d09IRTFTMmpsdnN5bFlYMDhPeW1KZ2R0UURPdnV3TjZLVm9hdy1L0gFWQVVfeXFMTXFybXE1c3pZS1gzcExTUFlBeDN4cS1mSXVoeG9VcUc0TGFDVTdOdzdVbE1IZTRqdVhiOVY2WGpLR0w0MTFkWGZYOWd3SlJISzBJcFdnUmc?oc=5",
-          "published_at": "2026-10-01T15:00+08:00",
-          "source": "Google 新聞 / UDN"
         },
         {
           "title": "飆太凶被注意！散熱廠健策遭強制自結8月獲利 每股賺7.35元年增近1倍 - Yahoo股市",
           "url": "https://news.google.com/rss/articles/CBMiswNBVV95cUxNR0YwT1dYQ0dETzFRdnlBRlJTTkNGd2RmbHBSXzN1MUVER1N6UUViX2FxZlpNeXpwSVkzMEdIOHh6WGZaSVk3TGZYU29la09YYktXdVhSXzlYbFpXRDRMOXpvMFZPVktQU19lWGQ5X2dQeGJETEM2NlVacUxnZlJZV2VUTmNidDgxNGE2Rzl6bTFBVy1NNlNfMnJ4QTMyN0h0WHFNbE5KTmRPUU1PZG90alhTZnA2WjUtWDhhbUpYNndyZDJobzZmNXJQYTdHRFZGLTl1Q05EWXZSWmhmRGpJSzNjcjZPNmVyMUREbGtJMGVpbzkxZW1fclRmN1ltWENMeks2TE9kR0ROQy1teDIxOW9ISW1RQjNDeHc4Z2RwVUZNOFpweUZ5NGRZb1JKdjJERUtudjNXeE5kWjZFVjRaX2ZQOU1WOTk0eUlnMTJzR1N1R2M2MldHWVNiNTFOek1oTUpKakw1TGhDYWMtc1JRNUhSVVhoazYwZWg3bUNmX3JnaEVCNlZ4MkE1NDB3SnY4OVFzSHNSQ1R5SVNLV2QzeFFhYjcxRWZXZEozT01CV2VMdVU?oc=5",
           "published_at": "2026-09-29T15:00+08:00",
           "source": "Google 新聞 / Yahoo股市"
+        },
+        {
+          "title": "散熱大單吃不完！健策營收連5月創高、7月暴增91％ 投信「連17買」狂卡位 - Yahoo股市",
+          "url": "https://news.google.com/rss/articles/CBMi8AJBVV95cUxPbERxN0NWQVNsUVN6X1ZmbFZjUDd5WUpseUxPUjFxR2ZBX00yVHE4OFgwRjJwS3Q0QTZLaFRtUTFkemgxSnpxdFpmbVhUODdFY2NZak9vZU9WM3pLZy1XNnpQTmhaV2dQbndXWnE4V21tZkVkYXBqc29HSnp4cGg1N1pvT1ZkeXF4SmtlaGV2VmNBMURodmYwalBWRWtrYnJTUExhQUZWa3VmNXY2TldVSFFEQ0gzeENGUlNRUnBSUFZBTEJKSlJHNmFXY3VVdlNWVjE3aURmeXlVLS01SWEwcmZJckg5c2t4WlZ0V3lEUi1NSXpSYl85ekhRTFNfOFY1bmVTZFhpQVRTZFhRODk0Y3lJemhyTnlLZU9YdEpvTm9SeVd0d1p1SzFIV0ZnVS1YamJfaHBxM1owMHB1Sms0aHpkTmw0bVZncFBQb2RTb281MHNjdnJoVmR4dlN6bHVBZEdjWDVjWTVqY25pYm9SUQ?oc=5",
+          "published_at": "2026-08-08T15:00+08:00",
+          "source": "Google 新聞 / Yahoo股市"
+        },
+        {
+          "title": "【11:38 即時新聞】健策(3653)股價走強漲5.88%，AI伺服器散熱需求延續＋短中期技術結構偏多、主力與投信買盤支撐 - CMoney投資網誌",
+          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOWVhkeTJLRXFzd2pMVnJHbGJkVG9XUTd0NVJLUG5TVUY4YTZfZFRJZk85YVBLbzVpeWlWbzgyZnVGaUxCMkl0TVhiLUQ2eWVfN3JtQVBJNDVkTk5XT0tXck5veDhDdGFGX1VtQWJ1YW5EeDVRX3lLekNJOVoxNzN2VGo4LXM1UFFKMzlBZzhn?oc=5",
+          "published_at": "2026-08-06T15:00+08:00",
+          "source": "Google 新聞 / CMoney投資網誌"
         }
       ],
       "official_announcements": []
@@ -2494,48 +2492,48 @@
   ],
   "quote_status": {
     "status": "ok",
-    "updated_at": "2026-11-05 22:51:23",
-    "as_of": "2026-11-05",
+    "updated_at": "2026-11-06 22:28:57",
+    "as_of": "2026-11-06",
     "quote_count": 11,
-    "source": "Shioaji Snapshot (primary) + TWSE MIS cross-check"
+    "source": "Shioaji Snapshot"
   },
   "institutional_status": {
     "status": "ok",
-    "date": "2026-11-05",
-    "retrieved_at": "2026-11-05T14:51:24",
+    "date": "2026-11-06",
+    "retrieved_at": "2026-11-06T14:28:59",
     "flow_count": 11,
-    "as_of": "2026-11-05"
+    "as_of": "2026-11-06"
   },
-  "research_next_review_at": "2026-11-05 15:00 Asia/Taipei",
+  "research_next_review_at": "2026-11-06 15:00 Asia/Taipei",
   "content_sources": {
     "fundamentals": {
       "status": "ok",
-      "checked_at": "2026-11-05T22:51:29+08:00"
+      "checked_at": "2026-11-06T22:29:05+08:00"
     },
     "announcements": {
       "status": "ok",
-      "checked_at": "2026-11-05T22:51:29+08:00",
-      "latest_matched_at": "2026-11-04",
-      "latest_published_at": "2026-11-04",
-      "row_count": 225,
-      "matched_count": 5,
+      "checked_at": "2026-11-06T22:29:05+08:00",
+      "latest_matched_at": "2026-11-05",
+      "latest_published_at": "2026-11-05",
+      "row_count": 381,
+      "matched_count": 7,
       "source": "https://openapi.twse.com.tw/v1/opendata/t187ap04_L"
     },
     "market": {
       "status": "ok",
-      "checked_at": "2026-11-05T22:51:29+08:00",
-      "latest_published_at": "2026-11-05T21:37+08:00",
+      "checked_at": "2026-11-06T22:29:05+08:00",
+      "latest_published_at": "2026-11-06T20:56+08:00",
       "source": "https://feeds.feedburner.com/rsscna/finance"
     },
     "industry": {
       "status": "ok",
-      "checked_at": "2026-11-05T22:51:29+08:00",
-      "latest_published_at": "2026-11-05T13:20+08:00",
+      "checked_at": "2026-11-06T22:29:05+08:00",
+      "latest_published_at": "2026-11-06T12:59+08:00",
       "source": "https://feeds.feedburner.com/rsscna/technology"
     },
     "company_news": {
       "status": "ok",
-      "checked_at": "2026-11-05T22:51:29+08:00",
+      "checked_at": "2026-11-06T22:29:05+08:00",
       "successful_stocks": 11,
       "expected_stocks": 11,
       "missing_codes": []
@@ -2544,79 +2542,97 @@
   "news_feeds": {
     "market": [
       {
-        "title": "民生電價遠低於成本 台電扛逾750億補貼盼立院支持預算撥補",
-        "url": "https://www.cna.com.tw/news/afe/202611050336.aspx",
-        "published_at": "2026-11-05T21:37+08:00",
+        "title": "大樂透第115103期開獎",
+        "url": "https://www.cna.com.tw/news/ahel/202611060329.aspx",
+        "published_at": "2026-11-06T20:56+08:00",
         "source": "中央社財經"
       },
       {
-        "title": "台股跌1374點 上市櫃融資餘額合計減少274.18億元",
-        "url": "https://www.cna.com.tw/news/afe/202611050332.aspx",
-        "published_at": "2026-11-05T21:25+08:00",
+        "title": "美光：已安排下次調解會議 與桃園工會繼續討論",
+        "url": "https://www.cna.com.tw/news/afe/202611060324.aspx",
+        "published_at": "2026-11-06T20:47+08:00",
         "source": "中央社財經"
       },
       {
-        "title": "英國央行調升基準利率1碼至4% 逾3年來首度升息",
-        "url": "https://www.cna.com.tw/news/aopl/202611050331.aspx",
-        "published_at": "2026-11-05T21:16+08:00",
+        "title": "今彩539第115269期開獎",
+        "url": "https://www.cna.com.tw/news/ahel/202611060323.aspx",
+        "published_at": "2026-11-06T20:43+08:00",
         "source": "中央社財經"
       },
       {
-        "title": "外媒稱美光勞資協商暫緩設廠 經部：協助雙方溝通",
-        "url": "https://www.cna.com.tw/news/afe/202611050330.aspx",
-        "published_at": "2026-11-05T21:15+08:00",
+        "title": "榮昌：看好IoT等智能應用 攻加州、德州網通基建市場",
+        "url": "https://www.cna.com.tw/news/afe/202611060321.aspx",
+        "published_at": "2026-11-06T20:37+08:00",
         "source": "中央社財經"
       },
       {
-        "title": "路透：北京暫緩核發進口許可 60萬顆輝達H200晶片堆香港",
-        "url": "https://www.cna.com.tw/news/aopl/202611050329.aspx",
-        "published_at": "2026-11-05T21:12+08:00",
+        "title": "叡揚：預期第4季維持旺季表現 估資安商機持續擴大",
+        "url": "https://www.cna.com.tw/news/afe/202611060318.aspx",
+        "published_at": "2026-11-06T20:25+08:00",
         "source": "中央社財經"
       },
       {
-        "title": "新台幣何時止貶 富邦金羅瑋：2因素未解前恐偏弱",
-        "url": "https://www.cna.com.tw/news/afe/202611050328.aspx",
-        "published_at": "2026-11-05T21:10+08:00",
+        "title": "緯穎前3季每股賺94.04元 超越去年全年",
+        "url": "https://www.cna.com.tw/news/afe/202611060314.aspx",
+        "published_at": "2026-11-06T20:01+08:00",
         "source": "中央社財經"
       },
       {
-        "title": "勞資協商致桃園新廠停工？美光：在台營運正常、期待達成協議",
-        "url": "https://www.cna.com.tw/news/afe/202611050327.aspx",
-        "published_at": "2026-11-05T21:04+08:00",
+        "title": "華航前3季營收、淨利創同期新高 每股賺1.8元",
+        "url": "https://www.cna.com.tw/news/afe/202611060306.aspx",
+        "published_at": "2026-11-06T19:29+08:00",
         "source": "中央社財經"
       },
       {
-        "title": "威力彩第115089期開獎",
-        "url": "https://www.cna.com.tw/news/ahel/202611050325.aspx",
-        "published_at": "2026-11-05T20:51+08:00",
+        "title": "中鋼擬投資逾10億 推動固態氧化物燃料電池及碳捕捉與利用",
+        "url": "https://www.cna.com.tw/news/afe/202611060302.aspx",
+        "published_at": "2026-11-06T19:16+08:00",
         "source": "中央社財經"
       },
       {
-        "title": "泓德能源啟動第2次庫藏股 擬斥資最高7.44億買回8000張",
-        "url": "https://www.cna.com.tw/news/afe/202611050324.aspx",
-        "published_at": "2026-11-05T20:49+08:00",
+        "title": "金管會：台股跌幅介於亞洲股市之間 已採穩定措施",
+        "url": "https://www.cna.com.tw/news/afe/202611060301.aspx",
+        "published_at": "2026-11-06T19:15+08:00",
         "source": "中央社財經"
       },
       {
-        "title": "今彩539第115268期開獎",
-        "url": "https://www.cna.com.tw/news/ahel/202611050323.aspx",
-        "published_at": "2026-11-05T20:44+08:00",
+        "title": "美期中選舉後 馬斯克旗下SpaceX特斯拉市值蒸發近15兆",
+        "url": "https://www.cna.com.tw/news/aopl/202611060295.aspx",
+        "published_at": "2026-11-06T18:59+08:00",
         "source": "中央社財經"
       },
       {
-        "title": "統一企業前3季獲利增26% 賺贏去年全年",
-        "url": "https://www.cna.com.tw/news/afe/202611050318.aspx",
-        "published_at": "2026-11-05T20:08+08:00",
+        "title": "台股重挫金管會祭限空令等5大救市措施 11/9實施",
+        "url": "https://www.cna.com.tw/news/afe/202611060293.aspx",
+        "published_at": "2026-11-06T18:48+08:00",
         "source": "中央社財經"
       },
       {
-        "title": "信驊第3季獲利逾20億元創新高 每股純益48.13元",
-        "url": "https://www.cna.com.tw/news/afe/202611050316.aspx",
-        "published_at": "2026-11-05T20:01+08:00",
+        "title": "宏碁智新：委外廠商傳資安事件 線上商店暫停營運",
+        "url": "https://www.cna.com.tw/news/afe/202611060287.aspx",
+        "published_at": "2026-11-06T18:37+08:00",
         "source": "中央社財經"
       }
     ],
     "industry": [
+      {
+        "title": "IREN延後交付微軟AI基礎設施 宣布追加150億美元投資",
+        "url": "https://www.cna.com.tw/news/ait/202611060121.aspx",
+        "published_at": "2026-11-06T12:59+08:00",
+        "source": "中央社科技"
+      },
+      {
+        "title": "路透：微軟不擴大與Nscale德州資料中心算力租用合約",
+        "url": "https://www.cna.com.tw/news/ait/202611050353.aspx",
+        "published_at": "2026-11-05T23:48+08:00",
+        "source": "中央社科技"
+      },
+      {
+        "title": "英國：網攻利用系統既有弱點 迴避資安投資代價更高",
+        "url": "https://www.cna.com.tw/news/aopl/202611050338.aspx",
+        "published_at": "2026-11-05T21:50+08:00",
+        "source": "中央社科技"
+      },
       {
         "title": "NASA雨燕天文台墜入大氣層 22年太空任務烈焰中謝幕",
         "url": "https://www.cna.com.tw/news/ait/202611050122.aspx",
@@ -2670,31 +2686,13 @@
         "url": "https://www.cna.com.tw/news/ait/202611030054.aspx",
         "published_at": "2026-11-03T10:57+08:00",
         "source": "中央社科技"
-      },
-      {
-        "title": "AI需求帶動 全球興建中核反應爐數量創車諾比核災後新高",
-        "url": "https://www.cna.com.tw/news/ait/202611020228.aspx",
-        "published_at": "2026-11-02T18:18+08:00",
-        "source": "中央社科技"
-      },
-      {
-        "title": "帕蘭泰爾執行長：日本可在專守防衛AI取得優勢 有意供應自衛隊",
-        "url": "https://www.cna.com.tw/news/aopl/202611020225.aspx",
-        "published_at": "2026-11-02T18:09+08:00",
-        "source": "中央社科技"
-      },
-      {
-        "title": "助攻未來火星任務 NASA太空人隔離378天後首踏出模擬艙",
-        "url": "https://www.cna.com.tw/news/ait/202611020047.aspx",
-        "published_at": "2026-11-02T11:09+08:00",
-        "source": "中央社科技"
       }
     ]
   },
-  "content_checked_at": "2026-11-05T22:51:29+08:00",
+  "content_checked_at": "2026-11-06T22:29:05+08:00",
   "quote_sync_status": {
     "status": "ok",
-    "checked_at": "2026-11-05T22:51:29+08:00"
+    "checked_at": "2026-11-06T22:29:05+08:00"
   },
   "delivery_checked_at": "2026-10-28T15:00:17+08:00"
 }
