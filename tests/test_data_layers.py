@@ -3,13 +3,21 @@ import unittest
 from unittest.mock import patch
 
 from fetch_shioaji_data import latest_market_date, next_research_review_at
-from fundamental_data import _refresh_event_label, _roc_date
+from fundamental_data import _refresh_event_label, _roc_date, fetch_fundamental_snapshot
 from sync_public_content import announcement_rows, parse_rss, refresh_content
 from cloud_daily_update import run_daily_pipeline
 from build_daily_report import render_report
 
 
 class DataLayerTests(unittest.TestCase):
+    @patch("fundamental_data._fetch_json", return_value=[{"公司代號": "2330", "出表日期": "1151118"}])
+    def test_reachable_financial_feed_with_missing_stock_is_partial(self, _fetch):
+        _, status = fetch_fundamental_snapshot({"2330": {}, "2360": {}})
+        self.assertEqual(status["status"], "partial")
+        for source in status["sources"].values():
+            self.assertEqual(source["status"], "partial")
+            self.assertEqual(source["matched_stocks"], 1)
+
     def test_roc_date_conversion(self):
         self.assertEqual(_roc_date("1150913"), "2026-09-13")
 
@@ -64,7 +72,9 @@ class DataLayerTests(unittest.TestCase):
     def test_content_failure_keeps_last_good_quotes_and_news(self, *_mocks):
         payload = {"stocks": [{"code": "2330", "last_price": 100, "official_announcements": [{"title": "old", "published_at": "2026-10-15"}]}],
                    "market_as_of": "2026-10-16", "news_feeds": {"market": [{"title": "old", "published_at": "2026-10-16"}]}}
+        payload["collection_completed_at"] = "2026-10-18T15:00:00+08:00"
         result = refresh_content(payload, "2026-10-19T20:00:00+08:00")
+        self.assertNotEqual(result["collection_completed_at"], "2026-10-18T15:00:00+08:00")
         self.assertEqual(result["market_as_of"], "2026-10-16")
         self.assertEqual(result["stocks"][0]["last_price"], 100)
         self.assertEqual(result["stocks"][0]["official_announcements"][0]["title"], "old")

@@ -154,7 +154,7 @@ def fetch_fundamental_snapshot(
             source_dates = [_roc_date(row.get("出表日期")) for row in rows]
             as_of_dates.extend(date for date in source_dates if date)
             source_status[source] = {
-                "status": "ok",
+                "status": "ok" if len(rows_by_source[source]) == len(codes) else "partial",
                 "endpoint": f"{TWSE_OPENAPI_BASE}/{endpoint}",
                 "row_count": len(rows),
                 "matched_stocks": len(rows_by_source[source]),

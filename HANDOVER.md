@@ -229,3 +229,9 @@ python3 /Users/TonyFu/Desktop/台湾股市分析/create_shioaji_excel.py
 1. **财务预告日跟踪**: 鸿海即将在 2026-08-14（本周五）举办法说会，建议关注其 GB200 出货量及毛利率指导。
 2. **凭证保护**: `.shioaji.local.env` 严禁提交至 Git 仓库；公网网关凭证只配置在 Render 环境变量，不复制到 GitHub Pages、前端代码、日志或 JSON。
 3. **扩展标的池**: 如需新增台股标的（如散热双雄双鸿 3324 或 CCL 龙头台燿 6274），只需修改 `fetch_shioaji_data.py` 中的 `STOCK_LIST` 字典即可。
+
+## 2026-11-18 automation incident
+
+- Today's local automation was dispatched at 21:18:26 Taipei and failed before script execution at 21:19:51 with `usage_limit_exceeded`. The reason for the missing 15:00 dispatch remains unproven; concurrent workspace routing HTTP 432 errors are not proof of causation.
+- The old GitHub fallback only stages JSON/Excel and does not build reports or stage index.html. The prepared workflow repair targets every day at 07:00 UTC, uses Asia/Taipei, builds daily reports, tests and stages all five artifacts, but deployment is blocked: HTTPS lacks workflow scope, the GitHub integration returns 403, and Chrome requires login. Do not describe this workflow repair as deployed.
+- Pipeline fixes mark reachable but incomplete financial feeds partial and replace inherited collection completion timestamps on each content refresh. Public report, Pages artifacts and Gmail delivery remain separate acceptance gates.

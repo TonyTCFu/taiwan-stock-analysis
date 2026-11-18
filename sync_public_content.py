@@ -183,6 +183,7 @@ def refresh_content(payload: dict[str, Any], checked_at: str | None = None) -> d
     status["company_news"] = {"status": "ok" if len(company_results) == len(STOCKS_META) else "partial", "checked_at": now, "successful_stocks": len(company_results), "expected_stocks": len(STOCKS_META), "missing_codes": sorted(set(STOCKS_META) - set(company_results))}
     payload["cache_version"] = f"{now[:16].replace('-', '').replace(':', '').replace('T', '-')}-{CACHE_VERSION}"
     payload["content_checked_at"] = now
+    payload["collection_completed_at"] = taipei_now()
     return payload
 
 
